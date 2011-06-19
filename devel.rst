@@ -10,7 +10,7 @@ Writing plugins
 Installing plugins
 ------------------------------------
 
-Put a ruby script to ``/etc/fluent/plugin`` directory to install your lugin.
+To install a plugin, put a ruby script to ``/etc/fluent/plugin`` directory.
 
 Or you can create gem package that includes ``lib/fluent/plugin/<TYPE>_<NAME>.rb`` file. *TYPE* is ``in`` for input plugins, ``out`` for output plugins and ``buf`` for buffer plugins. It's like ``lib/fluent/plugin/out_mail.rb``. The packaged gem can be distributed and installed using RubyGems.
 

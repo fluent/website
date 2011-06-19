@@ -13,15 +13,16 @@ Kind of plugins
 There are 3 kinds of plugins:
 
   Input plugin
-    Adds new entrance of events. It usually create a thread and listen a socket. Or pull data from data sources periodically.
+    Provides an entrance of events. It usually creates a thread and listen socket. Or pull data from data sources periodically.
 
   Output plugin
-    Adds new exit of events. Output plugins are usually *buffered output* that accumulates events in the buffer and write out to file or network. The buffers are provided by buffer plugins.
+    Provides an exit of events. Output plugins are usually *buffered* that accumulates events in the buffer and write out to file or network. Buffers are provided by buffer plugins.
     Some output plugins are fully customized plugin that doesn't use buffer plugins.
 
   Buffer plugin
-    Adds new buffer implementation. Buffer plugin manages performance and reliability.
+    Provides a buffer implementation. Buffer plugin manages performance and reliability.
 
+You can add your own plugin. See :ref:`devel`.
 
 .. _input_plugin:
 
@@ -62,6 +63,51 @@ port
 
 bind
   bind address to listen on. Default is 0.0.0.0 (all addresses).
+
+tail
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**tail** input plugin reads events from the tail of text files. It's like ``tail -f``.
+
+**configuration**::
+
+    <source>
+      type http
+      path /var/log/httpd-access.log
+      tag apache.access
+      format apache
+      time_format %d/%b/%Y:%H:%M:%S %z
+    </source>
+
+path (required)
+  Paths separated with ',' to read. This parameter is required.
+
+tag (required)
+  Tag of the event. This parameter is required.
+
+format
+  Format of the log. It's name of a template or regexp surround by '/'.
+
+  Regexp must have at least one named captures (?<NAME>PATTERN). If the regexp has capture named 'time', it is used as a time of the event. You can specify format of the time using *time_format* parameter. If the regexp has capture named 'tag', *tag* parameter + captured tag is used as the tag of the event.
+
+  Following templates are supported:
+
+  apache
+    Reads apache's log file. This template is same as following configuration::
+
+      format /^(?<host>.*?) .*? (?<user>.*?) \[(?<time>.*?)\] "(?<method>\S+?)(?: +(?<path>.*?) +\S*?)?" (?<code>.*?) (?<size>.*?)(?: "(?<referer>.*?)" "(?<agent>.*?)")?/
+      time_format %d/%b/%Y:%H:%M:%S %z
+
+  syslog
+    Reads syslog's output file (e.g. /var/log/syslog). This template is same as following configuration::
+
+      format /^(?<time>.*? .*? .*?) (?<host>.*?) ([a-zA-Z0-9_\/\.\-]*)(?:\[(?<pid>[0-9]+)\])?\: *(?<message>.*)/
+      time_format %b %d %H:%M:%S
+
+time_format
+  Format of the time field. This parameter is required only if the format includes 'time' capture and it can't be parsed automatically.
+  See `Time#strptime <http://www.ruby-doc.org/core-1.9/classes/Time.html#M000326>`_.
+
 
 tcp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -118,17 +164,14 @@ path
 Output plugins
 ------------------------------------
 
-Buffered outputs
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Most of output plugins are *buffered* that accumulates new events in the buffer.
 
-Most of output plugins are *buffered output* that accumulates events in the buffer and write out to file or network. The buffers are provided by buffer plugins.
-
-The *buffer* is a queue of chunks::
+The structure of the buffer is a queue of chunks like following::
 
     queue
     +---------+
     |         |
-    |  chunk <-- write events to the top chunk.
+    |  chunk <-- write events to the top chunk
     |         |
     |  chunk  |
     |         |
@@ -161,7 +204,6 @@ All buffered output plugins supports following parameters described above::
 Suffixes "s" (seconds), "m" (minutes), "h" (hours) can be used for *buffer_flush_interval* and *retry_wait*. *retry_wait* can be a decimal.
 
 Suffixes "k" (KB), "m" (MB), "g" (GB) can be used for *buffer_chunk_limit*.
-
 
 
 file
@@ -202,6 +244,7 @@ format
 localtime
   Uses local time zone for path formatting. Default is UTC.
 
+
 copy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -216,8 +259,7 @@ copy
         ...
       </store>
       <store>
-        type file
-        path /var/log/fluent/myapp2
+        type stdout
         ...
       </store>
       ...
@@ -225,6 +267,20 @@ copy
 
 <store>
   Specifies output plugin. The format is same as <match> directive.
+
+
+stdout
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**stdout** output plugin prints event to the console. This is NOT buffered plugin.
+
+**configuration**::
+
+    <match pattern>
+      type stdout
+    </match>
+
+This output plugin is for debugging.
 
 
 .. _buffer_plugin:

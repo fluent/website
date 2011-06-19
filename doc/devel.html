@@ -54,7 +54,7 @@
 </div>
 <div class="section" id="installing-plugins">
 <h2>Installing plugins<a class="headerlink" href="#installing-plugins" title="Permalink to this headline">¶</a></h2>
-<p>Put a ruby script to <tt class="docutils literal"><span class="pre">/etc/fluent/plugin</span></tt> directory to install your lugin.</p>
+<p>To install a plugin, put a ruby script to <tt class="docutils literal"><span class="pre">/etc/fluent/plugin</span></tt> directory</p>
 <p>Or you can create gem package that includes <tt class="docutils literal"><span class="pre">lib/fluent/plugin/&lt;TYPE&gt;_&lt;NAME&gt;.rb</span></tt> file. <em>TYPE</em> is <tt class="docutils literal"><span class="pre">in</span></tt> for input plugins, <tt class="docutils literal"><span class="pre">out</span></tt> for output plugins and <tt class="docutils literal"><span class="pre">buf</span></tt> for buffer plugins. It&#8217;s like <tt class="docutils literal"><span class="pre">lib/fluent/plugin/out_mail.rb</span></tt>. The packaged gem can be distributed and installed using RubyGems.</p>
 </div>
 <div class="section" id="input-plugins">

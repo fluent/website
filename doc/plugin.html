@@ -52,19 +52,20 @@
 <li><a class="reference internal" href="#kind-of-plugins" id="id2">Kind of plugins</a></li>
 <li><a class="reference internal" href="#input-plugins" id="id3">Input plugins</a><ul>
 <li><a class="reference internal" href="#http" id="id4">http</a></li>
-<li><a class="reference internal" href="#tcp" id="id5">tcp</a></li>
-<li><a class="reference internal" href="#unix" id="id6">unix</a></li>
+<li><a class="reference internal" href="#tail" id="id5">tail</a></li>
+<li><a class="reference internal" href="#tcp" id="id6">tcp</a></li>
+<li><a class="reference internal" href="#unix" id="id7">unix</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#output-plugins" id="id7">Output plugins</a><ul>
-<li><a class="reference internal" href="#buffered-outputs" id="id8">Buffered outputs</a></li>
+<li><a class="reference internal" href="#output-plugins" id="id8">Output plugins</a><ul>
 <li><a class="reference internal" href="#file" id="id9">file</a></li>
 <li><a class="reference internal" href="#copy" id="id10">copy</a></li>
+<li><a class="reference internal" href="#stdout" id="id11">stdout</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#buffer-plugins" id="id11">Buffer plugins</a><ul>
-<li><a class="reference internal" href="#memory" id="id12">memory</a></li>
-<li><a class="reference internal" href="#id1" id="id13">file</a></li>
+<li><a class="reference internal" href="#buffer-plugins" id="id12">Buffer plugins</a><ul>
+<li><a class="reference internal" href="#memory" id="id13">memory</a></li>
+<li><a class="reference internal" href="#id1" id="id14">file</a></li>
 </ul>
 </li>
 </ul>
@@ -75,14 +76,15 @@
 <blockquote>
 <dl class="docutils">
 <dt>Input plugin</dt>
-<dd>Adds new entrance of events. It usually create a thread and listen a socket. Or pull data from data sources periodically.</dd>
+<dd>Provides an entrance of events. It usually creates a thread and listen socket. Or pull data from data sources periodically.</dd>
 <dt>Output plugin</dt>
-<dd>Adds new exit of events. Output plugins are usually <em>buffered output</em> that accumulates events in the buffer and write out to file or network. The buffers are provided by buffer plugins.
+<dd>Provides an exit of events. Output plugins are usually <em>buffered</em> that accumulates events in the buffer and write out to file or network. Buffers are provided by buffer plugins.
 Some output plugins are fully customized plugin that doesn&#8217;t use buffer plugins.</dd>
 <dt>Buffer plugin</dt>
-<dd>Adds new buffer implementation. Buffer plugin manages performance and reliability.</dd>
+<dd>Provides a buffer implementation. Buffer plugin manages performance and reliability.</dd>
 </dl>
 </blockquote>
+<p>You can add your own plugin. See <a class="reference external" href="devel.html#devel"><em>Writing plugins</em></a>.</p>
 </div>
 <div class="section" id="input-plugins">
 <span id="input-plugin"></span><h2>Input plugins<a class="headerlink" href="#input-plugins" title="Permalink to this headline">¶</a></h2>
@@ -136,6 +138,47 @@ json={"event":"body"}</pre>
 <dd>bind address to listen on. Default is 0.0.0.0 (all addresses).</dd>
 </dl>
 </div>
+<div class="section" id="tail">
+<h3>tail<a class="headerlink" href="#tail" title="Permalink to this headline">¶</a></h3>
+<p><strong>tail</strong> input plugin reads events from the tail of text files. It&#8217;s like <tt class="docutils literal"><span class="pre">tail</span> <span class="pre">-f</span></tt>.</p>
+<p><strong>configuration</strong>:</p>
+<div class="highlight-python"><pre>&lt;source&gt;
+  type http
+  path /var/log/httpd-access.log
+  tag apache.access
+  format apache
+  time_format %d/%b/%Y:%H:%M:%S %z
+&lt;/source&gt;</pre>
+</div>
+<dl class="docutils">
+<dt>path (required)</dt>
+<dd>Paths separated with &#8216;,&#8217; to read. This parameter is required.</dd>
+<dt>tag (required)</dt>
+<dd>Tag of the event. This parameter is required.</dd>
+<dt>format</dt>
+<dd><p class="first">Format of the log. It&#8217;s name of a template or regexp surround by &#8216;/&#8217;.</p>
+<p>Regexp must have at least one named captures (?&lt;NAME&gt;PATTERN). If the regexp has capture named &#8216;time&#8217;, it is used as a time of the event. You can specify format of the time using <em>time_format</em> parameter. If the regexp has capture named &#8216;tag&#8217;, <em>tag</em> parameter + captured tag is used as the tag of the event.</p>
+<p>Following templates are supported:</p>
+<dl class="last docutils">
+<dt>apache</dt>
+<dd><p class="first">Reads apache&#8217;s log file. This template is same as following configuration:</p>
+<div class="last highlight-python"><pre>format /^(?&lt;host&gt;.*?) .*? (?&lt;user&gt;.*?) \[(?&lt;time&gt;.*?)\] "(?&lt;method&gt;\S+?)(?: +(?&lt;path&gt;.*?) +\S*?)?" (?&lt;code&gt;.*?) (?&lt;size&gt;.*?)(?: "(?&lt;referer&gt;.*?)" "(?&lt;agent&gt;.*?)")?/
+time_format %d/%b/%Y:%H:%M:%S %z</pre>
+</div>
+</dd>
+<dt>syslog</dt>
+<dd><p class="first">Reads syslog&#8217;s output file (e.g. /var/log/syslog). This template is same as following configuration:</p>
+<div class="last highlight-python"><pre>format /^(?&lt;time&gt;.*? .*? .*?) (?&lt;host&gt;.*?) ([a-zA-Z0-9_\/\.\-]*)(?:\[(?&lt;pid&gt;[0-9]+)\])?\: *(?&lt;message&gt;.*)/
+time_format %b %d %H:%M:%S</pre>
+</div>
+</dd>
+</dl>
+</dd>
+<dt>time_format</dt>
+<dd>Format of the time field. This parameter is required only if the format includes &#8216;time&#8217; capture and it can&#8217;t be parsed automatically.
+See <a class="reference external" href="http://www.ruby-doc.org/core-1.9/classes/Time.html#M000326">Time#strptime</a>.</dd>
+</dl>
+</div>
 <div class="section" id="tcp">
 <h3>tcp<a class="headerlink" href="#tcp" title="Permalink to this headline">¶</a></h3>
 <p><strong>tcp</strong> input plugin listens MessagePack stream on a TCP socket. This is used by <tt class="docutils literal"><span class="pre">fluent-cat</span></tt> command or other language bindings.</p>
@@ -183,14 +226,12 @@ example:
 </div>
 <div class="section" id="output-plugins">
 <span id="output-plugin"></span><h2>Output plugins<a class="headerlink" href="#output-plugins" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="buffered-outputs">
-<h3>Buffered outputs<a class="headerlink" href="#buffered-outputs" title="Permalink to this headline">¶</a></h3>
-<p>Most of output plugins are <em>buffered output</em> that accumulates events in the buffer and write out to file or network. The buffers are provided by buffer plugins.</p>
-<p>The <em>buffer</em> is a queue of chunks:</p>
+<p>Most of output plugins are <em>buffered</em> that accumulates new events in the buffer.</p>
+<p>The structure of the buffer is a queue of chunks like following:</p>
 <div class="highlight-python"><pre>queue
 +---------+
 |         |
-|  chunk &lt;-- write events to the top chunk.
+|  chunk &lt;-- write events to the top chunk
 |         |
 |  chunk  |
 |         |
@@ -218,7 +259,6 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 <p><em>buffer_type</em> specifies the type of buffer plugin. Default is <tt class="docutils literal"><span class="pre">memory</span></tt>.</p>
 <p>Suffixes &#8220;s&#8221; (seconds), &#8220;m&#8221; (minutes), &#8220;h&#8221; (hours) can be used for <em>buffer_flush_interval</em> and <em>retry_wait</em>. <em>retry_wait</em> can be a decimal.</p>
 <p>Suffixes &#8220;k&#8221; (KB), &#8220;m&#8221; (MB), &#8220;g&#8221; (GB) can be used for <em>buffer_chunk_limit</em>.</p>
-</div>
 <div class="section" id="file">
 <h3>file<a class="headerlink" href="#file" title="Permalink to this headline">¶</a></h3>
 <p><strong>file</strong> buffered output plugin writes events to files.</p>
@@ -280,8 +320,7 @@ Either format or path parameter is required.</dd>
     ...
   &lt;/store&gt;
   &lt;store&gt;
-    type file
-    path /var/log/fluent/myapp2
+    type stdout
     ...
   &lt;/store&gt;
   ...
@@ -291,6 +330,16 @@ Either format or path parameter is required.</dd>
 <dt>&lt;store&gt;</dt>
 <dd>Specifies output plugin. The format is same as &lt;match&gt; directive.</dd>
 </dl>
+</div>
+<div class="section" id="stdout">
+<h3>stdout<a class="headerlink" href="#stdout" title="Permalink to this headline">¶</a></h3>
+<p><strong>stdout</strong> output plugin prints event to the console. This is NOT buffered plugin.</p>
+<p><strong>configuration</strong>:</p>
+<div class="highlight-python"><pre>&lt;match pattern&gt;
+  type stdout
+&lt;/match&gt;</pre>
+</div>
+<p>This output plugin is for debugging.</p>
 </div>
 </div>
 <div class="section" id="buffer-plugins">
@@ -336,14 +385,15 @@ This parameter is required.</dd>
 <li><a class="reference external" href="#kind-of-plugins">Kind of plugins</a></li>
 <li><a class="reference external" href="#input-plugins">Input plugins</a><ul>
 <li><a class="reference external" href="#http">http</a></li>
+<li><a class="reference external" href="#tail">tail</a></li>
 <li><a class="reference external" href="#tcp">tcp</a></li>
 <li><a class="reference external" href="#unix">unix</a></li>
 </ul>
 </li>
 <li><a class="reference external" href="#output-plugins">Output plugins</a><ul>
-<li><a class="reference external" href="#buffered-outputs">Buffered outputs</a></li>
 <li><a class="reference external" href="#file">file</a></li>
 <li><a class="reference external" href="#copy">copy</a></li>
+<li><a class="reference external" href="#stdout">stdout</a></li>
 </ul>
 </li>
 <li><a class="reference external" href="#buffer-plugins">Buffer plugins</a><ul>
