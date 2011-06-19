@@ -1,0 +1,193 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Installation &mdash; fluent v0.9.0 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '#',
+        VERSION:     '0.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="fluent v0.9.0 documentation" href="index.html" />
+    <link rel="next" title="Configuration" href="config.html" />
+    <link rel="prev" title="Overview" href="overview.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="config.html" title="Configuration"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="Overview"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">fluent v0.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="installation">
+<span id="install"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#a-normal-installation" id="id2">A. Normal installation</a></li>
+<li><a class="reference internal" href="#b-gem-installation" id="id3">B. Gem installation</a></li>
+<li><a class="reference internal" href="#c-latest-repository-installation" id="id4">C. Latest repository installation</a></li>
+<li><a class="reference internal" href="#updating" id="id5">Updating</a></li>
+</ul>
+</div>
+<div class="section" id="a-normal-installation">
+<h2>A. Normal installation<a class="headerlink" href="#a-normal-installation" title="Permalink to this headline">¶</a></h2>
+<p>Before building the source package, make sure following libraries are installed:</p>
+<table border="1" class="docutils">
+<colgroup>
+<col width="17%" />
+<col width="45%" />
+<col width="38%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">&nbsp;</th>
+<th class="head">Ubuntu/Debian install</th>
+<th class="head">RedHat/CentOS install</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>openssl</td>
+<td><tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">libssl-dev</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">yum</span> <span class="pre">install</span> <span class="pre">libssl-dev</span></tt></td>
+</tr>
+<tr><td>zlib</td>
+<td><tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">zlib1g-dev</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">yum</span> <span class="pre">install</span> <span class="pre">zlib-devel</span></tt></td>
+</tr>
+<tr><td>readline</td>
+<td><tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">libreadline6-dev</span></tt></td>
+<td><tt class="docutils literal"><span class="pre">yum</span> <span class="pre">install</span> <span class="pre">readline-devel</span></tt></td>
+</tr>
+</tbody>
+</table>
+<p>Then download source package from the <a class="reference external" href="https://github.com/fluent/fluent/downloads">Download</a> page and extract it.</p>
+<p>Finally, build and install using ./configure &amp;&amp; make &amp;&amp; sudo make install:</p>
+<div class="highlight-python"><pre>$ ./configure
+$ make
+$ sudo make install</pre>
+</div>
+<p>Above commands install Fluent to <tt class="docutils literal"><span class="pre">$prefix</span></tt> and Ruby to <tt class="docutils literal"><span class="pre">$prefix/lib/fluent/ruby</span></tt>.</p>
+<p>Next step: <a class="reference external" href="config.html#config"><em>Configuration</em></a></p>
+</div>
+<div class="section" id="b-gem-installation">
+<h2>B. Gem installation<a class="headerlink" href="#b-gem-installation" title="Permalink to this headline">¶</a></h2>
+<p>If you have installed <a class="reference external" href="http://www.ruby-lang.org/">Ruby</a> &gt;= 1.9.2, you can use RubyGems to download and install Fluent.</p>
+<p>You can confirm installed Ruby&#8217;s version as following:</p>
+<div class="highlight-python"><pre>$ ruby --version
+ruby 1.9.2p180 (2011-02-18 revision 30909) [x86_64-darwin10.6.0]</pre>
+</div>
+<p>If it says ruby 1.9.2 or above, use <tt class="docutils literal"><span class="pre">gem</span></tt> command to install fluent:</p>
+<div class="highlight-python"><pre>$ sudo gem install fluent</pre>
+</div>
+<p>Next step: <a class="reference external" href="config.html#config"><em>Configuration</em></a></p>
+</div>
+<div class="section" id="c-latest-repository-installation">
+<h2>C. Latest repository installation<a class="headerlink" href="#c-latest-repository-installation" title="Permalink to this headline">¶</a></h2>
+<p>To install the latest development version from the <a class="reference external" href="https://github.com/fluent/fluent">source repository</a>, prepare <a class="reference external" href="http://www.ruby-lang.org/">Ruby</a> &gt;= 1.9.2 and run following commands:</p>
+<div class="highlight-python"><pre>$ git clone https://github.com/fluent/fluent.git
+$ cd fluent
+$ rake
+$ gem install pkg/fluent-*.gem</pre>
+</div>
+<p>Next step: <a class="reference external" href="devel.html#devel"><em>Writing plugins</em></a></p>
+</div>
+<div class="section" id="updating">
+<h2>Updating<a class="headerlink" href="#updating" title="Permalink to this headline">¶</a></h2>
+<p>Once you installed, you can update to the latest version using following command:</p>
+<div class="highlight-python"><pre>$ sudo fluent-gem install fluent</pre>
+</div>
+<p>Next step: <a class="reference external" href="config.html#config"><em>Configuration</em></a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Installation</a><ul>
+<li><a class="reference external" href="#a-normal-installation">A. Normal installation</a></li>
+<li><a class="reference external" href="#b-gem-installation">B. Gem installation</a></li>
+<li><a class="reference external" href="#c-latest-repository-installation">C. Latest repository installation</a></li>
+<li><a class="reference external" href="#updating">Updating</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="overview.html"
+                                  title="previous chapter">Overview</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="config.html"
+                                  title="next chapter">Configuration</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/install.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="config.html" title="Configuration"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="overview.html" title="Overview"
+             >previous</a> |</li>
+        <li><a href="index.html">fluent v0.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2011, Sadayuki Furuhashi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+    </div>
+  </body>
+</html>

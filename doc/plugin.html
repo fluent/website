@@ -1,0 +1,406 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Plugins &mdash; fluent v0.9.0 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '#',
+        VERSION:     '0.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="fluent v0.9.0 documentation" href="index.html" />
+    <link rel="next" title="Writing plugins" href="devel.html" />
+    <link rel="prev" title="Configuration" href="config.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="devel.html" title="Writing plugins"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="config.html" title="Configuration"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">fluent v0.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="plugins">
+<span id="plugin"></span><h1>Plugins<a class="headerlink" href="#plugins" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#kind-of-plugins" id="id2">Kind of plugins</a></li>
+<li><a class="reference internal" href="#input-plugins" id="id3">Input plugins</a><ul>
+<li><a class="reference internal" href="#http" id="id4">http</a></li>
+<li><a class="reference internal" href="#tcp" id="id5">tcp</a></li>
+<li><a class="reference internal" href="#unix" id="id6">unix</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#output-plugins" id="id7">Output plugins</a><ul>
+<li><a class="reference internal" href="#buffered-outputs" id="id8">Buffered outputs</a></li>
+<li><a class="reference internal" href="#file" id="id9">file</a></li>
+<li><a class="reference internal" href="#copy" id="id10">copy</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#buffer-plugins" id="id11">Buffer plugins</a><ul>
+<li><a class="reference internal" href="#memory" id="id12">memory</a></li>
+<li><a class="reference internal" href="#id1" id="id13">file</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="kind-of-plugins">
+<h2>Kind of plugins<a class="headerlink" href="#kind-of-plugins" title="Permalink to this headline">¶</a></h2>
+<p>There are 3 kinds of plugins:</p>
+<blockquote>
+<dl class="docutils">
+<dt>Input plugin</dt>
+<dd>Adds new entrance of events. It usually create a thread and listen a socket. Or pull data from data sources periodically.</dd>
+<dt>Output plugin</dt>
+<dd>Adds new exit of events. Output plugins are usually <em>buffered output</em> that accumulates events in the buffer and write out to file or network. The buffers are provided by buffer plugins.
+Some output plugins are fully customized plugin that doesn&#8217;t use buffer plugins.</dd>
+<dt>Buffer plugin</dt>
+<dd>Adds new buffer implementation. Buffer plugin manages performance and reliability.</dd>
+</dl>
+</blockquote>
+</div>
+<div class="section" id="input-plugins">
+<span id="input-plugin"></span><h2>Input plugins<a class="headerlink" href="#input-plugins" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="http">
+<h3>http<a class="headerlink" href="#http" title="Permalink to this headline">¶</a></h3>
+<p><strong>http</strong> input plugin listens HTTP clients. The URL is a tag of events and event body is included on the POST parameter:</p>
+<div class="highlight-python"><pre>POST /myapp.access HTTP/1.1
+Content-Length: 21
+Content-Type: application/x-www-form-urlencoded
+
+json={"event":"body"}</pre>
+</div>
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="62%" />
+<col width="26%" />
+</colgroup>
+<thead valign="bottom">
+<tr><th class="head">Parameter</th>
+<th class="head">Description</th>
+<th class="head">Required?</th>
+</tr>
+</thead>
+<tbody valign="top">
+<tr><td>json</td>
+<td>body of the event in JSON format</td>
+<td>either &#8216;msgpack&#8217; or &#8216;json&#8217;</td>
+</tr>
+<tr><td>msgpack</td>
+<td>body of the event in <a class="reference external" href="http://msgpack.org/">MessagePack</a> format</td>
+<td>either &#8216;msgpack&#8217; or &#8216;json&#8217;</td>
+</tr>
+<tr><td>time</td>
+<td>time of the event in integer (UNIX time)</td>
+<td>no</td>
+</tr>
+</tbody>
+</table>
+<p><strong>configuration</strong>:</p>
+<div class="highlight-python"><pre>&lt;source&gt;
+  type http
+  port 9880
+  bind 0.0.0.0
+&lt;/source&gt;</pre>
+</div>
+<dl class="docutils">
+<dt>port</dt>
+<dd>port to listen on. Default is 9880.</dd>
+<dt>bind</dt>
+<dd>bind address to listen on. Default is 0.0.0.0 (all addresses).</dd>
+</dl>
+</div>
+<div class="section" id="tcp">
+<h3>tcp<a class="headerlink" href="#tcp" title="Permalink to this headline">¶</a></h3>
+<p><strong>tcp</strong> input plugin listens MessagePack stream on a TCP socket. This is used by <tt class="docutils literal"><span class="pre">fluent-cat</span></tt> command or other language bindings.</p>
+<p>Protocol format:</p>
+<div class="highlight-python"><pre>stream:
+  message...
+
+message:
+  [tag, time, record]
+  or
+  [tag, [[time,record], [time,record], ...]]
+
+example:
+  ["myapp.access", [1308466941, {"a"=&gt;1}], [1308466942, {"b"=&gt;2}]]</pre>
+</div>
+<p><strong>configuration</strong>:</p>
+<div class="highlight-python"><pre>&lt;source&gt;
+  type tcp
+  port 24224
+  bind 0.0.0.0
+&lt;/source&gt;</pre>
+</div>
+<dl class="docutils">
+<dt>port</dt>
+<dd>port to listen on. Default is 24224.</dd>
+<dt>bind</dt>
+<dd>bind address to listen on. Default is 0.0.0.0 (all addresses).</dd>
+</dl>
+</div>
+<div class="section" id="unix">
+<h3>unix<a class="headerlink" href="#unix" title="Permalink to this headline">¶</a></h3>
+<p><strong>unix</strong> input plugin listens MessagePack stream on a UNIX socket. This is used by <tt class="docutils literal"><span class="pre">fluent-cat</span></tt> command or other language bindings.</p>
+<p>The format is same as <tt class="docutils literal"><span class="pre">tcp</span></tt>.</p>
+<p><strong>configuration</strong>:</p>
+<div class="highlight-python"><pre>&lt;source&gt;
+  type unix
+  path /var/run/fluent.sock
+&lt;/source&gt;</pre>
+</div>
+<dl class="docutils">
+<dt>path</dt>
+<dd>Path of the socket. Default is $install_prefix/var/run/fluent.sock.</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="output-plugins">
+<span id="output-plugin"></span><h2>Output plugins<a class="headerlink" href="#output-plugins" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="buffered-outputs">
+<h3>Buffered outputs<a class="headerlink" href="#buffered-outputs" title="Permalink to this headline">¶</a></h3>
+<p>Most of output plugins are <em>buffered output</em> that accumulates events in the buffer and write out to file or network. The buffers are provided by buffer plugins.</p>
+<p>The <em>buffer</em> is a queue of chunks:</p>
+<div class="highlight-python"><pre>queue
++---------+
+|         |
+|  chunk &lt;-- write events to the top chunk.
+|         |
+|  chunk  |
+|         |
+|  chunk  |
+|         |
+|  chunk --&gt; wirte out the bottom chunk
+|         |
++---------+</pre>
+</div>
+<p>When chunk size exceeds limit (<em>buffer_chunk_limit</em>) or specified time elapsed (<em>buffer_flush_interval</em>), new empty chunk is pushed.
+The bottom chunk is wirtten out immediately when new chunk is pushed.</p>
+<p>If it failed to write, the chunk is left in the queue and retried to write after seconds (<em>retry_wait</em>).
+If the retry count is exceeds limit (<em>retry_limit</em>), the chunk is trashed. The wait time before retrying increases twice and twice (like 1sec, 2sec, 4sec, ...).
+If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new events can&#8217;t be written.</p>
+<p>Buffered output plugins supports following parameters described above:</p>
+<div class="highlight-python"><pre>&lt;match pattern&gt;
+  buffer_type memory
+  buffer_flush_interval 60s
+  buffer_chunk_limit 1m
+  buffer_queue_limit 100
+  retry_limit 10
+  retry_wait 1.0s
+&lt;/match&gt;</pre>
+</div>
+<p><em>buffer_type</em> specifies the type of buffer plugin. Default type is <tt class="docutils literal"><span class="pre">memory</span></tt>.</p>
+<p>Suffixes &#8220;s&#8221; (seconds), &#8220;m&#8221; (minutes), &#8220;h&#8221; (hours) can be used for buffer_flush_interval and retry_wait. retry_wait can be a decimal.</p>
+<p>Suffixes &#8220;k&#8221; (KB), &#8220;m&#8221; (MB), &#8220;g&#8221; (GB) can be used for buffer_chunk_limit.</p>
+</div>
+<div class="section" id="file">
+<h3>file<a class="headerlink" href="#file" title="Permalink to this headline">¶</a></h3>
+<p><strong>file</strong> buffered output plugin writes events to files.</p>
+<p><strong>configuration</strong>:</p>
+<div class="highlight-python"><pre>&lt;match pattern&gt;
+  type file
+  path /var/log/fluent/myapp
+  format /var/log/fluent/myapp.%Y-%m-%d-%H.log
+  localtime
+&lt;/match&gt;</pre>
+</div>
+<dl class="docutils">
+<dt>path</dt>
+<dd>Syntax sugar for <tt class="docutils literal"><span class="pre">$path.%Y-%m-%d-%H</span></tt>.
+Either format or path parameter is required.</dd>
+<dt>format</dt>
+<dd><p class="first">Path of the file. Following characters is replaced with values:</p>
+<blockquote class="last">
+<table border="1" class="docutils">
+<colgroup>
+<col width="11%" />
+<col width="89%" />
+</colgroup>
+<tbody valign="top">
+<tr><td>%Y</td>
+<td>Year with century</td>
+</tr>
+<tr><td>%m</td>
+<td>Month of the year (01..12)</td>
+</tr>
+<tr><td>%d</td>
+<td>Day of the month (01..31)</td>
+</tr>
+<tr><td>%H</td>
+<td>Hour of the day, 24-hour clock (00..23)</td>
+</tr>
+<tr><td>%M</td>
+<td>Minute of the hour (00..59)</td>
+</tr>
+<tr><td>%S</td>
+<td>Second of the minute (00..60)</td>
+</tr>
+</tbody>
+</table>
+</blockquote>
+</dd>
+<dt>localtime</dt>
+<dd>Uses local time zone for path formatting. Default is UTC.</dd>
+</dl>
+</div>
+<div class="section" id="copy">
+<h3>copy<a class="headerlink" href="#copy" title="Permalink to this headline">¶</a></h3>
+<p><strong>copy</strong> output plugin copies events to multiple outputs. This is NOT buffered plugin.</p>
+<p><strong>configuration</strong>:</p>
+<div class="highlight-python"><pre>&lt;match pattern&gt;
+  &lt;store&gt;
+    type file
+    path /var/log/fluent/myapp1
+    ...
+  &lt;/store&gt;
+  &lt;store&gt;
+    type file
+    path /var/log/fluent/myapp2
+    ...
+  &lt;/store&gt;
+  ...
+&lt;/match&gt;</pre>
+</div>
+<dl class="docutils">
+<dt>&lt;store&gt;</dt>
+<dd>Specifies output plugin. The format is same as &lt;match&gt; directive.</dd>
+</dl>
+</div>
+</div>
+<div class="section" id="buffer-plugins">
+<span id="buffer-plugin"></span><h2>Buffer plugins<a class="headerlink" href="#buffer-plugins" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="memory">
+<h3>memory<a class="headerlink" href="#memory" title="Permalink to this headline">¶</a></h3>
+<p><strong>memory</strong> buffer plugin provides fast buffer implementation.
+It uses memory to store buffer chunks. Buffered events which can&#8217;t be written soon are deleted when fluent is shut down.</p>
+<p><strong>configuration</strong>:</p>
+<div class="highlight-python"><pre>&lt;match pattern&gt;
+  buffer_type memory
+&lt;/match pattern&gt;</pre>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>file<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p><strong>file</strong> buffer plugin provides persistent buffer implementation.
+It uses file to store buffer chunks.</p>
+<p><strong>configuration</strong>:</p>
+<div class="highlight-python"><pre>&lt;match pattern&gt;
+  buffer_type file
+  buffer_path /var/log/fluent/myapp.*.buffer
+&lt;/match pattern&gt;</pre>
+</div>
+<dl class="docutils">
+<dt>buffer_path (required)</dt>
+<dd>Path to store buffer chunks. &#8216;*&#8217; is replaced with random characters.
+This parameter is required.</dd>
+</dl>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Plugins</a><ul>
+<li><a class="reference external" href="#kind-of-plugins">Kind of plugins</a></li>
+<li><a class="reference external" href="#input-plugins">Input plugins</a><ul>
+<li><a class="reference external" href="#http">http</a></li>
+<li><a class="reference external" href="#tcp">tcp</a></li>
+<li><a class="reference external" href="#unix">unix</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#output-plugins">Output plugins</a><ul>
+<li><a class="reference external" href="#buffered-outputs">Buffered outputs</a></li>
+<li><a class="reference external" href="#file">file</a></li>
+<li><a class="reference external" href="#copy">copy</a></li>
+</ul>
+</li>
+<li><a class="reference external" href="#buffer-plugins">Buffer plugins</a><ul>
+<li><a class="reference external" href="#memory">memory</a></li>
+<li><a class="reference external" href="#id1">file</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="config.html"
+                                  title="previous chapter">Configuration</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="devel.html"
+                                  title="next chapter">Writing plugins</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/plugin.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="devel.html" title="Writing plugins"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="config.html" title="Configuration"
+             >previous</a> |</li>
+        <li><a href="index.html">fluent v0.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2011, Sadayuki Furuhashi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+    </div>
+  </body>
+</html>
