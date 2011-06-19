@@ -142,10 +142,10 @@ When chunk size exceeds limit (*buffer_chunk_limit*) or specified time elapsed (
 The bottom chunk is wirtten out immediately when new chunk is pushed.
 
 If it failed to write, the chunk is left in the queue and retried to write after seconds (*retry_wait*).
-If the retry count is exceeds limit (*retry_limit*), the chunk is trashed. The wait time before retrying increases twice and twice (like 1sec, 2sec, 4sec, ...).
-If the length of the queue exceeds limit (*buffer_queue_limit*), new events can't be written.
+If the retry count is exceeds limit (*retry_limit*), the chunk is trashed. The wait time before retrying increases twice and twice (1.0sec, 2.0sec, 4.0sec, ...).
+If the length of the queue exceeds limit (*buffer_queue_limit*), new events are rejected.
 
-Buffered output plugins supports following parameters described above::
+All buffered output plugins supports following parameters described above::
 
     <match pattern>
       buffer_type memory
@@ -156,11 +156,11 @@ Buffered output plugins supports following parameters described above::
       retry_wait 1.0s
     </match>
 
-*buffer_type* specifies the type of buffer plugin. Default type is ``memory``.
+*buffer_type* specifies the type of buffer plugin. Default is ``memory``.
 
-Suffixes "s" (seconds), "m" (minutes), "h" (hours) can be used for buffer_flush_interval and retry_wait. retry_wait can be a decimal.
+Suffixes "s" (seconds), "m" (minutes), "h" (hours) can be used for *buffer_flush_interval* and *retry_wait*. *retry_wait* can be a decimal.
 
-Suffixes "k" (KB), "m" (MB), "g" (GB) can be used for buffer_chunk_limit.
+Suffixes "k" (KB), "m" (MB), "g" (GB) can be used for *buffer_chunk_limit*.
 
 
 

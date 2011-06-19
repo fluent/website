@@ -1,0 +1,781 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Class: Fluent::EngineClass</title>
+
+	<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+
+	<script src="../js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="class">
+
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="../index.html">Home</a>
+          <a href="../index.html#classes">Classes</a>
+          <a href="../index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="../lib/fluent/engine_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/fluent/engine.rb">lib/fluent/engine.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+			<div id="parent-class-section" class="section">
+				<h3 class="section-header">Parent</h3>
+				
+				<p class="link">Object</p>
+				
+			</div>
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-c-new">::new</a></li>
+					
+					<li><a href="#method-i-configure">#configure</a></li>
+					
+					<li><a href="#method-i-emit">#emit</a></li>
+					
+					<li><a href="#method-i-emit_array">#emit_array</a></li>
+					
+					<li><a href="#method-i-emit_stream">#emit_stream</a></li>
+					
+					<li><a href="#method-i-init">#init</a></li>
+					
+					<li><a href="#method-i-join">#join</a></li>
+					
+					<li><a href="#method-i-load_plugin_dir">#load_plugin_dir</a></li>
+					
+					<li><a href="#method-i-now">#now</a></li>
+					
+					<li><a href="#method-i-read_config">#read_config</a></li>
+					
+					<li><a href="#method-i-run">#run</a></li>
+					
+					<li><a href="#method-i-shutdown">#shutdown</a></li>
+					
+					<li><a href="#method-i-start">#start</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="../images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="../Fluent.html">Fluent</a></li>
+				
+					<li><a href="../Fluent/ArrayEventStream.html">Fluent::ArrayEventStream</a></li>
+				
+					<li><a href="../Fluent/BasicBuffer.html">Fluent::BasicBuffer</a></li>
+				
+					<li><a href="../Fluent/BucketOutput.html">Fluent::BucketOutput</a></li>
+				
+					<li><a href="../Fluent/Buffer.html">Fluent::Buffer</a></li>
+				
+					<li><a href="../Fluent/BufferChunk.html">Fluent::BufferChunk</a></li>
+				
+					<li><a href="../Fluent/BufferError.html">Fluent::BufferError</a></li>
+				
+					<li><a href="../Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
+				
+					<li><a href="../Fluent/BufferedOutput/WriterThread.html">Fluent::BufferedOutput::WriterThread</a></li>
+				
+					<li><a href="../Fluent/Config.html">Fluent::Config</a></li>
+				
+					<li><a href="../Fluent/Config/Element.html">Fluent::Config::Element</a></li>
+				
+					<li><a href="../Fluent/ConfigError.html">Fluent::ConfigError</a></li>
+				
+					<li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
+				
+					<li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
+				
+					<li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
+				
+					<li><a href="../Fluent/Event.html">Fluent::Event</a></li>
+				
+					<li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
+				
+					<li><a href="../Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
+				
+					<li><a href="../Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
+				
+					<li><a href="../Fluent/FileOutput.html">Fluent::FileOutput</a></li>
+				
+					<li><a href="../Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
+				
+					<li><a href="../Fluent/HttpInput.html">Fluent::HttpInput</a></li>
+				
+					<li><a href="../Fluent/Input.html">Fluent::Input</a></li>
+				
+					<li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
+				
+					<li><a href="../Fluent/Log.html">Fluent::Log</a></li>
+				
+					<li><a href="../Fluent/Match.html">Fluent::Match</a></li>
+				
+					<li><a href="../Fluent/MatchPattern.html">Fluent::MatchPattern</a></li>
+				
+					<li><a href="../Fluent/MemoryBuffer.html">Fluent::MemoryBuffer</a></li>
+				
+					<li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
+				
+					<li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
+				
+					<li><a href="../Fluent/Output.html">Fluent::Output</a></li>
+				
+					<li><a href="../Fluent/OutputChain.html">Fluent::OutputChain</a></li>
+				
+					<li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
+				
+					<li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
+				
+					<li><a href="../Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
+				
+					<li><a href="../Fluent/StreamInput.html">Fluent::StreamInput</a></li>
+				
+					<li><a href="../Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
+				
+					<li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
+				
+					<li><a href="../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
+				
+					<li><a href="../Fluent/ZFileBuffer.html">Fluent::ZFileBuffer</a></li>
+				
+					<li><a href="../Fluent/ZFileBufferChunk.html">Fluent::ZFileBufferChunk</a></li>
+				
+					<li><a href="../Writer.html">Writer</a></li>
+				
+					<li><a href="../Writer/TimerThread.html">Writer::TimerThread</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="class">Fluent::EngineClass</h1>
+
+		<div id="description">
+			
+		</div>
+
+		<!-- Constants -->
+		
+
+		<!-- Attributes -->
+		
+
+		<!-- Methods -->
+		
+		<div id="public-class-method-details" class="method-section section">
+			<h3 class="section-header">Public Class Methods</h3>
+
+		
+			<div id="new-method" class="method-detail ">
+				<a name="method-c-new"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">new</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="new-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/fluent/engine.rb, line 22</span>
+22:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
+23:     <span class="ruby-ivar">@matches</span> = []
+24:     <span class="ruby-ivar">@sources</span> = []
+25:     <span class="ruby-ivar">@finish</span> = <span class="ruby-keyword kw">false</span>
+26:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="configure-method" class="method-detail ">
+				<a name="method-i-configure"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">configure</span><span
+						class="method-args">(conf)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="configure-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/fluent/engine.rb, line 53</span>
+53:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
+54:     <span class="ruby-identifier">conf</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+55:       <span class="ruby-identifier">e</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'source'</span>
+56:     }.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+57:       <span class="ruby-identifier">type</span> = <span class="ruby-identifier">e</span>[<span class="ruby-value str">'type'</span>]
+58:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">type</span>
+59:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConfigError</span>, <span class="ruby-value str">&quot;Missing 'type' parameter on &lt;source&gt; directive&quot;</span>
+60:       <span class="ruby-keyword kw">end</span>
+61:       <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">info</span> <span class="ruby-node">&quot;adding source type=#{type.dump}&quot;</span>
+62: 
+63:       <span class="ruby-identifier">input</span> = <span class="ruby-constant">Plugin</span>.<span class="ruby-identifier">new_input</span>(<span class="ruby-identifier">type</span>)
+64:       <span class="ruby-identifier">input</span>.<span class="ruby-identifier">configure</span>(<span class="ruby-identifier">e</span>)
+65: 
+66:       <span class="ruby-ivar">@sources</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">input</span>
+67:     }
+68: 
+69:     <span class="ruby-identifier">conf</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+70:       <span class="ruby-identifier">e</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'match'</span>
+71:     }.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+72:       <span class="ruby-identifier">type</span> = <span class="ruby-identifier">e</span>[<span class="ruby-value str">'type'</span>]
+73:       <span class="ruby-identifier">pattern</span> = <span class="ruby-identifier">e</span>.<span class="ruby-identifier">arg</span>
+74:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">type</span>
+75:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConfigError</span>, <span class="ruby-node">&quot;Missing 'type' parameter on &lt;match #{e.arg}&gt; directive&quot;</span>
+76:       <span class="ruby-keyword kw">end</span>
+77:       <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">info</span> <span class="ruby-node">&quot;adding match pattern=#{pattern.dump} type=#{type.dump}&quot;</span>
+78: 
+79:       <span class="ruby-identifier">output</span> = <span class="ruby-constant">Plugin</span>.<span class="ruby-identifier">new_output</span>(<span class="ruby-identifier">type</span>)
+80:       <span class="ruby-identifier">output</span>.<span class="ruby-identifier">configure</span>(<span class="ruby-identifier">e</span>)
+81: 
+82:       <span class="ruby-identifier">match</span> = <span class="ruby-constant">Match</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">pattern</span>, <span class="ruby-identifier">output</span>)
+83:       <span class="ruby-ivar">@matches</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">match</span>
+84:     }
+85:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="emit-method" class="method-detail ">
+				<a name="method-i-emit"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">emit</span><span
+						class="method-args">(tag, event)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="emit-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/fluent/engine.rb, line 91</span>
+91:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">emit</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">event</span>)
+92:     <span class="ruby-identifier">emit_stream</span> <span class="ruby-identifier">tag</span>, <span class="ruby-constant">ArrayEventStream</span>.<span class="ruby-identifier">new</span>([<span class="ruby-identifier">event</span>])
+93:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="emit-array-method" class="method-detail ">
+				<a name="method-i-emit_array"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">emit_array</span><span
+						class="method-args">(tag, array)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="emit-array-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/fluent/engine.rb, line 95</span>
+95:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">emit_array</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">array</span>)
+96:     <span class="ruby-identifier">emit_stream</span> <span class="ruby-identifier">tag</span>, <span class="ruby-constant">ArrayEventStream</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">array</span>)
+97:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="emit-stream-method" class="method-detail ">
+				<a name="method-i-emit_stream"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">emit_stream</span><span
+						class="method-args">(tag, es)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="emit-stream-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/fluent/engine.rb, line 99</span>
+ 99:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">emit_stream</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>)
+100:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">match</span> = <span class="ruby-ivar">@matches</span>.<span class="ruby-identifier">find</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">tag</span>) }
+101:       <span class="ruby-identifier">match</span>.<span class="ruby-identifier">emit</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>)
+102:     <span class="ruby-keyword kw">else</span>
+103:       <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">trace</span> { <span class="ruby-node">&quot;no pattern matched: tag=#{tag}&quot;</span> }
+104:     <span class="ruby-keyword kw">end</span>
+105:   <span class="ruby-keyword kw">rescue</span>
+106:     <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">on_warn</span> {
+107:       <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">warn</span> <span class="ruby-value str">&quot;emit transaction faild: &quot;</span>, <span class="ruby-identifier">$!</span>
+108:       <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">warn_backtrace</span>
+109:     }
+110:     <span class="ruby-identifier">raise</span>
+111:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="init-method" class="method-detail ">
+				<a name="method-i-init"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">init</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="init-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/fluent/engine.rb, line 28</span>
+28:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">init</span>
+29:     <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">info</span> <span class="ruby-node">&quot;started at #{Time.now}&quot;</span>
+30:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'thread'</span>
+31:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'monitor'</span>
+32:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'stringio'</span>
+33:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'fileutils'</span>
+34:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'json'</span>
+35:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'fluent/env'</span>
+36:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'fluent/buffer'</span>
+37:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'fluent/config'</span>
+38:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'fluent/event'</span>
+39:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'fluent/input'</span>
+40:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'fluent/match'</span>
+41:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'fluent/output'</span>
+42:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'fluent/plugin'</span>
+43:     <span class="ruby-constant">Plugin</span>.<span class="ruby-identifier">load_built_in_plugin</span>
+44:     <span class="ruby-keyword kw">self</span>
+45:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="join-method" class="method-detail ">
+				<a name="method-i-join"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">join</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="join-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/fluent/engine.rb, line 138</span>
+138:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">join</span>
+139:     <span class="ruby-keyword kw">until</span> <span class="ruby-ivar">@finish</span>
+140:       <span class="ruby-identifier">sleep</span> <span class="ruby-value">1</span>
+141:     <span class="ruby-keyword kw">end</span>
+142:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="load-plugin-dir-method" class="method-detail ">
+				<a name="method-i-load_plugin_dir"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">load_plugin_dir</span><span
+						class="method-args">(dir)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="load-plugin-dir-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/fluent/engine.rb, line 87</span>
+87:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">load_plugin_dir</span>(<span class="ruby-identifier">dir</span>)
+88:     <span class="ruby-constant">Plugin</span>.<span class="ruby-identifier">load_plugin</span>(<span class="ruby-identifier">dir</span>)
+89:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="now-method" class="method-detail ">
+				<a name="method-i-now"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">now</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="now-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/fluent/engine.rb, line 113</span>
+113:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">now</span>
+114:     <span class="ruby-comment cmt"># TODO thread update</span>
+115:     <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>
+116:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="read-config-method" class="method-detail ">
+				<a name="method-i-read_config"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">read_config</span><span
+						class="method-args">(path)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="read-config-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/fluent/engine.rb, line 47</span>
+47:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">read_config</span>(<span class="ruby-identifier">path</span>)
+48:     <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">info</span> <span class="ruby-node">&quot;reading config file '#{path}'&quot;</span>
+49:     <span class="ruby-identifier">conf</span> = <span class="ruby-constant">Config</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>)
+50:     <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
+51:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="run-method" class="method-detail ">
+				<a name="method-i-run"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">run</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="run-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/fluent/engine.rb, line 144</span>
+144:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">run</span>
+145:     <span class="ruby-identifier">start</span>
+146:     <span class="ruby-identifier">join</span>
+147:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="shutdown-method" class="method-detail ">
+				<a name="method-i-shutdown"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">shutdown</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="shutdown-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/fluent/engine.rb, line 128</span>
+128:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">shutdown</span>
+129:     <span class="ruby-ivar">@matches</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+130:       <span class="ruby-identifier">m</span>.<span class="ruby-identifier">shutdown</span> <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>
+131:     }
+132:     <span class="ruby-ivar">@sources</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+133:       <span class="ruby-identifier">s</span>.<span class="ruby-identifier">shutdown</span> <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>
+134:     }
+135:     <span class="ruby-ivar">@finish</span> = <span class="ruby-keyword kw">true</span>
+136:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="start-method" class="method-detail ">
+				<a name="method-i-start"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">start</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="start-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/fluent/engine.rb, line 118</span>
+118:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start</span>
+119:     <span class="ruby-ivar">@finish</span> = <span class="ruby-keyword kw">false</span>
+120:     <span class="ruby-ivar">@matches</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span>
+121:       <span class="ruby-identifier">m</span>.<span class="ruby-identifier">start</span>
+122:     }
+123:     <span class="ruby-ivar">@sources</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">s</span><span class="ruby-operator">|</span>
+124:       <span class="ruby-identifier">s</span>.<span class="ruby-identifier">start</span>
+125:     }
+126:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+

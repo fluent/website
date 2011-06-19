@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to fluent's documentation!
+Welcome to Fluent's documentation!
 ==================================
 
 .. toctree::
@@ -14,6 +14,11 @@ Welcome to fluent's documentation!
    config
    plugin
    devel
+
+RDoc
+==================
+
+`Fluent RDoc <http://fluent.github.com/rdoc/>`_
 
 Indices and tables
 ==================

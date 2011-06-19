@@ -1,0 +1,735 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Class: Fluent::BasicBuffer</title>
+
+	<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+
+	<script src="../js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="class">
+
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="../index.html">Home</a>
+          <a href="../index.html#classes">Classes</a>
+          <a href="../index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="../lib/fluent/buffer_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/fluent/buffer.rb">lib/fluent/buffer.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+			<div id="parent-class-section" class="section">
+				<h3 class="section-header">Parent</h3>
+				
+				<p class="link"><a href="Buffer.html">Fluent::Buffer</a></p>
+				
+			</div>
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-c-new">::new</a></li>
+					
+					<li><a href="#method-i-clear%21">#clear!</a></li>
+					
+					<li><a href="#method-i-configure">#configure</a></li>
+					
+					<li><a href="#method-i-emit">#emit</a></li>
+					
+					<li><a href="#method-i-enable_parallel">#enable_parallel</a></li>
+					
+					<li><a href="#method-i-finalize_queue">#finalize_queue</a></li>
+					
+					<li><a href="#method-i-shutdown">#shutdown</a></li>
+					
+					<li><a href="#method-i-start">#start</a></li>
+					
+					<li><a href="#method-i-try_flush">#try_flush</a></li>
+					
+					<li><a href="#method-i-write_chunk">#write_chunk</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="../images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="../Fluent.html">Fluent</a></li>
+				
+					<li><a href="../Fluent/ArrayEventStream.html">Fluent::ArrayEventStream</a></li>
+				
+					<li><a href="../Fluent/BasicBuffer.html">Fluent::BasicBuffer</a></li>
+				
+					<li><a href="../Fluent/BucketOutput.html">Fluent::BucketOutput</a></li>
+				
+					<li><a href="../Fluent/Buffer.html">Fluent::Buffer</a></li>
+				
+					<li><a href="../Fluent/BufferChunk.html">Fluent::BufferChunk</a></li>
+				
+					<li><a href="../Fluent/BufferError.html">Fluent::BufferError</a></li>
+				
+					<li><a href="../Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
+				
+					<li><a href="../Fluent/BufferedOutput/WriterThread.html">Fluent::BufferedOutput::WriterThread</a></li>
+				
+					<li><a href="../Fluent/Config.html">Fluent::Config</a></li>
+				
+					<li><a href="../Fluent/Config/Element.html">Fluent::Config::Element</a></li>
+				
+					<li><a href="../Fluent/ConfigError.html">Fluent::ConfigError</a></li>
+				
+					<li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
+				
+					<li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
+				
+					<li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
+				
+					<li><a href="../Fluent/Event.html">Fluent::Event</a></li>
+				
+					<li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
+				
+					<li><a href="../Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
+				
+					<li><a href="../Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
+				
+					<li><a href="../Fluent/FileOutput.html">Fluent::FileOutput</a></li>
+				
+					<li><a href="../Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
+				
+					<li><a href="../Fluent/HttpInput.html">Fluent::HttpInput</a></li>
+				
+					<li><a href="../Fluent/Input.html">Fluent::Input</a></li>
+				
+					<li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
+				
+					<li><a href="../Fluent/Log.html">Fluent::Log</a></li>
+				
+					<li><a href="../Fluent/Match.html">Fluent::Match</a></li>
+				
+					<li><a href="../Fluent/MatchPattern.html">Fluent::MatchPattern</a></li>
+				
+					<li><a href="../Fluent/MemoryBuffer.html">Fluent::MemoryBuffer</a></li>
+				
+					<li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
+				
+					<li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
+				
+					<li><a href="../Fluent/Output.html">Fluent::Output</a></li>
+				
+					<li><a href="../Fluent/OutputChain.html">Fluent::OutputChain</a></li>
+				
+					<li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
+				
+					<li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
+				
+					<li><a href="../Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
+				
+					<li><a href="../Fluent/StreamInput.html">Fluent::StreamInput</a></li>
+				
+					<li><a href="../Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
+				
+					<li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
+				
+					<li><a href="../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
+				
+					<li><a href="../Fluent/ZFileBuffer.html">Fluent::ZFileBuffer</a></li>
+				
+					<li><a href="../Fluent/ZFileBufferChunk.html">Fluent::ZFileBufferChunk</a></li>
+				
+					<li><a href="../Writer.html">Writer</a></li>
+				
+					<li><a href="../Writer/TimerThread.html">Writer::TimerThread</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="class">Fluent::BasicBuffer</h1>
+
+		<div id="description">
+			
+		</div>
+
+		<!-- Constants -->
+		
+
+		<!-- Attributes -->
+		
+		<div id="attribute-method-details" class="method-section section">
+			<h3 class="section-header">Attributes</h3>
+
+			
+			<div id="queue-limit-attribute-method" class="method-detail">
+				<a name="queue_limit"></a>
+				
+				<a name="queue_limit="></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">queue_limit</span><span
+						class="attribute-access-type">[RW]</span>
+				</div>
+
+				<div class="method-description">
+				
+				
+				
+				</div>
+			</div>
+			
+			<div id="chunk-limit-attribute-method" class="method-detail">
+				<a name="chunk_limit"></a>
+				
+				<a name="chunk_limit="></a>
+				
+				<div class="method-heading attribute-method-heading">
+					<span class="method-name">chunk_limit</span><span
+						class="attribute-access-type">[RW]</span>
+				</div>
+
+				<div class="method-description">
+				
+				
+				
+				</div>
+			</div>
+			
+		</div>
+		
+
+		<!-- Methods -->
+		
+		<div id="public-class-method-details" class="method-section section">
+			<h3 class="section-header">Public Class Methods</h3>
+
+		
+			<div id="new-method" class="method-detail ">
+				<a name="method-c-new"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">new</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="new-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/fluent/buffer.rb, line 88</span>
+88:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
+89:     <span class="ruby-ivar">@chunk_limit</span> = <span class="ruby-value">1024</span>*<span class="ruby-value">1024</span>  <span class="ruby-comment cmt"># TODO default</span>
+90:     <span class="ruby-ivar">@queue_limit</span> = <span class="ruby-value">100</span> <span class="ruby-comment cmt"># TODO default</span>
+91:     <span class="ruby-ivar">@parallel</span> = <span class="ruby-keyword kw">false</span>
+92:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="clear--method" class="method-detail ">
+				<a name="method-i-clear%21"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">clear!</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+def new_data end
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="clear--source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/fluent/buffer.rb, line 168</span>
+168:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">clear!</span>
+169:     <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">clear</span>
+170:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="configure-method" class="method-detail ">
+				<a name="method-i-configure"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">configure</span><span
+						class="method-args">(conf)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="configure-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/fluent/buffer.rb, line 100</span>
+100:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
+101:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">chunk_limit</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-value str">'buffer_chunk_limit'</span>]
+102:       <span class="ruby-ivar">@chunk_limit</span> = <span class="ruby-constant">Config</span>.<span class="ruby-identifier">size_value</span>(<span class="ruby-identifier">chunk_limit</span>)
+103:     <span class="ruby-keyword kw">end</span>
+104: 
+105:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">queue_limit</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-value str">'buffer_queue_limit'</span>]
+106:       <span class="ruby-ivar">@queue_limit</span> = <span class="ruby-ivar">@queue_limit</span>.<span class="ruby-identifier">to_i</span>
+107:     <span class="ruby-keyword kw">end</span>
+108:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="emit-method" class="method-detail ">
+				<a name="method-i-emit"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">emit</span><span
+						class="method-args">(data, chain)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="emit-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/fluent/buffer.rb, line 126</span>
+126:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">emit</span>(<span class="ruby-identifier">data</span>, <span class="ruby-identifier">chain</span>)
+127:     <span class="ruby-ivar">@top</span>.<span class="ruby-identifier">synchronize</span> {
+128:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@top</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@chunk_limit</span>
+129:         <span class="ruby-identifier">chain</span>.<span class="ruby-identifier">next</span>
+130:         <span class="ruby-ivar">@top</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">data</span>
+131:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+132: 
+133:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@queue_limit</span>
+134:         <span class="ruby-comment cmt"># TODO</span>
+135:         <span class="ruby-identifier">raise</span> <span class="ruby-constant">BufferError</span>, <span class="ruby-value str">&quot;queue size exceeds limit&quot;</span>
+136: 
+137:       <span class="ruby-keyword kw">else</span>
+138:         <span class="ruby-identifier">n</span> = <span class="ruby-identifier">new_data</span>
+139:         <span class="ruby-identifier">ok</span> = <span class="ruby-keyword kw">false</span>
+140:         <span class="ruby-keyword kw">begin</span>
+141:           <span class="ruby-identifier">n</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">data</span>
+142:           <span class="ruby-identifier">chain</span>.<span class="ruby-identifier">next</span>
+143:           <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">synchronize</span> {
+144:             <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@top</span>
+145:           }
+146:           <span class="ruby-ivar">@top</span>.<span class="ruby-identifier">close_write</span> <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>
+147:           <span class="ruby-ivar">@top</span> = <span class="ruby-identifier">n</span>
+148:           <span class="ruby-identifier">ok</span> = <span class="ruby-keyword kw">true</span>
+149:         <span class="ruby-keyword kw">ensure</span>
+150:           <span class="ruby-identifier">n</span>.<span class="ruby-identifier">purge</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">ok</span>
+151:         <span class="ruby-keyword kw">end</span>
+152:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">true</span>
+153:       <span class="ruby-keyword kw">end</span>
+154:     }
+155:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="enable-parallel-method" class="method-detail ">
+				<a name="method-i-enable_parallel"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">enable_parallel</span><span
+						class="method-args">(b=true)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="enable-parallel-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/fluent/buffer.rb, line 96</span>
+96:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">enable_parallel</span>(<span class="ruby-identifier">b</span>=<span class="ruby-keyword kw">true</span>)
+97:     <span class="ruby-ivar">@parallel</span> = <span class="ruby-identifier">b</span>
+98:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="finalize-queue-method" class="method-detail ">
+				<a name="method-i-finalize_queue"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">finalize_queue</span><span
+						class="method-args">(out)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					<p>
+def resume_queue end
+</p>
+					
+
+					
+					<div class="method-source-code"
+						id="finalize-queue-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/fluent/buffer.rb, line 160</span>
+160:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">finalize_queue</span>(<span class="ruby-identifier">out</span>)
+161:     <span class="ruby-keyword kw">while</span> <span class="ruby-identifier">try_flush</span>(<span class="ruby-identifier">out</span>, <span class="ruby-keyword kw">true</span>)
+162:     <span class="ruby-keyword kw">end</span>
+163:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="shutdown-method" class="method-detail ">
+				<a name="method-i-shutdown"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">shutdown</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="shutdown-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/fluent/buffer.rb, line 115</span>
+115:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">shutdown</span>
+116:     <span class="ruby-ivar">@top</span>.<span class="ruby-identifier">synchronize</span> {
+117:       <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">synchronize</span> {
+118:         <span class="ruby-keyword kw">until</span> <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">empty?</span>
+119:           <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">shift</span>.<span class="ruby-identifier">close</span>
+120:         <span class="ruby-keyword kw">end</span>
+121:       }
+122:       <span class="ruby-ivar">@top</span>.<span class="ruby-identifier">close</span>
+123:     }
+124:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="start-method" class="method-detail ">
+				<a name="method-i-start"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">start</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="start-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/fluent/buffer.rb, line 110</span>
+110:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start</span>
+111:     <span class="ruby-ivar">@queue</span>, <span class="ruby-ivar">@top</span> = <span class="ruby-identifier">resume_queue</span>
+112:     <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-constant">MonitorMixin</span>)
+113:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="try-flush-method" class="method-detail ">
+				<a name="method-i-try_flush"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">try_flush</span><span
+						class="method-args">(out, force=true)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="try-flush-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/fluent/buffer.rb, line 172</span>
+172:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">try_flush</span>(<span class="ruby-identifier">out</span>, <span class="ruby-identifier">force</span>=<span class="ruby-keyword kw">true</span>)
+173:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">empty?</span>
+174:       <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">force</span>
+175:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span>
+176:       <span class="ruby-keyword kw">end</span>
+177:       <span class="ruby-ivar">@top</span>.<span class="ruby-identifier">synchronize</span> {
+178:         <span class="ruby-keyword kw">unless</span> <span class="ruby-ivar">@top</span>.<span class="ruby-identifier">empty?</span>
+179:           <span class="ruby-identifier">n</span> = <span class="ruby-identifier">new_data</span>
+180:           <span class="ruby-identifier">ok</span> = <span class="ruby-keyword kw">false</span>
+181:           <span class="ruby-keyword kw">begin</span>
+182:             <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">synchronize</span> {
+183:               <span class="ruby-ivar">@queue</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@top</span>
+184:             }
+185:             <span class="ruby-ivar">@top</span>.<span class="ruby-identifier">close_write</span> <span class="ruby-keyword kw">rescue</span> <span class="ruby-keyword kw">nil</span>
+186:             <span class="ruby-ivar">@top</span> = <span class="ruby-identifier">n</span>
+187:             <span class="ruby-identifier">ok</span> = <span class="ruby-keyword kw">true</span>
+188:           <span class="ruby-keyword kw">ensure</span>
+189:             <span class="ruby-identifier">n</span>.<span class="ruby-identifier">purge</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">ok</span>
+190:           <span class="ruby-keyword kw">end</span>
+191:         <span class="ruby-keyword kw">end</span>
+192:       }
+193:     <span class="ruby-keyword kw">end</span>
+194: 
+195:     <span class="ruby-identifier">chunk</span> = <span class="ruby-keyword kw">nil</span>
+196:     <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">synchronize</span> {
+197:       <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@parallel</span>
+198:         <span class="ruby-identifier">chunk</span> = <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">find</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">try_mon_enter</span> }
+199:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">chunk</span>
+200:       <span class="ruby-keyword kw">else</span>
+201:         <span class="ruby-identifier">chunk</span> = <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">first</span>
+202:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">chunk</span>
+203:         <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">false</span> <span class="ruby-keyword kw">unless</span> <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">try_mon_enter</span>
+204:       <span class="ruby-keyword kw">end</span>
+205:     }
+206: 
+207:     <span class="ruby-keyword kw">begin</span>
+208:       <span class="ruby-keyword kw">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">empty?</span>
+209:         <span class="ruby-identifier">write_chunk</span>(<span class="ruby-identifier">chunk</span>, <span class="ruby-identifier">out</span>)
+210:       <span class="ruby-keyword kw">end</span>
+211: 
+212:       <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">synchronize</span> {
+213:         <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">delete_if</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+214:           <span class="ruby-identifier">c</span>.<span class="ruby-identifier">object_id</span> <span class="ruby-operator">==</span> <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">object_id</span>
+215:         }
+216:       }
+217:       <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">purge</span>
+218: 
+219:       <span class="ruby-keyword kw">return</span> <span class="ruby-operator">!</span><span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">empty?</span>
+220:     <span class="ruby-keyword kw">ensure</span>
+221:       <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">mon_exit</span>
+222:     <span class="ruby-keyword kw">end</span>
+223:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+			<div id="write-chunk-method" class="method-detail ">
+				<a name="method-i-write_chunk"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">write_chunk</span><span
+						class="method-args">(chunk, out)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="write-chunk-source">
+<pre>
+     <span class="ruby-comment cmt"># File lib/fluent/buffer.rb, line 225</span>
+225:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write_chunk</span>(<span class="ruby-identifier">chunk</span>, <span class="ruby-identifier">out</span>)
+226:     <span class="ruby-identifier">out</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">chunk</span>)
+227:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+

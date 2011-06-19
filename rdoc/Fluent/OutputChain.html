@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+
+	<title>Class: Fluent::OutputChain</title>
+
+	<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+
+	<script src="../js/jquery.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/thickbox-compressed.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/quicksearch.js" type="text/javascript"
+		charset="utf-8"></script>
+	<script src="../js/darkfish.js" type="text/javascript"
+		charset="utf-8"></script>
+
+</head>
+<body class="class">
+
+	<div id="metadata">
+		<div id="home-metadata">
+			<div id="home-section" class="section">
+        <h3 class="section-header">
+          <a href="../index.html">Home</a>
+          <a href="../index.html#classes">Classes</a>
+          <a href="../index.html#methods">Methods</a>
+        </h3>
+			</div>
+		</div>
+
+		<div id="file-metadata">
+			<div id="file-list-section" class="section">
+				<h3 class="section-header">In Files</h3>
+				<div class="section-body">
+					<ul>
+					
+						<li><a href="../lib/fluent/output_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/fluent/output.rb">lib/fluent/output.rb</a></li>
+					
+					</ul>
+				</div>
+			</div>
+
+			
+		</div>
+
+		<div id="class-metadata">
+
+			<!-- Parent Class -->
+			
+			<div id="parent-class-section" class="section">
+				<h3 class="section-header">Parent</h3>
+				
+				<p class="link">Object</p>
+				
+			</div>
+			
+
+			<!-- Namespace Contents -->
+			
+
+			<!-- Method Quickref -->
+			
+			<div id="method-list-section" class="section">
+				<h3 class="section-header">Methods</h3>
+				<ul class="link-list">
+					
+					<li><a href="#method-c-new">::new</a></li>
+					
+					<li><a href="#method-i-next">#next</a></li>
+					
+				</ul>
+			</div>
+			
+
+			<!-- Included Modules -->
+			
+		</div>
+
+		<div id="project-metadata">
+			
+			
+
+			<div id="classindex-section" class="section project-section">
+				<h3 class="section-header">Class Index
+					<span class="search-toggle"><img src="../images/find.png"
+						height="16" width="16" alt="[+]"
+						title="show/hide quicksearch" /></span></h3>
+				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+				<fieldset>
+					<legend>Quicksearch</legend>
+					<input type="text" name="quicksearch" value=""
+						class="quicksearch-field" />
+				</fieldset>
+				</form>
+
+				<ul class="link-list">
+				
+					<li><a href="../Fluent.html">Fluent</a></li>
+				
+					<li><a href="../Fluent/ArrayEventStream.html">Fluent::ArrayEventStream</a></li>
+				
+					<li><a href="../Fluent/BasicBuffer.html">Fluent::BasicBuffer</a></li>
+				
+					<li><a href="../Fluent/BucketOutput.html">Fluent::BucketOutput</a></li>
+				
+					<li><a href="../Fluent/Buffer.html">Fluent::Buffer</a></li>
+				
+					<li><a href="../Fluent/BufferChunk.html">Fluent::BufferChunk</a></li>
+				
+					<li><a href="../Fluent/BufferError.html">Fluent::BufferError</a></li>
+				
+					<li><a href="../Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
+				
+					<li><a href="../Fluent/BufferedOutput/WriterThread.html">Fluent::BufferedOutput::WriterThread</a></li>
+				
+					<li><a href="../Fluent/Config.html">Fluent::Config</a></li>
+				
+					<li><a href="../Fluent/Config/Element.html">Fluent::Config::Element</a></li>
+				
+					<li><a href="../Fluent/ConfigError.html">Fluent::ConfigError</a></li>
+				
+					<li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
+				
+					<li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
+				
+					<li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
+				
+					<li><a href="../Fluent/Event.html">Fluent::Event</a></li>
+				
+					<li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
+				
+					<li><a href="../Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
+				
+					<li><a href="../Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
+				
+					<li><a href="../Fluent/FileOutput.html">Fluent::FileOutput</a></li>
+				
+					<li><a href="../Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
+				
+					<li><a href="../Fluent/HttpInput.html">Fluent::HttpInput</a></li>
+				
+					<li><a href="../Fluent/Input.html">Fluent::Input</a></li>
+				
+					<li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
+				
+					<li><a href="../Fluent/Log.html">Fluent::Log</a></li>
+				
+					<li><a href="../Fluent/Match.html">Fluent::Match</a></li>
+				
+					<li><a href="../Fluent/MatchPattern.html">Fluent::MatchPattern</a></li>
+				
+					<li><a href="../Fluent/MemoryBuffer.html">Fluent::MemoryBuffer</a></li>
+				
+					<li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
+				
+					<li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
+				
+					<li><a href="../Fluent/Output.html">Fluent::Output</a></li>
+				
+					<li><a href="../Fluent/OutputChain.html">Fluent::OutputChain</a></li>
+				
+					<li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
+				
+					<li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
+				
+					<li><a href="../Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
+				
+					<li><a href="../Fluent/StreamInput.html">Fluent::StreamInput</a></li>
+				
+					<li><a href="../Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
+				
+					<li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
+				
+					<li><a href="../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
+				
+					<li><a href="../Fluent/ZFileBuffer.html">Fluent::ZFileBuffer</a></li>
+				
+					<li><a href="../Fluent/ZFileBufferChunk.html">Fluent::ZFileBufferChunk</a></li>
+				
+					<li><a href="../Writer.html">Writer</a></li>
+				
+					<li><a href="../Writer/TimerThread.html">Writer::TimerThread</a></li>
+				
+				</ul>
+				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
+			</div>
+
+			
+		</div>
+	</div>
+
+	<div id="documentation">
+		<h1 class="class">Fluent::OutputChain</h1>
+
+		<div id="description">
+			
+		</div>
+
+		<!-- Constants -->
+		
+
+		<!-- Attributes -->
+		
+
+		<!-- Methods -->
+		
+		<div id="public-class-method-details" class="method-section section">
+			<h3 class="section-header">Public Class Methods</h3>
+
+		
+			<div id="new-method" class="method-detail ">
+				<a name="method-c-new"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">new</span><span
+						class="method-args">(array, tag, es, chain)</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="new-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/fluent/output.rb, line 22</span>
+22:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">array</span>, <span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>, <span class="ruby-identifier">chain</span>)
+23:     <span class="ruby-ivar">@array</span> = <span class="ruby-identifier">array</span>
+24:     <span class="ruby-ivar">@tag</span> = <span class="ruby-identifier">tag</span>
+25:     <span class="ruby-ivar">@es</span> = <span class="ruby-identifier">es</span>
+26:     <span class="ruby-ivar">@offset</span> = <span class="ruby-value">0</span>
+27:     <span class="ruby-ivar">@chain</span> = <span class="ruby-identifier">chain</span>
+28:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+		<div id="public-instance-method-details" class="method-section section">
+			<h3 class="section-header">Public Instance Methods</h3>
+
+		
+			<div id="next-method" class="method-detail ">
+				<a name="method-i-next"></a>
+
+				<div class="method-heading">
+				
+					<span class="method-name">next</span><span
+						class="method-args">()</span>
+					<span class="method-click-advice">click to toggle source</span>
+				
+				</div>
+
+				<div class="method-description">
+					
+					
+					
+
+					
+					<div class="method-source-code"
+						id="next-source">
+<pre>
+    <span class="ruby-comment cmt"># File lib/fluent/output.rb, line 30</span>
+30:   <span class="ruby-keyword kw">def</span> <span class="ruby-keyword kw">next</span>
+31:     <span class="ruby-ivar">@offset</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+32:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@array</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-ivar">@offset</span>
+33:       <span class="ruby-keyword kw">return</span> <span class="ruby-ivar">@chain</span>.<span class="ruby-identifier">next</span>
+34:     <span class="ruby-keyword kw">end</span>
+35:     <span class="ruby-identifier">result</span> = <span class="ruby-ivar">@array</span>[<span class="ruby-ivar">@offset</span>].<span class="ruby-identifier">emit</span>(<span class="ruby-ivar">@tag</span>, <span class="ruby-ivar">@es</span>, <span class="ruby-keyword kw">self</span>)
+36:     <span class="ruby-identifier">result</span>
+37:   <span class="ruby-keyword kw">end</span></pre>
+					</div>
+					
+				</div>
+
+				
+
+				
+			</div>
+
+		
+		</div>
+	
+
+	</div>
+
+
+	<div id="rdoc-debugging-section-dump" class="debugging-section">
+	
+		<p>Disabled; run with --debug to generate this.</p>
+	
+	</div>
+
+	<div id="validator-badges">
+		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+			Rdoc Generator</a> 1.1.6</small>.</p>
+	</div>
+
+</body>
+</html>
+

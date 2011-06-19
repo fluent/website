@@ -43,6 +43,104 @@
             
   <div class="section" id="writing-plugins">
 <span id="devel"></span><h1>Writing plugins<a class="headerlink" href="#writing-plugins" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#installing-plugins" id="id1">Installing plugins</a></li>
+<li><a class="reference internal" href="#input-plugins" id="id2">Input plugins</a></li>
+<li><a class="reference internal" href="#buffered-output-plugins" id="id3">Buffered output plugins</a></li>
+<li><a class="reference internal" href="#non-buffered-output-plugins" id="id4">Non-buffered output plugins</a></li>
+<li><a class="reference internal" href="#buffer-plugins" id="id5">Buffer plugins</a></li>
+</ul>
+</div>
+<div class="section" id="installing-plugins">
+<h2>Installing plugins<a class="headerlink" href="#installing-plugins" title="Permalink to this headline">¶</a></h2>
+<p>Put a ruby script to <tt class="docutils literal"><span class="pre">/etc/fluent/plugin</span></tt> directory to install your lugin.</p>
+<p>Or you can create gem package that includes <tt class="docutils literal"><span class="pre">lib/fluent/plugin/&lt;TYPE&gt;_&lt;NAME&gt;.rb</span></tt> file. <em>TYPE</em> is <tt class="docutils literal"><span class="pre">in</span></tt> for input plugins, <tt class="docutils literal"><span class="pre">out</span></tt> for output plugins and <tt class="docutils literal"><span class="pre">buf</span></tt> for buffer plugins. It&#8217;s like <tt class="docutils literal"><span class="pre">lib/fluent/plugin/out_mail.rb</span></tt>. The packaged gem can be distributed and installed using RubyGems.</p>
+</div>
+<div class="section" id="input-plugins">
+<h2>Input plugins<a class="headerlink" href="#input-plugins" title="Permalink to this headline">¶</a></h2>
+<p>Extend <strong>Fluent::Input</strong> class and implement folloing methods:</p>
+<div class="highlight-python"><pre>class SomeInput &lt; Fluent::Input
+  Plugin.register_input('NAME', self)
+
+  # `conf` is a Hash that includes configuration parameters.
+  # If the configuration is invalid, raise Fluent::ConfigError.
+  def configure(conf)
+    @port = conf['port']
+    ...
+  end
+
+  # This method is called when starting.
+  # Open sockets or files here and create a Thread.
+  def start
+  end
+
+  # This method is called when shutting down.
+  # Shutdown the thread and Close sockets or files here.
+  def shutdown
+  end
+end</pre>
+</div>
+<p>To submit events, use <tt class="docutils literal"><span class="pre">Fluent::Engine.emit(tag,</span> <span class="pre">event)</span></tt> method as following:</p>
+<div class="highlight-python"><pre>tag = "myapp.access"
+time = Time.now.to_i
+record = {"message"=&gt;"body"}
+Fluent::Engine.emit(tag, Fluent::Event.new(tag, record))</pre>
+</div>
+<p>RDoc of the Engine class is available from <a class="reference external" href="http://fluent.github.com/rdoc/Fluent/Engine.html">Fluent RDoc</a>.</p>
+</div>
+<div class="section" id="buffered-output-plugins">
+<h2>Buffered output plugins<a class="headerlink" href="#buffered-output-plugins" title="Permalink to this headline">¶</a></h2>
+<p>Extend <strong>Fluent::BufferedOutput</strong> class and implement follwing methods:</p>
+<div class="highlight-python"><pre>class SomeOutput &lt; Fluent::BufferedOutput
+  Plugin.register_output('NAME', self)
+
+  # `conf` is a Hash that includes configuration parameters.
+  # If the configuration is invalid, raise Fluent::ConfigError.
+  def configure(conf)
+    @path = conf['path']
+    ...
+  end
+
+  # This method is called when starting.
+  # Open sockets or files here.
+  # Don't forgate call super()
+  def start
+    super()
+  end
+
+  # This method is called when shutting down.
+  # Shutdown the thread and Close sockets or files here.
+  # Don't forgate call super()
+  def shutdown
+    super()
+  end
+
+  # Convert event and tag to a raw string.
+  def format(tag, event)
+    [tag, event.time, event.record].to_json + "\n"
+  end
+
+  # Writes a buffer chunk to a files or network.
+  # `chunk` is a buffer chunk that includes multiple formatted
+  # events. You can use `data = chunk.read` to get all events and
+  # `chunk.open {|io| }` to get IO object.
+  def write(chunk)
+    objs = chunk.read.split("\n").map {|raw|
+      JSON.load(raw)
+    }
+  end
+end</pre>
+</div>
+</div>
+<div class="section" id="non-buffered-output-plugins">
+<h2>Non-buffered output plugins<a class="headerlink" href="#non-buffered-output-plugins" title="Permalink to this headline">¶</a></h2>
+<p>TODO</p>
+</div>
+<div class="section" id="buffer-plugins">
+<h2>Buffer plugins<a class="headerlink" href="#buffer-plugins" title="Permalink to this headline">¶</a></h2>
+<p>TODO</p>
+</div>
 </div>
 
 
@@ -51,6 +149,18 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Writing plugins</a><ul>
+<li><a class="reference external" href="#installing-plugins">Installing plugins</a></li>
+<li><a class="reference external" href="#input-plugins">Input plugins</a></li>
+<li><a class="reference external" href="#buffered-output-plugins">Buffered output plugins</a></li>
+<li><a class="reference external" href="#non-buffered-output-plugins">Non-buffered output plugins</a></li>
+<li><a class="reference external" href="#buffer-plugins">Buffer plugins</a></li>
+</ul>
+</li>
+</ul>
+
             <h4>Previous topic</h4>
             <p class="topless"><a href="plugin.html"
                                   title="previous chapter">Plugins</a></p>

@@ -64,13 +64,11 @@ Next step: :ref:`input_plugin`
 Next step: :ref:`output_plugin`
 
 
-init script examples
+Init scripts
 ------------------------------------
 
 Ubuntu upstart
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-TODO
 
 Put the file on ``/etc/init/fluent``::
 
@@ -89,4 +87,6 @@ Put the file on ``/etc/init/fluent``::
     exec bash -c "/usr/bin/fluentd -c /etc/fluent/fluent.conf 2>&1 \| /usr/bin/cronolog /var/log/fluent.log /var/log/fluent/fluent.%Y_%m_%d.log"
 
 `cronolog <http://cronolog.org/>`_ is used for logging error messages. Install it using ``apt-get install cronolog``.
+
+TODO
 

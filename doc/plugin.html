@@ -203,9 +203,9 @@ example:
 <p>When chunk size exceeds limit (<em>buffer_chunk_limit</em>) or specified time elapsed (<em>buffer_flush_interval</em>), new empty chunk is pushed.
 The bottom chunk is wirtten out immediately when new chunk is pushed.</p>
 <p>If it failed to write, the chunk is left in the queue and retried to write after seconds (<em>retry_wait</em>).
-If the retry count is exceeds limit (<em>retry_limit</em>), the chunk is trashed. The wait time before retrying increases twice and twice (like 1sec, 2sec, 4sec, ...).
-If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new events can&#8217;t be written.</p>
-<p>Buffered output plugins supports following parameters described above:</p>
+If the retry count is exceeds limit (<em>retry_limit</em>), the chunk is trashed. The wait time before retrying increases twice and twice (1.0sec, 2.0sec, 4.0sec, ...).
+If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new events are rejected.</p>
+<p>All buffered output plugins supports following parameters described above:</p>
 <div class="highlight-python"><pre>&lt;match pattern&gt;
   buffer_type memory
   buffer_flush_interval 60s
@@ -215,9 +215,9 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
   retry_wait 1.0s
 &lt;/match&gt;</pre>
 </div>
-<p><em>buffer_type</em> specifies the type of buffer plugin. Default type is <tt class="docutils literal"><span class="pre">memory</span></tt>.</p>
-<p>Suffixes &#8220;s&#8221; (seconds), &#8220;m&#8221; (minutes), &#8220;h&#8221; (hours) can be used for buffer_flush_interval and retry_wait. retry_wait can be a decimal.</p>
-<p>Suffixes &#8220;k&#8221; (KB), &#8220;m&#8221; (MB), &#8220;g&#8221; (GB) can be used for buffer_chunk_limit.</p>
+<p><em>buffer_type</em> specifies the type of buffer plugin. Default is <tt class="docutils literal"><span class="pre">memory</span></tt>.</p>
+<p>Suffixes &#8220;s&#8221; (seconds), &#8220;m&#8221; (minutes), &#8220;h&#8221; (hours) can be used for <em>buffer_flush_interval</em> and <em>retry_wait</em>. <em>retry_wait</em> can be a decimal.</p>
+<p>Suffixes &#8220;k&#8221; (KB), &#8220;m&#8221; (MB), &#8220;g&#8221; (GB) can be used for <em>buffer_chunk_limit</em>.</p>
 </div>
 <div class="section" id="file">
 <h3>file<a class="headerlink" href="#file" title="Permalink to this headline">¶</a></h3>

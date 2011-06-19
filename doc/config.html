@@ -56,7 +56,7 @@ It describes the format of the file.</p>
 <li><a class="reference internal" href="#match-directive" id="id3">&lt;match&gt; directive</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#init-script-examples" id="id4">init script examples</a><ul>
+<li><a class="reference internal" href="#init-scripts" id="id4">Init scripts</a><ul>
 <li><a class="reference internal" href="#ubuntu-upstart" id="id5">Ubuntu upstart</a></li>
 </ul>
 </li>
@@ -106,11 +106,10 @@ It describes the format of the file.</p>
 <p>Next step: <a class="reference external" href="plugin.html#output-plugin"><em>Output plugins</em></a></p>
 </div>
 </div>
-<div class="section" id="init-script-examples">
-<h2>init script examples<a class="headerlink" href="#init-script-examples" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="init-scripts">
+<h2>Init scripts<a class="headerlink" href="#init-scripts" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="ubuntu-upstart">
 <h3>Ubuntu upstart<a class="headerlink" href="#ubuntu-upstart" title="Permalink to this headline">¶</a></h3>
-<p>TODO</p>
 <p>Put the file on <tt class="docutils literal"><span class="pre">/etc/init/fluent</span></tt>:</p>
 <div class="highlight-python"><pre>description "Fluent event collector"
 author "Sadayuki Furuhashi"
@@ -127,6 +126,7 @@ kill timeout 60
 exec bash -c "/usr/bin/fluentd -c /etc/fluent/fluent.conf 2&gt;&amp;1 \| /usr/bin/cronolog /var/log/fluent.log /var/log/fluent/fluent.%Y_%m_%d.log"</pre>
 </div>
 <p><a class="reference external" href="http://cronolog.org/">cronolog</a> is used for logging error messages. Install it using <tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">cronolog</span></tt>.</p>
+<p>TODO</p>
 </div>
 </div>
 </div>
@@ -145,7 +145,7 @@ exec bash -c "/usr/bin/fluentd -c /etc/fluent/fluent.conf 2&gt;&amp;1 \| /usr/bi
 <li><a class="reference external" href="#match-directive">&lt;match&gt; directive</a></li>
 </ul>
 </li>
-<li><a class="reference external" href="#init-script-examples">init script examples</a><ul>
+<li><a class="reference external" href="#init-scripts">Init scripts</a><ul>
 <li><a class="reference external" href="#ubuntu-upstart">Ubuntu upstart</a></li>
 </ul>
 </li>
