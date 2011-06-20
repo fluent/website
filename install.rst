@@ -32,7 +32,7 @@ Finally, build and install using ./configure && make && sudo make install::
 
 Above commands install Fluent to ``$prefix`` and Ruby to ``$prefix/lib/fluent/ruby``.
 
-Next step: :ref:`config`
+Next step: :ref:`install/confirm`
 
 
 B. Gem installation
@@ -49,7 +49,7 @@ If it says ruby 1.9.2 or above, use ``gem`` command to install fluent::
 
     $ sudo gem install fluent
 
-Next step: :ref:`config`
+Next step: :ref:`install/confirm`
 
 
 C. Latest repository installation
@@ -63,6 +63,17 @@ To install the latest development version from the `source repository <https://g
     $ gem install pkg/fluent-*.gem
 
 Next step: :ref:`devel`
+
+
+.. _install/confirm:
+
+Confirm installation
+------------------------------------
+
+Try to run ``fluentd`` and submit a log using ``fluent-cat`` command as following::
+
+    $ fluentd &
+    $ echo '{"json":"message"}' | fluent-cat debug.test
 
 
 Updating

@@ -5,7 +5,7 @@
 <head>
 	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
 
-	<title>Class: Fluent::EventStream</title>
+	<title>Class: Fluent::StdoutOutput</title>
 
 	<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
 
@@ -38,8 +38,8 @@
 				<div class="section-body">
 					<ul>
 					
-						<li><a href="../lib/fluent/event_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/event.rb">lib/fluent/event.rb</a></li>
+						<li><a href="../lib/fluent/plugin/out_stdout_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+							class="thickbox" title="lib/fluent/plugin/out_stdout.rb">lib/fluent/plugin/out_stdout.rb</a></li>
 					
 					</ul>
 				</div>
@@ -55,7 +55,7 @@
 			<div id="parent-class-section" class="section">
 				<h3 class="section-header">Parent</h3>
 				
-				<p class="link">Object</p>
+				<p class="link"><a href="Output.html">Fluent::Output</a></p>
 				
 			</div>
 			
@@ -69,7 +69,7 @@
 				<h3 class="section-header">Methods</h3>
 				<ul class="link-list">
 					
-					<li><a href="#method-i-repeatable%3F">#repeatable?</a></li>
+					<li><a href="#method-i-emit">#emit</a></li>
 					
 				</ul>
 			</div>
@@ -199,7 +199,7 @@
 	</div>
 
 	<div id="documentation">
-		<h1 class="class">Fluent::EventStream</h1>
+		<h1 class="class">Fluent::StdoutOutput</h1>
 
 		<div id="description">
 			
@@ -217,13 +217,13 @@
 			<h3 class="section-header">Public Instance Methods</h3>
 
 		
-			<div id="repeatable--method" class="method-detail ">
-				<a name="method-i-repeatable%3F"></a>
+			<div id="emit-method" class="method-detail ">
+				<a name="method-i-emit"></a>
 
 				<div class="method-heading">
 				
-					<span class="method-name">repeatable?</span><span
-						class="method-args">()</span>
+					<span class="method-name">emit</span><span
+						class="method-args">(tag, es, chain)</span>
 					<span class="method-click-advice">click to toggle source</span>
 				
 				</div>
@@ -235,12 +235,15 @@
 
 					
 					<div class="method-source-code"
-						id="repeatable--source">
+						id="emit-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/event.rb, line 41</span>
-41:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">repeatable?</span>
-42:                 <span class="ruby-keyword kw">false</span>
-43:         <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/fluent/plugin/out_stdout.rb, line 24</span>
+24:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">emit</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>, <span class="ruby-identifier">chain</span>)
+25:     <span class="ruby-identifier">es</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+26:       <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{Time.at(e.time).localtime} #{tag}: #{e.record.to_json}&quot;</span>
+27:     }
+28:     <span class="ruby-identifier">chain</span>.<span class="ruby-identifier">next</span>
+29:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

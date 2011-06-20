@@ -47,7 +47,7 @@
             
   <div class="section" id="configuration">
 <span id="config"></span><h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
-<p>You can control the flow of event stream using the configuration file. It is stored on /etc/fluent/fluent.conf.
+<p>You can control the flow of event stream using the configuration file. It is stored on $install_prefix/etc/fluent/fluent.conf.
 It describes the format of the file.</p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -110,7 +110,7 @@ It describes the format of the file.</p>
 <h2>Init scripts<a class="headerlink" href="#init-scripts" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="ubuntu-upstart">
 <h3>Ubuntu upstart<a class="headerlink" href="#ubuntu-upstart" title="Permalink to this headline">¶</a></h3>
-<p>Put the file on <tt class="docutils literal"><span class="pre">/etc/init/fluent</span></tt>:</p>
+<p>Put the file on <tt class="docutils literal"><span class="pre">$install_prefix/etc/init/fluent</span></tt>:</p>
 <div class="highlight-python"><pre>description "Fluent event collector"
 author "Sadayuki Furuhashi"
 
@@ -123,7 +123,7 @@ respawn limit 10 5
 # The default of 5 seconds is too low to flush buffers
 kill timeout 60
 
-exec bash -c "/usr/bin/fluentd -c /etc/fluent/fluent.conf 2&gt;&amp;1 \| /usr/bin/cronolog /var/log/fluent.log /var/log/fluent/fluent.%Y_%m_%d.log"</pre>
+exec bash -c "/usr/bin/fluentd -c /usr/local/etc/fluent/fluent.conf 2&gt;&amp;1 \| /usr/bin/cronolog /var/log/fluent.log /var/log/fluent/fluent.%Y_%m_%d.log"</pre>
 </div>
 <p><a class="reference external" href="http://cronolog.org/">cronolog</a> is used for logging error messages. Install it using <tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">cronolog</span></tt>.</p>
 <p>TODO</p>

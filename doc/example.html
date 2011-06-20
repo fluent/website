@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Examples &mdash; fluent v0.9.0 documentation</title>
+    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '#',
+        VERSION:     '0.9.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="fluent v0.9.0 documentation" href="index.html" />
+    <link rel="prev" title="Writing plugins" href="devel.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="devel.html" title="Writing plugins"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">fluent v0.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="examples">
+<span id="example"></span><h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#calculate-web-accesses-hourly-and-write-it-to-mongodb" id="id1">Calculate web accesses hourly and write it to MongoDB</a><ul>
+<li><a class="reference internal" href="#writing-plugin" id="id2">Writing plugin</a></li>
+<li><a class="reference internal" href="#configuration" id="id3">Configuration</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="calculate-web-accesses-hourly-and-write-it-to-mongodb">
+<h2>Calculate web accesses hourly and write it to MongoDB<a class="headerlink" href="#calculate-web-accesses-hourly-and-write-it-to-mongodb" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="writing-plugin">
+<h3>Writing plugin<a class="headerlink" href="#writing-plugin" title="Permalink to this headline">¶</a></h3>
+<p>Put following script to $install_prefix/etc/fluent/plugin directory:</p>
+<div class="highlight-python"><pre># out_hourly_mongo.rb
+class HourlyMongoOutput &lt; Fluent::BufferedOutput
+  Fluent::Plugin.register_output('hourly_mongo', self)
+
+  def initialize
+    require 'mongo'
+    @host = nil
+    @port = 27017
+    @database = nil
+    @collection = nil
+  end
+
+  def configure(conf)
+    super(conf)
+
+    @host = conf['host']
+    unless @host
+      raise Fluent::ConfigError, "'host' parameter is required on hourly_mongo output"
+    end
+
+    @port = (conf['port'] || @port).to_i
+
+    @database = conf['database']
+    unless @database
+      raise Fluent::ConfigError, "'database' parameter is required on hourly_mongo output"
+    end
+
+    @collection = conf['collection']
+    unless @collection
+      raise Fluent::ConfigError, "'collection' parameter is required on hourly_mongo output"
+    end
+  end
+
+  def start
+    super()
+    @coll = Mongo::Connection.new(@host, @port)[@database][@collection]
+  end
+
+  def format(tag, event)
+    [event.time, event.record['path']].to_msgpack
+  end
+
+  HOUR = 60*60
+
+  def write(chunk)
+    counts = {}  # (time/HOUR,path) =&gt; count
+    chunk.open {|io|
+      u = MessagePack::Unpacker.new(io)
+      u.each {|time,path|
+        next if !time || !path
+        key = [time/HOUR, path]
+        n = counts[key] || 0
+        counts[key] = n + 1
+      } rescue EOFError
+    }
+
+    counts.each_pair {|(hour,path),count|
+      time = hour*HOUR
+      obj = {"time"=&gt;time, "path"=&gt;path, "count"=&gt;count}
+      $log.trace { "hourly_mongo: inserting #{obj.to_json}" }
+      @coll.insert(obj)
+    }
+  end
+end</pre>
+</div>
+</div>
+<div class="section" id="configuration">
+<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
+<blockquote>
+<p># read access log from /var/log/apache/access.log
+&lt;source&gt;</p>
+<blockquote>
+type tail
+format apache
+path /var/log/apache/access.log
+tag apache.access</blockquote>
+<p>&lt;/source&gt;</p>
+<p># configurate hourly_mongo plugin
+&lt;match apache.access&gt;</p>
+<blockquote>
+<p>type hourly_mongo
+host 127.0.0.1
+database test
+collection hourly</p>
+<p># use file buffer
+buffer_type file
+buffer_path /tmp/fluent/hourly_mongo.*.buffer</p>
+<p># flush every 1 hour
+buffer_flush_interval 1h</p>
+<p># limit size of the chunk upto 20MB
+chunk_limit 20m</p>
+</blockquote>
+<p>&lt;/match&gt;</p>
+</blockquote>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Examples</a><ul>
+<li><a class="reference external" href="#calculate-web-accesses-hourly-and-write-it-to-mongodb">Calculate web accesses hourly and write it to MongoDB</a><ul>
+<li><a class="reference external" href="#writing-plugin">Writing plugin</a></li>
+<li><a class="reference external" href="#configuration">Configuration</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="devel.html"
+                                  title="previous chapter">Writing plugins</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/example.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="devel.html" title="Writing plugins"
+             >previous</a> |</li>
+        <li><a href="index.html">fluent v0.9.0 documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+      &copy; Copyright 2011, Sadayuki Furuhashi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+    </div>
+  </body>
+</html>

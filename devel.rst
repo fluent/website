@@ -21,7 +21,7 @@ Input plugins
 Extend **Fluent::Input** class and implement folloing methods::
 
     class SomeInput < Fluent::Input
-      Plugin.register_input('NAME', self)
+      Fluent::Plugin.register_input('NAME', self)
 
       # `conf` is a Hash that includes configuration parameters.
       # If the configuration is invalid, raise Fluent::ConfigError.
@@ -57,7 +57,7 @@ Buffered output plugins
 Extend **Fluent::BufferedOutput** class and implement follwing methods::
 
     class SomeOutput < Fluent::BufferedOutput
-      Plugin.register_output('NAME', self)
+      Fluent::Plugin.register_output('NAME', self)
 
       # `conf` is a Hash that includes configuration parameters.
       # If the configuration is invalid, raise Fluent::ConfigError.

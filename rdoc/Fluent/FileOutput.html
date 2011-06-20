@@ -174,9 +174,15 @@
 				
 					<li><a href="../Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
 				
+					<li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
+				
 					<li><a href="../Fluent/StreamInput.html">Fluent::StreamInput</a></li>
 				
 					<li><a href="../Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
+				
+					<li><a href="../Fluent/TailInput.html">Fluent::TailInput</a></li>
+				
+					<li><a href="../Fluent/TailInput/Tailer.html">Fluent::TailInput::Tailer</a></li>
 				
 					<li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
 				
@@ -214,13 +220,13 @@
 			<h3 class="section-header">Attributes</h3>
 
 			
-			<div id="format-attribute-method" class="method-detail">
-				<a name="format"></a>
+			<div id="path-attribute-method" class="method-detail">
+				<a name="path"></a>
 				
-				<a name="format="></a>
+				<a name="path="></a>
 				
 				<div class="method-heading attribute-method-heading">
-					<span class="method-name">format</span><span
+					<span class="method-name">path</span><span
 						class="attribute-access-type">[RW]</span>
 				</div>
 
@@ -263,7 +269,7 @@
     <span class="ruby-comment cmt"># File lib/fluent/plugin/out_file.rb, line 24</span>
 24:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
 25:     <span class="ruby-keyword kw">super</span>
-26:     <span class="ruby-ivar">@format</span> = <span class="ruby-keyword kw">nil</span>
+26:     <span class="ruby-ivar">@path</span> = <span class="ruby-keyword kw">nil</span>
 27:     <span class="ruby-ivar">@localtime</span> = <span class="ruby-keyword kw">false</span>
 28:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
@@ -307,26 +313,18 @@
 33:     <span class="ruby-keyword kw">super</span>
 34: 
 35:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">path</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-value str">'path'</span>]
-36:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">pos</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">index</span>(<span class="ruby-value str">'*'</span>)
-37:         <span class="ruby-ivar">@format</span> = <span class="ruby-node">&quot;#{path[0,pos]}%Y-%m-%d-%H#{path[pos+1..-1]}&quot;</span>
-38:       <span class="ruby-keyword kw">else</span>
-39:         <span class="ruby-ivar">@format</span> = <span class="ruby-node">&quot;#{path}.%Y-%m-%d-%H&quot;</span>
-40:       <span class="ruby-keyword kw">end</span>
-41:     <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">format</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-value str">'format'</span>]
-42:       <span class="ruby-ivar">@format</span> = <span class="ruby-identifier">format</span>
-43:     <span class="ruby-keyword kw">else</span>
-44:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConfigError</span>, <span class="ruby-value str">&quot;'path' parameter is required on file output&quot;</span>
-45:     <span class="ruby-keyword kw">end</span>
-46: 
-47:     <span class="ruby-comment cmt"># TODO timezone</span>
-48:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">localtime</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-value str">'localtime'</span>]
-49:       <span class="ruby-ivar">@localtime</span> = <span class="ruby-keyword kw">true</span>
-50:     <span class="ruby-keyword kw">end</span>
-51: 
-52:     <span class="ruby-comment cmt"># TODO configure rotate_time</span>
-53:     <span class="ruby-comment cmt"># TODO configure rotate_size</span>
-54:     <span class="ruby-comment cmt"># TODO compression</span>
-55:   <span class="ruby-keyword kw">end</span></pre>
+36:       <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">path</span>
+37:     <span class="ruby-keyword kw">else</span>
+38:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConfigError</span>, <span class="ruby-value str">&quot;'path' parameter is required on file output&quot;</span>
+39:     <span class="ruby-keyword kw">end</span>
+40: 
+41:     <span class="ruby-comment cmt"># TODO timezone</span>
+42:     <span class="ruby-ivar">@localtime</span> = <span class="ruby-keyword kw">true</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">conf</span>[<span class="ruby-value str">'localtime'</span>]
+43: 
+44:     <span class="ruby-comment cmt"># TODO configure rotate_time</span>
+45:     <span class="ruby-comment cmt"># TODO configure rotate_size</span>
+46:     <span class="ruby-comment cmt"># TODO compression</span>
+47:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -357,17 +355,17 @@
 					<div class="method-source-code"
 						id="format-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/plugin/out_file.rb, line 57</span>
-57:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">format</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">event</span>)
-58:     <span class="ruby-comment cmt"># TODO foramt</span>
-59:     <span class="ruby-comment cmt">#msg = e.record.map {|k,v|</span>
-60:     <span class="ruby-comment cmt">#   k = &quot;\&quot;#{k}\&quot;&quot; if k.include?(' ')</span>
-61:     <span class="ruby-comment cmt">#   v = &quot;\&quot;#{v}\&quot;&quot; if v.include?(' ')</span>
-62:     <span class="ruby-comment cmt">#   &quot;#{k}=#{v}&quot;</span>
-63:     <span class="ruby-comment cmt">#}.join(' ')</span>
-64:     <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">event</span>.<span class="ruby-identifier">record</span>.<span class="ruby-identifier">to_json</span>
-65:     <span class="ruby-node">&quot;#{Time.at(event.time).to_s} #{tag}: #{msg}\n&quot;</span>
-66:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/fluent/plugin/out_file.rb, line 49</span>
+49:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">format</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">event</span>)
+50:     <span class="ruby-comment cmt"># TODO foramt</span>
+51:     <span class="ruby-comment cmt">#msg = e.record.map {|k,v|</span>
+52:     <span class="ruby-comment cmt">#   k = &quot;\&quot;#{k}\&quot;&quot; if k.include?(' ')</span>
+53:     <span class="ruby-comment cmt">#   v = &quot;\&quot;#{v}\&quot;&quot; if v.include?(' ')</span>
+54:     <span class="ruby-comment cmt">#   &quot;#{k}=#{v}&quot;</span>
+55:     <span class="ruby-comment cmt">#}.join(' ')</span>
+56:     <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">event</span>.<span class="ruby-identifier">record</span>.<span class="ruby-identifier">to_json</span>
+57:     <span class="ruby-node">&quot;#{Time.at(event.time).to_s} #{tag}: #{msg}\n&quot;</span>
+58:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -398,19 +396,19 @@
 					<div class="method-source-code"
 						id="write-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/plugin/out_file.rb, line 68</span>
-68:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write</span>(<span class="ruby-identifier">chunk</span>)
-69:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@localtime</span>
-70:       <span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
-71:     <span class="ruby-keyword kw">else</span>
-72:       <span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">utc</span>
-73:     <span class="ruby-keyword kw">end</span>
-74:     <span class="ruby-identifier">path</span> = <span class="ruby-identifier">time</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-ivar">@format</span>)
-75:     <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">path</span>)
-76:     <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-value str">&quot;a&quot;</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
-77:       <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">read</span>)
-78:     }
-79:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/fluent/plugin/out_file.rb, line 60</span>
+60:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">write</span>(<span class="ruby-identifier">chunk</span>)
+61:     <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@localtime</span>
+62:       <span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+63:     <span class="ruby-keyword kw">else</span>
+64:       <span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">utc</span>
+65:     <span class="ruby-keyword kw">end</span>
+66:     <span class="ruby-identifier">path</span> = <span class="ruby-identifier">time</span>.<span class="ruby-identifier">strftime</span>(<span class="ruby-ivar">@path</span>)
+67:     <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">path</span>)
+68:     <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-value str">&quot;a&quot;</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+69:       <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">read</span>)
+70:     }
+71:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

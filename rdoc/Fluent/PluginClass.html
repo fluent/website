@@ -190,9 +190,15 @@
 				
 					<li><a href="../Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
 				
+					<li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
+				
 					<li><a href="../Fluent/StreamInput.html">Fluent::StreamInput</a></li>
 				
 					<li><a href="../Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
+				
+					<li><a href="../Fluent/TailInput.html">Fluent::TailInput</a></li>
+				
+					<li><a href="../Fluent/TailInput/Tailer.html">Fluent::TailInput::Tailer</a></li>
 				
 					<li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
 				
@@ -332,7 +338,7 @@
 <pre>
     <span class="ruby-comment cmt"># File lib/fluent/plugin.rb, line 57</span>
 57:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">load_plugin_dir</span>(<span class="ruby-identifier">dir</span>)
-58:     <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">entries</span>(<span class="ruby-identifier">dir</span>).<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">fname</span><span class="ruby-operator">|</span>
+58:     <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">entries</span>(<span class="ruby-identifier">dir</span>).<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">fname</span><span class="ruby-operator">|</span>
 59:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">fname</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/\.rb$/</span>
 60:         <span class="ruby-identifier">require</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-identifier">dir</span>, <span class="ruby-identifier">fname</span>)
 61:       <span class="ruby-keyword kw">end</span>

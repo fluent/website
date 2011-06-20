@@ -3,7 +3,7 @@
 Configuration
 ========================
 
-You can control the flow of event stream using the configuration file. It is stored on /etc/fluent/fluent.conf.
+You can control the flow of event stream using the configuration file. It is stored on $install_prefix/etc/fluent/fluent.conf.
 It describes the format of the file.
 
 .. contents::
@@ -70,7 +70,7 @@ Init scripts
 Ubuntu upstart
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Put the file on ``/etc/init/fluent``::
+Put the file on ``$install_prefix/etc/init/fluent``::
 
     description "Fluent event collector"
     author "Sadayuki Furuhashi"
@@ -84,7 +84,7 @@ Put the file on ``/etc/init/fluent``::
     # The default of 5 seconds is too low to flush buffers
     kill timeout 60
     
-    exec bash -c "/usr/bin/fluentd -c /etc/fluent/fluent.conf 2>&1 \| /usr/bin/cronolog /var/log/fluent.log /var/log/fluent/fluent.%Y_%m_%d.log"
+    exec bash -c "/usr/bin/fluentd -c /usr/local/etc/fluent/fluent.conf 2>&1 \| /usr/bin/cronolog /var/log/fluent.log /var/log/fluent/fluent.%Y_%m_%d.log"
 
 `cronolog <http://cronolog.org/>`_ is used for logging error messages. Install it using ``apt-get install cronolog``.
 

@@ -48,7 +48,39 @@
   <div class="section" id="overview">
 <span id="id1"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
 <p><strong>Fluent</strong> is an event collector service. It&#8217;s said that Fluent is generalized version of syslogd, which can deal with JSON object for the log message.</p>
+<div class="section" id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
+<p>Fluent collects events from various data sources and write tem to files, database or other storages:</p>
+<div class="highlight-python"><pre>Web apps  ---+                +--&gt; file
+             |                |
+             +--&gt;          ---+
+/var/log  ------&gt;  fluent  ------&gt; mail
+             +--&gt;          ---+
+             |                |
+apache    ----                +--&gt; fluent</pre>
+</div>
+<p>Fluent also supports log transfer (not implemented yet):</p>
+<div class="highlight-python"><pre>Web server
++--------+
+| fluent -------
++--------+|     |
+ +--------+     |
+                |
+Proxy server    |    Log server, Amazon S3, HDFS, ...
++--------+      +--&gt; +--------+
+| fluent ----------&gt; | fluent ||
++--------+|     +--&gt; +--------+|
+ +--------+     |     +--------+
+                |
+Database server |
++--------+      |
+| fluent ---------&gt; mail
++--------+|
+ +--------+</pre>
+</div>
+<p>An event collected consists of <em>tag</em>, <em>time</em> and <em>record</em>. Tag is a string separated with &#8216;.&#8217; (e.g. myapp.access). It is used to categorize events. Time is a UNIX time when the event occurs. Record is a JSON object.</p>
 <p>Next step: <a class="reference external" href="install.html#install"><em>Installation</em></a></p>
+</div>
 </div>
 
 
@@ -57,6 +89,14 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Overview</a><ul>
+<li><a class="reference external" href="#architecture">Architecture</a></li>
+</ul>
+</li>
+</ul>
+
             <h4>Previous topic</h4>
             <p class="topless"><a href="index.html"
                                   title="previous chapter">Welcome to Fluent&#8217;s documentation!</a></p>

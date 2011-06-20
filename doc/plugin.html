@@ -168,7 +168,7 @@ time_format %d/%b/%Y:%H:%M:%S %z</pre>
 </dd>
 <dt>syslog</dt>
 <dd><p class="first">Reads syslog&#8217;s output file (e.g. /var/log/syslog). This template is same as following configuration:</p>
-<div class="last highlight-python"><pre>format /^(?&lt;time&gt;.*? .*? .*?) (?&lt;host&gt;.*?) ([a-zA-Z0-9_\/\.\-]*)(?:\[(?&lt;pid&gt;[0-9]+)\])?\: *(?&lt;message&gt;.*)/
+<div class="last highlight-python"><pre>format /^(?&lt;time&gt;.*? .*? .*?) (?&lt;host&gt;.*?) (?&lt;ident&gt;[a-zA-Z0-9_\/\.\-]*)(?:\[(?&lt;pid&gt;[0-9]+)\])?[^\:]*\: *(?&lt;message&gt;.*)/
 time_format %b %d %H:%M:%S</pre>
 </div>
 </dd>
@@ -265,17 +265,13 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 <p><strong>configuration</strong>:</p>
 <div class="highlight-python"><pre>&lt;match pattern&gt;
   type file
-  path /var/log/fluent/myapp
-  format /var/log/fluent/myapp.%Y-%m-%d-%H.log
+  path /var/log/fluent/myapp.%Y-%m-%d-%H.log
   localtime
 &lt;/match&gt;</pre>
 </div>
 <dl class="docutils">
-<dt>path</dt>
-<dd>Syntax sugar for <tt class="docutils literal"><span class="pre">$path.%Y-%m-%d-%H</span></tt>.
-Either format or path parameter is required.</dd>
-<dt>format</dt>
-<dd><p class="first">Path of the file. Following characters is replaced with values:</p>
+<dt>path (required)</dt>
+<dd><p class="first">Path of the file. Following characters are replaced with values:</p>
 <blockquote class="last">
 <table border="1" class="docutils">
 <colgroup>

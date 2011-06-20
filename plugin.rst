@@ -64,6 +64,7 @@ port
 bind
   bind address to listen on. Default is 0.0.0.0 (all addresses).
 
+
 tail
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -101,7 +102,7 @@ format
   syslog
     Reads syslog's output file (e.g. /var/log/syslog). This template is same as following configuration::
 
-      format /^(?<time>.*? .*? .*?) (?<host>.*?) ([a-zA-Z0-9_\/\.\-]*)(?:\[(?<pid>[0-9]+)\])?\: *(?<message>.*)/
+      format /^(?<time>.*? .*? .*?) (?<host>.*?) (?<ident>[a-zA-Z0-9_\/\.\-]*)(?:\[(?<pid>[0-9]+)\])?[^\:]*\: *(?<message>.*)/
       time_format %b %d %H:%M:%S
 
 time_format
@@ -215,17 +216,12 @@ file
 
     <match pattern>
       type file
-      path /var/log/fluent/myapp
-      format /var/log/fluent/myapp.%Y-%m-%d-%H.log
+      path /var/log/fluent/myapp.%Y-%m-%d-%H.log
       localtime
     </match>
 
-path
-  Syntax sugar for ``$path.%Y-%m-%d-%H``.
-  Either format or path parameter is required.
-
-format
-  Path of the file. Following characters is replaced with values:
+path (required)
+  Path of the file. Following characters are replaced with values:
 
       +-----+------------------------------------------+
       | %Y  | Year with century                        |

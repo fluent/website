@@ -170,9 +170,15 @@
 				
 					<li><a href="../Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
 				
+					<li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
+				
 					<li><a href="../Fluent/StreamInput.html">Fluent::StreamInput</a></li>
 				
 					<li><a href="../Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
+				
+					<li><a href="../Fluent/TailInput.html">Fluent::TailInput</a></li>
+				
+					<li><a href="../Fluent/TailInput/Tailer.html">Fluent::TailInput::Tailer</a></li>
 				
 					<li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
 				
@@ -237,22 +243,25 @@
 71:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">pat</span>)
 72:     <span class="ruby-identifier">regex</span> = <span class="ruby-value str">''</span>
 73:     <span class="ruby-identifier">escape</span> = <span class="ruby-keyword kw">false</span>
-74:     <span class="ruby-identifier">pat</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp re">/./</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
-75:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">escape</span>
-76:         <span class="ruby-identifier">regex</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">c</span>
-77:         <span class="ruby-identifier">escape</span> = <span class="ruby-keyword kw">false</span>
-78:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'/'</span>
-79:         <span class="ruby-identifier">escape</span> = <span class="ruby-keyword kw">true</span>
-80:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/[a-zA-Z0-9_]/</span>
-81:         <span class="ruby-identifier">regex</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">c</span>
-82:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'*'</span>
-83:         <span class="ruby-identifier">regex</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'[^\.]*'</span>
-84:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'?'</span>
-85:         <span class="ruby-identifier">regex</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'.'</span>
-86:       <span class="ruby-keyword kw">end</span>
-87:     }
-88:     <span class="ruby-ivar">@regex</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">regex</span>)
-89:   <span class="ruby-keyword kw">end</span></pre>
+74:     <span class="ruby-comment cmt"># FIXME</span>
+75:     <span class="ruby-identifier">pat</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp re">/./</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+76:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">escape</span>
+77:         <span class="ruby-identifier">regex</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">c</span>
+78:         <span class="ruby-identifier">escape</span> = <span class="ruby-keyword kw">false</span>
+79:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'/'</span>
+80:         <span class="ruby-identifier">escape</span> = <span class="ruby-keyword kw">true</span>
+81:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/[a-zA-Z0-9_]/</span>
+82:         <span class="ruby-identifier">regex</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">c</span>
+83:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'*'</span>
+84:         <span class="ruby-identifier">regex</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'[^\.]*'</span>
+85:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'?'</span>
+86:         <span class="ruby-identifier">regex</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value str">'.'</span>
+87:       <span class="ruby-keyword kw">else</span>
+88:         <span class="ruby-identifier">regex</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;\\#{c}&quot;</span>
+89:       <span class="ruby-keyword kw">end</span>
+90:     }
+91:     <span class="ruby-ivar">@regex</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">regex</span>)
+92:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -289,10 +298,10 @@
 					<div class="method-source-code"
 						id="match-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/match.rb, line 91</span>
-91:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">match</span>(<span class="ruby-identifier">str</span>)
-92:     <span class="ruby-ivar">@regex</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">str</span>) <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span>
-93:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/fluent/match.rb, line 94</span>
+94:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">match</span>(<span class="ruby-identifier">str</span>)
+95:     <span class="ruby-ivar">@regex</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">str</span>) <span class="ruby-operator">!=</span> <span class="ruby-keyword kw">nil</span>
+96:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

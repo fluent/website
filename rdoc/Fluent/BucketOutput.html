@@ -178,9 +178,15 @@
 				
 					<li><a href="../Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
 				
+					<li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
+				
 					<li><a href="../Fluent/StreamInput.html">Fluent::StreamInput</a></li>
 				
 					<li><a href="../Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
+				
+					<li><a href="../Fluent/TailInput.html">Fluent::TailInput</a></li>
+				
+					<li><a href="../Fluent/TailInput/Tailer.html">Fluent::TailInput::Tailer</a></li>
 				
 					<li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
 				
@@ -291,11 +297,11 @@ Plugin.register_output(&#8216;bucket&#8217;, self)
 30:     <span class="ruby-identifier">conf</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
 31:       <span class="ruby-identifier">e</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-value str">'bucket'</span>
 32:     }.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
-33:         <span class="ruby-identifier">output</span> = <span class="ruby-constant">Plugin</span>.<span class="ruby-identifier">new_output</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">arg</span>)
-34:         <span class="ruby-identifier">output</span>.<span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span><span class="ruby-operator">+</span><span class="ruby-identifier">e</span>)
-35:         <span class="ruby-ivar">@buckets</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">output</span>
-36:       }
-37:       <span class="ruby-ivar">@rr</span> = <span class="ruby-value">0</span>  <span class="ruby-comment cmt"># TODO BucketOutput algorithm</span>
+33:       <span class="ruby-identifier">output</span> = <span class="ruby-constant">Plugin</span>.<span class="ruby-identifier">new_output</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">arg</span>)
+34:       <span class="ruby-identifier">output</span>.<span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span><span class="ruby-operator">+</span><span class="ruby-identifier">e</span>)
+35:       <span class="ruby-ivar">@buckets</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">output</span>
+36:     }
+37:     <span class="ruby-ivar">@rr</span> = <span class="ruby-value">0</span>  <span class="ruby-comment cmt"># TODO BucketOutput algorithm</span>
 38:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
@@ -331,7 +337,8 @@ Plugin.register_output(&#8216;bucket&#8217;, self)
 52:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">emit</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>, <span class="ruby-identifier">chain</span>)
 53:     <span class="ruby-identifier">b</span> = <span class="ruby-identifier">next_bucket</span>
 54:     <span class="ruby-ivar">@buckets</span>[<span class="ruby-identifier">b</span>].<span class="ruby-identifier">emit</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>, <span class="ruby-identifier">chain</span>)
-55:   <span class="ruby-keyword kw">end</span></pre>
+55:     <span class="ruby-identifier">chain</span>.<span class="ruby-identifier">next</span>
+56:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>
@@ -440,10 +447,10 @@ Plugin.register_output(&#8216;bucket&#8217;, self)
 					<div class="method-source-code"
 						id="next-bucket-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/plugin/out_bucket.rb, line 58</span>
-58:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">next_bucket</span>
-59:     <span class="ruby-ivar">@rr</span> = <span class="ruby-value">0</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@rr</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>) <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@buckets</span>.<span class="ruby-identifier">size</span>
-60:   <span class="ruby-keyword kw">end</span></pre>
+    <span class="ruby-comment cmt"># File lib/fluent/plugin/out_bucket.rb, line 59</span>
+59:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">next_bucket</span>
+60:     <span class="ruby-ivar">@rr</span> = <span class="ruby-value">0</span> <span class="ruby-keyword kw">if</span> (<span class="ruby-ivar">@rr</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>) <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@buckets</span>.<span class="ruby-identifier">size</span>
+61:   <span class="ruby-keyword kw">end</span></pre>
 					</div>
 					
 				</div>

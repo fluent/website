@@ -14,6 +14,7 @@ Welcome to Fluent's documentation!
    config
    plugin
    devel
+   example
 
 RDoc
 ==================
