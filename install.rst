@@ -72,7 +72,7 @@ Confirm installation
 
 Try to run ``fluentd`` and submit a log using ``fluent-cat`` command as following::
 
-    $ fluentd &
+    $ fluentd -vv &
     $ echo '{"json":"message"}' | fluent-cat debug.test
 
 

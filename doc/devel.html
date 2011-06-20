@@ -20,6 +20,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="fluent v0.9.0 documentation" href="index.html" />
+    <link rel="next" title="Examples" href="example.html" />
     <link rel="prev" title="Plugins" href="plugin.html" /> 
   </head>
   <body>
@@ -29,6 +30,9 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="example.html" title="Examples"
+             accesskey="N">next</a> |</li>
         <li class="right" >
           <a href="plugin.html" title="Plugins"
              accesskey="P">previous</a> |</li>
@@ -59,7 +63,7 @@
 </div>
 <div class="section" id="input-plugins">
 <h2>Input plugins<a class="headerlink" href="#input-plugins" title="Permalink to this headline">¶</a></h2>
-<p>Extend <strong>Fluent::Input</strong> class and implement folloing methods:</p>
+<p>Extend <strong>Fluent::Input</strong> class and implement following methods:</p>
 <div class="highlight-python"><pre>class SomeInput &lt; Fluent::Input
   Fluent::Plugin.register_input('NAME', self)
 
@@ -91,7 +95,7 @@ Fluent::Engine.emit(tag, Fluent::Event.new(tag, record))</pre>
 </div>
 <div class="section" id="buffered-output-plugins">
 <h2>Buffered output plugins<a class="headerlink" href="#buffered-output-plugins" title="Permalink to this headline">¶</a></h2>
-<p>Extend <strong>Fluent::BufferedOutput</strong> class and implement follwing methods:</p>
+<p>Extend <strong>Fluent::BufferedOutput</strong> class and implement following methods:</p>
 <div class="highlight-python"><pre>class SomeOutput &lt; Fluent::BufferedOutput
   Fluent::Plugin.register_output('NAME', self)
 
@@ -135,7 +139,27 @@ end</pre>
 </div>
 <div class="section" id="non-buffered-output-plugins">
 <h2>Non-buffered output plugins<a class="headerlink" href="#non-buffered-output-plugins" title="Permalink to this headline">¶</a></h2>
-<p>TODO</p>
+<p>Extend <strong>Fluent::Output</strong> class and implement following methods:</p>
+<div class="highlight-python"><pre>class SomeOutput &lt; Fluent::Output
+  def configure(conf)
+  end
+
+  def start
+  end
+
+  def shutdown
+  end
+
+  def emit(tag, es, chain)
+    chain.next
+    es.each {|event|
+      $stderr.puts "OK!"
+    }
+  end
+end</pre>
+</div>
+<p><tt class="docutils literal"><span class="pre">emit</span></tt> outputs events provided by <tt class="docutils literal"><span class="pre">es.each</span></tt> method (<strong>es</strong> is <strong>EventStream</strong>).
+<tt class="docutils literal"><span class="pre">chain.next</span></tt> in the emit is used in the CopyOutput. To write logs transactionally, call it appropriate point.</p>
 </div>
 <div class="section" id="buffer-plugins">
 <h2>Buffer plugins<a class="headerlink" href="#buffer-plugins" title="Permalink to this headline">¶</a></h2>
@@ -164,6 +188,9 @@ end</pre>
             <h4>Previous topic</h4>
             <p class="topless"><a href="plugin.html"
                                   title="previous chapter">Plugins</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="example.html"
+                                  title="next chapter">Examples</a></p>
             <h3>This Page</h3>
             <ul class="this-page-menu">
               <li><a href="_sources/devel.txt"
@@ -192,6 +219,9 @@ end</pre>
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
+        <li class="right" >
+          <a href="example.html" title="Examples"
+             >next</a> |</li>
         <li class="right" >
           <a href="plugin.html" title="Plugins"
              >previous</a> |</li>

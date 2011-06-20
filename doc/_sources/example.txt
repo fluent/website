@@ -83,6 +83,8 @@ Put following script to $install_prefix/etc/fluent/plugin directory::
 Configuration
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
+$install_prefix/etc/fluent/fluent.conf::
+
     # read access log from /var/log/apache/access.log
     <source>
       type tail
@@ -91,21 +93,21 @@ Configuration
       tag apache.access
     </source>
     
-    # configurate hourly_mongo plugin
+    # configure hourly_mongo plugin
     <match apache.access>
       type hourly_mongo
       host 127.0.0.1
       database test
       collection hourly
     
-      # use file buffer
+      # use file-based buffer
       buffer_type file
       buffer_path /tmp/fluent/hourly_mongo.*.buffer
     
-      # flush every 1 hour
+      # write buffered chunk every 1 hour
       buffer_flush_interval 1h
     
-      # limit size of the chunk upto 20MB
+      # limit size of the chunk 20MB
       chunk_limit 20m
     </match>
 

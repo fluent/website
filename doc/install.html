@@ -120,7 +120,7 @@ $ gem install pkg/fluent-*.gem</pre>
 <div class="section" id="confirm-installation">
 <span id="install-confirm"></span><h2>Confirm installation<a class="headerlink" href="#confirm-installation" title="Permalink to this headline">¶</a></h2>
 <p>Try to run <tt class="docutils literal"><span class="pre">fluentd</span></tt> and submit a log using <tt class="docutils literal"><span class="pre">fluent-cat</span></tt> command as following:</p>
-<div class="highlight-python"><pre>$ fluentd &amp;
+<div class="highlight-python"><pre>$ fluentd -vv &amp;
 $ echo '{"json":"message"}' | fluent-cat debug.test</pre>
 </div>
 </div>

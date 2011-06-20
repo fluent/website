@@ -125,32 +125,33 @@ end</pre>
 </div>
 <div class="section" id="configuration">
 <h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
-<blockquote>
-<p># read access log from /var/log/apache/access.log
-&lt;source&gt;</p>
-<blockquote>
-type tail
-format apache
-path /var/log/apache/access.log
-tag apache.access</blockquote>
-<p>&lt;/source&gt;</p>
-<p># configurate hourly_mongo plugin
-&lt;match apache.access&gt;</p>
-<blockquote>
-<p>type hourly_mongo
-host 127.0.0.1
-database test
-collection hourly</p>
-<p># use file buffer
-buffer_type file
-buffer_path /tmp/fluent/hourly_mongo.*.buffer</p>
-<p># flush every 1 hour
-buffer_flush_interval 1h</p>
-<p># limit size of the chunk upto 20MB
-chunk_limit 20m</p>
-</blockquote>
-<p>&lt;/match&gt;</p>
-</blockquote>
+<p>$install_prefix/etc/fluent/fluent.conf:</p>
+<div class="highlight-python"><pre># read access log from /var/log/apache/access.log
+&lt;source&gt;
+  type tail
+  format apache
+  path /var/log/apache/access.log
+  tag apache.access
+&lt;/source&gt;
+
+# configure hourly_mongo plugin
+&lt;match apache.access&gt;
+  type hourly_mongo
+  host 127.0.0.1
+  database test
+  collection hourly
+
+  # use file-based buffer
+  buffer_type file
+  buffer_path /tmp/fluent/hourly_mongo.*.buffer
+
+  # write buffered chunk every 1 hour
+  buffer_flush_interval 1h
+
+  # limit size of the chunk 20MB
+  chunk_limit 20m
+&lt;/match&gt;</pre>
+</div>
 </div>
 </div>
 </div>

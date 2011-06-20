@@ -18,7 +18,7 @@ Or you can create gem package that includes ``lib/fluent/plugin/<TYPE>_<NAME>.rb
 Input plugins
 ------------------------------------
 
-Extend **Fluent::Input** class and implement folloing methods::
+Extend **Fluent::Input** class and implement following methods::
 
     class SomeInput < Fluent::Input
       Fluent::Plugin.register_input('NAME', self)
@@ -54,7 +54,7 @@ RDoc of the Engine class is available from `Fluent RDoc <http://fluent.github.co
 Buffered output plugins
 ------------------------------------
 
-Extend **Fluent::BufferedOutput** class and implement follwing methods::
+Extend **Fluent::BufferedOutput** class and implement following methods::
 
     class SomeOutput < Fluent::BufferedOutput
       Fluent::Plugin.register_output('NAME', self)
@@ -100,7 +100,28 @@ Extend **Fluent::BufferedOutput** class and implement follwing methods::
 Non-buffered output plugins
 ------------------------------------
 
-TODO
+Extend **Fluent::Output** class and implement following methods::
+
+    class SomeOutput < Fluent::Output
+      def configure(conf)
+      end
+    
+      def start
+      end
+    
+      def shutdown
+      end
+    
+      def emit(tag, es, chain)
+        chain.next
+        es.each {|event|
+          $stderr.puts "OK!"
+        }
+      end
+    end
+
+``emit`` outputs events provided by ``es.each`` method (**es** is **EventStream**).
+``chain.next`` in the emit is used in the CopyOutput. To write logs transactionally, call it appropriate point.
 
 
 Buffer plugins
