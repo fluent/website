@@ -5,13 +5,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Plugins &mdash; fluent v0.9.0 documentation</title>
+    <title>Plugins &mdash; fluent v0.9.1 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '#',
-        VERSION:     '0.9.0',
+        VERSION:     '0.9.1',
         COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -19,7 +19,7 @@
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="fluent v0.9.0 documentation" href="index.html" />
+    <link rel="top" title="fluent v0.9.1 documentation" href="index.html" />
     <link rel="next" title="Writing plugins" href="devel.html" />
     <link rel="prev" title="Configuration" href="config.html" /> 
   </head>
@@ -36,7 +36,7 @@
         <li class="right" >
           <a href="config.html" title="Configuration"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">fluent v0.9.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluent v0.9.1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -49,23 +49,25 @@
 <span id="plugin"></span><h1>Plugins<a class="headerlink" href="#plugins" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#kind-of-plugins" id="id2">Kind of plugins</a></li>
-<li><a class="reference internal" href="#input-plugins" id="id3">Input plugins</a><ul>
-<li><a class="reference internal" href="#http" id="id4">http</a></li>
-<li><a class="reference internal" href="#tail" id="id5">tail</a></li>
-<li><a class="reference internal" href="#tcp" id="id6">tcp</a></li>
-<li><a class="reference internal" href="#unix" id="id7">unix</a></li>
+<li><a class="reference internal" href="#kind-of-plugins" id="id4">Kind of plugins</a></li>
+<li><a class="reference internal" href="#input-plugins" id="id5">Input plugins</a><ul>
+<li><a class="reference internal" href="#http" id="id6">http</a></li>
+<li><a class="reference internal" href="#tail" id="id7">tail</a></li>
+<li><a class="reference internal" href="#tcp" id="id8">tcp</a></li>
+<li><a class="reference internal" href="#unix" id="id9">unix</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#output-plugins" id="id8">Output plugins</a><ul>
-<li><a class="reference internal" href="#file" id="id9">file</a></li>
-<li><a class="reference internal" href="#copy" id="id10">copy</a></li>
-<li><a class="reference internal" href="#stdout" id="id11">stdout</a></li>
+<li><a class="reference internal" href="#output-plugins" id="id10">Output plugins</a><ul>
+<li><a class="reference internal" href="#file" id="id11">file</a></li>
+<li><a class="reference internal" href="#id1" id="id12">tcp</a></li>
+<li><a class="reference internal" href="#id2" id="id13">unix</a></li>
+<li><a class="reference internal" href="#copy" id="id14">copy</a></li>
+<li><a class="reference internal" href="#stdout" id="id15">stdout</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#buffer-plugins" id="id12">Buffer plugins</a><ul>
-<li><a class="reference internal" href="#memory" id="id13">memory</a></li>
-<li><a class="reference internal" href="#id1" id="id14">file</a></li>
+<li><a class="reference internal" href="#buffer-plugins" id="id16">Buffer plugins</a><ul>
+<li><a class="reference internal" href="#memory" id="id17">memory</a></li>
+<li><a class="reference internal" href="#id3" id="id18">file</a></li>
 </ul>
 </li>
 </ul>
@@ -304,6 +306,37 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 <dd>Uses local time zone for path formatting. Default is UTC.</dd>
 </dl>
 </div>
+<div class="section" id="id1">
+<h3>tcp<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<p><strong>file</strong> buffered output plugin forwards events to another fluent server.</p>
+<p><strong>configuration</strong>:</p>
+<div class="highlight-python"><pre>&lt;source&gt;
+  type tcp
+  host 192.168.1.3
+  port 24224
+&lt;/source&gt;</pre>
+</div>
+<dl class="docutils">
+<dt>host (required)</dt>
+<dd>IP address or host name to send events. This parameters is required.</dd>
+<dt>port</dt>
+<dd>Port number of the host to send. Default is 24224.</dd>
+</dl>
+</div>
+<div class="section" id="id2">
+<h3>unix<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p><strong>unix</strong> buffered output plugin forwards events to another fluent process on the same host.</p>
+<p><strong>configuration</strong>:</p>
+<div class="highlight-python"><pre>&lt;source&gt;
+  type unix
+  path /var/run/fluent.sock
+&lt;/source&gt;</pre>
+</div>
+<dl class="docutils">
+<dt>path (required)</dt>
+<dd>Path to the UNIX domain socket. This parameters is required.</dd>
+</dl>
+</div>
 <div class="section" id="copy">
 <h3>copy<a class="headerlink" href="#copy" title="Permalink to this headline">¶</a></h3>
 <p><strong>copy</strong> output plugin copies events to multiple outputs. This is NOT buffered plugin.</p>
@@ -349,8 +382,8 @@ It uses memory to store buffer chunks. Buffered events which can&#8217;t be writ
 &lt;/match pattern&gt;</pre>
 </div>
 </div>
-<div class="section" id="id1">
-<h3>file<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id3">
+<h3>file<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
 <p><strong>file</strong> buffer plugin provides persistent buffer implementation.
 It uses file to store buffer chunks.</p>
 <p><strong>configuration</strong>:</p>
@@ -387,13 +420,15 @@ This parameter is required.</dd>
 </li>
 <li><a class="reference external" href="#output-plugins">Output plugins</a><ul>
 <li><a class="reference external" href="#file">file</a></li>
+<li><a class="reference external" href="#id1">tcp</a></li>
+<li><a class="reference external" href="#id2">unix</a></li>
 <li><a class="reference external" href="#copy">copy</a></li>
 <li><a class="reference external" href="#stdout">stdout</a></li>
 </ul>
 </li>
 <li><a class="reference external" href="#buffer-plugins">Buffer plugins</a><ul>
 <li><a class="reference external" href="#memory">memory</a></li>
-<li><a class="reference external" href="#id1">file</a></li>
+<li><a class="reference external" href="#id3">file</a></li>
 </ul>
 </li>
 </ul>
@@ -440,7 +475,7 @@ This parameter is required.</dd>
         <li class="right" >
           <a href="config.html" title="Configuration"
              >previous</a> |</li>
-        <li><a href="index.html">fluent v0.9.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluent v0.9.1 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

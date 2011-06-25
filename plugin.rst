@@ -240,6 +240,42 @@ localtime
   Uses local time zone for path formatting. Default is UTC.
 
 
+tcp
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**file** buffered output plugin forwards events to another fluent server.
+
+**configuration**::
+
+    <source>
+      type tcp
+      host 192.168.1.3
+      port 24224
+    </source>
+
+host (required)
+  IP address or host name to send events. This parameters is required.
+
+port
+  Port number of the host to send. Default is 24224.
+
+
+unix
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**unix** buffered output plugin forwards events to another fluent process on the same host.
+
+**configuration**::
+
+    <source>
+      type unix
+      path /var/run/fluent.sock
+    </source>
+
+path (required)
+  Path to the UNIX domain socket. This parameters is required.
+
+
 copy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
