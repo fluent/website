@@ -76,6 +76,7 @@ Put following script to $install_prefix/etc/fluent/plugin directory::
           obj = {"time"=>time, "path"=>path, "count"=>count}
           $log.trace { "hourly_mongo: inserting #{obj.to_json}" }
           @coll.insert(obj)
+          # FIXME get last error?
         }
       end
     end
@@ -104,10 +105,10 @@ $install_prefix/etc/fluent/fluent.conf::
       buffer_type file
       buffer_path /tmp/fluent/hourly_mongo.*.buffer
     
-      # write buffered chunk every 1 hour
+      # write out buffered chunk every 1 hour
       buffer_flush_interval 1h
     
-      # limit size of the chunk 20MB
-      chunk_limit 20m
+      # expand limit of the chunk size from 1MB (default) to 100MB
+      buffer_chunk_limit 100m
     </match>
 
