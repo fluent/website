@@ -147,7 +147,6 @@ json={"event":"body"}</pre>
   path /var/log/httpd-access.log
   tag apache.access
   format apache
-  time_format %d/%b/%Y:%H:%M:%S %z
 &lt;/source&gt;</pre>
 </div>
 <dl class="docutils">
@@ -161,14 +160,14 @@ json={"event":"body"}</pre>
 <p>Following templates are supported:</p>
 <dl class="last docutils">
 <dt>apache</dt>
-<dd><p class="first">Reads apache&#8217;s log file. This template is same as following configuration:</p>
-<div class="last highlight-python"><pre>format /^(?&lt;host&gt;.*?) .*? (?&lt;user&gt;.*?) \[(?&lt;time&gt;.*?)\] "(?&lt;method&gt;\S+?)(?: +(?&lt;path&gt;.*?) +\S*?)?" (?&lt;code&gt;.*?) (?&lt;size&gt;.*?)(?: "(?&lt;referer&gt;.*?)" "(?&lt;agent&gt;.*?)")?/
+<dd><p class="first">Reads apache&#8217;s log file <em>host</em>, <em>user</em>, <em>time</em>, <em>method</em>, <em>path</em>, <em>code</em>, <em>size</em>, <em>referer</em> and <em>agent</em> fields. This template is same as following configuration:</p>
+<div class="last highlight-python"><pre>format /^(?&lt;host&gt;[^ ]*) [^ ]* (?&lt;user&gt;[^ ]*) \[(?&lt;time&gt;[^\]]*)\] "(?&lt;method&gt;\S+)(?: +(?&lt;path&gt;[^ ]*) +\S*)?" (?&lt;code&gt;[^ ]*) (?&lt;size&gt;[^ ]*)(?: "(?&lt;referer&gt;[^\"]*)" "(?&lt;agent&gt;[^\"]*)")?$/
 time_format %d/%b/%Y:%H:%M:%S %z</pre>
 </div>
 </dd>
 <dt>syslog</dt>
-<dd><p class="first">Reads syslog&#8217;s output file (e.g. /var/log/syslog). This template is same as following configuration:</p>
-<div class="last highlight-python"><pre>format /^(?&lt;time&gt;.*? .*? .*?) (?&lt;host&gt;.*?) (?&lt;ident&gt;[a-zA-Z0-9_\/\.\-]*)(?:\[(?&lt;pid&gt;[0-9]+)\])?[^\:]*\: *(?&lt;message&gt;.*)/
+<dd><p class="first">Reads syslog&#8217;s output file (e.g. /var/log/syslog) <em>time</em>, <em>host</em>, <em>ident</em>, <em>message</em> fields. This template is same as following configuration:</p>
+<div class="last highlight-python"><pre>format /^(?&lt;time&gt;[^ ]* [^ ]* [^ ]*) (?&lt;host&gt;[^ ]*) (?&lt;ident&gt;[a-zA-Z0-9_\/\.\-]*)(?:\[(?&lt;pid&gt;[0-9]+)\])?[^\:]*\: *(?&lt;message&gt;.*)$/
 time_format %b %d %H:%M:%S</pre>
 </div>
 </dd>

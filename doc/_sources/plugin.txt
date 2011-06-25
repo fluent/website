@@ -77,7 +77,6 @@ tail
       path /var/log/httpd-access.log
       tag apache.access
       format apache
-      time_format %d/%b/%Y:%H:%M:%S %z
     </source>
 
 path (required)
@@ -94,15 +93,15 @@ format
   Following templates are supported:
 
   apache
-    Reads apache's log file. This template is same as following configuration::
+    Reads apache's log file *host*, *user*, *time*, *method*, *path*, *code*, *size*, *referer* and *agent* fields. This template is same as following configuration::
 
-      format /^(?<host>.*?) .*? (?<user>.*?) \[(?<time>.*?)\] "(?<method>\S+?)(?: +(?<path>.*?) +\S*?)?" (?<code>.*?) (?<size>.*?)(?: "(?<referer>.*?)" "(?<agent>.*?)")?/
+      format /^(?<host>[^ ]*) [^ ]* (?<user>[^ ]*) \[(?<time>[^\]]*)\] "(?<method>\S+)(?: +(?<path>[^ ]*) +\S*)?" (?<code>[^ ]*) (?<size>[^ ]*)(?: "(?<referer>[^\"]*)" "(?<agent>[^\"]*)")?$/
       time_format %d/%b/%Y:%H:%M:%S %z
 
   syslog
-    Reads syslog's output file (e.g. /var/log/syslog). This template is same as following configuration::
+    Reads syslog's output file (e.g. /var/log/syslog) *time*, *host*, *ident*, *message* fields. This template is same as following configuration::
 
-      format /^(?<time>.*? .*? .*?) (?<host>.*?) (?<ident>[a-zA-Z0-9_\/\.\-]*)(?:\[(?<pid>[0-9]+)\])?[^\:]*\: *(?<message>.*)/
+      format /^(?<time>[^ ]* [^ ]* [^ ]*) (?<host>[^ ]*) (?<ident>[a-zA-Z0-9_\/\.\-]*)(?:\[(?<pid>[0-9]+)\])?[^\:]*\: *(?<message>.*)$/
       time_format %b %d %H:%M:%S
 
 time_format
