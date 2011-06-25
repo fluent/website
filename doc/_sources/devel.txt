@@ -129,3 +129,45 @@ Buffer plugins
 
 TODO
 
+
+Debug
+------------------------------------
+
+Run ``fluentd`` with ``-vv`` option to show debug messages::
+
+    $ fluentd -vv
+
+**stdout** and **copy** output plugins will be useful to debug.  **stdout** output plugin dumps matched events to the console. It can be used as following::
+
+    # You want to debug thid plugin
+    <source>
+      type your_custom_input_plugin
+    </source>
+
+    # Dump all events to stdout
+    <match *>
+      type stdout
+    </match>
+
+**copy** output plugin copies matched events to multiple output plugins. You can use it with the stdout plugin::
+
+    # Use tcp input plugin and fluent-cat command to feed events:
+    #  $ echo '{"event":"message"}' | fluent-cat test.tag
+    <source>
+      type tcp
+    </source>
+
+    <match test.tag>
+      type copy
+
+      # Dump the matched events
+      <store>
+        type stdout
+      </store>
+
+      # And feed them to your plugin
+      <store>
+        type your_custom_output_plugin
+      </store>
+    </match>
+

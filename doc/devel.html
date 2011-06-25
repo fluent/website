@@ -54,6 +54,7 @@
 <li><a class="reference internal" href="#buffered-output-plugins" id="id3">Buffered output plugins</a></li>
 <li><a class="reference internal" href="#non-buffered-output-plugins" id="id4">Non-buffered output plugins</a></li>
 <li><a class="reference internal" href="#buffer-plugins" id="id5">Buffer plugins</a></li>
+<li><a class="reference internal" href="#debug" id="id6">Debug</a></li>
 </ul>
 </div>
 <div class="section" id="installing-plugins">
@@ -165,6 +166,44 @@ end</pre>
 <h2>Buffer plugins<a class="headerlink" href="#buffer-plugins" title="Permalink to this headline">¶</a></h2>
 <p>TODO</p>
 </div>
+<div class="section" id="debug">
+<h2>Debug<a class="headerlink" href="#debug" title="Permalink to this headline">¶</a></h2>
+<p>Run <tt class="docutils literal"><span class="pre">fluentd</span></tt> with <tt class="docutils literal"><span class="pre">-vv</span></tt> option to show debug messages:</p>
+<div class="highlight-python"><pre>$ fluentd -vv</pre>
+</div>
+<p><strong>stdout</strong> and <strong>copy</strong> output plugins will be useful to debug.  <strong>stdout</strong> output plugin dumps matched events to the console. It can be used as following:</p>
+<div class="highlight-python"><pre># You want to debug thid plugin
+&lt;source&gt;
+  type your_custom_input_plugin
+&lt;/source&gt;
+
+# Dump all events to stdout
+&lt;match *&gt;
+  type stdout
+&lt;/match&gt;</pre>
+</div>
+<p><strong>copy</strong> output plugin copies matched events to multiple output plugins. You can use it with the stdout plugin:</p>
+<div class="highlight-python"><pre># Use tcp input plugin and fluent-cat command to feed events:
+#  $ echo '{"event":"message"}' | fluent-cat test.tag
+&lt;source&gt;
+  type tcp
+&lt;/source&gt;
+
+&lt;match test.tag&gt;
+  type copy
+
+  # Dump the matched events
+  &lt;store&gt;
+    type stdout
+  &lt;/store&gt;
+
+  # And feed them to your plugin
+  &lt;store&gt;
+    type your_custom_output_plugin
+  &lt;/store&gt;
+&lt;/match&gt;</pre>
+</div>
+</div>
 </div>
 
 
@@ -181,6 +220,7 @@ end</pre>
 <li><a class="reference external" href="#buffered-output-plugins">Buffered output plugins</a></li>
 <li><a class="reference external" href="#non-buffered-output-plugins">Non-buffered output plugins</a></li>
 <li><a class="reference external" href="#buffer-plugins">Buffer plugins</a></li>
+<li><a class="reference external" href="#debug">Debug</a></li>
 </ul>
 </li>
 </ul>
