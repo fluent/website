@@ -1,764 +1,804 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 
-	<title>Module: Fluent</title>
+  <title>Module: Fluent</title>
 
-	<link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="./rdoc.css" type="text/css" media="screen" />
 
-	<script src="./js/jquery.js" type="text/javascript"
-		charset="utf-8"></script>
-	<script src="./js/thickbox-compressed.js" type="text/javascript"
-		charset="utf-8"></script>
-	<script src="./js/quicksearch.js" type="text/javascript"
-		charset="utf-8"></script>
-	<script src="./js/darkfish.js" type="text/javascript"
-		charset="utf-8"></script>
+  <script src="./js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="./js/thickbox-compressed.js" type="text/javascript" charset="utf-8"></script>
+  <script src="./js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
+  <script src="./js/darkfish.js" type="text/javascript" charset="utf-8"></script>
 
 </head>
-<body class="module">
+<body id="top" class="module">
 
-	<div id="metadata">
-		<div id="home-metadata">
-			<div id="home-section" class="section">
+  <div id="metadata">
+    <div id="home-metadata">
+      <div id="home-section" class="section">
         <h3 class="section-header">
           <a href="./index.html">Home</a>
           <a href="./index.html#classes">Classes</a>
           <a href="./index.html#methods">Methods</a>
         </h3>
-			</div>
-		</div>
+      </div>
+    </div>
 
-		<div id="file-metadata">
-			<div id="file-list-section" class="section">
-				<h3 class="section-header">In Files</h3>
-				<div class="section-body">
-					<ul>
-					
-						<li><a href="./lib/fluent/buffer_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/buffer.rb">lib/fluent/buffer.rb</a></li>
-					
-						<li><a href="./lib/fluent/config_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/config.rb">lib/fluent/config.rb</a></li>
-					
-						<li><a href="./lib/fluent/engine_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/engine.rb">lib/fluent/engine.rb</a></li>
-					
-						<li><a href="./lib/fluent/env_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/env.rb">lib/fluent/env.rb</a></li>
-					
-						<li><a href="./lib/fluent/event_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/event.rb">lib/fluent/event.rb</a></li>
-					
-						<li><a href="./lib/fluent/input_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/input.rb">lib/fluent/input.rb</a></li>
-					
-						<li><a href="./lib/fluent/log_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/log.rb">lib/fluent/log.rb</a></li>
-					
-						<li><a href="./lib/fluent/match_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/match.rb">lib/fluent/match.rb</a></li>
-					
-						<li><a href="./lib/fluent/output_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/output.rb">lib/fluent/output.rb</a></li>
-					
-						<li><a href="./lib/fluent/plugin/buf_file_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/plugin/buf_file.rb">lib/fluent/plugin/buf_file.rb</a></li>
-					
-						<li><a href="./lib/fluent/plugin/buf_memory_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/plugin/buf_memory.rb">lib/fluent/plugin/buf_memory.rb</a></li>
-					
-						<li><a href="./lib/fluent/plugin/buf_zfile_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/plugin/buf_zfile.rb">lib/fluent/plugin/buf_zfile.rb</a></li>
-					
-						<li><a href="./lib/fluent/plugin/in_http_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/plugin/in_http.rb">lib/fluent/plugin/in_http.rb</a></li>
-					
-						<li><a href="./lib/fluent/plugin/in_stream_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/plugin/in_stream.rb">lib/fluent/plugin/in_stream.rb</a></li>
-					
-						<li><a href="./lib/fluent/plugin/in_tail_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/plugin/in_tail.rb">lib/fluent/plugin/in_tail.rb</a></li>
-					
-						<li><a href="./lib/fluent/plugin/out_bucket_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/plugin/out_bucket.rb">lib/fluent/plugin/out_bucket.rb</a></li>
-					
-						<li><a href="./lib/fluent/plugin/out_copy_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/plugin/out_copy.rb">lib/fluent/plugin/out_copy.rb</a></li>
-					
-						<li><a href="./lib/fluent/plugin/out_file_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/plugin/out_file.rb">lib/fluent/plugin/out_file.rb</a></li>
-					
-						<li><a href="./lib/fluent/plugin/out_stdout_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/plugin/out_stdout.rb">lib/fluent/plugin/out_stdout.rb</a></li>
-					
-						<li><a href="./lib/fluent/plugin_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/plugin.rb">lib/fluent/plugin.rb</a></li>
-					
-						<li><a href="./lib/fluent/version_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/version.rb">lib/fluent/version.rb</a></li>
-					
-					</ul>
-				</div>
-			</div>
+    <div id="file-metadata">
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li><a href="./lib/fluent/buffer_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/buffer.rb">lib/fluent/buffer.rb</a></li>
+          
+            <li><a href="./lib/fluent/config_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/config.rb">lib/fluent/config.rb</a></li>
+          
+            <li><a href="./lib/fluent/engine_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/engine.rb">lib/fluent/engine.rb</a></li>
+          
+            <li><a href="./lib/fluent/env_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/env.rb">lib/fluent/env.rb</a></li>
+          
+            <li><a href="./lib/fluent/event_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/event.rb">lib/fluent/event.rb</a></li>
+          
+            <li><a href="./lib/fluent/input_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/input.rb">lib/fluent/input.rb</a></li>
+          
+            <li><a href="./lib/fluent/log_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/log.rb">lib/fluent/log.rb</a></li>
+          
+            <li><a href="./lib/fluent/match_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/match.rb">lib/fluent/match.rb</a></li>
+          
+            <li><a href="./lib/fluent/output_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/output.rb">lib/fluent/output.rb</a></li>
+          
+            <li><a href="./lib/fluent/parser_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/parser.rb">lib/fluent/parser.rb</a></li>
+          
+            <li><a href="./lib/fluent/plugin/buf_file_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/buf_file.rb">lib/fluent/plugin/buf_file.rb</a></li>
+          
+            <li><a href="./lib/fluent/plugin/buf_memory_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/buf_memory.rb">lib/fluent/plugin/buf_memory.rb</a></li>
+          
+            <li><a href="./lib/fluent/plugin/buf_zfile_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/buf_zfile.rb">lib/fluent/plugin/buf_zfile.rb</a></li>
+          
+            <li><a href="./lib/fluent/plugin/in_http_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/in_http.rb">lib/fluent/plugin/in_http.rb</a></li>
+          
+            <li><a href="./lib/fluent/plugin/in_stream_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/in_stream.rb">lib/fluent/plugin/in_stream.rb</a></li>
+          
+            <li><a href="./lib/fluent/plugin/in_syslog_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/in_syslog.rb">lib/fluent/plugin/in_syslog.rb</a></li>
+          
+            <li><a href="./lib/fluent/plugin/in_tail_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/in_tail.rb">lib/fluent/plugin/in_tail.rb</a></li>
+          
+            <li><a href="./lib/fluent/plugin/out_bucket_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/out_bucket.rb">lib/fluent/plugin/out_bucket.rb</a></li>
+          
+            <li><a href="./lib/fluent/plugin/out_copy_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/out_copy.rb">lib/fluent/plugin/out_copy.rb</a></li>
+          
+            <li><a href="./lib/fluent/plugin/out_file_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/out_file.rb">lib/fluent/plugin/out_file.rb</a></li>
+          
+            <li><a href="./lib/fluent/plugin/out_stdout_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/out_stdout.rb">lib/fluent/plugin/out_stdout.rb</a></li>
+          
+            <li><a href="./lib/fluent/plugin/out_stream_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/out_stream.rb">lib/fluent/plugin/out_stream.rb</a></li>
+          
+            <li><a href="./lib/fluent/plugin_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin.rb">lib/fluent/plugin.rb</a></li>
+          
+            <li><a href="./lib/fluent/version_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/version.rb">lib/fluent/version.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
 
-			
-		</div>
+      
+    </div>
 
-		<div id="class-metadata">
+    <div id="class-metadata">
+      
 
-			<!-- Parent Class -->
-			
+      
 
-			<!-- Namespace Contents -->
-			
-			<div id="namespace-list-section" class="section">
-				<h3 class="section-header">Namespace</h3>
-				<ul class="link-list">
-					
-					<li><span class="type">MODULE</span> <a href="Fluent/Config.html">Fluent::Config</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/ArrayEventStream.html">Fluent::ArrayEventStream</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/BasicBuffer.html">Fluent::BasicBuffer</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/BucketOutput.html">Fluent::BucketOutput</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/Buffer.html">Fluent::Buffer</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/BufferChunk.html">Fluent::BufferChunk</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/BufferError.html">Fluent::BufferError</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/ConfigError.html">Fluent::ConfigError</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/EngineClass.html">Fluent::EngineClass</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/Event.html">Fluent::Event</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/EventStream.html">Fluent::EventStream</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/FileOutput.html">Fluent::FileOutput</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/HttpInput.html">Fluent::HttpInput</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/Input.html">Fluent::Input</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/Log.html">Fluent::Log</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/Match.html">Fluent::Match</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/MatchPattern.html">Fluent::MatchPattern</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/MemoryBuffer.html">Fluent::MemoryBuffer</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/Output.html">Fluent::Output</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/OutputChain.html">Fluent::OutputChain</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/PluginClass.html">Fluent::PluginClass</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/StreamInput.html">Fluent::StreamInput</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/TailInput.html">Fluent::TailInput</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/TcpInput.html">Fluent::TcpInput</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/UnixInput.html">Fluent::UnixInput</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/ZFileBuffer.html">Fluent::ZFileBuffer</a></li>
-					
-					<li><span class="type">CLASS</span> <a href="Fluent/ZFileBufferChunk.html">Fluent::ZFileBufferChunk</a></li>
-					
-				</ul>
-			</div>
-			
+      
+      <!-- Namespace Contents -->
+      <div id="namespace-list-section" class="section">
+        <h3 class="section-header">Namespace</h3>
+        <ul class="link-list">
+          
+          <li><span class="type">MODULE</span> <a href="Fluent/Config.html">Fluent::Config</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/ArrayEventStream.html">Fluent::ArrayEventStream</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/BasicBuffer.html">Fluent::BasicBuffer</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/BucketOutput.html">Fluent::BucketOutput</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/Buffer.html">Fluent::Buffer</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/BufferChunk.html">Fluent::BufferChunk</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/BufferError.html">Fluent::BufferError</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/ConfigError.html">Fluent::ConfigError</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/EngineClass.html">Fluent::EngineClass</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/Event.html">Fluent::Event</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/EventStream.html">Fluent::EventStream</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/FileOutput.html">Fluent::FileOutput</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/HttpInput.html">Fluent::HttpInput</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/Input.html">Fluent::Input</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/Log.html">Fluent::Log</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/Match.html">Fluent::Match</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/MatchPattern.html">Fluent::MatchPattern</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/MemoryBuffer.html">Fluent::MemoryBuffer</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/Output.html">Fluent::Output</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/OutputChain.html">Fluent::OutputChain</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/PluginClass.html">Fluent::PluginClass</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/StreamInput.html">Fluent::StreamInput</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/StreamOutput.html">Fluent::StreamOutput</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/SyslogInput.html">Fluent::SyslogInput</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/TailInput.html">Fluent::TailInput</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/TcpInput.html">Fluent::TcpInput</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/TextParser.html">Fluent::TextParser</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/UnixInput.html">Fluent::UnixInput</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/UnixOutput.html">Fluent::UnixOutput</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/ZFileBuffer.html">Fluent::ZFileBuffer</a></li>
+          
+          <li><span class="type">CLASS</span> <a href="Fluent/ZFileBufferChunk.html">Fluent::ZFileBufferChunk</a></li>
+          
+        </ul>
+      </div>
+      
 
-			<!-- Method Quickref -->
-			
+      
 
-			<!-- Included Modules -->
-			
-		</div>
+      
+    </div>
 
-		<div id="project-metadata">
-			
-			
+    <div id="project-metadata">
+      
+      
 
-			<div id="classindex-section" class="section project-section">
-				<h3 class="section-header">Class Index
-					<span class="search-toggle"><img src="./images/find.png"
-						height="16" width="16" alt="[+]"
-						title="show/hide quicksearch" /></span></h3>
-				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
-				<fieldset>
-					<legend>Quicksearch</legend>
-					<input type="text" name="quicksearch" value=""
-						class="quicksearch-field" />
-				</fieldset>
-				</form>
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class/Module Index
+          <span class="search-toggle"><img src="./images/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
 
-				<ul class="link-list">
-				
-					<li><a href="./Fluent.html">Fluent</a></li>
-				
-					<li><a href="./Fluent/ArrayEventStream.html">Fluent::ArrayEventStream</a></li>
-				
-					<li><a href="./Fluent/BasicBuffer.html">Fluent::BasicBuffer</a></li>
-				
-					<li><a href="./Fluent/BucketOutput.html">Fluent::BucketOutput</a></li>
-				
-					<li><a href="./Fluent/Buffer.html">Fluent::Buffer</a></li>
-				
-					<li><a href="./Fluent/BufferChunk.html">Fluent::BufferChunk</a></li>
-				
-					<li><a href="./Fluent/BufferError.html">Fluent::BufferError</a></li>
-				
-					<li><a href="./Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
-				
-					<li><a href="./Fluent/BufferedOutput/WriterThread.html">Fluent::BufferedOutput::WriterThread</a></li>
-				
-					<li><a href="./Fluent/Config.html">Fluent::Config</a></li>
-				
-					<li><a href="./Fluent/Config/Element.html">Fluent::Config::Element</a></li>
-				
-					<li><a href="./Fluent/ConfigError.html">Fluent::ConfigError</a></li>
-				
-					<li><a href="./Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
-				
-					<li><a href="./Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
-				
-					<li><a href="./Fluent/EngineClass.html">Fluent::EngineClass</a></li>
-				
-					<li><a href="./Fluent/Event.html">Fluent::Event</a></li>
-				
-					<li><a href="./Fluent/EventStream.html">Fluent::EventStream</a></li>
-				
-					<li><a href="./Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
-				
-					<li><a href="./Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
-				
-					<li><a href="./Fluent/FileOutput.html">Fluent::FileOutput</a></li>
-				
-					<li><a href="./Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
-				
-					<li><a href="./Fluent/HttpInput.html">Fluent::HttpInput</a></li>
-				
-					<li><a href="./Fluent/Input.html">Fluent::Input</a></li>
-				
-					<li><a href="./Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
-				
-					<li><a href="./Fluent/Log.html">Fluent::Log</a></li>
-				
-					<li><a href="./Fluent/Match.html">Fluent::Match</a></li>
-				
-					<li><a href="./Fluent/MatchPattern.html">Fluent::MatchPattern</a></li>
-				
-					<li><a href="./Fluent/MemoryBuffer.html">Fluent::MemoryBuffer</a></li>
-				
-					<li><a href="./Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
-				
-					<li><a href="./Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
-				
-					<li><a href="./Fluent/Output.html">Fluent::Output</a></li>
-				
-					<li><a href="./Fluent/OutputChain.html">Fluent::OutputChain</a></li>
-				
-					<li><a href="./Fluent/PluginClass.html">Fluent::PluginClass</a></li>
-				
-					<li><a href="./Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
-				
-					<li><a href="./Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
-				
-					<li><a href="./Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
-				
-					<li><a href="./Fluent/StreamInput.html">Fluent::StreamInput</a></li>
-				
-					<li><a href="./Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
-				
-					<li><a href="./Fluent/TailInput.html">Fluent::TailInput</a></li>
-				
-					<li><a href="./Fluent/TailInput/Tailer.html">Fluent::TailInput::Tailer</a></li>
-				
-					<li><a href="./Fluent/TcpInput.html">Fluent::TcpInput</a></li>
-				
-					<li><a href="./Fluent/UnixInput.html">Fluent::UnixInput</a></li>
-				
-					<li><a href="./Fluent/ZFileBuffer.html">Fluent::ZFileBuffer</a></li>
-				
-					<li><a href="./Fluent/ZFileBufferChunk.html">Fluent::ZFileBufferChunk</a></li>
-				
-					<li><a href="./Writer.html">Writer</a></li>
-				
-					<li><a href="./Writer/TimerThread.html">Writer::TimerThread</a></li>
-				
-				</ul>
-				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
-			</div>
+        <ul class="link-list">
+        
+          <li><a href="./Fluent.html">Fluent</a></li>
+        
+          <li><a href="./Fluent/ArrayEventStream.html">Fluent::ArrayEventStream</a></li>
+        
+          <li><a href="./Fluent/BasicBuffer.html">Fluent::BasicBuffer</a></li>
+        
+          <li><a href="./Fluent/BucketOutput.html">Fluent::BucketOutput</a></li>
+        
+          <li><a href="./Fluent/Buffer.html">Fluent::Buffer</a></li>
+        
+          <li><a href="./Fluent/BufferChunk.html">Fluent::BufferChunk</a></li>
+        
+          <li><a href="./Fluent/BufferError.html">Fluent::BufferError</a></li>
+        
+          <li><a href="./Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
+        
+          <li><a href="./Fluent/BufferedOutput/WriterThread.html">Fluent::BufferedOutput::WriterThread</a></li>
+        
+          <li><a href="./Fluent/Config.html">Fluent::Config</a></li>
+        
+          <li><a href="./Fluent/Config/Element.html">Fluent::Config::Element</a></li>
+        
+          <li><a href="./Fluent/ConfigError.html">Fluent::ConfigError</a></li>
+        
+          <li><a href="./Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
+        
+          <li><a href="./Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
+        
+          <li><a href="./Fluent/EngineClass.html">Fluent::EngineClass</a></li>
+        
+          <li><a href="./Fluent/Event.html">Fluent::Event</a></li>
+        
+          <li><a href="./Fluent/EventStream.html">Fluent::EventStream</a></li>
+        
+          <li><a href="./Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
+        
+          <li><a href="./Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
+        
+          <li><a href="./Fluent/FileOutput.html">Fluent::FileOutput</a></li>
+        
+          <li><a href="./Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
+        
+          <li><a href="./Fluent/HttpInput.html">Fluent::HttpInput</a></li>
+        
+          <li><a href="./Fluent/HttpInput/Handler.html">Fluent::HttpInput::Handler</a></li>
+        
+          <li><a href="./Fluent/Input.html">Fluent::Input</a></li>
+        
+          <li><a href="./Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
+        
+          <li><a href="./Fluent/Log.html">Fluent::Log</a></li>
+        
+          <li><a href="./Fluent/Match.html">Fluent::Match</a></li>
+        
+          <li><a href="./Fluent/MatchPattern.html">Fluent::MatchPattern</a></li>
+        
+          <li><a href="./Fluent/MemoryBuffer.html">Fluent::MemoryBuffer</a></li>
+        
+          <li><a href="./Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
+        
+          <li><a href="./Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
+        
+          <li><a href="./Fluent/Output.html">Fluent::Output</a></li>
+        
+          <li><a href="./Fluent/OutputChain.html">Fluent::OutputChain</a></li>
+        
+          <li><a href="./Fluent/PluginClass.html">Fluent::PluginClass</a></li>
+        
+          <li><a href="./Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
+        
+          <li><a href="./Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
+        
+          <li><a href="./Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
+        
+          <li><a href="./Fluent/StreamInput.html">Fluent::StreamInput</a></li>
+        
+          <li><a href="./Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
+        
+          <li><a href="./Fluent/StreamOutput.html">Fluent::StreamOutput</a></li>
+        
+          <li><a href="./Fluent/SyslogInput.html">Fluent::SyslogInput</a></li>
+        
+          <li><a href="./Fluent/SyslogInput/UdpHandler.html">Fluent::SyslogInput::UdpHandler</a></li>
+        
+          <li><a href="./Fluent/TailInput.html">Fluent::TailInput</a></li>
+        
+          <li><a href="./Fluent/TailInput/Tailer.html">Fluent::TailInput::Tailer</a></li>
+        
+          <li><a href="./Fluent/TcpInput.html">Fluent::TcpInput</a></li>
+        
+          <li><a href="./Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
+        
+          <li><a href="./Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="./Fluent/UnixInput.html">Fluent::UnixInput</a></li>
+        
+          <li><a href="./Fluent/UnixOutput.html">Fluent::UnixOutput</a></li>
+        
+          <li><a href="./Fluent/ZFileBuffer.html">Fluent::ZFileBuffer</a></li>
+        
+          <li><a href="./Fluent/ZFileBufferChunk.html">Fluent::ZFileBufferChunk</a></li>
+        
+          <li><a href="./Writer.html">Writer</a></li>
+        
+          <li><a href="./Writer/TimerThread.html">Writer::TimerThread</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
 
-			
-		</div>
-	</div>
+      
+    </div>
+  </div>
 
-	<div id="documentation">
-		<h1 class="module">Fluent</h1>
+  <div id="documentation">
+    <h1 class="module">Fluent</h1>
 
-		<div id="description">
-			<p>
-<a href="Fluent.html">Fluent</a>
-</p>
-<p>
-Copyright (C) 2011 FURUHASHI Sadayuki
-</p>
-<pre>
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+    <div id="description" class="description">
+      
+<p><a href="Fluent.html">Fluent</a></p>
 
-       http://www.apache.org/licenses/LICENSE-2.0
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-</pre>
-<hr style="height: 1px"></hr><p>
-<a href="Fluent.html">Fluent</a>
-</p>
-<p>
-Copyright (C) 2011 FURUHASHI Sadayuki
-</p>
-<pre>
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-</pre>
-<hr style="height: 1px"></hr><p>
-<a href="Fluent.html">Fluent</a>
-</p>
-<p>
-Copyright (C) 2011 FURUHASHI Sadayuki
-</p>
-<pre>
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
 
-       http://www.apache.org/licenses/LICENSE-2.0
+<p><a href="Fluent.html">Fluent</a></p>
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-</pre>
-<hr style="height: 1px"></hr><p>
-<a href="Fluent.html">Fluent</a>
-</p>
-<p>
-Copyright (C) 2011 FURUHASHI Sadayuki
-</p>
-<pre>
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
 
-       http://www.apache.org/licenses/LICENSE-2.0
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-</pre>
-<hr style="height: 1px"></hr><p>
-<a href="Fluent.html">Fluent</a>
-</p>
-<p>
-Copyright (C) 2011 FURUHASHI Sadayuki
-</p>
-<pre>
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
 
-       http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-</pre>
-<hr style="height: 1px"></hr><p>
-<a href="Fluent.html">Fluent</a>
-</p>
-<p>
-Copyright (C) 2011 FURUHASHI Sadayuki
-</p>
-<pre>
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+<p><a href="Fluent.html">Fluent</a></p>
 
-       http://www.apache.org/licenses/LICENSE-2.0
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-</pre>
-<hr style="height: 1px"></hr><p>
-<a href="Fluent.html">Fluent</a>
-</p>
-<p>
-Copyright (C) 2011 FURUHASHI Sadayuki
-</p>
-<pre>
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-</pre>
-<hr style="height: 1px"></hr><p>
-<a href="Fluent.html">Fluent</a>
-</p>
-<p>
-Copyright (C) 2011 FURUHASHI Sadayuki
-</p>
-<pre>
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
 
-       http://www.apache.org/licenses/LICENSE-2.0
+<p><a href="Fluent.html">Fluent</a></p>
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-</pre>
-<hr style="height: 1px"></hr><p>
-<a href="Fluent.html">Fluent</a>
-</p>
-<p>
-Copyright (C) 2011 FURUHASHI Sadayuki
-</p>
-<pre>
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
 
-       http://www.apache.org/licenses/LICENSE-2.0
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-</pre>
-<hr style="height: 1px"></hr><p>
-<a href="Fluent.html">Fluent</a>
-</p>
-<p>
-Copyright (C) 2011 FURUHASHI Sadayuki
-</p>
-<pre>
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
 
-       http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-</pre>
-<hr style="height: 1px"></hr><p>
-<a href="Fluent.html">Fluent</a>
-</p>
-<p>
-Copyright (C) 2011 FURUHASHI Sadayuki
-</p>
-<pre>
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+<p><a href="Fluent.html">Fluent</a></p>
 
-       http://www.apache.org/licenses/LICENSE-2.0
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-</pre>
-<hr style="height: 1px"></hr><p>
-<a href="Fluent.html">Fluent</a>
-</p>
-<p>
-Copyright (C) 2011 FURUHASHI Sadayuki
-</p>
-<pre>
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-</pre>
-<hr style="height: 1px"></hr><p>
-<a href="Fluent.html">Fluent</a>
-</p>
-<p>
-Copyright (C) 2011 FURUHASHI Sadayuki
-</p>
-<pre>
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
 
-       http://www.apache.org/licenses/LICENSE-2.0
+<p><a href="Fluent.html">Fluent</a></p>
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-</pre>
-<hr style="height: 1px"></hr><p>
-<a href="Fluent.html">Fluent</a>
-</p>
-<p>
-Copyright (C) 2011 FURUHASHI Sadayuki
-</p>
-<pre>
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
 
-       http://www.apache.org/licenses/LICENSE-2.0
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-</pre>
-<hr style="height: 1px"></hr><p>
-<a href="Fluent.html">Fluent</a>
-</p>
-<p>
-Copyright (C) 2011 FURUHASHI Sadayuki
-</p>
-<pre>
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+    http://www.apache.org/licenses/LICENSE-2.0
 
-       http://www.apache.org/licenses/LICENSE-2.0
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-</pre>
-<hr style="height: 1px"></hr><p>
-<a href="Fluent.html">Fluent</a>
-</p>
-<p>
-Copyright (C) 2011 FURUHASHI Sadayuki
-</p>
-<pre>
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+<p><a href="Fluent.html">Fluent</a></p>
 
-       http://www.apache.org/licenses/LICENSE-2.0
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-</pre>
-<hr style="height: 1px"></hr><p>
-<a href="Fluent.html">Fluent</a>
-</p>
-<p>
-Copyright (C) 2011 FURUHASHI Sadayuki
-</p>
-<pre>
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-       http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-</pre>
-<hr style="height: 1px"></hr><p>
-<a href="Fluent.html">Fluent</a>
-</p>
-<p>
-Copyright (C) 2011 FURUHASHI Sadayuki
-</p>
-<pre>
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
 
-       http://www.apache.org/licenses/LICENSE-2.0
+<p><a href="Fluent.html">Fluent</a></p>
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.
-</pre>
-<hr style="height: 1px"></hr><p>
-<a href="Fluent.html">Fluent</a>
-</p>
-<p>
-Copyright (C) 2011 FURUHASHI Sadayuki
-</p>
-<pre>
-   Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
-   you may not use this file except in compliance with the License.
-   You may obtain a copy of the License at
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
 
-       http://www.apache.org/licenses/LICENSE-2.0
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-   Unless required by applicable law or agreed to in writing, software
-   distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
-   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-   See the License for the specific language governing permissions and
-   limitations under the License.</pre>
+    http://www.apache.org/licenses/LICENSE-2.0
 
-		</div>
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
 
-		<!-- Constants -->
-		
-		<div id="constants-list" class="section">
-			<h3 class="section-header">Constants</h3>
-			<dl>
-			
-				<dt><a name="Engine">Engine</a></dt>
-				
-				<dd class="description"></dd>
-				
-			
-				<dt><a name="DEFAULT_CONFIG_PATH">DEFAULT_CONFIG_PATH</a></dt>
-				
-				<dd class="description"></dd>
-				
-			
-				<dt><a name="DEFAULT_PLUGIN_DIR">DEFAULT_PLUGIN_DIR</a></dt>
-				
-				<dd class="description"></dd>
-				
-			
-				<dt><a name="DEFAULT_SOCKET_PATH">DEFAULT_SOCKET_PATH</a></dt>
-				
-				<dd class="description"></dd>
-				
-			
-				<dt><a name="DEFAULT_LISTEN_PORT">DEFAULT_LISTEN_PORT</a></dt>
-				
-				<dd class="description"></dd>
-				
-			
-				<dt><a name="Plugin">Plugin</a></dt>
-				
-				<dd class="description"></dd>
-				
-			
-				<dt><a name="VERSION">VERSION</a></dt>
-				
-				<dd class="description"></dd>
-				
-			
-			</dl>
-		</div>
-		
+<p><a href="Fluent.html">Fluent</a></p>
 
-		<!-- Attributes -->
-		
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
 
-		<!-- Methods -->
-		
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
 
-	</div>
+    http://www.apache.org/licenses/LICENSE-2.0
 
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
 
-	<div id="rdoc-debugging-section-dump" class="debugging-section">
-	
-		<p>Disabled; run with --debug to generate this.</p>
-	
-	</div>
+<p><a href="Fluent.html">Fluent</a></p>
 
-	<div id="validator-badges">
-		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
-		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
-			Rdoc Generator</a> 1.1.6</small>.</p>
-	</div>
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
+
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
+
+<p><a href="Fluent.html">Fluent</a></p>
+
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
+
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
+
+<p><a href="Fluent.html">Fluent</a></p>
+
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
+
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
+
+<p><a href="Fluent.html">Fluent</a></p>
+
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
+
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
+
+<p><a href="Fluent.html">Fluent</a></p>
+
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
+
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
+
+<p><a href="Fluent.html">Fluent</a></p>
+
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
+
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
+
+<p><a href="Fluent.html">Fluent</a></p>
+
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
+
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
+
+<p><a href="Fluent.html">Fluent</a></p>
+
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
+
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
+
+<p><a href="Fluent.html">Fluent</a></p>
+
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
+
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
+
+<p><a href="Fluent.html">Fluent</a></p>
+
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
+
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
+
+<p><a href="Fluent.html">Fluent</a></p>
+
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
+
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
+
+<p><a href="Fluent.html">Fluent</a></p>
+
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
+
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+<hr style="height: 1px">
+
+<p><a href="Fluent.html">Fluent</a></p>
+
+<p>Copyright (C) 2011 FURUHASHI Sadayuki</p>
+
+<pre>Licensed under the Apache License, Version 2.0 (the &quot;License&quot;);
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an &quot;AS IS&quot; BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.</pre>
+
+    </div><!-- description -->
+
+    
+    <div id="5Buntitled-5D" class="documentation-section">
+      
+
+      
+
+      
+      <!-- Constants -->
+      <div id="constants-list" class="section">
+        <h3 class="section-header">Constants</h3>
+        <dl>
+        
+          <dt><a name="DEFAULT_CONFIG_PATH">DEFAULT_CONFIG_PATH</a></dt>
+          
+          <dd class="description"></dd>
+          
+        
+          <dt><a name="DEFAULT_LISTEN_PORT">DEFAULT_LISTEN_PORT</a></dt>
+          
+          <dd class="description"></dd>
+          
+        
+          <dt><a name="DEFAULT_PLUGIN_DIR">DEFAULT_PLUGIN_DIR</a></dt>
+          
+          <dd class="description"></dd>
+          
+        
+          <dt><a name="DEFAULT_SOCKET_PATH">DEFAULT_SOCKET_PATH</a></dt>
+          
+          <dd class="description"></dd>
+          
+        
+          <dt><a name="Engine">Engine</a></dt>
+          
+          <dd class="description"></dd>
+          
+        
+          <dt><a name="Plugin">Plugin</a></dt>
+          
+          <dd class="description"></dd>
+          
+        
+          <dt><a name="VERSION">VERSION</a></dt>
+          
+          <dd class="description"></dd>
+          
+        
+        </dl>
+      </div>
+      
+
+      
+
+      <!-- Methods -->
+      
+    </div><!-- 5Buntitled-5D -->
+  
+
+  </div><!-- documentation -->
+
+  <div id="validator-badges">
+    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+      Rdoc Generator</a> 2</small>.</p>
+  </div>
 
 </body>
 </html>

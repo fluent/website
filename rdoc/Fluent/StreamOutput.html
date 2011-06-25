@@ -5,7 +5,7 @@
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 
-  <title>Class: Fluent::OutputChain</title>
+  <title>Class: Fluent::StreamOutput</title>
 
   <link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
 
@@ -34,8 +34,8 @@
         <div class="section-body">
           <ul>
           
-            <li><a href="../lib/fluent/output_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-              class="thickbox" title="lib/fluent/output.rb">lib/fluent/output.rb</a></li>
+            <li><a href="../lib/fluent/plugin/out_stream_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/out_stream.rb">lib/fluent/plugin/out_stream.rb</a></li>
           
           </ul>
         </div>
@@ -50,7 +50,7 @@
       <div id="parent-class-section" class="section">
         <h3 class="section-header">Parent</h3>
         
-        <p class="link">Object</p>
+        <p class="link"><a href="BufferedOutput.html">Fluent::BufferedOutput</a></p>
         
       </div>
       
@@ -67,7 +67,9 @@
           
           <li><a href="#method-c-new">::new</a></li>
           
-          <li><a href="#method-i-next">#next</a></li>
+          <li><a href="#method-i-format_stream">#format_stream</a></li>
+          
+          <li><a href="#method-i-write">#write</a></li>
           
         </ul>
       </div>
@@ -210,7 +212,7 @@
   </div>
 
   <div id="documentation">
-    <h1 class="class">Fluent::OutputChain</h1>
+    <h1 class="class">Fluent::StreamOutput</h1>
 
     <div id="description" class="description">
       
@@ -238,7 +240,7 @@
           
           <div class="method-heading">
             <span class="method-name">new</span><span
-              class="method-args">(array, tag, es, chain)</span>
+              class="method-args">()</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -251,13 +253,11 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 22</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">array</span>, <span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>, <span class="ruby-identifier">chain</span>)
-  <span class="ruby-ivar">@array</span> = <span class="ruby-identifier">array</span>
-  <span class="ruby-ivar">@tag</span> = <span class="ruby-identifier">tag</span>
-  <span class="ruby-ivar">@es</span> = <span class="ruby-identifier">es</span>
-  <span class="ruby-ivar">@offset</span> = <span class="ruby-value">0</span>
-  <span class="ruby-ivar">@chain</span> = <span class="ruby-identifier">chain</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_stream.rb, line 22</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">'socket'</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">'fileutils'</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -275,13 +275,13 @@
         <h3 class="section-header">Public Instance Methods</h3>
 
       
-        <div id="next-method" class="method-detail ">
-          <a name="method-i-next"></a>
+        <div id="format_stream-method" class="method-detail ">
+          <a name="method-i-format_stream"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">next</span><span
-              class="method-args">()</span>
+            <span class="method-name">format_stream</span><span
+              class="method-args">(tag, es)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -292,25 +292,64 @@
             
 
             
-            <div class="method-source-code" id="next-source">
+            <div class="method-source-code" id="format_stream-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 30</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">next</span>
-  <span class="ruby-ivar">@offset</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@array</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-ivar">@offset</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@chain</span>.<span class="ruby-identifier">next</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">result</span> = <span class="ruby-ivar">@array</span>[<span class="ruby-ivar">@offset</span>].<span class="ruby-identifier">emit</span>(<span class="ruby-ivar">@tag</span>, <span class="ruby-ivar">@es</span>, <span class="ruby-keyword">self</span>)
-  <span class="ruby-identifier">result</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_stream.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">format_stream</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>)
+  <span class="ruby-identifier">entries</span> = []
+  <span class="ruby-identifier">es</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">event</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">entries</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">event</span>
+  }
+  [<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">entries</span>].<span class="ruby-identifier">to_msgpack</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- next-source -->
+            </div><!-- format_stream-source -->
             
           </div>
 
           
 
           
-        </div><!-- next-method -->
+        </div><!-- format_stream-method -->
+
+      
+        <div id="write-method" class="method-detail ">
+          <a name="method-i-write"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">write</span><span
+              class="method-args">(chunk)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="write-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/out_stream.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">write</span>(<span class="ruby-identifier">chunk</span>)
+  <span class="ruby-identifier">sock</span> = <span class="ruby-identifier">connect</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">open</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">io</span><span class="ruby-operator">|</span>
+      <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">copy_stream</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">sock</span>)
+    }
+  <span class="ruby-keyword">ensure</span>
+    <span class="ruby-identifier">sock</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- write-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- write-method -->
 
       
       </div><!-- public-instance-method-details -->

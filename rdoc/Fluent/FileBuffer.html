@@ -1,582 +1,584 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 
-	<title>Class: Fluent::FileBuffer</title>
+  <title>Class: Fluent::FileBuffer</title>
 
-	<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
 
-	<script src="../js/jquery.js" type="text/javascript"
-		charset="utf-8"></script>
-	<script src="../js/thickbox-compressed.js" type="text/javascript"
-		charset="utf-8"></script>
-	<script src="../js/quicksearch.js" type="text/javascript"
-		charset="utf-8"></script>
-	<script src="../js/darkfish.js" type="text/javascript"
-		charset="utf-8"></script>
+  <script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/thickbox-compressed.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/darkfish.js" type="text/javascript" charset="utf-8"></script>
 
 </head>
-<body class="class">
+<body id="top" class="class">
 
-	<div id="metadata">
-		<div id="home-metadata">
-			<div id="home-section" class="section">
+  <div id="metadata">
+    <div id="home-metadata">
+      <div id="home-section" class="section">
         <h3 class="section-header">
           <a href="../index.html">Home</a>
           <a href="../index.html#classes">Classes</a>
           <a href="../index.html#methods">Methods</a>
         </h3>
-			</div>
-		</div>
+      </div>
+    </div>
 
-		<div id="file-metadata">
-			<div id="file-list-section" class="section">
-				<h3 class="section-header">In Files</h3>
-				<div class="section-body">
-					<ul>
-					
-						<li><a href="../lib/fluent/plugin/buf_file_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/plugin/buf_file.rb">lib/fluent/plugin/buf_file.rb</a></li>
-					
-					</ul>
-				</div>
-			</div>
+    <div id="file-metadata">
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li><a href="../lib/fluent/plugin/buf_file_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/buf_file.rb">lib/fluent/plugin/buf_file.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
 
-			
-		</div>
+      
+    </div>
 
-		<div id="class-metadata">
+    <div id="class-metadata">
+      
+      <!-- Parent Class -->
+      <div id="parent-class-section" class="section">
+        <h3 class="section-header">Parent</h3>
+        
+        <p class="link"><a href="BasicBuffer.html">Fluent::BasicBuffer</a></p>
+        
+      </div>
+      
 
-			<!-- Parent Class -->
-			
-			<div id="parent-class-section" class="section">
-				<h3 class="section-header">Parent</h3>
-				
-				<p class="link"><a href="BasicBuffer.html">Fluent::BasicBuffer</a></p>
-				
-			</div>
-			
+      
 
-			<!-- Namespace Contents -->
-			
+      
 
-			<!-- Method Quickref -->
-			
-			<div id="method-list-section" class="section">
-				<h3 class="section-header">Methods</h3>
-				<ul class="link-list">
-					
-					<li><a href="#method-c-new">::new</a></li>
-					
-					<li><a href="#method-i-configure">#configure</a></li>
-					
-					<li><a href="#method-i-new_chunk_path">#new_chunk_path</a></li>
-					
-					<li><a href="#method-i-new_data">#new_data</a></li>
-					
-					<li><a href="#method-i-resume_queue">#resume_queue</a></li>
-					
-					<li><a href="#method-i-resume_queue_paths">#resume_queue_paths</a></li>
-					
-					<li><a href="#method-i-start">#start</a></li>
-					
-				</ul>
-			</div>
-			
+      
+      <!-- Method Quickref -->
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+          <li><a href="#method-c-new">::new</a></li>
+          
+          <li><a href="#method-i-configure">#configure</a></li>
+          
+          <li><a href="#method-i-new_chunk_path">#new_chunk_path</a></li>
+          
+          <li><a href="#method-i-new_data">#new_data</a></li>
+          
+          <li><a href="#method-i-resume_queue">#resume_queue</a></li>
+          
+          <li><a href="#method-i-resume_queue_paths">#resume_queue_paths</a></li>
+          
+          <li><a href="#method-i-start">#start</a></li>
+          
+        </ul>
+      </div>
+      
 
-			<!-- Included Modules -->
-			
-		</div>
+      
+    </div>
 
-		<div id="project-metadata">
-			
-			
+    <div id="project-metadata">
+      
+      
 
-			<div id="classindex-section" class="section project-section">
-				<h3 class="section-header">Class Index
-					<span class="search-toggle"><img src="../images/find.png"
-						height="16" width="16" alt="[+]"
-						title="show/hide quicksearch" /></span></h3>
-				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
-				<fieldset>
-					<legend>Quicksearch</legend>
-					<input type="text" name="quicksearch" value=""
-						class="quicksearch-field" />
-				</fieldset>
-				</form>
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class/Module Index
+          <span class="search-toggle"><img src="../images/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
 
-				<ul class="link-list">
-				
-					<li><a href="../Fluent.html">Fluent</a></li>
-				
-					<li><a href="../Fluent/ArrayEventStream.html">Fluent::ArrayEventStream</a></li>
-				
-					<li><a href="../Fluent/BasicBuffer.html">Fluent::BasicBuffer</a></li>
-				
-					<li><a href="../Fluent/BucketOutput.html">Fluent::BucketOutput</a></li>
-				
-					<li><a href="../Fluent/Buffer.html">Fluent::Buffer</a></li>
-				
-					<li><a href="../Fluent/BufferChunk.html">Fluent::BufferChunk</a></li>
-				
-					<li><a href="../Fluent/BufferError.html">Fluent::BufferError</a></li>
-				
-					<li><a href="../Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
-				
-					<li><a href="../Fluent/BufferedOutput/WriterThread.html">Fluent::BufferedOutput::WriterThread</a></li>
-				
-					<li><a href="../Fluent/Config.html">Fluent::Config</a></li>
-				
-					<li><a href="../Fluent/Config/Element.html">Fluent::Config::Element</a></li>
-				
-					<li><a href="../Fluent/ConfigError.html">Fluent::ConfigError</a></li>
-				
-					<li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
-				
-					<li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
-				
-					<li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
-				
-					<li><a href="../Fluent/Event.html">Fluent::Event</a></li>
-				
-					<li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
-				
-					<li><a href="../Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
-				
-					<li><a href="../Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
-				
-					<li><a href="../Fluent/FileOutput.html">Fluent::FileOutput</a></li>
-				
-					<li><a href="../Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
-				
-					<li><a href="../Fluent/HttpInput.html">Fluent::HttpInput</a></li>
-				
-					<li><a href="../Fluent/Input.html">Fluent::Input</a></li>
-				
-					<li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
-				
-					<li><a href="../Fluent/Log.html">Fluent::Log</a></li>
-				
-					<li><a href="../Fluent/Match.html">Fluent::Match</a></li>
-				
-					<li><a href="../Fluent/MatchPattern.html">Fluent::MatchPattern</a></li>
-				
-					<li><a href="../Fluent/MemoryBuffer.html">Fluent::MemoryBuffer</a></li>
-				
-					<li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
-				
-					<li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
-				
-					<li><a href="../Fluent/Output.html">Fluent::Output</a></li>
-				
-					<li><a href="../Fluent/OutputChain.html">Fluent::OutputChain</a></li>
-				
-					<li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
-				
-					<li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
-				
-					<li><a href="../Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
-				
-					<li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
-				
-					<li><a href="../Fluent/StreamInput.html">Fluent::StreamInput</a></li>
-				
-					<li><a href="../Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
-				
-					<li><a href="../Fluent/TailInput.html">Fluent::TailInput</a></li>
-				
-					<li><a href="../Fluent/TailInput/Tailer.html">Fluent::TailInput::Tailer</a></li>
-				
-					<li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
-				
-					<li><a href="../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
-				
-					<li><a href="../Fluent/ZFileBuffer.html">Fluent::ZFileBuffer</a></li>
-				
-					<li><a href="../Fluent/ZFileBufferChunk.html">Fluent::ZFileBufferChunk</a></li>
-				
-					<li><a href="../Writer.html">Writer</a></li>
-				
-					<li><a href="../Writer/TimerThread.html">Writer::TimerThread</a></li>
-				
-				</ul>
-				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
-			</div>
+        <ul class="link-list">
+        
+          <li><a href="../Fluent.html">Fluent</a></li>
+        
+          <li><a href="../Fluent/ArrayEventStream.html">Fluent::ArrayEventStream</a></li>
+        
+          <li><a href="../Fluent/BasicBuffer.html">Fluent::BasicBuffer</a></li>
+        
+          <li><a href="../Fluent/BucketOutput.html">Fluent::BucketOutput</a></li>
+        
+          <li><a href="../Fluent/Buffer.html">Fluent::Buffer</a></li>
+        
+          <li><a href="../Fluent/BufferChunk.html">Fluent::BufferChunk</a></li>
+        
+          <li><a href="../Fluent/BufferError.html">Fluent::BufferError</a></li>
+        
+          <li><a href="../Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
+        
+          <li><a href="../Fluent/BufferedOutput/WriterThread.html">Fluent::BufferedOutput::WriterThread</a></li>
+        
+          <li><a href="../Fluent/Config.html">Fluent::Config</a></li>
+        
+          <li><a href="../Fluent/Config/Element.html">Fluent::Config::Element</a></li>
+        
+          <li><a href="../Fluent/ConfigError.html">Fluent::ConfigError</a></li>
+        
+          <li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
+        
+          <li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
+        
+          <li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
+        
+          <li><a href="../Fluent/Event.html">Fluent::Event</a></li>
+        
+          <li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
+        
+          <li><a href="../Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
+        
+          <li><a href="../Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
+        
+          <li><a href="../Fluent/FileOutput.html">Fluent::FileOutput</a></li>
+        
+          <li><a href="../Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
+        
+          <li><a href="../Fluent/HttpInput.html">Fluent::HttpInput</a></li>
+        
+          <li><a href="../Fluent/HttpInput/Handler.html">Fluent::HttpInput::Handler</a></li>
+        
+          <li><a href="../Fluent/Input.html">Fluent::Input</a></li>
+        
+          <li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
+        
+          <li><a href="../Fluent/Log.html">Fluent::Log</a></li>
+        
+          <li><a href="../Fluent/Match.html">Fluent::Match</a></li>
+        
+          <li><a href="../Fluent/MatchPattern.html">Fluent::MatchPattern</a></li>
+        
+          <li><a href="../Fluent/MemoryBuffer.html">Fluent::MemoryBuffer</a></li>
+        
+          <li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
+        
+          <li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
+        
+          <li><a href="../Fluent/Output.html">Fluent::Output</a></li>
+        
+          <li><a href="../Fluent/OutputChain.html">Fluent::OutputChain</a></li>
+        
+          <li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
+        
+          <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
+        
+          <li><a href="../Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
+        
+          <li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
+        
+          <li><a href="../Fluent/StreamInput.html">Fluent::StreamInput</a></li>
+        
+          <li><a href="../Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
+        
+          <li><a href="../Fluent/StreamOutput.html">Fluent::StreamOutput</a></li>
+        
+          <li><a href="../Fluent/SyslogInput.html">Fluent::SyslogInput</a></li>
+        
+          <li><a href="../Fluent/SyslogInput/UdpHandler.html">Fluent::SyslogInput::UdpHandler</a></li>
+        
+          <li><a href="../Fluent/TailInput.html">Fluent::TailInput</a></li>
+        
+          <li><a href="../Fluent/TailInput/Tailer.html">Fluent::TailInput::Tailer</a></li>
+        
+          <li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
+        
+          <li><a href="../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
+        
+          <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
+        
+          <li><a href="../Fluent/UnixOutput.html">Fluent::UnixOutput</a></li>
+        
+          <li><a href="../Fluent/ZFileBuffer.html">Fluent::ZFileBuffer</a></li>
+        
+          <li><a href="../Fluent/ZFileBufferChunk.html">Fluent::ZFileBufferChunk</a></li>
+        
+          <li><a href="../Writer.html">Writer</a></li>
+        
+          <li><a href="../Writer/TimerThread.html">Writer::TimerThread</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
 
-			
-		</div>
-	</div>
+      
+    </div>
+  </div>
 
-	<div id="documentation">
-		<h1 class="class">Fluent::FileBuffer</h1>
+  <div id="documentation">
+    <h1 class="class">Fluent::FileBuffer</h1>
 
-		<div id="description">
-			
-		</div>
+    <div id="description" class="description">
+      
+    </div><!-- description -->
 
-		<!-- Constants -->
-		
+    
+    <div id="5Buntitled-5D" class="documentation-section">
+      
 
-		<!-- Attributes -->
-		
-		<div id="attribute-method-details" class="method-section section">
-			<h3 class="section-header">Attributes</h3>
+      
 
-			
-			<div id="dir-attribute-method" class="method-detail">
-				<a name="dir"></a>
-				
-				<a name="dir="></a>
-				
-				<div class="method-heading attribute-method-heading">
-					<span class="method-name">dir</span><span
-						class="attribute-access-type">[RW]</span>
-				</div>
+      
 
-				<div class="method-description">
-				
-				
-				
-				</div>
-			</div>
-			
-			<div id="prefix-attribute-method" class="method-detail">
-				<a name="prefix"></a>
-				
-				<a name="prefix="></a>
-				
-				<div class="method-heading attribute-method-heading">
-					<span class="method-name">prefix</span><span
-						class="attribute-access-type">[RW]</span>
-				</div>
+      
+      <!-- Attributes -->
+      <div id="attribute-method-details" class="method-section section">
+        <h3 class="section-header">Attributes</h3>
 
-				<div class="method-description">
-				
-				
-				
-				</div>
-			</div>
-			
-			<div id="suffix-attribute-method" class="method-detail">
-				<a name="suffix"></a>
-				
-				<a name="suffix="></a>
-				
-				<div class="method-heading attribute-method-heading">
-					<span class="method-name">suffix</span><span
-						class="attribute-access-type">[RW]</span>
-				</div>
+        
+        <div id="dir-attribute-method" class="method-detail">
+          <a name="dir"></a>
+          
+          <a name="dir="></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">dir</span><span
+              class="attribute-access-type">[RW]</span>
+          </div>
 
-				<div class="method-description">
-				
-				
-				
-				</div>
-			</div>
-			
-		</div>
-		
+          <div class="method-description">
+          
+          
+          
+          </div>
+        </div>
+        
+        <div id="prefix-attribute-method" class="method-detail">
+          <a name="prefix"></a>
+          
+          <a name="prefix="></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">prefix</span><span
+              class="attribute-access-type">[RW]</span>
+          </div>
 
-		<!-- Methods -->
-		
-		<div id="public-class-method-details" class="method-section section">
-			<h3 class="section-header">Public Class Methods</h3>
+          <div class="method-description">
+          
+          
+          
+          </div>
+        </div>
+        
+        <div id="suffix-attribute-method" class="method-detail">
+          <a name="suffix"></a>
+          
+          <a name="suffix="></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">suffix</span><span
+              class="attribute-access-type">[RW]</span>
+          </div>
 
-		
-			<div id="new-method" class="method-detail ">
-				<a name="method-c-new"></a>
+          <div class="method-description">
+          
+          
+          
+          </div>
+        </div>
+        
+      </div><!-- attribute-method-details -->
+      
 
-				<div class="method-heading">
-				
-					<span class="method-name">new</span><span
-						class="method-args">()</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+      <!-- Methods -->
+      
+      <div id="public-class-method-details" class="method-section section">
+        <h3 class="section-header">Public Class Methods</h3>
 
-				<div class="method-description">
-					
-					
-					
+      
+        <div id="new-method" class="method-detail ">
+          <a name="method-c-new"></a>
 
-					
-					<div class="method-source-code"
-						id="new-source">
+          
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="new-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/plugin/buf_file.rb, line 75</span>
-75:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
-76:     <span class="ruby-keyword kw">super</span>
-77:     <span class="ruby-ivar">@prefix</span> = <span class="ruby-keyword kw">nil</span>
-78:     <span class="ruby-ivar">@suffix</span> = <span class="ruby-keyword kw">nil</span>
-79:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-ivar">@prefix</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@suffix</span> = <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- new-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- new-method -->
 
-		
-		</div>
-	
-		<div id="public-instance-method-details" class="method-section section">
-			<h3 class="section-header">Public Instance Methods</h3>
+      
+      </div><!-- public-class-method-details -->
+    
+      <div id="public-instance-method-details" class="method-section section">
+        <h3 class="section-header">Public Instance Methods</h3>
 
-		
-			<div id="configure-method" class="method-detail ">
-				<a name="method-i-configure"></a>
+      
+        <div id="configure-method" class="method-detail ">
+          <a name="method-i-configure"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">configure</span><span
-						class="method-args">(conf)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">configure</span><span
+              class="method-args">(conf)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="configure-source">
+            
+            <div class="method-source-code" id="configure-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/plugin/buf_file.rb, line 83</span>
-83:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
-84:     <span class="ruby-keyword kw">super</span>
-85: 
-86:     <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">path</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-value str">'buffer_path'</span>]
-87:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">pos</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">index</span>(<span class="ruby-value str">'*'</span>)
-88:         <span class="ruby-ivar">@prefix</span> = <span class="ruby-identifier">path</span>[<span class="ruby-value">0</span>,<span class="ruby-identifier">pos</span>]
-89:         <span class="ruby-ivar">@suffix</span> = <span class="ruby-identifier">path</span>[<span class="ruby-identifier">pos</span><span class="ruby-operator">+</span><span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">1</span>]
-90:       <span class="ruby-keyword kw">else</span>
-91:         <span class="ruby-ivar">@prefix</span> = <span class="ruby-identifier">path</span><span class="ruby-operator">+</span><span class="ruby-value str">&quot;.&quot;</span>
-92:         <span class="ruby-ivar">@suffix</span> = <span class="ruby-value str">&quot;&quot;</span>
-93:       <span class="ruby-keyword kw">end</span>
-94:     <span class="ruby-keyword kw">else</span>
-95:       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConfigError</span>, <span class="ruby-value str">&quot;'buffer_path' parameter is required on file buffer&quot;</span>
-96:     <span class="ruby-keyword kw">end</span>
-97:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 83</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
+  <span class="ruby-keyword">super</span>
 
-				
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'buffer_path'</span>]
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">pos</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">'*'</span>)
+      <span class="ruby-ivar">@prefix</span> = <span class="ruby-identifier">path</span>[<span class="ruby-value">0</span>,<span class="ruby-identifier">pos</span>]
+      <span class="ruby-ivar">@suffix</span> = <span class="ruby-identifier">path</span>[<span class="ruby-identifier">pos</span><span class="ruby-operator">+</span><span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-ivar">@prefix</span> = <span class="ruby-identifier">path</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.&quot;</span>
+      <span class="ruby-ivar">@suffix</span> = <span class="ruby-string">&quot;&quot;</span>
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConfigError</span>, <span class="ruby-string">&quot;'buffer_path' parameter is required on file buffer&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- configure-source -->
+            
+          </div>
 
-				
-			</div>
+          
 
-		
-			<div id="new-data-method" class="method-detail ">
-				<a name="method-i-new_data"></a>
+          
+        </div><!-- configure-method -->
 
-				<div class="method-heading">
-				
-					<span class="method-name">new_data</span><span
-						class="method-args">()</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+      
+        <div id="new_data-method" class="method-detail ">
+          <a name="method-i-new_data"></a>
 
-				<div class="method-description">
-					
-					
-					
+          
+          <div class="method-heading">
+            <span class="method-name">new_data</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-					
-					<div class="method-source-code"
-						id="new-data-source">
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="new_data-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/fluent/plugin/buf_file.rb, line 112</span>
-112:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new_data</span>
-113:     <span class="ruby-identifier">path</span> = <span class="ruby-identifier">new_chunk_path</span>
-114:     <span class="ruby-constant">FileBufferChunk</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>)
-115:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 112</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">new_data</span>
+  <span class="ruby-identifier">path</span> = <span class="ruby-identifier">new_chunk_path</span>
+  <span class="ruby-constant">FileBufferChunk</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>)
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- new_data-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- new_data-method -->
 
-		
-			<div id="resume-queue-method" class="method-detail ">
-				<a name="method-i-resume_queue"></a>
+      
+        <div id="resume_queue-method" class="method-detail ">
+          <a name="method-i-resume_queue"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">resume_queue</span><span
-						class="method-args">()</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">resume_queue</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="resume-queue-source">
+            
+            <div class="method-source-code" id="resume_queue-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/fluent/plugin/buf_file.rb, line 104</span>
-104:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">resume_queue</span>
-105:     <span class="ruby-identifier">queue</span> = <span class="ruby-identifier">resume_queue_paths</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
-106:       <span class="ruby-constant">FileBufferChunk</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>)
-107:     }
-108:     <span class="ruby-identifier">top</span> = <span class="ruby-identifier">queue</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">new_data</span>
-109:     <span class="ruby-keyword kw">return</span> <span class="ruby-identifier">queue</span>, <span class="ruby-identifier">top</span>
-110:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">resume_queue</span>
+  <span class="ruby-identifier">queue</span> = <span class="ruby-identifier">resume_queue_paths</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">FileBufferChunk</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>)
+  }
+  <span class="ruby-identifier">top</span> = <span class="ruby-identifier">queue</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">new_data</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">queue</span>, <span class="ruby-identifier">top</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- resume_queue-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- resume_queue-method -->
 
-		
-			<div id="start-method" class="method-detail ">
-				<a name="method-i-start"></a>
+      
+        <div id="start-method" class="method-detail ">
+          <a name="method-i-start"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">start</span><span
-						class="method-args">()</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">start</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="start-source">
+            
+            <div class="method-source-code" id="start-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/fluent/plugin/buf_file.rb, line 99</span>
- 99:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start</span>
-100:     <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-ivar">@prefix</span>)
-101:     <span class="ruby-keyword kw">super</span>
-102:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 99</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span>
+  <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-ivar">@prefix</span>)
+  <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- start-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- start-method -->
 
-		
-		</div>
-	
-		<div id="protected-instance-method-details" class="method-section section">
-			<h3 class="section-header">Protected Instance Methods</h3>
+      
+      </div><!-- public-instance-method-details -->
+    
+      <div id="protected-instance-method-details" class="method-section section">
+        <h3 class="section-header">Protected Instance Methods</h3>
 
-		
-			<div id="new-chunk-path-method" class="method-detail ">
-				<a name="method-i-new_chunk_path"></a>
+      
+        <div id="new_chunk_path-method" class="method-detail ">
+          <a name="method-i-new_chunk_path"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">new_chunk_path</span><span
-						class="method-args">()</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">new_chunk_path</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="new-chunk-path-source">
+            
+            <div class="method-source-code" id="new_chunk_path-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/fluent/plugin/buf_file.rb, line 118</span>
-118:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">new_chunk_path</span>
-119:     <span class="ruby-identifier">time16</span> = <span class="ruby-value str">&quot;%016x&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>
-120:     <span class="ruby-identifier">path</span> = <span class="ruby-node">&quot;#{@prefix}#{time16}#{@suffix}&quot;</span>
-121:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 118</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">new_chunk_path</span>
+  <span class="ruby-identifier">time16</span> = <span class="ruby-string">&quot;%016x&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>
+  <span class="ruby-identifier">path</span> = <span class="ruby-node">&quot;#{@prefix}#{time16}#{@suffix}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- new_chunk_path-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- new_chunk_path-method -->
 
-		
-			<div id="resume-queue-paths-method" class="method-detail ">
-				<a name="method-i-resume_queue_paths"></a>
+      
+        <div id="resume_queue_paths-method" class="method-detail ">
+          <a name="method-i-resume_queue_paths"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">resume_queue_paths</span><span
-						class="method-args">()</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">resume_queue_paths</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="resume-queue-paths-source">
+            
+            <div class="method-source-code" id="resume_queue_paths-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/fluent/plugin/buf_file.rb, line 123</span>
-123:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">resume_queue_paths</span>
-124:     <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-node">&quot;#{@prefix}*#{@suffix}&quot;</span>).<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
-125:       <span class="ruby-identifier">time16</span> = <span class="ruby-identifier">path</span>[<span class="ruby-ivar">@prefix</span>.<span class="ruby-identifier">length</span>,<span class="ruby-value">8</span>]
-126:       <span class="ruby-identifier">time16</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp re">/^[0-9a-f]{8}/</span>
-127:     }
-128:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 123</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">resume_queue_paths</span>
+  <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-node">&quot;#{@prefix}*#{@suffix}&quot;</span>).<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">time16</span> = <span class="ruby-identifier">path</span>[<span class="ruby-ivar">@prefix</span>.<span class="ruby-identifier">length</span>,<span class="ruby-value">8</span>]
+    <span class="ruby-identifier">time16</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^[0-9a-f]{8}/</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- resume_queue_paths-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- resume_queue_paths-method -->
 
-		
-		</div>
-	
+      
+      </div><!-- protected-instance-method-details -->
+    
+    </div><!-- 5Buntitled-5D -->
+  
 
-	</div>
+  </div><!-- documentation -->
 
-
-	<div id="rdoc-debugging-section-dump" class="debugging-section">
-	
-		<p>Disabled; run with --debug to generate this.</p>
-	
-	</div>
-
-	<div id="validator-badges">
-		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
-		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
-			Rdoc Generator</a> 1.1.6</small>.</p>
-	</div>
+  <div id="validator-badges">
+    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+      Rdoc Generator</a> 2</small>.</p>
+  </div>
 
 </body>
 </html>

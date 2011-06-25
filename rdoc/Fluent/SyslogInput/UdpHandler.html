@@ -5,7 +5,7 @@
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 
-  <title>Class: Fluent::StreamInput::StreamInputThread</title>
+  <title>Class: Fluent::SyslogInput::UdpHandler</title>
 
   <link rel="stylesheet" href="../../rdoc.css" type="text/css" media="screen" />
 
@@ -34,8 +34,8 @@
         <div class="section-body">
           <ul>
           
-            <li><a href="../../lib/fluent/plugin/in_stream_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-              class="thickbox" title="lib/fluent/plugin/in_stream.rb">lib/fluent/plugin/in_stream.rb</a></li>
+            <li><a href="../../lib/fluent/plugin/in_syslog_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/in_syslog.rb">lib/fluent/plugin/in_syslog.rb</a></li>
           
           </ul>
         </div>
@@ -50,7 +50,7 @@
       <div id="parent-class-section" class="section">
         <h3 class="section-header">Parent</h3>
         
-        <p class="link">Thread</p>
+        <p class="link">EventMachine::Connection</p>
         
       </div>
       
@@ -67,9 +67,7 @@
           
           <li><a href="#method-c-new">::new</a></li>
           
-          <li><a href="#method-i-on_message">#on_message</a></li>
-          
-          <li><a href="#method-i-run">#run</a></li>
+          <li><a href="#method-i-receive_data">#receive_data</a></li>
           
         </ul>
       </div>
@@ -212,7 +210,7 @@
   </div>
 
   <div id="documentation">
-    <h1 class="class">Fluent::StreamInput::StreamInputThread</h1>
+    <h1 class="class">Fluent::SyslogInput::UdpHandler</h1>
 
     <div id="description" class="description">
       
@@ -240,7 +238,7 @@
           
           <div class="method-heading">
             <span class="method-name">new</span><span
-              class="method-args">(sock)</span>
+              class="method-args">(callback)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -253,11 +251,10 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 47</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">sock</span>)
-  <span class="ruby-ivar">@sock</span> = <span class="ruby-identifier">sock</span>
-  <span class="ruby-ivar">@mpac</span> = <span class="ruby-constant">MessagePack</span><span class="ruby-operator">::</span><span class="ruby-constant">Unpacker</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@sock</span>)
-  <span class="ruby-keyword">super</span>(&amp;<span class="ruby-identifier">method</span>(<span class="ruby-value">:run</span>))
+<span class="ruby-comment"># File lib/fluent/plugin/in_syslog.rb, line 166</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">callback</span>)
+  <span class="ruby-keyword">super</span>()
+  <span class="ruby-ivar">@callback</span> = <span class="ruby-identifier">callback</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -275,88 +272,13 @@
         <h3 class="section-header">Public Instance Methods</h3>
 
       
-        <div id="on_message-method" class="method-detail ">
-          <a name="method-i-on_message"></a>
+        <div id="receive_data-method" class="method-detail ">
+          <a name="method-i-receive_data"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">on_message</span><span
-              class="method-args">(msg)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>message Entry {</p>
-
-<pre>1: long? time
-2: object record</pre>
-
-<p>}</p>
-
-<p>message Forward {</p>
-
-<pre>1: string tag
-2: list&lt;Entry&gt; entries</pre>
-
-<p>}</p>
-
-<p>message Message {</p>
-
-<pre>1: string tag
-2: long? time
-3: object record</pre>
-
-<p>}</p>
-            
-
-            
-            <div class="method-source-code" id="on_message-source">
-<pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 78</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_message</span>(<span class="ruby-identifier">msg</span>)
-  <span class="ruby-comment"># TODO format error</span>
-  <span class="ruby-identifier">tag</span> = <span class="ruby-identifier">msg</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">entries</span> = <span class="ruby-identifier">msg</span>[<span class="ruby-value">1</span>]
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Array</span>
-    <span class="ruby-comment"># Forward</span>
-    <span class="ruby-identifier">array</span> = <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">time</span> = <span class="ruby-identifier">e</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_i</span>
-      <span class="ruby-identifier">time</span> = <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">time</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-      <span class="ruby-identifier">record</span> = <span class="ruby-identifier">e</span>[<span class="ruby-value">1</span>]
-      <span class="ruby-constant">Event</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">record</span>)
-    }
-    <span class="ruby-identifier">es</span> = <span class="ruby-constant">ArrayEventStream</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">array</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-comment"># Message</span>
-    <span class="ruby-identifier">time</span> = <span class="ruby-identifier">msg</span>[<span class="ruby-value">1</span>]
-    <span class="ruby-identifier">time</span> = <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">time</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-    <span class="ruby-identifier">record</span> = <span class="ruby-identifier">msg</span>[<span class="ruby-value">2</span>]
-    <span class="ruby-identifier">event</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">record</span>)
-    <span class="ruby-identifier">es</span> = <span class="ruby-constant">ArrayEventStream</span>.<span class="ruby-identifier">new</span>([<span class="ruby-identifier">event</span>])
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">emit_stream</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>)
-<span class="ruby-keyword">end</span></pre>
-            </div><!-- on_message-source -->
-            
-          </div>
-
-          
-
-          
-        </div><!-- on_message-method -->
-
-      
-        <div id="run-method" class="method-detail ">
-          <a name="method-i-run"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">run</span><span
-              class="method-args">()</span>
+            <span class="method-name">receive_data</span><span
+              class="method-args">(data)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -367,26 +289,22 @@
             
 
             
-            <div class="method-source-code" id="run-source">
+            <div class="method-source-code" id="receive_data-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 53</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>
-  <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">trace</span> { <span class="ruby-node">&quot;accepted fluent socket object_id=#{@sock.object_id}&quot;</span> }
-  <span class="ruby-ivar">@mpac</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">on_message</span>(<span class="ruby-identifier">msg</span>)
+<span class="ruby-comment"># File lib/fluent/plugin/in_syslog.rb, line 171</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">receive_data</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-constant">EventMachine</span>.<span class="ruby-identifier">defer</span> {
+    <span class="ruby-ivar">@callback</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">data</span>)
   }
-<span class="ruby-keyword">ensure</span>
-  <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">trace</span> { <span class="ruby-node">&quot;closed fluent socket object_id=#{@sock.object_id}&quot;</span> }
-  <span class="ruby-ivar">@sock</span>.<span class="ruby-identifier">close</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- run-source -->
+            </div><!-- receive_data-source -->
             
           </div>
 
           
 
           
-        </div><!-- run-method -->
+        </div><!-- receive_data-method -->
 
       
       </div><!-- public-instance-method-details -->

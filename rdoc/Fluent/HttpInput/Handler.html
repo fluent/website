@@ -5,7 +5,7 @@
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 
-  <title>Class: Fluent::StreamInput::StreamInputThread</title>
+  <title>Class: Fluent::HttpInput::Handler</title>
 
   <link rel="stylesheet" href="../../rdoc.css" type="text/css" media="screen" />
 
@@ -34,8 +34,8 @@
         <div class="section-body">
           <ul>
           
-            <li><a href="../../lib/fluent/plugin/in_stream_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-              class="thickbox" title="lib/fluent/plugin/in_stream.rb">lib/fluent/plugin/in_stream.rb</a></li>
+            <li><a href="../../lib/fluent/plugin/in_http_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/in_http.rb">lib/fluent/plugin/in_http.rb</a></li>
           
           </ul>
         </div>
@@ -50,7 +50,7 @@
       <div id="parent-class-section" class="section">
         <h3 class="section-header">Parent</h3>
         
-        <p class="link">Thread</p>
+        <p class="link">EventMachine::Connection</p>
         
       </div>
       
@@ -67,14 +67,24 @@
           
           <li><a href="#method-c-new">::new</a></li>
           
-          <li><a href="#method-i-on_message">#on_message</a></li>
-          
-          <li><a href="#method-i-run">#run</a></li>
+          <li><a href="#method-i-process_http_request">#process_http_request</a></li>
           
         </ul>
       </div>
       
 
+      
+      <!-- Included Modules -->
+      <div id="includes-section" class="section">
+        <h3 class="section-header">Included Modules</h3>
+        <ul class="link-list">
+        
+        
+          <li><span class="include">EventMachine::HttpServer</span></li>
+        
+        
+        </ul>
+      </div>
       
     </div>
 
@@ -212,7 +222,7 @@
   </div>
 
   <div id="documentation">
-    <h1 class="class">Fluent::StreamInput::StreamInputThread</h1>
+    <h1 class="class">Fluent::HttpInput::Handler</h1>
 
     <div id="description" class="description">
       
@@ -240,7 +250,7 @@
           
           <div class="method-heading">
             <span class="method-name">new</span><span
-              class="method-args">(sock)</span>
+              class="method-args">(callback)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -253,11 +263,9 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 47</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">sock</span>)
-  <span class="ruby-ivar">@sock</span> = <span class="ruby-identifier">sock</span>
-  <span class="ruby-ivar">@mpac</span> = <span class="ruby-constant">MessagePack</span><span class="ruby-operator">::</span><span class="ruby-constant">Unpacker</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@sock</span>)
-  <span class="ruby-keyword">super</span>(&amp;<span class="ruby-identifier">method</span>(<span class="ruby-value">:run</span>))
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 86</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">callback</span>)
+  <span class="ruby-ivar">@callback</span> = <span class="ruby-identifier">callback</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -275,87 +283,12 @@
         <h3 class="section-header">Public Instance Methods</h3>
 
       
-        <div id="on_message-method" class="method-detail ">
-          <a name="method-i-on_message"></a>
+        <div id="process_http_request-method" class="method-detail ">
+          <a name="method-i-process_http_request"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">on_message</span><span
-              class="method-args">(msg)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            <p>message Entry {</p>
-
-<pre>1: long? time
-2: object record</pre>
-
-<p>}</p>
-
-<p>message Forward {</p>
-
-<pre>1: string tag
-2: list&lt;Entry&gt; entries</pre>
-
-<p>}</p>
-
-<p>message Message {</p>
-
-<pre>1: string tag
-2: long? time
-3: object record</pre>
-
-<p>}</p>
-            
-
-            
-            <div class="method-source-code" id="on_message-source">
-<pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 78</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_message</span>(<span class="ruby-identifier">msg</span>)
-  <span class="ruby-comment"># TODO format error</span>
-  <span class="ruby-identifier">tag</span> = <span class="ruby-identifier">msg</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_s</span>
-  <span class="ruby-identifier">entries</span> = <span class="ruby-identifier">msg</span>[<span class="ruby-value">1</span>]
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Array</span>
-    <span class="ruby-comment"># Forward</span>
-    <span class="ruby-identifier">array</span> = <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
-      <span class="ruby-identifier">time</span> = <span class="ruby-identifier">e</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_i</span>
-      <span class="ruby-identifier">time</span> = <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">time</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-      <span class="ruby-identifier">record</span> = <span class="ruby-identifier">e</span>[<span class="ruby-value">1</span>]
-      <span class="ruby-constant">Event</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">record</span>)
-    }
-    <span class="ruby-identifier">es</span> = <span class="ruby-constant">ArrayEventStream</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">array</span>)
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-comment"># Message</span>
-    <span class="ruby-identifier">time</span> = <span class="ruby-identifier">msg</span>[<span class="ruby-value">1</span>]
-    <span class="ruby-identifier">time</span> = <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">time</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-    <span class="ruby-identifier">record</span> = <span class="ruby-identifier">msg</span>[<span class="ruby-value">2</span>]
-    <span class="ruby-identifier">event</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">record</span>)
-    <span class="ruby-identifier">es</span> = <span class="ruby-constant">ArrayEventStream</span>.<span class="ruby-identifier">new</span>([<span class="ruby-identifier">event</span>])
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">emit_stream</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>)
-<span class="ruby-keyword">end</span></pre>
-            </div><!-- on_message-source -->
-            
-          </div>
-
-          
-
-          
-        </div><!-- on_message-method -->
-
-      
-        <div id="run-method" class="method-detail ">
-          <a name="method-i-run"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">run</span><span
+            <span class="method-name">process_http_request</span><span
               class="method-args">()</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
@@ -367,26 +300,41 @@
             
 
             
-            <div class="method-source-code" id="run-source">
+            <div class="method-source-code" id="process_http_request-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 53</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>
-  <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">trace</span> { <span class="ruby-node">&quot;accepted fluent socket object_id=#{@sock.object_id}&quot;</span> }
-  <span class="ruby-ivar">@mpac</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">on_message</span>(<span class="ruby-identifier">msg</span>)
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">process_http_request</span>
+  <span class="ruby-identifier">resp</span> = <span class="ruby-constant">EventMachine</span><span class="ruby-operator">::</span><span class="ruby-constant">DelegatedHttpResponse</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+
+  <span class="ruby-identifier">params</span> = <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPUtils</span>.<span class="ruby-identifier">parse_query</span>(<span class="ruby-ivar">@http_query_string</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@http_content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^application\/x-www-form-urlencoded/</span>
+    <span class="ruby-identifier">params</span>.<span class="ruby-identifier">update</span> <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPUtils</span>.<span class="ruby-identifier">parse_query</span>(<span class="ruby-ivar">@http_post_content</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@http_content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^multipart\/form-data; boundary=(.+)/</span>
+    <span class="ruby-identifier">boundary</span> = <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPUtils</span>.<span class="ruby-identifier">dequote</span>(<span class="ruby-node">$1</span>)
+    <span class="ruby-identifier">params</span>.<span class="ruby-identifier">update</span> <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPUtils</span>.<span class="ruby-identifier">parse_form_data</span>(<span class="ruby-ivar">@http_post_content</span>, <span class="ruby-identifier">boundary</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-identifier">op</span> = <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> {
+    <span class="ruby-ivar">@callback</span>.<span class="ruby-identifier">call</span>(<span class="ruby-ivar">@http_path_info</span>, <span class="ruby-identifier">params</span>)
   }
-<span class="ruby-keyword">ensure</span>
-  <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">trace</span> { <span class="ruby-node">&quot;closed fluent socket object_id=#{@sock.object_id}&quot;</span> }
-  <span class="ruby-ivar">@sock</span>.<span class="ruby-identifier">close</span>
+
+  <span class="ruby-identifier">sender</span> = <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> {<span class="ruby-operator">|</span>(<span class="ruby-identifier">code</span>,<span class="ruby-identifier">header</span>,<span class="ruby-identifier">body</span>)<span class="ruby-operator">|</span>
+    <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">status</span> = <span class="ruby-identifier">code</span>
+    <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">headers</span> = <span class="ruby-identifier">header</span>
+    <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">content</span> = <span class="ruby-identifier">body</span>.<span class="ruby-identifier">to_s</span>
+    <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">send_response</span>
+  }
+
+  <span class="ruby-constant">EventMachine</span>.<span class="ruby-identifier">defer</span>(<span class="ruby-identifier">op</span>, <span class="ruby-identifier">sender</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- run-source -->
+            </div><!-- process_http_request-source -->
             
           </div>
 
           
 
           
-        </div><!-- run-method -->
+        </div><!-- process_http_request-method -->
 
       
       </div><!-- public-instance-method-details -->

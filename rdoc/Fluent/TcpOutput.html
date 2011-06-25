@@ -5,7 +5,7 @@
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 
-  <title>Class: Fluent::OutputChain</title>
+  <title>Class: Fluent::TcpOutput</title>
 
   <link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
 
@@ -34,8 +34,8 @@
         <div class="section-body">
           <ul>
           
-            <li><a href="../lib/fluent/output_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-              class="thickbox" title="lib/fluent/output.rb">lib/fluent/output.rb</a></li>
+            <li><a href="../lib/fluent/plugin/out_stream_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/out_stream.rb">lib/fluent/plugin/out_stream.rb</a></li>
           
           </ul>
         </div>
@@ -50,7 +50,7 @@
       <div id="parent-class-section" class="section">
         <h3 class="section-header">Parent</h3>
         
-        <p class="link">Object</p>
+        <p class="link"><a href="StreamOutput.html">Fluent::StreamOutput</a></p>
         
       </div>
       
@@ -67,7 +67,9 @@
           
           <li><a href="#method-c-new">::new</a></li>
           
-          <li><a href="#method-i-next">#next</a></li>
+          <li><a href="#method-i-configure">#configure</a></li>
+          
+          <li><a href="#method-i-connect">#connect</a></li>
           
         </ul>
       </div>
@@ -210,7 +212,7 @@
   </div>
 
   <div id="documentation">
-    <h1 class="class">Fluent::OutputChain</h1>
+    <h1 class="class">Fluent::TcpOutput</h1>
 
     <div id="description" class="description">
       
@@ -238,7 +240,7 @@
           
           <div class="method-heading">
             <span class="method-name">new</span><span
-              class="method-args">(array, tag, es, chain)</span>
+              class="method-args">()</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -251,13 +253,10 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 22</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">array</span>, <span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>, <span class="ruby-identifier">chain</span>)
-  <span class="ruby-ivar">@array</span> = <span class="ruby-identifier">array</span>
-  <span class="ruby-ivar">@tag</span> = <span class="ruby-identifier">tag</span>
-  <span class="ruby-ivar">@es</span> = <span class="ruby-identifier">es</span>
-  <span class="ruby-ivar">@offset</span> = <span class="ruby-value">0</span>
-  <span class="ruby-ivar">@chain</span> = <span class="ruby-identifier">chain</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_stream.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-ivar">@port</span> = <span class="ruby-constant">DEFAULT_LISTEN_PORT</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -275,12 +274,54 @@
         <h3 class="section-header">Public Instance Methods</h3>
 
       
-        <div id="next-method" class="method-detail ">
-          <a name="method-i-next"></a>
+        <div id="configure-method" class="method-detail ">
+          <a name="method-i-configure"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">next</span><span
+            <span class="method-name">configure</span><span
+              class="method-args">(conf)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="configure-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/out_stream.rb, line 57</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
+  <span class="ruby-keyword">super</span>
+
+  <span class="ruby-ivar">@port</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'port'</span>] <span class="ruby-operator">||</span> <span class="ruby-ivar">@port</span>
+  <span class="ruby-ivar">@port</span> = <span class="ruby-ivar">@port</span>.<span class="ruby-identifier">to_i</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">host</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'host'</span>]
+    <span class="ruby-ivar">@host</span> = <span class="ruby-identifier">host</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConfigError</span>, <span class="ruby-string">&quot;'host' parameter is required on tcp output&quot;</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- configure-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- configure-method -->
+
+      
+        <div id="connect-method" class="method-detail ">
+          <a name="method-i-connect"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">connect</span><span
               class="method-args">()</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
@@ -292,25 +333,20 @@
             
 
             
-            <div class="method-source-code" id="next-source">
+            <div class="method-source-code" id="connect-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 30</span>
-<span class="ruby-keyword">def</span> <span class="ruby-keyword">next</span>
-  <span class="ruby-ivar">@offset</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@array</span>.<span class="ruby-identifier">length</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-ivar">@offset</span>
-    <span class="ruby-keyword">return</span> <span class="ruby-ivar">@chain</span>.<span class="ruby-identifier">next</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-identifier">result</span> = <span class="ruby-ivar">@array</span>[<span class="ruby-ivar">@offset</span>].<span class="ruby-identifier">emit</span>(<span class="ruby-ivar">@tag</span>, <span class="ruby-ivar">@es</span>, <span class="ruby-keyword">self</span>)
-  <span class="ruby-identifier">result</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_stream.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">connect</span>
+  <span class="ruby-constant">TCPSocket</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@host</span>, <span class="ruby-ivar">@port</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- next-source -->
+            </div><!-- connect-source -->
             
           </div>
 
           
 
           
-        </div><!-- next-method -->
+        </div><!-- connect-method -->
 
       
       </div><!-- public-instance-method-details -->

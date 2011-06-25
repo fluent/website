@@ -1,1353 +1,1291 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 
-	<title>Class: Fluent::Log</title>
+  <title>Class: Fluent::Log</title>
 
-	<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
 
-	<script src="../js/jquery.js" type="text/javascript"
-		charset="utf-8"></script>
-	<script src="../js/thickbox-compressed.js" type="text/javascript"
-		charset="utf-8"></script>
-	<script src="../js/quicksearch.js" type="text/javascript"
-		charset="utf-8"></script>
-	<script src="../js/darkfish.js" type="text/javascript"
-		charset="utf-8"></script>
+  <script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/thickbox-compressed.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/darkfish.js" type="text/javascript" charset="utf-8"></script>
 
 </head>
-<body class="class">
+<body id="top" class="class">
 
-	<div id="metadata">
-		<div id="home-metadata">
-			<div id="home-section" class="section">
+  <div id="metadata">
+    <div id="home-metadata">
+      <div id="home-section" class="section">
         <h3 class="section-header">
           <a href="../index.html">Home</a>
           <a href="../index.html#classes">Classes</a>
           <a href="../index.html#methods">Methods</a>
         </h3>
-			</div>
-		</div>
+      </div>
+    </div>
 
-		<div id="file-metadata">
-			<div id="file-list-section" class="section">
-				<h3 class="section-header">In Files</h3>
-				<div class="section-body">
-					<ul>
-					
-						<li><a href="../lib/fluent/log_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/log.rb">lib/fluent/log.rb</a></li>
-					
-					</ul>
-				</div>
-			</div>
+    <div id="file-metadata">
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li><a href="../lib/fluent/log_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/log.rb">lib/fluent/log.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
 
-			
-		</div>
+      
+    </div>
 
-		<div id="class-metadata">
+    <div id="class-metadata">
+      
+      <!-- Parent Class -->
+      <div id="parent-class-section" class="section">
+        <h3 class="section-header">Parent</h3>
+        
+        <p class="link">Object</p>
+        
+      </div>
+      
 
-			<!-- Parent Class -->
-			
-			<div id="parent-class-section" class="section">
-				<h3 class="section-header">Parent</h3>
-				
-				<p class="link">Object</p>
-				
-			</div>
-			
+      
 
-			<!-- Namespace Contents -->
-			
+      
 
-			<!-- Method Quickref -->
-			
-			<div id="method-list-section" class="section">
-				<h3 class="section-header">Methods</h3>
-				<ul class="link-list">
-					
-					<li><a href="#method-c-new">::new</a></li>
-					
-					<li><a href="#method-i-DEBUG">#DEBUG</a></li>
-					
-					<li><a href="#method-i-ERROR">#ERROR</a></li>
-					
-					<li><a href="#method-i-FATAL">#FATAL</a></li>
-					
-					<li><a href="#method-i-INFO">#INFO</a></li>
-					
-					<li><a href="#method-i-TRACE">#TRACE</a></li>
-					
-					<li><a href="#method-i-WARN">#WARN</a></li>
-					
-					<li><a href="#method-i-caller_line">#caller_line</a></li>
-					
-					<li><a href="#method-i-debug">#debug</a></li>
-					
-					<li><a href="#method-i-debug_backtrace">#debug_backtrace</a></li>
-					
-					<li><a href="#method-i-enable_debug">#enable_debug</a></li>
-					
-					<li><a href="#method-i-error">#error</a></li>
-					
-					<li><a href="#method-i-error_backtrace">#error_backtrace</a></li>
-					
-					<li><a href="#method-i-fatal">#fatal</a></li>
-					
-					<li><a href="#method-i-fatal_backtrace">#fatal_backtrace</a></li>
-					
-					<li><a href="#method-i-info">#info</a></li>
-					
-					<li><a href="#method-i-info_backtrace">#info_backtrace</a></li>
-					
-					<li><a href="#method-i-on_debug">#on_debug</a></li>
-					
-					<li><a href="#method-i-on_error">#on_error</a></li>
-					
-					<li><a href="#method-i-on_fatal">#on_fatal</a></li>
-					
-					<li><a href="#method-i-on_info">#on_info</a></li>
-					
-					<li><a href="#method-i-on_trace">#on_trace</a></li>
-					
-					<li><a href="#method-i-on_warn">#on_warn</a></li>
-					
-					<li><a href="#method-i-puts">#puts</a></li>
-					
-					<li><a href="#method-i-trace">#trace</a></li>
-					
-					<li><a href="#method-i-warn">#warn</a></li>
-					
-					<li><a href="#method-i-warn_backtrace">#warn_backtrace</a></li>
-					
-				</ul>
-			</div>
-			
+      
+      <!-- Method Quickref -->
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+          <li><a href="#method-c-new">::new</a></li>
+          
+          <li><a href="#method-i-DEBUG">#DEBUG</a></li>
+          
+          <li><a href="#method-i-ERROR">#ERROR</a></li>
+          
+          <li><a href="#method-i-FATAL">#FATAL</a></li>
+          
+          <li><a href="#method-i-INFO">#INFO</a></li>
+          
+          <li><a href="#method-i-TRACE">#TRACE</a></li>
+          
+          <li><a href="#method-i-WARN">#WARN</a></li>
+          
+          <li><a href="#method-i-debug">#debug</a></li>
+          
+          <li><a href="#method-i-debug_backtrace">#debug_backtrace</a></li>
+          
+          <li><a href="#method-i-enable_debug">#enable_debug</a></li>
+          
+          <li><a href="#method-i-error">#error</a></li>
+          
+          <li><a href="#method-i-error_backtrace">#error_backtrace</a></li>
+          
+          <li><a href="#method-i-fatal">#fatal</a></li>
+          
+          <li><a href="#method-i-fatal_backtrace">#fatal_backtrace</a></li>
+          
+          <li><a href="#method-i-info">#info</a></li>
+          
+          <li><a href="#method-i-info_backtrace">#info_backtrace</a></li>
+          
+          <li><a href="#method-i-on_debug">#on_debug</a></li>
+          
+          <li><a href="#method-i-on_error">#on_error</a></li>
+          
+          <li><a href="#method-i-on_fatal">#on_fatal</a></li>
+          
+          <li><a href="#method-i-on_info">#on_info</a></li>
+          
+          <li><a href="#method-i-on_trace">#on_trace</a></li>
+          
+          <li><a href="#method-i-on_warn">#on_warn</a></li>
+          
+          <li><a href="#method-i-puts">#puts</a></li>
+          
+          <li><a href="#method-i-trace">#trace</a></li>
+          
+          <li><a href="#method-i-warn">#warn</a></li>
+          
+          <li><a href="#method-i-warn_backtrace">#warn_backtrace</a></li>
+          
+        </ul>
+      </div>
+      
 
-			<!-- Included Modules -->
-			
-		</div>
+      
+    </div>
 
-		<div id="project-metadata">
-			
-			
+    <div id="project-metadata">
+      
+      
 
-			<div id="classindex-section" class="section project-section">
-				<h3 class="section-header">Class Index
-					<span class="search-toggle"><img src="../images/find.png"
-						height="16" width="16" alt="[+]"
-						title="show/hide quicksearch" /></span></h3>
-				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
-				<fieldset>
-					<legend>Quicksearch</legend>
-					<input type="text" name="quicksearch" value=""
-						class="quicksearch-field" />
-				</fieldset>
-				</form>
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class/Module Index
+          <span class="search-toggle"><img src="../images/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
 
-				<ul class="link-list">
-				
-					<li><a href="../Fluent.html">Fluent</a></li>
-				
-					<li><a href="../Fluent/ArrayEventStream.html">Fluent::ArrayEventStream</a></li>
-				
-					<li><a href="../Fluent/BasicBuffer.html">Fluent::BasicBuffer</a></li>
-				
-					<li><a href="../Fluent/BucketOutput.html">Fluent::BucketOutput</a></li>
-				
-					<li><a href="../Fluent/Buffer.html">Fluent::Buffer</a></li>
-				
-					<li><a href="../Fluent/BufferChunk.html">Fluent::BufferChunk</a></li>
-				
-					<li><a href="../Fluent/BufferError.html">Fluent::BufferError</a></li>
-				
-					<li><a href="../Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
-				
-					<li><a href="../Fluent/BufferedOutput/WriterThread.html">Fluent::BufferedOutput::WriterThread</a></li>
-				
-					<li><a href="../Fluent/Config.html">Fluent::Config</a></li>
-				
-					<li><a href="../Fluent/Config/Element.html">Fluent::Config::Element</a></li>
-				
-					<li><a href="../Fluent/ConfigError.html">Fluent::ConfigError</a></li>
-				
-					<li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
-				
-					<li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
-				
-					<li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
-				
-					<li><a href="../Fluent/Event.html">Fluent::Event</a></li>
-				
-					<li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
-				
-					<li><a href="../Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
-				
-					<li><a href="../Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
-				
-					<li><a href="../Fluent/FileOutput.html">Fluent::FileOutput</a></li>
-				
-					<li><a href="../Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
-				
-					<li><a href="../Fluent/HttpInput.html">Fluent::HttpInput</a></li>
-				
-					<li><a href="../Fluent/Input.html">Fluent::Input</a></li>
-				
-					<li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
-				
-					<li><a href="../Fluent/Log.html">Fluent::Log</a></li>
-				
-					<li><a href="../Fluent/Match.html">Fluent::Match</a></li>
-				
-					<li><a href="../Fluent/MatchPattern.html">Fluent::MatchPattern</a></li>
-				
-					<li><a href="../Fluent/MemoryBuffer.html">Fluent::MemoryBuffer</a></li>
-				
-					<li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
-				
-					<li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
-				
-					<li><a href="../Fluent/Output.html">Fluent::Output</a></li>
-				
-					<li><a href="../Fluent/OutputChain.html">Fluent::OutputChain</a></li>
-				
-					<li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
-				
-					<li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
-				
-					<li><a href="../Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
-				
-					<li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
-				
-					<li><a href="../Fluent/StreamInput.html">Fluent::StreamInput</a></li>
-				
-					<li><a href="../Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
-				
-					<li><a href="../Fluent/TailInput.html">Fluent::TailInput</a></li>
-				
-					<li><a href="../Fluent/TailInput/Tailer.html">Fluent::TailInput::Tailer</a></li>
-				
-					<li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
-				
-					<li><a href="../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
-				
-					<li><a href="../Fluent/ZFileBuffer.html">Fluent::ZFileBuffer</a></li>
-				
-					<li><a href="../Fluent/ZFileBufferChunk.html">Fluent::ZFileBufferChunk</a></li>
-				
-					<li><a href="../Writer.html">Writer</a></li>
-				
-					<li><a href="../Writer/TimerThread.html">Writer::TimerThread</a></li>
-				
-				</ul>
-				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
-			</div>
+        <ul class="link-list">
+        
+          <li><a href="../Fluent.html">Fluent</a></li>
+        
+          <li><a href="../Fluent/ArrayEventStream.html">Fluent::ArrayEventStream</a></li>
+        
+          <li><a href="../Fluent/BasicBuffer.html">Fluent::BasicBuffer</a></li>
+        
+          <li><a href="../Fluent/BucketOutput.html">Fluent::BucketOutput</a></li>
+        
+          <li><a href="../Fluent/Buffer.html">Fluent::Buffer</a></li>
+        
+          <li><a href="../Fluent/BufferChunk.html">Fluent::BufferChunk</a></li>
+        
+          <li><a href="../Fluent/BufferError.html">Fluent::BufferError</a></li>
+        
+          <li><a href="../Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
+        
+          <li><a href="../Fluent/BufferedOutput/WriterThread.html">Fluent::BufferedOutput::WriterThread</a></li>
+        
+          <li><a href="../Fluent/Config.html">Fluent::Config</a></li>
+        
+          <li><a href="../Fluent/Config/Element.html">Fluent::Config::Element</a></li>
+        
+          <li><a href="../Fluent/ConfigError.html">Fluent::ConfigError</a></li>
+        
+          <li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
+        
+          <li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
+        
+          <li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
+        
+          <li><a href="../Fluent/Event.html">Fluent::Event</a></li>
+        
+          <li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
+        
+          <li><a href="../Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
+        
+          <li><a href="../Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
+        
+          <li><a href="../Fluent/FileOutput.html">Fluent::FileOutput</a></li>
+        
+          <li><a href="../Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
+        
+          <li><a href="../Fluent/HttpInput.html">Fluent::HttpInput</a></li>
+        
+          <li><a href="../Fluent/HttpInput/Handler.html">Fluent::HttpInput::Handler</a></li>
+        
+          <li><a href="../Fluent/Input.html">Fluent::Input</a></li>
+        
+          <li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
+        
+          <li><a href="../Fluent/Log.html">Fluent::Log</a></li>
+        
+          <li><a href="../Fluent/Match.html">Fluent::Match</a></li>
+        
+          <li><a href="../Fluent/MatchPattern.html">Fluent::MatchPattern</a></li>
+        
+          <li><a href="../Fluent/MemoryBuffer.html">Fluent::MemoryBuffer</a></li>
+        
+          <li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
+        
+          <li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
+        
+          <li><a href="../Fluent/Output.html">Fluent::Output</a></li>
+        
+          <li><a href="../Fluent/OutputChain.html">Fluent::OutputChain</a></li>
+        
+          <li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
+        
+          <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
+        
+          <li><a href="../Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
+        
+          <li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
+        
+          <li><a href="../Fluent/StreamInput.html">Fluent::StreamInput</a></li>
+        
+          <li><a href="../Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
+        
+          <li><a href="../Fluent/StreamOutput.html">Fluent::StreamOutput</a></li>
+        
+          <li><a href="../Fluent/SyslogInput.html">Fluent::SyslogInput</a></li>
+        
+          <li><a href="../Fluent/SyslogInput/UdpHandler.html">Fluent::SyslogInput::UdpHandler</a></li>
+        
+          <li><a href="../Fluent/TailInput.html">Fluent::TailInput</a></li>
+        
+          <li><a href="../Fluent/TailInput/Tailer.html">Fluent::TailInput::Tailer</a></li>
+        
+          <li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
+        
+          <li><a href="../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
+        
+          <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
+        
+          <li><a href="../Fluent/UnixOutput.html">Fluent::UnixOutput</a></li>
+        
+          <li><a href="../Fluent/ZFileBuffer.html">Fluent::ZFileBuffer</a></li>
+        
+          <li><a href="../Fluent/ZFileBufferChunk.html">Fluent::ZFileBufferChunk</a></li>
+        
+          <li><a href="../Writer.html">Writer</a></li>
+        
+          <li><a href="../Writer/TimerThread.html">Writer::TimerThread</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
 
-			
-		</div>
-	</div>
+      
+    </div>
+  </div>
 
-	<div id="documentation">
-		<h1 class="class">Fluent::Log</h1>
+  <div id="documentation">
+    <h1 class="class">Fluent::Log</h1>
 
-		<div id="description">
-			
-		</div>
+    <div id="description" class="description">
+      
+    </div><!-- description -->
 
-		<!-- Constants -->
-		
-		<div id="constants-list" class="section">
-			<h3 class="section-header">Constants</h3>
-			<dl>
-			
-				<dt><a name="LEVEL_TRACE">LEVEL_TRACE</a></dt>
-				
-				<dd class="description"></dd>
-				
-			
-				<dt><a name="LEVEL_DEBUG">LEVEL_DEBUG</a></dt>
-				
-				<dd class="description"></dd>
-				
-			
-				<dt><a name="LEVEL_INFO">LEVEL_INFO</a></dt>
-				
-				<dd class="description"></dd>
-				
-			
-				<dt><a name="LEVEL_WARN">LEVEL_WARN</a></dt>
-				
-				<dd class="description"></dd>
-				
-			
-				<dt><a name="LEVEL_ERROR">LEVEL_ERROR</a></dt>
-				
-				<dd class="description"></dd>
-				
-			
-				<dt><a name="LEVEL_FATAL">LEVEL_FATAL</a></dt>
-				
-				<dd class="description"></dd>
-				
-			
-			</dl>
-		</div>
-		
+    
+    <div id="5Buntitled-5D" class="documentation-section">
+      
 
-		<!-- Attributes -->
-		
-		<div id="attribute-method-details" class="method-section section">
-			<h3 class="section-header">Attributes</h3>
+      
 
-			
-			<div id="out-attribute-method" class="method-detail">
-				<a name="out"></a>
-				
-				<a name="out="></a>
-				
-				<div class="method-heading attribute-method-heading">
-					<span class="method-name">out</span><span
-						class="attribute-access-type">[RW]</span>
-				</div>
+      
+      <!-- Constants -->
+      <div id="constants-list" class="section">
+        <h3 class="section-header">Constants</h3>
+        <dl>
+        
+          <dt><a name="LEVEL_DEBUG">LEVEL_DEBUG</a></dt>
+          
+          <dd class="description"></dd>
+          
+        
+          <dt><a name="LEVEL_ERROR">LEVEL_ERROR</a></dt>
+          
+          <dd class="description"></dd>
+          
+        
+          <dt><a name="LEVEL_FATAL">LEVEL_FATAL</a></dt>
+          
+          <dd class="description"></dd>
+          
+        
+          <dt><a name="LEVEL_INFO">LEVEL_INFO</a></dt>
+          
+          <dd class="description"></dd>
+          
+        
+          <dt><a name="LEVEL_TRACE">LEVEL_TRACE</a></dt>
+          
+          <dd class="description"></dd>
+          
+        
+          <dt><a name="LEVEL_WARN">LEVEL_WARN</a></dt>
+          
+          <dd class="description"></dd>
+          
+        
+        </dl>
+      </div>
+      
 
-				<div class="method-description">
-				
-				
-				
-				</div>
-			</div>
-			
-			<div id="level-attribute-method" class="method-detail">
-				<a name="level"></a>
-				
-				<a name="level="></a>
-				
-				<div class="method-heading attribute-method-heading">
-					<span class="method-name">level</span><span
-						class="attribute-access-type">[RW]</span>
-				</div>
+      
+      <!-- Attributes -->
+      <div id="attribute-method-details" class="method-section section">
+        <h3 class="section-header">Attributes</h3>
 
-				<div class="method-description">
-				
-				
-				
-				</div>
-			</div>
-			
-		</div>
-		
+        
+        <div id="level-attribute-method" class="method-detail">
+          <a name="level"></a>
+          
+          <a name="level="></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">level</span><span
+              class="attribute-access-type">[RW]</span>
+          </div>
 
-		<!-- Methods -->
-		
-		<div id="public-class-method-details" class="method-section section">
-			<h3 class="section-header">Public Class Methods</h3>
+          <div class="method-description">
+          
+          
+          
+          </div>
+        </div>
+        
+        <div id="out-attribute-method" class="method-detail">
+          <a name="out"></a>
+          
+          <a name="out="></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">out</span><span
+              class="attribute-access-type">[RW]</span>
+          </div>
 
-		
-			<div id="new-method" class="method-detail ">
-				<a name="method-c-new"></a>
+          <div class="method-description">
+          
+          
+          
+          </div>
+        </div>
+        
+      </div><!-- attribute-method-details -->
+      
 
-				<div class="method-heading">
-				
-					<span class="method-name">new</span><span
-						class="method-args">(level = LEVEL_TRACE, out = $stderr)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+      <!-- Methods -->
+      
+      <div id="public-class-method-details" class="method-section section">
+        <h3 class="section-header">Public Class Methods</h3>
 
-				<div class="method-description">
-					
-					
-					
+      
+        <div id="new-method" class="method-detail ">
+          <a name="method-c-new"></a>
 
-					
-					<div class="method-source-code"
-						id="new-source">
+          
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">(level = LEVEL_TRACE, out = $stderr)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="new-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 28</span>
-28:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">level</span> = <span class="ruby-constant">LEVEL_TRACE</span>, <span class="ruby-identifier">out</span> = <span class="ruby-identifier">$stderr</span>)
-29:                 <span class="ruby-ivar">@level</span> = <span class="ruby-identifier">level</span>
-30:                 <span class="ruby-ivar">@out</span> = <span class="ruby-identifier">out</span>
-31:                 <span class="ruby-ivar">@debug_mode</span> = <span class="ruby-keyword kw">false</span>
-32:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 28</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">level</span> = <span class="ruby-constant">LEVEL_TRACE</span>, <span class="ruby-identifier">out</span> = <span class="ruby-identifier">$stderr</span>)
+        <span class="ruby-ivar">@level</span> = <span class="ruby-identifier">level</span>
+        <span class="ruby-ivar">@out</span> = <span class="ruby-identifier">out</span>
+        <span class="ruby-ivar">@debug_mode</span> = <span class="ruby-keyword">false</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- new-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- new-method -->
 
-		
-		</div>
-	
-		<div id="public-instance-method-details" class="method-section section">
-			<h3 class="section-header">Public Instance Methods</h3>
+      
+      </div><!-- public-class-method-details -->
+    
+      <div id="public-instance-method-details" class="method-section section">
+        <h3 class="section-header">Public Instance Methods</h3>
 
-		
-			<div id="--method" class="method-detail method-alias">
-				<a name="method-i-DEBUG"></a>
+      
+        <div id="DEBUG-method" class="method-detail method-alias">
+          <a name="method-i-DEBUG"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">DEBUG</span><span
-						class="method-args">(*args, &block)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">DEBUG</span><span
+              class="method-args">(*args, &block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-				</div>
+            
+          </div>
 
-				
+          
 
-				
-				<div class="aliases">
-          Alias for: <a href="Log.html#method-i-debug">debug</a>
-				</div>
-				
-			</div>
+          
+          <div class="aliases">
+            Alias for: <a href="Log.html#method-i-debug">debug</a>
+          </div>
+          
+        </div><!-- DEBUG-method -->
 
-		
-			<div id="--method" class="method-detail method-alias">
-				<a name="method-i-ERROR"></a>
+      
+        <div id="ERROR-method" class="method-detail method-alias">
+          <a name="method-i-ERROR"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">ERROR</span><span
-						class="method-args">(*args, &block)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">ERROR</span><span
+              class="method-args">(*args, &block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-				</div>
+            
+          </div>
 
-				
+          
 
-				
-				<div class="aliases">
-          Alias for: <a href="Log.html#method-i-error">error</a>
-				</div>
-				
-			</div>
+          
+          <div class="aliases">
+            Alias for: <a href="Log.html#method-i-error">error</a>
+          </div>
+          
+        </div><!-- ERROR-method -->
 
-		
-			<div id="--method" class="method-detail method-alias">
-				<a name="method-i-FATAL"></a>
+      
+        <div id="FATAL-method" class="method-detail method-alias">
+          <a name="method-i-FATAL"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">FATAL</span><span
-						class="method-args">(*args, &block)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">FATAL</span><span
+              class="method-args">(*args, &block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-				</div>
+            
+          </div>
 
-				
+          
 
-				
-				<div class="aliases">
-          Alias for: <a href="Log.html#method-i-fatal">fatal</a>
-				</div>
-				
-			</div>
+          
+          <div class="aliases">
+            Alias for: <a href="Log.html#method-i-fatal">fatal</a>
+          </div>
+          
+        </div><!-- FATAL-method -->
 
-		
-			<div id="--method" class="method-detail method-alias">
-				<a name="method-i-INFO"></a>
+      
+        <div id="INFO-method" class="method-detail method-alias">
+          <a name="method-i-INFO"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">INFO</span><span
-						class="method-args">(*args, &block)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">INFO</span><span
+              class="method-args">(*args, &block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-				</div>
+            
+          </div>
 
-				
+          
 
-				
-				<div class="aliases">
-          Alias for: <a href="Log.html#method-i-info">info</a>
-				</div>
-				
-			</div>
+          
+          <div class="aliases">
+            Alias for: <a href="Log.html#method-i-info">info</a>
+          </div>
+          
+        </div><!-- INFO-method -->
 
-		
-			<div id="--method" class="method-detail method-alias">
-				<a name="method-i-TRACE"></a>
+      
+        <div id="TRACE-method" class="method-detail method-alias">
+          <a name="method-i-TRACE"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">TRACE</span><span
-						class="method-args">(*args, &block)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">TRACE</span><span
+              class="method-args">(*args, &block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-				</div>
+            
+          </div>
 
-				
+          
 
-				
-				<div class="aliases">
-          Alias for: <a href="Log.html#method-i-trace">trace</a>
-				</div>
-				
-			</div>
+          
+          <div class="aliases">
+            Alias for: <a href="Log.html#method-i-trace">trace</a>
+          </div>
+          
+        </div><!-- TRACE-method -->
 
-		
-			<div id="--method" class="method-detail method-alias">
-				<a name="method-i-WARN"></a>
+      
+        <div id="WARN-method" class="method-detail method-alias">
+          <a name="method-i-WARN"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">WARN</span><span
-						class="method-args">(*args, &block)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">WARN</span><span
+              class="method-args">(*args, &block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-				</div>
+            
+          </div>
 
-				
+          
 
-				
-				<div class="aliases">
-          Alias for: <a href="Log.html#method-i-warn">warn</a>
-				</div>
-				
-			</div>
+          
+          <div class="aliases">
+            Alias for: <a href="Log.html#method-i-warn">warn</a>
+          </div>
+          
+        </div><!-- WARN-method -->
 
-		
-			<div id="debug-method" class="method-detail ">
-				<a name="method-i-debug"></a>
+      
+        <div id="debug-method" class="method-detail ">
+          <a name="method-i-debug"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">debug</span><span
-						class="method-args">(*args, &block)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">debug</span><span
+              class="method-args">(*args, &block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="debug-source">
+            
+            <div class="method-source-code" id="debug-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 59</span>
-59:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
-60:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_DEBUG</span>
-61:                 <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>
-62:                 <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">join</span>
-63:                 <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{caller_line(1,true)}#{msg}&quot;</span>
-64:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 59</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">debug</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_DEBUG</span>
+        <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
+        <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">join</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{caller_line(1,true)}#{msg}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- debug-source -->
+            
+          </div>
 
-				
-				<div class="aliases">
-					Also aliased as: <a href="Log.html#method-i-DEBUG">DEBUG</a>
-				</div>
-				
+          
+          <div class="aliases">
+            Also aliased as: <a href="Log.html#method-i-DEBUG">DEBUG</a>
+          </div>
+          
 
-				
-			</div>
+          
+        </div><!-- debug-method -->
 
-		
-			<div id="debug-backtrace-method" class="method-detail ">
-				<a name="method-i-debug_backtrace"></a>
+      
+        <div id="debug_backtrace-method" class="method-detail ">
+          <a name="method-i-debug_backtrace"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">debug_backtrace</span><span
-						class="method-args">(backtrace=$!.backtrace)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">debug_backtrace</span><span
+              class="method-args">(backtrace=$!.backtrace)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="debug-backtrace-source">
+            
+            <div class="method-source-code" id="debug_backtrace-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 67</span>
-67:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">debug_backtrace</span>(<span class="ruby-identifier">backtrace</span>=<span class="ruby-identifier">$!</span>.<span class="ruby-identifier">backtrace</span>)
-68:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_DEBUG</span>
-69:                 <span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
-70:                         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  #{caller_line(4,true)}#{msg}&quot;</span>
-71:                 }
-72:                 <span class="ruby-keyword kw">nil</span>
-73:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">debug_backtrace</span>(<span class="ruby-identifier">backtrace</span>=<span class="ruby-identifier">$!</span>.<span class="ruby-identifier">backtrace</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_DEBUG</span>
+        <span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  #{caller_line(4,true)}#{msg}&quot;</span>
+        }
+        <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- debug_backtrace-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- debug_backtrace-method -->
 
-		
-			<div id="enable-debug-method" class="method-detail ">
-				<a name="method-i-enable_debug"></a>
+      
+        <div id="enable_debug-method" class="method-detail ">
+          <a name="method-i-enable_debug"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">enable_debug</span><span
-						class="method-args">(b=true)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">enable_debug</span><span
+              class="method-args">(b=true)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="enable-debug-source">
+            
+            <div class="method-source-code" id="enable_debug-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 37</span>
-37:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">enable_debug</span>(<span class="ruby-identifier">b</span>=<span class="ruby-keyword kw">true</span>)
-38:                 <span class="ruby-ivar">@debug_mode</span> = <span class="ruby-identifier">b</span>
-39:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 37</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">enable_debug</span>(<span class="ruby-identifier">b</span>=<span class="ruby-keyword">true</span>)
+        <span class="ruby-ivar">@debug_mode</span> = <span class="ruby-identifier">b</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- enable_debug-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- enable_debug-method -->
 
-		
-			<div id="error-method" class="method-detail ">
-				<a name="method-i-error"></a>
+      
+        <div id="error-method" class="method-detail ">
+          <a name="method-i-error"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">error</span><span
-						class="method-args">(*args, &block)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">error</span><span
+              class="method-args">(*args, &block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="error-source">
+            
+            <div class="method-source-code" id="error-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 122</span>
-122:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">error</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
-123:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_ERROR</span>
-124:                 <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>
-125:                 <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">join</span>
-126:                 <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{caller_line(1)}#{msg}&quot;</span>
-127:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 122</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">error</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_ERROR</span>
+        <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
+        <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">join</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{caller_line(1)}#{msg}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- error-source -->
+            
+          </div>
 
-				
-				<div class="aliases">
-					Also aliased as: <a href="Log.html#method-i-ERROR">ERROR</a>
-				</div>
-				
+          
+          <div class="aliases">
+            Also aliased as: <a href="Log.html#method-i-ERROR">ERROR</a>
+          </div>
+          
 
-				
-			</div>
+          
+        </div><!-- error-method -->
 
-		
-			<div id="error-backtrace-method" class="method-detail ">
-				<a name="method-i-error_backtrace"></a>
+      
+        <div id="error_backtrace-method" class="method-detail ">
+          <a name="method-i-error_backtrace"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">error_backtrace</span><span
-						class="method-args">(backtrace=$!.backtrace)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">error_backtrace</span><span
+              class="method-args">(backtrace=$!.backtrace)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="error-backtrace-source">
+            
+            <div class="method-source-code" id="error_backtrace-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 130</span>
-130:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">error_backtrace</span>(<span class="ruby-identifier">backtrace</span>=<span class="ruby-identifier">$!</span>.<span class="ruby-identifier">backtrace</span>)
-131:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_ERROR</span>
-132:                 <span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
-133:                         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  #{caller_line(4)}#{msg}&quot;</span>
-134:                 }
-135:                 <span class="ruby-keyword kw">nil</span>
-136:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 130</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">error_backtrace</span>(<span class="ruby-identifier">backtrace</span>=<span class="ruby-identifier">$!</span>.<span class="ruby-identifier">backtrace</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_ERROR</span>
+        <span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  #{caller_line(4)}#{msg}&quot;</span>
+        }
+        <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- error_backtrace-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- error_backtrace-method -->
 
-		
-			<div id="fatal-method" class="method-detail ">
-				<a name="method-i-fatal"></a>
+      
+        <div id="fatal-method" class="method-detail ">
+          <a name="method-i-fatal"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">fatal</span><span
-						class="method-args">(*args, &block)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">fatal</span><span
+              class="method-args">(*args, &block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="fatal-source">
+            
+            <div class="method-source-code" id="fatal-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 143</span>
-143:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fatal</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
-144:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_FATAL</span>
-145:                 <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>
-146:                 <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">join</span>
-147:                 <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{caller_line(1)}#{msg}&quot;</span>
-148:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 143</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">fatal</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_FATAL</span>
+        <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
+        <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">join</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{caller_line(1)}#{msg}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- fatal-source -->
+            
+          </div>
 
-				
-				<div class="aliases">
-					Also aliased as: <a href="Log.html#method-i-FATAL">FATAL</a>
-				</div>
-				
+          
+          <div class="aliases">
+            Also aliased as: <a href="Log.html#method-i-FATAL">FATAL</a>
+          </div>
+          
 
-				
-			</div>
+          
+        </div><!-- fatal-method -->
 
-		
-			<div id="fatal-backtrace-method" class="method-detail ">
-				<a name="method-i-fatal_backtrace"></a>
+      
+        <div id="fatal_backtrace-method" class="method-detail ">
+          <a name="method-i-fatal_backtrace"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">fatal_backtrace</span><span
-						class="method-args">(backtrace=$!.backtrace)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">fatal_backtrace</span><span
+              class="method-args">(backtrace=$!.backtrace)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="fatal-backtrace-source">
+            
+            <div class="method-source-code" id="fatal_backtrace-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 151</span>
-151:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">fatal_backtrace</span>(<span class="ruby-identifier">backtrace</span>=<span class="ruby-identifier">$!</span>.<span class="ruby-identifier">backtrace</span>)
-152:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_FATAL</span>
-153:                 <span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
-154:                         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  #{caller_line(4)}#{msg}&quot;</span>
-155:                 }
-156:                 <span class="ruby-keyword kw">nil</span>
-157:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 151</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">fatal_backtrace</span>(<span class="ruby-identifier">backtrace</span>=<span class="ruby-identifier">$!</span>.<span class="ruby-identifier">backtrace</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_FATAL</span>
+        <span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  #{caller_line(4)}#{msg}&quot;</span>
+        }
+        <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- fatal_backtrace-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- fatal_backtrace-method -->
 
-		
-			<div id="info-method" class="method-detail ">
-				<a name="method-i-info"></a>
+      
+        <div id="info-method" class="method-detail ">
+          <a name="method-i-info"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">info</span><span
-						class="method-args">(*args, &block)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">info</span><span
+              class="method-args">(*args, &block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="info-source">
+            
+            <div class="method-source-code" id="info-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 80</span>
-80:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
-81:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_INFO</span>
-82:                 <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>
-83:                 <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">join</span>
-84:                 <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{caller_line(1,true)}#{msg}&quot;</span>
-85:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 80</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">info</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_INFO</span>
+        <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
+        <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">join</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{caller_line(1,true)}#{msg}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- info-source -->
+            
+          </div>
 
-				
-				<div class="aliases">
-					Also aliased as: <a href="Log.html#method-i-INFO">INFO</a>
-				</div>
-				
+          
+          <div class="aliases">
+            Also aliased as: <a href="Log.html#method-i-INFO">INFO</a>
+          </div>
+          
 
-				
-			</div>
+          
+        </div><!-- info-method -->
 
-		
-			<div id="info-backtrace-method" class="method-detail ">
-				<a name="method-i-info_backtrace"></a>
+      
+        <div id="info_backtrace-method" class="method-detail ">
+          <a name="method-i-info_backtrace"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">info_backtrace</span><span
-						class="method-args">(backtrace=$!.backtrace)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">info_backtrace</span><span
+              class="method-args">(backtrace=$!.backtrace)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="info-backtrace-source">
+            
+            <div class="method-source-code" id="info_backtrace-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 88</span>
-88:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">info_backtrace</span>(<span class="ruby-identifier">backtrace</span>=<span class="ruby-identifier">$!</span>.<span class="ruby-identifier">backtrace</span>)
-89:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_INFO</span>
-90:                 <span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
-91:                         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  #{caller_line(4,true)}#{msg}&quot;</span>
-92:                 }
-93:                 <span class="ruby-keyword kw">nil</span>
-94:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 88</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">info_backtrace</span>(<span class="ruby-identifier">backtrace</span>=<span class="ruby-identifier">$!</span>.<span class="ruby-identifier">backtrace</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_INFO</span>
+        <span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  #{caller_line(4,true)}#{msg}&quot;</span>
+        }
+        <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- info_backtrace-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- info_backtrace-method -->
 
-		
-			<div id="on-debug-method" class="method-detail ">
-				<a name="method-i-on_debug"></a>
+      
+        <div id="on_debug-method" class="method-detail ">
+          <a name="method-i-on_debug"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">on_debug</span><span
-						class="method-args">(&block)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">on_debug</span><span
+              class="method-args">(&block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="on-debug-source">
+            
+            <div class="method-source-code" id="on_debug-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 54</span>
-54:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">on_debug</span>(&amp;<span class="ruby-identifier">block</span>)
-55:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_DEBUG</span>
-56:                 <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>
-57:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 54</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_debug</span>(&amp;<span class="ruby-identifier">block</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_DEBUG</span>
+        <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- on_debug-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- on_debug-method -->
 
-		
-			<div id="on-error-method" class="method-detail ">
-				<a name="method-i-on_error"></a>
+      
+        <div id="on_error-method" class="method-detail ">
+          <a name="method-i-on_error"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">on_error</span><span
-						class="method-args">(&block)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">on_error</span><span
+              class="method-args">(&block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="on-error-source">
+            
+            <div class="method-source-code" id="on_error-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 117</span>
-117:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">on_error</span>(&amp;<span class="ruby-identifier">block</span>)
-118:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_ERROR</span>
-119:                 <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>
-120:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 117</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_error</span>(&amp;<span class="ruby-identifier">block</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_ERROR</span>
+        <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- on_error-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- on_error-method -->
 
-		
-			<div id="on-fatal-method" class="method-detail ">
-				<a name="method-i-on_fatal"></a>
+      
+        <div id="on_fatal-method" class="method-detail ">
+          <a name="method-i-on_fatal"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">on_fatal</span><span
-						class="method-args">(&block)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">on_fatal</span><span
+              class="method-args">(&block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="on-fatal-source">
+            
+            <div class="method-source-code" id="on_fatal-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 138</span>
-138:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">on_fatal</span>(&amp;<span class="ruby-identifier">block</span>)
-139:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_FATAL</span>
-140:                 <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>
-141:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 138</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_fatal</span>(&amp;<span class="ruby-identifier">block</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_FATAL</span>
+        <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- on_fatal-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- on_fatal-method -->
 
-		
-			<div id="on-info-method" class="method-detail ">
-				<a name="method-i-on_info"></a>
+      
+        <div id="on_info-method" class="method-detail ">
+          <a name="method-i-on_info"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">on_info</span><span
-						class="method-args">(&block)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">on_info</span><span
+              class="method-args">(&block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="on-info-source">
+            
+            <div class="method-source-code" id="on_info-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 75</span>
-75:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">on_info</span>(&amp;<span class="ruby-identifier">block</span>)
-76:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_INFO</span>
-77:                 <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>
-78:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 75</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_info</span>(&amp;<span class="ruby-identifier">block</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_INFO</span>
+        <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- on_info-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- on_info-method -->
 
-		
-			<div id="on-trace-method" class="method-detail ">
-				<a name="method-i-on_trace"></a>
+      
+        <div id="on_trace-method" class="method-detail ">
+          <a name="method-i-on_trace"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">on_trace</span><span
-						class="method-args">(&block)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">on_trace</span><span
+              class="method-args">(&block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="on-trace-source">
+            
+            <div class="method-source-code" id="on_trace-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 41</span>
-41:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">on_trace</span>(&amp;<span class="ruby-identifier">block</span>)
-42:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_TRACE</span>
-43:                 <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>
-44:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 41</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_trace</span>(&amp;<span class="ruby-identifier">block</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_TRACE</span>
+        <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- on_trace-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- on_trace-method -->
 
-		
-			<div id="on-warn-method" class="method-detail ">
-				<a name="method-i-on_warn"></a>
+      
+        <div id="on_warn-method" class="method-detail ">
+          <a name="method-i-on_warn"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">on_warn</span><span
-						class="method-args">(&block)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">on_warn</span><span
+              class="method-args">(&block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="on-warn-source">
+            
+            <div class="method-source-code" id="on_warn-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 96</span>
-96:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">on_warn</span>(&amp;<span class="ruby-identifier">block</span>)
-97:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_WARN</span>
-98:                 <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>
-99:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 96</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_warn</span>(&amp;<span class="ruby-identifier">block</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_WARN</span>
+        <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- on_warn-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- on_warn-method -->
 
-		
-			<div id="puts-method" class="method-detail ">
-				<a name="method-i-puts"></a>
+      
+        <div id="puts-method" class="method-detail ">
+          <a name="method-i-puts"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">puts</span><span
-						class="method-args">(msg)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">puts</span><span
+              class="method-args">(msg)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="puts-source">
+            
+            <div class="method-source-code" id="puts-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 159</span>
-159:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">puts</span>(<span class="ruby-identifier">msg</span>)
-160:                 <span class="ruby-ivar">@out</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-identifier">msg</span>)
-161:                 <span class="ruby-ivar">@out</span>.<span class="ruby-identifier">flush</span>
-162:                 <span class="ruby-identifier">msg</span>
-163:         <span class="ruby-keyword kw">rescue</span>
-164:                 <span class="ruby-comment cmt"># FIXME</span>
-165:                 <span class="ruby-keyword kw">nil</span>
-166:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 159</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">puts</span>(<span class="ruby-identifier">msg</span>)
+        <span class="ruby-ivar">@out</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-identifier">msg</span>)
+        <span class="ruby-ivar">@out</span>.<span class="ruby-identifier">flush</span>
+        <span class="ruby-identifier">msg</span>
+<span class="ruby-keyword">rescue</span>
+        <span class="ruby-comment"># FIXME</span>
+        <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- puts-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- puts-method -->
 
-		
-			<div id="trace-method" class="method-detail ">
-				<a name="method-i-trace"></a>
+      
+        <div id="trace-method" class="method-detail ">
+          <a name="method-i-trace"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">trace</span><span
-						class="method-args">(*args, &block)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">trace</span><span
+              class="method-args">(*args, &block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="trace-source">
+            
+            <div class="method-source-code" id="trace-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 46</span>
-46:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">trace</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
-47:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_TRACE</span>
-48:                 <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>
-49:                 <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">join</span>
-50:                 <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{caller_line(1,true)}#{msg}&quot;</span>
-51:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">trace</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_TRACE</span>
+        <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
+        <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">join</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{caller_line(1,true)}#{msg}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- trace-source -->
+            
+          </div>
 
-				
-				<div class="aliases">
-					Also aliased as: <a href="Log.html#method-i-TRACE">TRACE</a>
-				</div>
-				
+          
+          <div class="aliases">
+            Also aliased as: <a href="Log.html#method-i-TRACE">TRACE</a>
+          </div>
+          
 
-				
-			</div>
+          
+        </div><!-- trace-method -->
 
-		
-			<div id="warn-method" class="method-detail ">
-				<a name="method-i-warn"></a>
+      
+        <div id="warn-method" class="method-detail ">
+          <a name="method-i-warn"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">warn</span><span
-						class="method-args">(*args, &block)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">warn</span><span
+              class="method-args">(*args, &block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="warn-source">
+            
+            <div class="method-source-code" id="warn-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 101</span>
-101:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">warn</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
-102:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_WARN</span>
-103:                 <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">block</span>
-104:                 <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">join</span>
-105:                 <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{caller_line(1)}#{msg}&quot;</span>
-106:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 101</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">warn</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_WARN</span>
+        <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
+        <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">args</span>.<span class="ruby-identifier">join</span>
+        <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;#{caller_line(1)}#{msg}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- warn-source -->
+            
+          </div>
 
-				
-				<div class="aliases">
-					Also aliased as: <a href="Log.html#method-i-WARN">WARN</a>
-				</div>
-				
+          
+          <div class="aliases">
+            Also aliased as: <a href="Log.html#method-i-WARN">WARN</a>
+          </div>
+          
 
-				
-			</div>
+          
+        </div><!-- warn-method -->
 
-		
-			<div id="warn-backtrace-method" class="method-detail ">
-				<a name="method-i-warn_backtrace"></a>
+      
+        <div id="warn_backtrace-method" class="method-detail ">
+          <a name="method-i-warn_backtrace"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">warn_backtrace</span><span
-						class="method-args">(backtrace=$!.backtrace)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">warn_backtrace</span><span
+              class="method-args">(backtrace=$!.backtrace)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="warn-backtrace-source">
+            
+            <div class="method-source-code" id="warn_backtrace-source">
 <pre>
-     <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 109</span>
-109:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">warn_backtrace</span>(<span class="ruby-identifier">backtrace</span>=<span class="ruby-identifier">$!</span>.<span class="ruby-identifier">backtrace</span>)
-110:                 <span class="ruby-keyword kw">return</span> <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_WARN</span>
-111:                 <span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
-112:                         <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  #{caller_line(4)}#{msg}&quot;</span>
-113:                 }
-114:                 <span class="ruby-keyword kw">nil</span>
-115:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 109</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">warn_backtrace</span>(<span class="ruby-identifier">backtrace</span>=<span class="ruby-identifier">$!</span>.<span class="ruby-identifier">backtrace</span>)
+        <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_WARN</span>
+        <span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
+                <span class="ruby-identifier">puts</span> <span class="ruby-node">&quot;  #{caller_line(4)}#{msg}&quot;</span>
+        }
+        <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- warn_backtrace-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- warn_backtrace-method -->
 
-		
-		</div>
-	
-		<div id="private-instance-method-details" class="method-section section">
-			<h3 class="section-header">Private Instance Methods</h3>
+      
+      </div><!-- public-instance-method-details -->
+    
+    </div><!-- 5Buntitled-5D -->
+  
 
-		
-			<div id="caller-line-method" class="method-detail ">
-				<a name="method-i-caller_line"></a>
+  </div><!-- documentation -->
 
-				<div class="method-heading">
-				
-					<span class="method-name">caller_line</span><span
-						class="method-args">(level, debug = false)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
-
-				<div class="method-description">
-					
-					
-					
-
-					
-					<div class="method-source-code"
-						id="caller-line-source">
-<pre>
-     <span class="ruby-comment cmt"># File lib/fluent/log.rb, line 169</span>
-169:         <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">caller_line</span>(<span class="ruby-identifier">level</span>, <span class="ruby-identifier">debug</span> = <span class="ruby-keyword kw">false</span>)
-170:                 <span class="ruby-identifier">line</span> = <span class="ruby-identifier">caller</span>(<span class="ruby-identifier">level</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)[<span class="ruby-value">0</span>]
-171:                 <span class="ruby-keyword kw">if</span> <span class="ruby-ivar">@debug_mode</span>
-172:                         <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">match</span> = <span class="ruby-regexp re">/^(.+?):(\d+)(?::in `(.*)')?/</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">line</span>)
-173:                                 <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">debug</span>
-174:                                         <span class="ruby-keyword kw">return</span> <span class="ruby-node">&quot;#{match[1]}:#{match[2]}:#{match[3]}: &quot;</span>
-175:                                 <span class="ruby-keyword kw">else</span>
-176:                                         <span class="ruby-keyword kw">return</span> <span class="ruby-node">&quot;#{match[1]}:#{match[2]}: &quot;</span>
-177:                                 <span class="ruby-keyword kw">end</span>
-178:                         <span class="ruby-keyword kw">end</span>
-179:                 <span class="ruby-keyword kw">end</span>
-180:                 <span class="ruby-value str">&quot;&quot;</span>
-181:         <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
-
-				
-
-				
-			</div>
-
-		
-		</div>
-	
-
-	</div>
-
-
-	<div id="rdoc-debugging-section-dump" class="debugging-section">
-	
-		<p>Disabled; run with --debug to generate this.</p>
-	
-	</div>
-
-	<div id="validator-badges">
-		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
-		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
-			Rdoc Generator</a> 1.1.6</small>.</p>
-	</div>
+  <div id="validator-badges">
+    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+      Rdoc Generator</a> 2</small>.</p>
+  </div>
 
 </body>
 </html>

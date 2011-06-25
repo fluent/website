@@ -1,479 +1,473 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
-	<meta content="text/html; charset=utf-8" http-equiv="Content-Type" />
+  <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 
-	<title>Class: Fluent::HttpInput</title>
+  <title>Class: Fluent::HttpInput</title>
 
-	<link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
+  <link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
 
-	<script src="../js/jquery.js" type="text/javascript"
-		charset="utf-8"></script>
-	<script src="../js/thickbox-compressed.js" type="text/javascript"
-		charset="utf-8"></script>
-	<script src="../js/quicksearch.js" type="text/javascript"
-		charset="utf-8"></script>
-	<script src="../js/darkfish.js" type="text/javascript"
-		charset="utf-8"></script>
+  <script src="../js/jquery.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/thickbox-compressed.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/quicksearch.js" type="text/javascript" charset="utf-8"></script>
+  <script src="../js/darkfish.js" type="text/javascript" charset="utf-8"></script>
 
 </head>
-<body class="class">
+<body id="top" class="class">
 
-	<div id="metadata">
-		<div id="home-metadata">
-			<div id="home-section" class="section">
+  <div id="metadata">
+    <div id="home-metadata">
+      <div id="home-section" class="section">
         <h3 class="section-header">
           <a href="../index.html">Home</a>
           <a href="../index.html#classes">Classes</a>
           <a href="../index.html#methods">Methods</a>
         </h3>
-			</div>
-		</div>
+      </div>
+    </div>
 
-		<div id="file-metadata">
-			<div id="file-list-section" class="section">
-				<h3 class="section-header">In Files</h3>
-				<div class="section-body">
-					<ul>
-					
-						<li><a href="../lib/fluent/plugin/in_http_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-							class="thickbox" title="lib/fluent/plugin/in_http.rb">lib/fluent/plugin/in_http.rb</a></li>
-					
-					</ul>
-				</div>
-			</div>
+    <div id="file-metadata">
+      <div id="file-list-section" class="section">
+        <h3 class="section-header">In Files</h3>
+        <div class="section-body">
+          <ul>
+          
+            <li><a href="../lib/fluent/plugin/in_http_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/in_http.rb">lib/fluent/plugin/in_http.rb</a></li>
+          
+          </ul>
+        </div>
+      </div>
 
-			
-		</div>
+      
+    </div>
 
-		<div id="class-metadata">
+    <div id="class-metadata">
+      
+      <!-- Parent Class -->
+      <div id="parent-class-section" class="section">
+        <h3 class="section-header">Parent</h3>
+        
+        <p class="link"><a href="Input.html">Fluent::Input</a></p>
+        
+      </div>
+      
 
-			<!-- Parent Class -->
-			
-			<div id="parent-class-section" class="section">
-				<h3 class="section-header">Parent</h3>
-				
-				<p class="link"><a href="Input.html">Fluent::Input</a></p>
-				
-			</div>
-			
+      
 
-			<!-- Namespace Contents -->
-			
+      
+      <!-- Namespace Contents -->
+      <div id="namespace-list-section" class="section">
+        <h3 class="section-header">Namespace</h3>
+        <ul class="link-list">
+          
+          <li><span class="type">CLASS</span> <a href="HttpInput/Handler.html">Fluent::HttpInput::Handler</a></li>
+          
+        </ul>
+      </div>
+      
 
-			<!-- Method Quickref -->
-			
-			<div id="method-list-section" class="section">
-				<h3 class="section-header">Methods</h3>
-				<ul class="link-list">
-					
-					<li><a href="#method-c-new">::new</a></li>
-					
-					<li><a href="#method-i-configure">#configure</a></li>
-					
-					<li><a href="#method-i-on_request">#on_request</a></li>
-					
-					<li><a href="#method-i-shutdown">#shutdown</a></li>
-					
-					<li><a href="#method-i-start">#start</a></li>
-					
-				</ul>
-			</div>
-			
+      
+      <!-- Method Quickref -->
+      <div id="method-list-section" class="section">
+        <h3 class="section-header">Methods</h3>
+        <ul class="link-list">
+          
+          <li><a href="#method-c-new">::new</a></li>
+          
+          <li><a href="#method-i-configure">#configure</a></li>
+          
+          <li><a href="#method-i-on_request">#on_request</a></li>
+          
+          <li><a href="#method-i-shutdown">#shutdown</a></li>
+          
+          <li><a href="#method-i-start">#start</a></li>
+          
+        </ul>
+      </div>
+      
 
-			<!-- Included Modules -->
-			
-		</div>
+      
+    </div>
 
-		<div id="project-metadata">
-			
-			
+    <div id="project-metadata">
+      
+      
 
-			<div id="classindex-section" class="section project-section">
-				<h3 class="section-header">Class Index
-					<span class="search-toggle"><img src="../images/find.png"
-						height="16" width="16" alt="[+]"
-						title="show/hide quicksearch" /></span></h3>
-				<form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
-				<fieldset>
-					<legend>Quicksearch</legend>
-					<input type="text" name="quicksearch" value=""
-						class="quicksearch-field" />
-				</fieldset>
-				</form>
+      <div id="classindex-section" class="section project-section">
+        <h3 class="section-header">Class/Module Index
+          <span class="search-toggle"><img src="../images/find.png"
+            height="16" width="16" alt="[+]"
+            title="show/hide quicksearch" /></span></h3>
+        <form action="#" method="get" accept-charset="utf-8" class="initially-hidden">
+        <fieldset>
+          <legend>Quicksearch</legend>
+          <input type="text" name="quicksearch" value=""
+            class="quicksearch-field" />
+        </fieldset>
+        </form>
 
-				<ul class="link-list">
-				
-					<li><a href="../Fluent.html">Fluent</a></li>
-				
-					<li><a href="../Fluent/ArrayEventStream.html">Fluent::ArrayEventStream</a></li>
-				
-					<li><a href="../Fluent/BasicBuffer.html">Fluent::BasicBuffer</a></li>
-				
-					<li><a href="../Fluent/BucketOutput.html">Fluent::BucketOutput</a></li>
-				
-					<li><a href="../Fluent/Buffer.html">Fluent::Buffer</a></li>
-				
-					<li><a href="../Fluent/BufferChunk.html">Fluent::BufferChunk</a></li>
-				
-					<li><a href="../Fluent/BufferError.html">Fluent::BufferError</a></li>
-				
-					<li><a href="../Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
-				
-					<li><a href="../Fluent/BufferedOutput/WriterThread.html">Fluent::BufferedOutput::WriterThread</a></li>
-				
-					<li><a href="../Fluent/Config.html">Fluent::Config</a></li>
-				
-					<li><a href="../Fluent/Config/Element.html">Fluent::Config::Element</a></li>
-				
-					<li><a href="../Fluent/ConfigError.html">Fluent::ConfigError</a></li>
-				
-					<li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
-				
-					<li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
-				
-					<li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
-				
-					<li><a href="../Fluent/Event.html">Fluent::Event</a></li>
-				
-					<li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
-				
-					<li><a href="../Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
-				
-					<li><a href="../Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
-				
-					<li><a href="../Fluent/FileOutput.html">Fluent::FileOutput</a></li>
-				
-					<li><a href="../Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
-				
-					<li><a href="../Fluent/HttpInput.html">Fluent::HttpInput</a></li>
-				
-					<li><a href="../Fluent/Input.html">Fluent::Input</a></li>
-				
-					<li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
-				
-					<li><a href="../Fluent/Log.html">Fluent::Log</a></li>
-				
-					<li><a href="../Fluent/Match.html">Fluent::Match</a></li>
-				
-					<li><a href="../Fluent/MatchPattern.html">Fluent::MatchPattern</a></li>
-				
-					<li><a href="../Fluent/MemoryBuffer.html">Fluent::MemoryBuffer</a></li>
-				
-					<li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
-				
-					<li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
-				
-					<li><a href="../Fluent/Output.html">Fluent::Output</a></li>
-				
-					<li><a href="../Fluent/OutputChain.html">Fluent::OutputChain</a></li>
-				
-					<li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
-				
-					<li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
-				
-					<li><a href="../Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
-				
-					<li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
-				
-					<li><a href="../Fluent/StreamInput.html">Fluent::StreamInput</a></li>
-				
-					<li><a href="../Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
-				
-					<li><a href="../Fluent/TailInput.html">Fluent::TailInput</a></li>
-				
-					<li><a href="../Fluent/TailInput/Tailer.html">Fluent::TailInput::Tailer</a></li>
-				
-					<li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
-				
-					<li><a href="../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
-				
-					<li><a href="../Fluent/ZFileBuffer.html">Fluent::ZFileBuffer</a></li>
-				
-					<li><a href="../Fluent/ZFileBufferChunk.html">Fluent::ZFileBufferChunk</a></li>
-				
-					<li><a href="../Writer.html">Writer</a></li>
-				
-					<li><a href="../Writer/TimerThread.html">Writer::TimerThread</a></li>
-				
-				</ul>
-				<div id="no-class-search-results" style="display: none;">No matching classes.</div>
-			</div>
+        <ul class="link-list">
+        
+          <li><a href="../Fluent.html">Fluent</a></li>
+        
+          <li><a href="../Fluent/ArrayEventStream.html">Fluent::ArrayEventStream</a></li>
+        
+          <li><a href="../Fluent/BasicBuffer.html">Fluent::BasicBuffer</a></li>
+        
+          <li><a href="../Fluent/BucketOutput.html">Fluent::BucketOutput</a></li>
+        
+          <li><a href="../Fluent/Buffer.html">Fluent::Buffer</a></li>
+        
+          <li><a href="../Fluent/BufferChunk.html">Fluent::BufferChunk</a></li>
+        
+          <li><a href="../Fluent/BufferError.html">Fluent::BufferError</a></li>
+        
+          <li><a href="../Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
+        
+          <li><a href="../Fluent/BufferedOutput/WriterThread.html">Fluent::BufferedOutput::WriterThread</a></li>
+        
+          <li><a href="../Fluent/Config.html">Fluent::Config</a></li>
+        
+          <li><a href="../Fluent/Config/Element.html">Fluent::Config::Element</a></li>
+        
+          <li><a href="../Fluent/ConfigError.html">Fluent::ConfigError</a></li>
+        
+          <li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
+        
+          <li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
+        
+          <li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
+        
+          <li><a href="../Fluent/Event.html">Fluent::Event</a></li>
+        
+          <li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
+        
+          <li><a href="../Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
+        
+          <li><a href="../Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
+        
+          <li><a href="../Fluent/FileOutput.html">Fluent::FileOutput</a></li>
+        
+          <li><a href="../Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
+        
+          <li><a href="../Fluent/HttpInput.html">Fluent::HttpInput</a></li>
+        
+          <li><a href="../Fluent/HttpInput/Handler.html">Fluent::HttpInput::Handler</a></li>
+        
+          <li><a href="../Fluent/Input.html">Fluent::Input</a></li>
+        
+          <li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
+        
+          <li><a href="../Fluent/Log.html">Fluent::Log</a></li>
+        
+          <li><a href="../Fluent/Match.html">Fluent::Match</a></li>
+        
+          <li><a href="../Fluent/MatchPattern.html">Fluent::MatchPattern</a></li>
+        
+          <li><a href="../Fluent/MemoryBuffer.html">Fluent::MemoryBuffer</a></li>
+        
+          <li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
+        
+          <li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
+        
+          <li><a href="../Fluent/Output.html">Fluent::Output</a></li>
+        
+          <li><a href="../Fluent/OutputChain.html">Fluent::OutputChain</a></li>
+        
+          <li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
+        
+          <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
+        
+          <li><a href="../Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
+        
+          <li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
+        
+          <li><a href="../Fluent/StreamInput.html">Fluent::StreamInput</a></li>
+        
+          <li><a href="../Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
+        
+          <li><a href="../Fluent/StreamOutput.html">Fluent::StreamOutput</a></li>
+        
+          <li><a href="../Fluent/SyslogInput.html">Fluent::SyslogInput</a></li>
+        
+          <li><a href="../Fluent/SyslogInput/UdpHandler.html">Fluent::SyslogInput::UdpHandler</a></li>
+        
+          <li><a href="../Fluent/TailInput.html">Fluent::TailInput</a></li>
+        
+          <li><a href="../Fluent/TailInput/Tailer.html">Fluent::TailInput::Tailer</a></li>
+        
+          <li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
+        
+          <li><a href="../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
+        
+          <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
+        
+          <li><a href="../Fluent/UnixOutput.html">Fluent::UnixOutput</a></li>
+        
+          <li><a href="../Fluent/ZFileBuffer.html">Fluent::ZFileBuffer</a></li>
+        
+          <li><a href="../Fluent/ZFileBufferChunk.html">Fluent::ZFileBufferChunk</a></li>
+        
+          <li><a href="../Writer.html">Writer</a></li>
+        
+          <li><a href="../Writer/TimerThread.html">Writer::TimerThread</a></li>
+        
+        </ul>
+        <div id="no-class-search-results" style="display: none;">No matching classes.</div>
+      </div>
 
-			
-		</div>
-	</div>
+      
+    </div>
+  </div>
 
-	<div id="documentation">
-		<h1 class="class">Fluent::HttpInput</h1>
+  <div id="documentation">
+    <h1 class="class">Fluent::HttpInput</h1>
 
-		<div id="description">
-			
-		</div>
+    <div id="description" class="description">
+      
+    </div><!-- description -->
 
-		<!-- Constants -->
-		
+    
+    <div id="5Buntitled-5D" class="documentation-section">
+      
 
-		<!-- Attributes -->
-		
+      
 
-		<!-- Methods -->
-		
-		<div id="public-class-method-details" class="method-section section">
-			<h3 class="section-header">Public Class Methods</h3>
+      
 
-		
-			<div id="new-method" class="method-detail ">
-				<a name="method-c-new"></a>
+      
 
-				<div class="method-heading">
-				
-					<span class="method-name">new</span><span
-						class="method-args">()</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+      <!-- Methods -->
+      
+      <div id="public-class-method-details" class="method-section section">
+        <h3 class="section-header">Public Class Methods</h3>
 
-				<div class="method-description">
-					
-					
-					
+      
+        <div id="new-method" class="method-detail ">
+          <a name="method-c-new"></a>
 
-					
-					<div class="method-source-code"
-						id="new-source">
+          
+          <div class="method-heading">
+            <span class="method-name">new</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="new-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/plugin/in_http.rb, line 24</span>
-24:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">initialize</span>
-25:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'rack'</span>
-26:     <span class="ruby-identifier">require</span> <span class="ruby-value str">'webrick'</span>
-27:     <span class="ruby-ivar">@port</span> = <span class="ruby-value">9880</span>
-28:     <span class="ruby-ivar">@bind</span> = <span class="ruby-value str">'0.0.0.0'</span>
-29:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 26</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">'webrick/httputils'</span>
+  <span class="ruby-ivar">@port</span> = <span class="ruby-value">9880</span>
+  <span class="ruby-ivar">@bind</span> = <span class="ruby-string">'0.0.0.0'</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- new-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- new-method -->
 
-		
-		</div>
-	
-		<div id="public-instance-method-details" class="method-section section">
-			<h3 class="section-header">Public Instance Methods</h3>
+      
+      </div><!-- public-class-method-details -->
+    
+      <div id="public-instance-method-details" class="method-section section">
+        <h3 class="section-header">Public Instance Methods</h3>
 
-		
-			<div id="configure-method" class="method-detail ">
-				<a name="method-i-configure"></a>
+      
+        <div id="configure-method" class="method-detail ">
+          <a name="method-i-configure"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">configure</span><span
-						class="method-args">(conf)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">configure</span><span
+              class="method-args">(conf)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="configure-source">
+            
+            <div class="method-source-code" id="configure-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/plugin/in_http.rb, line 31</span>
-31:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
-32:     <span class="ruby-ivar">@port</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-value str">'port'</span>] <span class="ruby-operator">||</span> <span class="ruby-ivar">@port</span>
-33:     <span class="ruby-ivar">@port</span> = <span class="ruby-ivar">@port</span>.<span class="ruby-identifier">to_i</span>
-34: 
-35:     <span class="ruby-ivar">@bind</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-value str">'bind'</span>] <span class="ruby-operator">||</span> <span class="ruby-ivar">@bind</span>
-36:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 32</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
+  <span class="ruby-ivar">@port</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'port'</span>] <span class="ruby-operator">||</span> <span class="ruby-ivar">@port</span>
+  <span class="ruby-ivar">@port</span> = <span class="ruby-ivar">@port</span>.<span class="ruby-identifier">to_i</span>
 
-				
+  <span class="ruby-ivar">@bind</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'bind'</span>] <span class="ruby-operator">||</span> <span class="ruby-ivar">@bind</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- configure-source -->
+            
+          </div>
 
-				
-			</div>
+          
 
-		
-			<div id="on-request-method" class="method-detail ">
-				<a name="method-i-on_request"></a>
+          
+        </div><!-- configure-method -->
 
-				<div class="method-heading">
-				
-					<span class="method-name">on_request</span><span
-						class="method-args">(env)</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+      
+        <div id="on_request-method" class="method-detail ">
+          <a name="method-i-on_request"></a>
 
-				<div class="method-description">
-					
-					
-					
+          
+          <div class="method-heading">
+            <span class="method-name">on_request</span><span
+              class="method-args">(path_info, params)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-					
-					<div class="method-source-code"
-						id="on-request-source">
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="on_request-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/plugin/in_http.rb, line 68</span>
-68:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">on_request</span>(<span class="ruby-identifier">env</span>)
-69:     <span class="ruby-identifier">request</span> = <span class="ruby-operator">::</span><span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">Request</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">env</span>)
-70:     <span class="ruby-identifier">path_info</span> = <span class="ruby-identifier">request</span>.<span class="ruby-identifier">path_info</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">1</span>]  <span class="ruby-comment cmt"># remove '/'</span>
-71: 
-72:     <span class="ruby-keyword kw">begin</span>
-73:       <span class="ruby-identifier">tag</span> = <span class="ruby-identifier">path_info</span>.<span class="ruby-identifier">split</span>(<span class="ruby-value str">'/'</span>).<span class="ruby-identifier">join</span>(<span class="ruby-value str">'.'</span>)
-74: 
-75:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">msgpack</span> = <span class="ruby-identifier">request</span>.<span class="ruby-constant">POST</span>[<span class="ruby-value str">'msgpack'</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">request</span>.<span class="ruby-constant">GET</span>[<span class="ruby-value str">'msgpack'</span>]
-76:         <span class="ruby-identifier">record</span> = <span class="ruby-constant">MessagePack</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-identifier">msgpack</span>)
-77: 
-78:       <span class="ruby-keyword kw">elsif</span> <span class="ruby-identifier">js</span> = <span class="ruby-identifier">request</span>.<span class="ruby-constant">POST</span>[<span class="ruby-value str">'json'</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">request</span>.<span class="ruby-constant">GET</span>[<span class="ruby-value str">'json'</span>]
-79:         <span class="ruby-identifier">record</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">js</span>)
-80: 
-81:       <span class="ruby-keyword kw">else</span>
-82:         <span class="ruby-identifier">raise</span> <span class="ruby-value str">&quot;'json' or 'msgpack' parameter is required&quot;</span>
-83:       <span class="ruby-keyword kw">end</span>
-84: 
-85:       <span class="ruby-identifier">time</span> = <span class="ruby-identifier">request</span>.<span class="ruby-constant">POST</span>[<span class="ruby-value str">'time'</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">request</span>.<span class="ruby-constant">GET</span>[<span class="ruby-value str">'time'</span>]
-86:       <span class="ruby-identifier">time</span> = <span class="ruby-identifier">time</span>.<span class="ruby-identifier">to_i</span>
-87:       <span class="ruby-keyword kw">if</span> <span class="ruby-identifier">time</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
-88:         <span class="ruby-identifier">time</span> = <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span>
-89:       <span class="ruby-keyword kw">end</span>
-90: 
-91:       <span class="ruby-identifier">event</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">record</span>)
-92: 
-93:     <span class="ruby-keyword kw">rescue</span>
-94:       <span class="ruby-keyword kw">return</span> [<span class="ruby-value">400</span>, {<span class="ruby-value str">'ContentType'</span>=<span class="ruby-operator">&gt;</span><span class="ruby-value str">'text/plain'</span>}, <span class="ruby-node">&quot;400 Bad Request\n#{$!}&quot;</span>]
-95:     <span class="ruby-keyword kw">end</span>
-96: 
-97:     <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">emit</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">event</span>)
-98:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 46</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_request</span>(<span class="ruby-identifier">path_info</span>, <span class="ruby-identifier">params</span>)
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-identifier">path</span> = <span class="ruby-identifier">path_info</span>[<span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]  <span class="ruby-comment"># remove /</span>
+    <span class="ruby-identifier">tag</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">'/'</span>).<span class="ruby-identifier">join</span>(<span class="ruby-string">'.'</span>)
 
-				
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">msgpack</span> = <span class="ruby-identifier">params</span>[<span class="ruby-string">'msgpack'</span>]
+      <span class="ruby-identifier">record</span> = <span class="ruby-constant">MessagePack</span>.<span class="ruby-identifier">unpack</span>(<span class="ruby-identifier">msgpack</span>)
 
-				
-			</div>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">js</span> = <span class="ruby-identifier">params</span>[<span class="ruby-string">'json'</span>]
+      <span class="ruby-identifier">record</span> = <span class="ruby-constant">JSON</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">js</span>)
 
-		
-			<div id="shutdown-method" class="method-detail ">
-				<a name="method-i-shutdown"></a>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-string">&quot;'json' or 'msgpack' parameter is required&quot;</span>
+    <span class="ruby-keyword">end</span>
 
-				<div class="method-heading">
-				
-					<span class="method-name">shutdown</span><span
-						class="method-args">()</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+    <span class="ruby-identifier">time</span> = <span class="ruby-identifier">params</span>[<span class="ruby-string">'time'</span>]
+    <span class="ruby-identifier">time</span> = <span class="ruby-identifier">time</span>.<span class="ruby-identifier">to_i</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">time</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">time</span> = <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span>
+    <span class="ruby-keyword">end</span>
 
-				<div class="method-description">
-					
-					
-					
+    <span class="ruby-identifier">event</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">record</span>)
 
-					
-					<div class="method-source-code"
-						id="shutdown-source">
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-keyword">return</span> [<span class="ruby-value">400</span>, {<span class="ruby-string">'Content-type'</span>=<span class="ruby-operator">&gt;</span><span class="ruby-string">'text/plain'</span>}, <span class="ruby-node">&quot;400 Bad Request\n#{$!}\n&quot;</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># TODO server error</span>
+  <span class="ruby-keyword">begin</span>
+    <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">emit</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">event</span>)
+  <span class="ruby-keyword">rescue</span>
+    <span class="ruby-keyword">return</span> [<span class="ruby-value">500</span>, {<span class="ruby-string">'Content-type'</span>=<span class="ruby-operator">&gt;</span><span class="ruby-string">'text/plain'</span>}, <span class="ruby-node">&quot;500 Internal Server Error\n#{$!}\n&quot;</span>]
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> [<span class="ruby-value">200</span>, {<span class="ruby-string">'Content-type'</span>=<span class="ruby-operator">&gt;</span><span class="ruby-string">'text/plain'</span>}, <span class="ruby-string">&quot;&quot;</span>]
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- on_request-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- on_request-method -->
+
+      
+        <div id="shutdown-method" class="method-detail ">
+          <a name="method-i-shutdown"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">shutdown</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="shutdown-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/plugin/in_http.rb, line 64</span>
-64:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">shutdown</span>
-65:     <span class="ruby-ivar">@server</span>.<span class="ruby-identifier">shutdown</span>
-66:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">shutdown</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- shutdown-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- shutdown-method -->
 
-		
-			<div id="start-method" class="method-detail ">
-				<a name="method-i-start"></a>
+      
+        <div id="start-method" class="method-detail ">
+          <a name="method-i-start"></a>
 
-				<div class="method-heading">
-				
-					<span class="method-name">start</span><span
-						class="method-args">()</span>
-					<span class="method-click-advice">click to toggle source</span>
-				
-				</div>
+          
+          <div class="method-heading">
+            <span class="method-name">start</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
 
-				<div class="method-description">
-					
-					
-					
+          <div class="method-description">
+            
+            
+            
 
-					
-					<div class="method-source-code"
-						id="start-source">
+            
+            <div class="method-source-code" id="start-source">
 <pre>
-    <span class="ruby-comment cmt"># File lib/fluent/plugin/in_http.rb, line 38</span>
-38:   <span class="ruby-keyword kw">def</span> <span class="ruby-identifier">start</span>
-39:     <span class="ruby-keyword kw">case</span> <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">level</span>
-40:     <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Log</span><span class="ruby-operator">::</span><span class="ruby-constant">LEVEL_TRACE</span>
-41:       <span class="ruby-identifier">level</span> = <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">Log</span><span class="ruby-operator">::</span><span class="ruby-constant">DEBUG</span>
-42:     <span class="ruby-keyword kw">when</span> <span class="ruby-constant">Log</span><span class="ruby-operator">::</span><span class="ruby-constant">LEVEL_DEBUG</span>
-43:       <span class="ruby-identifier">level</span> = <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">Log</span><span class="ruby-operator">::</span><span class="ruby-constant">INFO</span>
-44:     <span class="ruby-keyword kw">else</span>
-45:       <span class="ruby-identifier">level</span> = <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">Log</span><span class="ruby-operator">::</span><span class="ruby-constant">WARN</span>
-46:     <span class="ruby-keyword kw">end</span>
-47: 
-48:     <span class="ruby-identifier">log</span> = <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">Log</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">$log</span>.<span class="ruby-identifier">out</span>, <span class="ruby-identifier">level</span>)
-49: 
-50:     <span class="ruby-ivar">@server</span> = <span class="ruby-operator">::</span><span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPServer</span>.<span class="ruby-identifier">new</span>({
-51:       <span class="ruby-value">:BindAddress</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@bind</span>,
-52:       <span class="ruby-value">:Port</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@port</span>,
-53:       <span class="ruby-value">:Logger</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">log</span>,
-54:     })
-55: 
-56:     <span class="ruby-identifier">app</span> = <span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">URLMap</span>.<span class="ruby-identifier">new</span>({
-57:       <span class="ruby-value str">'/'</span> =<span class="ruby-operator">&gt;</span> <span class="ruby-identifier">method</span>(<span class="ruby-value">:on_request</span>),
-58:     })
-59:     <span class="ruby-ivar">@server</span>.<span class="ruby-identifier">mount</span>(<span class="ruby-value str">&quot;/&quot;</span>, <span class="ruby-operator">::</span><span class="ruby-constant">Rack</span><span class="ruby-operator">::</span><span class="ruby-constant">Handler</span><span class="ruby-operator">::</span><span class="ruby-constant">WEBrick</span>, <span class="ruby-identifier">app</span>)
-60: 
-61:     <span class="ruby-ivar">@thread</span> = <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">new</span>(&amp;<span class="ruby-ivar">@server</span>.<span class="ruby-identifier">method</span>(<span class="ruby-value">:start</span>))
-62:   <span class="ruby-keyword kw">end</span></pre>
-					</div>
-					
-				</div>
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 39</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span>
+  <span class="ruby-constant">EventMachine</span>.<span class="ruby-identifier">start_server</span>(<span class="ruby-ivar">@bind</span>, <span class="ruby-ivar">@port</span>, <span class="ruby-constant">Handler</span>, <span class="ruby-identifier">method</span>(<span class="ruby-value">:on_request</span>))
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- start-source -->
+            
+          </div>
 
-				
+          
 
-				
-			</div>
+          
+        </div><!-- start-method -->
 
-		
-		</div>
-	
+      
+      </div><!-- public-instance-method-details -->
+    
+    </div><!-- 5Buntitled-5D -->
+  
 
-	</div>
+  </div><!-- documentation -->
 
-
-	<div id="rdoc-debugging-section-dump" class="debugging-section">
-	
-		<p>Disabled; run with --debug to generate this.</p>
-	
-	</div>
-
-	<div id="validator-badges">
-		<p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
-		<p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
-			Rdoc Generator</a> 1.1.6</small>.</p>
-	</div>
+  <div id="validator-badges">
+    <p><small><a href="http://validator.w3.org/check/referer">[Validate]</a></small></p>
+    <p><small>Generated with the <a href="http://deveiate.org/projects/Darkfish-Rdoc/">Darkfish
+      Rdoc Generator</a> 2</small>.</p>
+  </div>
 
 </body>
 </html>
