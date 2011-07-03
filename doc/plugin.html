@@ -59,15 +59,16 @@
 </li>
 <li><a class="reference internal" href="#output-plugins" id="id10">Output plugins</a><ul>
 <li><a class="reference internal" href="#file" id="id11">file</a></li>
-<li><a class="reference internal" href="#id1" id="id12">tcp</a></li>
-<li><a class="reference internal" href="#id2" id="id13">unix</a></li>
-<li><a class="reference internal" href="#copy" id="id14">copy</a></li>
-<li><a class="reference internal" href="#stdout" id="id15">stdout</a></li>
+<li><a class="reference internal" href="#time-file" id="id12">time_file</a></li>
+<li><a class="reference internal" href="#id1" id="id13">tcp</a></li>
+<li><a class="reference internal" href="#id2" id="id14">unix</a></li>
+<li><a class="reference internal" href="#copy" id="id15">copy</a></li>
+<li><a class="reference internal" href="#stdout" id="id16">stdout</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#buffer-plugins" id="id16">Buffer plugins</a><ul>
-<li><a class="reference internal" href="#memory" id="id17">memory</a></li>
-<li><a class="reference internal" href="#id3" id="id18">file</a></li>
+<li><a class="reference internal" href="#buffer-plugins" id="id17">Buffer plugins</a><ul>
+<li><a class="reference internal" href="#memory" id="id18">memory</a></li>
+<li><a class="reference internal" href="#id3" id="id19">file</a></li>
 </ul>
 </li>
 </ul>
@@ -306,6 +307,29 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 <dd>Uses local time zone for path formatting. Default is UTC.</dd>
 </dl>
 </div>
+<div class="section" id="time-file">
+<h3>time_file<a class="headerlink" href="#time-file" title="Permalink to this headline">¶</a></h3>
+<p><strong>time_file</strong> buffered output plugin writes events to files. It splits files exactly based on the time.</p>
+<p><strong>configuration</strong>:</p>
+<div class="highlight-python"><pre>&lt;store&gt;
+  type time_file
+  path /var/log/fluent/myapp
+  time_slice hourly
+  time_slice_wait 10m
+  localtime
+&lt;/store&gt;</pre>
+</div>
+<dl class="docutils">
+<dt>path (required)</dt>
+<dd>Path of the file. Actual name of the file will be path + time where time is yyyyMM (hourly), yyyyMMdd (daily) or yyyyMMddmm (minutely).</dd>
+<dt>time_slice (required)</dt>
+<dd>One of &#8216;monthly&#8217;, &#8216;daily&#8217;, &#8216;hourly&#8217; or &#8216;minutely&#8217;</dd>
+<dt>time_slice_wait</dt>
+<dd>Time before writing file. Default is 10m (10 minutes).</dd>
+<dt>localtime</dt>
+<dd>Uses local time zone for slicing. Default is UTC.</dd>
+</dl>
+</div>
 <div class="section" id="id1">
 <h3>tcp<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p><strong>file</strong> buffered output plugin forwards events to another fluent server.</p>
@@ -420,6 +444,7 @@ This parameter is required.</dd>
 </li>
 <li><a class="reference external" href="#output-plugins">Output plugins</a><ul>
 <li><a class="reference external" href="#file">file</a></li>
+<li><a class="reference external" href="#time-file">time_file</a></li>
 <li><a class="reference external" href="#id1">tcp</a></li>
 <li><a class="reference external" href="#id2">unix</a></li>
 <li><a class="reference external" href="#copy">copy</a></li>

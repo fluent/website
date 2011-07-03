@@ -79,6 +79,27 @@ Database server |
  +--------+</pre>
 </div>
 <p>An event collected consists of <em>tag</em>, <em>time</em> and <em>record</em>. Tag is a string separated with &#8216;.&#8217; (e.g. myapp.access). It is used to categorize events. Time is a UNIX time when the event occurs. Record is a JSON object.</p>
+</div>
+<div class="section" id="reliability">
+<h2>Reliability<a class="headerlink" href="#reliability" title="Permalink to this headline">¶</a></h2>
+<p>Fluent provides reliable buffering strategy to prevent loss of events from failure of servers.</p>
+<p>The structure of the buffer is a queue of chunks:</p>
+<div class="highlight-python"><pre>queue
++---------+
+|         |
+|  chunk &lt;-- write events to the top chunk
+|         |  (never block)
+|  chunk  |
+|         |
+|  chunk  |
+|         |
+|  chunk --&gt; wirte out the bottom chunk
+|         |  (transactional)
++---------+</pre>
+</div>
+<p>When a event is reached to a fluent server, it is appended to a top buffer chunk. This operation never blocks even if next server is down.</p>
+<p>When size of the the top chunk exceeds limit or timer is expired, new empty chunk is pushed. And another thread get the bottom chunk and forward it to the next server (or send to a storage server). If it succeeded, the chunk is removed. Otherwise the thread leaves the chunk in the queue and retries to send it later.</p>
+<p>The implementation of the buffer is pluggable. Default plugin named &#8216;memory&#8217; stores chunks in memory. It is fast but not persistent. Another plugin named &#8216;file&#8217; stores chunks in file.</p>
 <p>Next step: <a class="reference external" href="install.html#install"><em>Installation</em></a></p>
 </div>
 </div>
@@ -93,6 +114,7 @@ Database server |
             <ul>
 <li><a class="reference external" href="#">Overview</a><ul>
 <li><a class="reference external" href="#architecture">Architecture</a></li>
+<li><a class="reference external" href="#reliability">Reliability</a></li>
 </ul>
 </li>
 </ul>
