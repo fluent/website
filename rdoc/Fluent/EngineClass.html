@@ -129,8 +129,6 @@
         
           <li><a href="../Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
         
-          <li><a href="../Fluent/BufferedOutput/WriterThread.html">Fluent::BufferedOutput::WriterThread</a></li>
-        
           <li><a href="../Fluent/Config.html">Fluent::Config</a></li>
         
           <li><a href="../Fluent/Config/Element.html">Fluent::Config::Element</a></li>
@@ -179,6 +177,8 @@
         
           <li><a href="../Fluent/OutputChain.html">Fluent::OutputChain</a></li>
         
+          <li><a href="../Fluent/OutputThread.html">Fluent::OutputThread</a></li>
+        
           <li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
         
           <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
@@ -206,6 +206,10 @@
           <li><a href="../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
         
           <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../Fluent/TimeSlicedFileOutput.html">Fluent::TimeSlicedFileOutput</a></li>
+        
+          <li><a href="../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
           <li><a href="../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
         
@@ -309,7 +313,7 @@
             
             <div class="method-source-code" id="configure-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/engine.rb, line 55</span>
+<span class="ruby-comment"># File lib/fluent/engine.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
   <span class="ruby-identifier">conf</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">e</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-string">'source'</span>
@@ -372,7 +376,7 @@
             
             <div class="method-source-code" id="emit-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/engine.rb, line 93</span>
+<span class="ruby-comment"># File lib/fluent/engine.rb, line 96</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">emit</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">event</span>)
   <span class="ruby-identifier">emit_stream</span> <span class="ruby-identifier">tag</span>, <span class="ruby-constant">ArrayEventStream</span>.<span class="ruby-identifier">new</span>([<span class="ruby-identifier">event</span>])
 <span class="ruby-keyword">end</span></pre>
@@ -405,7 +409,7 @@
             
             <div class="method-source-code" id="emit_array-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/engine.rb, line 97</span>
+<span class="ruby-comment"># File lib/fluent/engine.rb, line 100</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">emit_array</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">array</span>)
   <span class="ruby-identifier">emit_stream</span> <span class="ruby-identifier">tag</span>, <span class="ruby-constant">ArrayEventStream</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">array</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -438,7 +442,7 @@
             
             <div class="method-source-code" id="emit_stream-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/engine.rb, line 101</span>
+<span class="ruby-comment"># File lib/fluent/engine.rb, line 104</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">emit_stream</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">match</span> = <span class="ruby-ivar">@matches</span>.<span class="ruby-identifier">find</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">m</span><span class="ruby-operator">|</span> <span class="ruby-identifier">m</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">tag</span>) }
     <span class="ruby-identifier">match</span>.<span class="ruby-identifier">emit</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>)
@@ -532,7 +536,7 @@
             
             <div class="method-source-code" id="load_plugin_dir-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/engine.rb, line 89</span>
+<span class="ruby-comment"># File lib/fluent/engine.rb, line 92</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">load_plugin_dir</span>(<span class="ruby-identifier">dir</span>)
   <span class="ruby-constant">Plugin</span>.<span class="ruby-identifier">load_plugin_dir</span>(<span class="ruby-identifier">dir</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -565,7 +569,7 @@
             
             <div class="method-source-code" id="now-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/engine.rb, line 115</span>
+<span class="ruby-comment"># File lib/fluent/engine.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">now</span>
   <span class="ruby-comment"># TODO thread update</span>
   <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>
@@ -604,6 +608,9 @@
   <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">info</span> <span class="ruby-node">&quot;reading config file '#{path}'&quot;</span>
   <span class="ruby-identifier">conf</span> = <span class="ruby-constant">Config</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
+  <span class="ruby-identifier">conf</span>.<span class="ruby-identifier">check_not_fetched</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span>,<span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;parameter '#{key}' in #{e.to_s.strip} is not used.&quot;</span>
+  }
 <span class="ruby-keyword">end</span></pre>
             </div><!-- read_config-source -->
             
@@ -634,7 +641,7 @@
             
             <div class="method-source-code" id="run-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/engine.rb, line 120</span>
+<span class="ruby-comment"># File lib/fluent/engine.rb, line 123</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>
   <span class="ruby-constant">EventMachine</span>.<span class="ruby-identifier">run</span> <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">start</span>
@@ -671,7 +678,7 @@
             
             <div class="method-source-code" id="stop-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/engine.rb, line 128</span>
+<span class="ruby-comment"># File lib/fluent/engine.rb, line 131</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">stop</span>
   <span class="ruby-constant">EventMachine</span>.<span class="ruby-identifier">stop_event_loop</span>
   <span class="ruby-keyword">nil</span>

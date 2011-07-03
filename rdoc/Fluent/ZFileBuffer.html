@@ -67,7 +67,7 @@
           
           <li><a href="#method-c-new">::new</a></li>
           
-          <li><a href="#method-i-new_data">#new_data</a></li>
+          <li><a href="#method-i-new_chunk">#new_chunk</a></li>
           
           <li><a href="#method-i-resume_queue">#resume_queue</a></li>
           
@@ -112,8 +112,6 @@
           <li><a href="../Fluent/BufferError.html">Fluent::BufferError</a></li>
         
           <li><a href="../Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
-        
-          <li><a href="../Fluent/BufferedOutput/WriterThread.html">Fluent::BufferedOutput::WriterThread</a></li>
         
           <li><a href="../Fluent/Config.html">Fluent::Config</a></li>
         
@@ -163,6 +161,8 @@
         
           <li><a href="../Fluent/OutputChain.html">Fluent::OutputChain</a></li>
         
+          <li><a href="../Fluent/OutputThread.html">Fluent::OutputThread</a></li>
+        
           <li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
         
           <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
@@ -190,6 +190,10 @@
           <li><a href="../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
         
           <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../Fluent/TimeSlicedFileOutput.html">Fluent::TimeSlicedFileOutput</a></li>
+        
+          <li><a href="../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
           <li><a href="../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
         
@@ -276,12 +280,12 @@
         <h3 class="section-header">Public Instance Methods</h3>
 
       
-        <div id="new_data-method" class="method-detail ">
-          <a name="method-i-new_data"></a>
+        <div id="new_chunk-method" class="method-detail ">
+          <a name="method-i-new_chunk"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">new_data</span><span
+            <span class="method-name">new_chunk</span><span
               class="method-args">()</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
@@ -293,21 +297,21 @@
             
 
             
-            <div class="method-source-code" id="new_data-source">
+            <div class="method-source-code" id="new_chunk-source">
 <pre>
 <span class="ruby-comment"># File lib/fluent/plugin/buf_zfile.rb, line 76</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">new_data</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">new_chunk</span>
   <span class="ruby-identifier">path</span> = <span class="ruby-identifier">new_chunk_path</span>
   <span class="ruby-constant">ZFileBufferChunk</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- new_data-source -->
+            </div><!-- new_chunk-source -->
             
           </div>
 
           
 
           
-        </div><!-- new_data-method -->
+        </div><!-- new_chunk-method -->
 
       
         <div id="resume_queue-method" class="method-detail ">
@@ -334,7 +338,7 @@
   <span class="ruby-identifier">queue</span> = <span class="ruby-identifier">resume_queue_paths</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
     <span class="ruby-constant">ZFileBufferChunk</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>)
   }
-  <span class="ruby-identifier">top</span> = <span class="ruby-identifier">new_data</span>
+  <span class="ruby-identifier">top</span> = <span class="ruby-identifier">new_chunk</span>
   <span class="ruby-keyword">return</span> <span class="ruby-identifier">queue</span>, <span class="ruby-identifier">top</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- resume_queue-source -->

@@ -71,9 +71,9 @@
           
           <li><a href="#method-i-close">#close</a></li>
           
-          <li><a href="#method-i-close_write">#close_write</a></li>
-          
           <li><a href="#method-i-empty-3F">#empty?</a></li>
+          
+          <li><a href="#method-i-mv">#mv</a></li>
           
           <li><a href="#method-i-open">#open</a></li>
           
@@ -125,8 +125,6 @@
         
           <li><a href="../Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
         
-          <li><a href="../Fluent/BufferedOutput/WriterThread.html">Fluent::BufferedOutput::WriterThread</a></li>
-        
           <li><a href="../Fluent/Config.html">Fluent::Config</a></li>
         
           <li><a href="../Fluent/Config/Element.html">Fluent::Config::Element</a></li>
@@ -175,6 +173,8 @@
         
           <li><a href="../Fluent/OutputChain.html">Fluent::OutputChain</a></li>
         
+          <li><a href="../Fluent/OutputThread.html">Fluent::OutputThread</a></li>
+        
           <li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
         
           <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
@@ -202,6 +202,10 @@
           <li><a href="../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
         
           <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../Fluent/TimeSlicedFileOutput.html">Fluent::TimeSlicedFileOutput</a></li>
+        
+          <li><a href="../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
           <li><a href="../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
         
@@ -274,7 +278,7 @@
           
           <div class="method-heading">
             <span class="method-name">new</span><span
-              class="method-args">(path)</span>
+              class="method-args">(key, path, mode="a+")</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -288,11 +292,11 @@
             <div class="method-source-code" id="new-source">
 <pre>
 <span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 22</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">path</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">path</span>, <span class="ruby-identifier">mode</span>=<span class="ruby-string">&quot;a+&quot;</span>)
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">path</span>
-  <span class="ruby-ivar">@file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@path</span>, <span class="ruby-string">&quot;a+&quot;</span>)
+  <span class="ruby-ivar">@file</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-ivar">@path</span>, <span class="ruby-identifier">mode</span>)
   <span class="ruby-ivar">@size</span> = <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">stat</span>.<span class="ruby-identifier">size</span>
-  <span class="ruby-keyword">super</span>()
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -333,6 +337,7 @@
 <span class="ruby-keyword">def</span> <span class="ruby-operator">&lt;&lt;</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-ivar">@size</span> <span class="ruby-operator">+=</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">size</span>
+  <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">flush</span>  <span class="ruby-comment"># TODO</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- 3C-3C-source -->
             
@@ -363,12 +368,12 @@
             
             <div class="method-source-code" id="close-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 46</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">close</span>
+  <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">close</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">stat</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
     <span class="ruby-constant">File</span>.<span class="ruby-identifier">unlink</span>(<span class="ruby-ivar">@path</span>)
   <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">close</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- close-source -->
             
@@ -378,39 +383,6 @@
 
           
         </div><!-- close-method -->
-
-      
-        <div id="close_write-method" class="method-detail ">
-          <a name="method-i-close_write"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">close_write</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            
-            
-
-            
-            <div class="method-source-code" id="close_write-source">
-<pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 42</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">close_write</span>
-  <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">flush</span>
-<span class="ruby-keyword">end</span></pre>
-            </div><!-- close_write-source -->
-            
-          </div>
-
-          
-
-          
-        </div><!-- close_write-method -->
 
       
         <div id="empty-3F-method" class="method-detail ">
@@ -432,7 +404,7 @@
             
             <div class="method-source-code" id="empty-3F-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 38</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">empty?</span>
   <span class="ruby-ivar">@size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
 <span class="ruby-keyword">end</span></pre>
@@ -444,6 +416,40 @@
 
           
         </div><!-- empty-3F-method -->
+
+      
+        <div id="mv-method" class="method-detail ">
+          <a name="method-i-mv"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">mv</span><span
+              class="method-args">(path)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="mv-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 67</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">mv</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-constant">File</span>.<span class="ruby-identifier">rename</span>(<span class="ruby-ivar">@path</span>, <span class="ruby-identifier">path</span>)
+  <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">path</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- mv-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- mv-method -->
 
       
         <div id="open-method" class="method-detail ">
@@ -465,7 +471,7 @@
             
             <div class="method-source-code" id="open-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 63</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 60</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">open</span>(&amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">pos</span> = <span class="ruby-value">0</span>
   <span class="ruby-keyword">yield</span> <span class="ruby-ivar">@file</span>
@@ -499,10 +505,10 @@
             
             <div class="method-source-code" id="purge-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 53</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">purge</span>
-  <span class="ruby-constant">File</span>.<span class="ruby-identifier">unlink</span>(<span class="ruby-ivar">@path</span>) <span class="ruby-keyword">rescue</span> <span class="ruby-keyword">nil</span>  <span class="ruby-comment"># TODO rescue?</span>
   <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-constant">File</span>.<span class="ruby-identifier">unlink</span>(<span class="ruby-ivar">@path</span>) <span class="ruby-keyword">rescue</span> <span class="ruby-keyword">nil</span>  <span class="ruby-comment"># TODO rescue?</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- purge-source -->
             
@@ -533,7 +539,7 @@
             
             <div class="method-source-code" id="read-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 58</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">read</span>
   <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">pos</span> = <span class="ruby-value">0</span>
   <span class="ruby-ivar">@file</span>.<span class="ruby-identifier">read</span>
@@ -567,7 +573,7 @@
             
             <div class="method-source-code" id="size-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 34</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 35</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">size</span>
   <span class="ruby-ivar">@size</span>
 <span class="ruby-keyword">end</span></pre>

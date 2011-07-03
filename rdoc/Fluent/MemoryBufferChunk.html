@@ -121,8 +121,6 @@
         
           <li><a href="../Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
         
-          <li><a href="../Fluent/BufferedOutput/WriterThread.html">Fluent::BufferedOutput::WriterThread</a></li>
-        
           <li><a href="../Fluent/Config.html">Fluent::Config</a></li>
         
           <li><a href="../Fluent/Config/Element.html">Fluent::Config::Element</a></li>
@@ -171,6 +169,8 @@
         
           <li><a href="../Fluent/OutputChain.html">Fluent::OutputChain</a></li>
         
+          <li><a href="../Fluent/OutputThread.html">Fluent::OutputThread</a></li>
+        
           <li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
         
           <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
@@ -198,6 +198,10 @@
           <li><a href="../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
         
           <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../Fluent/TimeSlicedFileOutput.html">Fluent::TimeSlicedFileOutput</a></li>
+        
+          <li><a href="../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
           <li><a href="../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
         
@@ -248,7 +252,7 @@
           
           <div class="method-heading">
             <span class="method-name">new</span><span
-              class="method-args">(data='')</span>
+              class="method-args">(key, data='')</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -262,9 +266,9 @@
             <div class="method-source-code" id="new-source">
 <pre>
 <span class="ruby-comment"># File lib/fluent/plugin/buf_memory.rb, line 22</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">data</span>=<span class="ruby-string">''</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">data</span>=<span class="ruby-string">''</span>)
   <span class="ruby-ivar">@data</span> = <span class="ruby-identifier">data</span>
-  <span class="ruby-keyword">super</span>()
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">key</span>)
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             

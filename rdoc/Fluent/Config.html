@@ -119,8 +119,6 @@
         
           <li><a href="../Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
         
-          <li><a href="../Fluent/BufferedOutput/WriterThread.html">Fluent::BufferedOutput::WriterThread</a></li>
-        
           <li><a href="../Fluent/Config.html">Fluent::Config</a></li>
         
           <li><a href="../Fluent/Config/Element.html">Fluent::Config::Element</a></li>
@@ -169,6 +167,8 @@
         
           <li><a href="../Fluent/OutputChain.html">Fluent::OutputChain</a></li>
         
+          <li><a href="../Fluent/OutputThread.html">Fluent::OutputThread</a></li>
+        
           <li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
         
           <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
@@ -196,6 +196,10 @@
           <li><a href="../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
         
           <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../Fluent/TimeSlicedFileOutput.html">Fluent::TimeSlicedFileOutput</a></li>
+        
+          <li><a href="../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
           <li><a href="../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
         
@@ -259,7 +263,7 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/config.rb, line 81</span>
+<span class="ruby-comment"># File lib/fluent/config.rb, line 99</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>=<span class="ruby-string">''</span>)
   <span class="ruby-constant">Element</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">''</span>, <span class="ruby-string">''</span>, {}, [])
 <span class="ruby-keyword">end</span></pre>
@@ -292,7 +296,7 @@
             
             <div class="method-source-code" id="parse-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/config.rb, line 75</span>
+<span class="ruby-comment"># File lib/fluent/config.rb, line 93</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">str</span>, <span class="ruby-identifier">fname</span>)
   <span class="ruby-identifier">lines</span> = <span class="ruby-identifier">str</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">&quot;\n&quot;</span>)
   <span class="ruby-identifier">i</span>, <span class="ruby-identifier">attrs</span>, <span class="ruby-identifier">elems</span> = <span class="ruby-identifier">parse_element</span>(<span class="ruby-string">'end'</span>, <span class="ruby-identifier">lines</span>, <span class="ruby-value">0</span>, <span class="ruby-identifier">fname</span>)
@@ -327,7 +331,7 @@
             
             <div class="method-source-code" id="read-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/config.rb, line 71</span>
+<span class="ruby-comment"># File lib/fluent/config.rb, line 89</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-identifier">parse</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">read</span>(<span class="ruby-identifier">path</span>), <span class="ruby-constant">File</span>.<span class="ruby-identifier">basename</span>(<span class="ruby-identifier">path</span>))
 <span class="ruby-keyword">end</span></pre>
@@ -360,7 +364,7 @@
             
             <div class="method-source-code" id="size_value-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/config.rb, line 85</span>
+<span class="ruby-comment"># File lib/fluent/config.rb, line 103</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">size_value</span>(<span class="ruby-identifier">str</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>
   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/([0-9]+)k/</span>
@@ -404,7 +408,7 @@
             
             <div class="method-source-code" id="time_value-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/config.rb, line 100</span>
+<span class="ruby-comment"># File lib/fluent/config.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">time_value</span>(<span class="ruby-identifier">str</span>)
   <span class="ruby-keyword">case</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_s</span>
   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/([0-9]+)s/</span>
@@ -413,6 +417,8 @@
     <span class="ruby-identifier">$~</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span> * <span class="ruby-value">60</span>
   <span class="ruby-keyword">when</span> <span class="ruby-regexp">/([0-9]+)h/</span>
     <span class="ruby-identifier">$~</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span> * <span class="ruby-value">60</span>*<span class="ruby-value">60</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-regexp">/([0-9]+)d/</span>
+    <span class="ruby-identifier">$~</span>[<span class="ruby-value">1</span>].<span class="ruby-identifier">to_i</span> * <span class="ruby-value">24</span>*<span class="ruby-value">60</span>*<span class="ruby-value">60</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">str</span>.<span class="ruby-identifier">to_f</span>
   <span class="ruby-keyword">end</span>

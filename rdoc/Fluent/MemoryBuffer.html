@@ -65,11 +65,17 @@
         <h3 class="section-header">Methods</h3>
         <ul class="link-list">
           
+          <li><a href="#method-i-before_shutdown">#before_shutdown</a></li>
+          
+          <li><a href="#method-i-clear-21">#clear!</a></li>
+          
           <li><a href="#method-i-configure">#configure</a></li>
           
-          <li><a href="#method-i-new_data">#new_data</a></li>
+          <li><a href="#method-i-enqueue">#enqueue</a></li>
           
-          <li><a href="#method-i-resume_queue">#resume_queue</a></li>
+          <li><a href="#method-i-new_chunk">#new_chunk</a></li>
+          
+          <li><a href="#method-i-resume">#resume</a></li>
           
         </ul>
       </div>
@@ -112,8 +118,6 @@
           <li><a href="../Fluent/BufferError.html">Fluent::BufferError</a></li>
         
           <li><a href="../Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
-        
-          <li><a href="../Fluent/BufferedOutput/WriterThread.html">Fluent::BufferedOutput::WriterThread</a></li>
         
           <li><a href="../Fluent/Config.html">Fluent::Config</a></li>
         
@@ -163,6 +167,8 @@
         
           <li><a href="../Fluent/OutputChain.html">Fluent::OutputChain</a></li>
         
+          <li><a href="../Fluent/OutputThread.html">Fluent::OutputThread</a></li>
+        
           <li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
         
           <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
@@ -190,6 +196,10 @@
           <li><a href="../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
         
           <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../Fluent/TimeSlicedFileOutput.html">Fluent::TimeSlicedFileOutput</a></li>
+        
+          <li><a href="../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
           <li><a href="../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
         
@@ -234,6 +244,78 @@
         <h3 class="section-header">Public Instance Methods</h3>
 
       
+        <div id="before_shutdown-method" class="method-detail ">
+          <a name="method-i-before_shutdown"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">before_shutdown</span><span
+              class="method-args">(out)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="before_shutdown-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_memory.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">before_shutdown</span>(<span class="ruby-identifier">out</span>)
+  <span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-ivar">@map</span>.<span class="ruby-identifier">each_key</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">push</span>(<span class="ruby-identifier">key</span>)
+    }
+    <span class="ruby-keyword">while</span> <span class="ruby-identifier">pop</span>(<span class="ruby-identifier">out</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- before_shutdown-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- before_shutdown-method -->
+
+      
+        <div id="clear-21-method" class="method-detail ">
+          <a name="method-i-clear-21"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">clear!</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="clear-21-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_memory.rb, line 79</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">clear!</span>
+  <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">clear</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- clear-21-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- clear-21-method -->
+
+      
         <div id="configure-method" class="method-detail ">
           <a name="method-i-configure"></a>
 
@@ -267,13 +349,13 @@
         </div><!-- configure-method -->
 
       
-        <div id="new_data-method" class="method-detail ">
-          <a name="method-i-new_data"></a>
+        <div id="enqueue-method" class="method-detail ">
+          <a name="method-i-enqueue"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">new_data</span><span
-              class="method-args">()</span>
+            <span class="method-name">enqueue</span><span
+              class="method-args">(chunk)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -284,28 +366,60 @@
             
 
             
-            <div class="method-source-code" id="new_data-source">
+            <div class="method-source-code" id="enqueue-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_memory.rb, line 62</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">new_data</span>
-  <span class="ruby-constant">MemoryBufferChunk</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_memory.rb, line 76</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">enqueue</span>(<span class="ruby-identifier">chunk</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- new_data-source -->
+            </div><!-- enqueue-source -->
             
           </div>
 
           
 
           
-        </div><!-- new_data-method -->
+        </div><!-- enqueue-method -->
 
       
-        <div id="resume_queue-method" class="method-detail ">
-          <a name="method-i-resume_queue"></a>
+        <div id="new_chunk-method" class="method-detail ">
+          <a name="method-i-new_chunk"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">resume_queue</span><span
+            <span class="method-name">new_chunk</span><span
+              class="method-args">(key)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="new_chunk-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_memory.rb, line 68</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">new_chunk</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-constant">MemoryBufferChunk</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">key</span>)
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- new_chunk-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- new_chunk-method -->
+
+      
+        <div id="resume-method" class="method-detail ">
+          <a name="method-i-resume"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">resume</span><span
               class="method-args">()</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
@@ -317,20 +431,20 @@
             
 
             
-            <div class="method-source-code" id="resume_queue-source">
+            <div class="method-source-code" id="resume-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_memory.rb, line 58</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">resume_queue</span>
-  <span class="ruby-keyword">return</span> [], <span class="ruby-identifier">new_data</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_memory.rb, line 72</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">resume</span>
+  <span class="ruby-keyword">return</span> [], {}
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- resume_queue-source -->
+            </div><!-- resume-source -->
             
           </div>
 
           
 
           
-        </div><!-- resume_queue-method -->
+        </div><!-- resume-method -->
 
       
       </div><!-- public-instance-method-details -->

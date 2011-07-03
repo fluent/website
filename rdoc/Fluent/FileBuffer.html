@@ -67,15 +67,19 @@
           
           <li><a href="#method-c-new">::new</a></li>
           
+          <li><a href="#method-i-clear-21">#clear!</a></li>
+          
           <li><a href="#method-i-configure">#configure</a></li>
           
-          <li><a href="#method-i-new_chunk_path">#new_chunk_path</a></li>
+          <li><a href="#method-i-decode_key">#decode_key</a></li>
           
-          <li><a href="#method-i-new_data">#new_data</a></li>
+          <li><a href="#method-i-encode_key">#encode_key</a></li>
           
-          <li><a href="#method-i-resume_queue">#resume_queue</a></li>
+          <li><a href="#method-i-enqueue">#enqueue</a></li>
           
-          <li><a href="#method-i-resume_queue_paths">#resume_queue_paths</a></li>
+          <li><a href="#method-i-new_chunk">#new_chunk</a></li>
+          
+          <li><a href="#method-i-resume">#resume</a></li>
           
           <li><a href="#method-i-start">#start</a></li>
           
@@ -120,8 +124,6 @@
           <li><a href="../Fluent/BufferError.html">Fluent::BufferError</a></li>
         
           <li><a href="../Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
-        
-          <li><a href="../Fluent/BufferedOutput/WriterThread.html">Fluent::BufferedOutput::WriterThread</a></li>
         
           <li><a href="../Fluent/Config.html">Fluent::Config</a></li>
         
@@ -171,6 +173,8 @@
         
           <li><a href="../Fluent/OutputChain.html">Fluent::OutputChain</a></li>
         
+          <li><a href="../Fluent/OutputThread.html">Fluent::OutputThread</a></li>
+        
           <li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
         
           <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
@@ -198,6 +202,10 @@
           <li><a href="../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
         
           <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../Fluent/TimeSlicedFileOutput.html">Fluent::TimeSlicedFileOutput</a></li>
+        
+          <li><a href="../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
           <li><a href="../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
         
@@ -233,29 +241,25 @@
       
 
       
+      <!-- Constants -->
+      <div id="constants-list" class="section">
+        <h3 class="section-header">Constants</h3>
+        <dl>
+        
+          <dt><a name="PATH_MATCH">PATH_MATCH</a></dt>
+          
+          <dd class="description"></dd>
+          
+        
+        </dl>
+      </div>
+      
 
       
       <!-- Attributes -->
       <div id="attribute-method-details" class="method-section section">
         <h3 class="section-header">Attributes</h3>
 
-        
-        <div id="dir-attribute-method" class="method-detail">
-          <a name="dir"></a>
-          
-          <a name="dir="></a>
-          
-          <div class="method-heading attribute-method-heading">
-            <span class="method-name">dir</span><span
-              class="attribute-access-type">[RW]</span>
-          </div>
-
-          <div class="method-description">
-          
-          
-          
-          </div>
-        </div>
         
         <div id="prefix-attribute-method" class="method-detail">
           <a name="prefix"></a>
@@ -319,8 +323,9 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 75</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 77</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">'uri'</span>
   <span class="ruby-keyword">super</span>
   <span class="ruby-ivar">@prefix</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@suffix</span> = <span class="ruby-keyword">nil</span>
@@ -339,6 +344,42 @@
     
       <div id="public-instance-method-details" class="method-section section">
         <h3 class="section-header">Public Instance Methods</h3>
+
+      
+        <div id="clear-21-method" class="method-detail ">
+          <a name="method-i-clear-21"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">clear!</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="clear-21-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">clear!</span>
+  <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">delete_if</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">chunk</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">purge</span>
+    <span class="ruby-keyword">true</span>
+  }
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- clear-21-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- clear-21-method -->
 
       
         <div id="configure-method" class="method-detail ">
@@ -360,7 +401,7 @@
             
             <div class="method-source-code" id="configure-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 83</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 86</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
   <span class="ruby-keyword">super</span>
 
@@ -370,7 +411,7 @@
       <span class="ruby-ivar">@suffix</span> = <span class="ruby-identifier">path</span>[<span class="ruby-identifier">pos</span><span class="ruby-operator">+</span><span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
     <span class="ruby-keyword">else</span>
       <span class="ruby-ivar">@prefix</span> = <span class="ruby-identifier">path</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.&quot;</span>
-      <span class="ruby-ivar">@suffix</span> = <span class="ruby-string">&quot;&quot;</span>
+      <span class="ruby-ivar">@suffix</span> = <span class="ruby-string">&quot;.log&quot;</span>
     <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">else</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConfigError</span>, <span class="ruby-string">&quot;'buffer_path' parameter is required on file buffer&quot;</span>
@@ -386,13 +427,13 @@
         </div><!-- configure-method -->
 
       
-        <div id="new_data-method" class="method-detail ">
-          <a name="method-i-new_data"></a>
+        <div id="enqueue-method" class="method-detail ">
+          <a name="method-i-enqueue"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">new_data</span><span
-              class="method-args">()</span>
+            <span class="method-name">enqueue</span><span
+              class="method-args">(chunk)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -403,29 +444,72 @@
             
 
             
-            <div class="method-source-code" id="new_data-source">
+            <div class="method-source-code" id="enqueue-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 112</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">new_data</span>
-  <span class="ruby-identifier">path</span> = <span class="ruby-identifier">new_chunk_path</span>
-  <span class="ruby-constant">FileBufferChunk</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>)
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 153</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">enqueue</span>(<span class="ruby-identifier">chunk</span>)
+  <span class="ruby-identifier">path</span> = <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">path</span>
+  <span class="ruby-identifier">mp</span> = <span class="ruby-identifier">path</span>[<span class="ruby-ivar">@prefix</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">..</span><span class="ruby-operator">-</span>(<span class="ruby-ivar">@suffix</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)]
+
+  <span class="ruby-identifier">m</span> = <span class="ruby-constant">PATH_MATCH</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">mp</span>)
+  <span class="ruby-identifier">encoded_key</span> = <span class="ruby-identifier">m</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">:</span> <span class="ruby-string">&quot;&quot;</span>
+  <span class="ruby-identifier">time16</span> = <span class="ruby-string">&quot;%016x&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>
+
+  <span class="ruby-identifier">path</span> = <span class="ruby-node">&quot;#{@prefix}#{encoded_key}_r#{time16}#{@suffix}&quot;</span>
+  <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">mv</span>(<span class="ruby-identifier">path</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- new_data-source -->
+            </div><!-- enqueue-source -->
             
           </div>
 
           
 
           
-        </div><!-- new_data-method -->
+        </div><!-- enqueue-method -->
 
       
-        <div id="resume_queue-method" class="method-detail ">
-          <a name="method-i-resume_queue"></a>
+        <div id="new_chunk-method" class="method-detail ">
+          <a name="method-i-new_chunk"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">resume_queue</span><span
+            <span class="method-name">new_chunk</span><span
+              class="method-args">(key)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="new_chunk-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 109</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">new_chunk</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">time16</span> = <span class="ruby-string">&quot;%016x&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>
+  <span class="ruby-identifier">encoded_key</span> = <span class="ruby-identifier">encode_key</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-identifier">path</span> = <span class="ruby-node">&quot;#{@prefix}#{encoded_key}_a#{time16}#{@suffix}&quot;</span>
+  <span class="ruby-constant">FileBufferChunk</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">path</span>)
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- new_chunk-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- new_chunk-method -->
+
+      
+        <div id="resume-method" class="method-detail ">
+          <a name="method-i-resume"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">resume</span><span
               class="method-args">()</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
@@ -437,24 +521,53 @@
             
 
             
-            <div class="method-source-code" id="resume_queue-source">
+            <div class="method-source-code" id="resume-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 104</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">resume_queue</span>
-  <span class="ruby-identifier">queue</span> = <span class="ruby-identifier">resume_queue_paths</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
-    <span class="ruby-constant">FileBufferChunk</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">path</span>)
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 116</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">resume</span>
+  <span class="ruby-identifier">maps</span> = []
+  <span class="ruby-identifier">queues</span> = []
+
+  <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-node">&quot;#{@prefix}*#{@suffix}&quot;</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">match</span> = <span class="ruby-identifier">path</span>[<span class="ruby-ivar">@prefix</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">..</span><span class="ruby-operator">-</span>(<span class="ruby-ivar">@suffix</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)]
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">m</span> = <span class="ruby-constant">PATH_MATCH</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">match</span>)
+      <span class="ruby-identifier">key</span> = <span class="ruby-identifier">decode_key</span>(<span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>])
+      <span class="ruby-identifier">ar</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">2</span>]
+      <span class="ruby-identifier">time16</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">3</span>].<span class="ruby-identifier">to_i</span>(<span class="ruby-value">16</span>)
+
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">ar</span> <span class="ruby-operator">==</span> <span class="ruby-string">'a'</span>
+        <span class="ruby-identifier">chunk</span> = <span class="ruby-constant">FileBufferChunk</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">path</span>, <span class="ruby-string">&quot;a+&quot;</span>)
+        <span class="ruby-identifier">maps</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">time16</span>, <span class="ruby-identifier">chunk</span>]
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">ar</span> <span class="ruby-operator">==</span> <span class="ruby-string">'r'</span>
+        <span class="ruby-identifier">chunk</span> = <span class="ruby-constant">FileBufferChunk</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">path</span>, <span class="ruby-string">&quot;r&quot;</span>)
+        <span class="ruby-identifier">queues</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">time16</span>, <span class="ruby-identifier">chunk</span>]
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
   }
-  <span class="ruby-identifier">top</span> = <span class="ruby-identifier">queue</span>.<span class="ruby-identifier">pop</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">new_data</span>
-  <span class="ruby-keyword">return</span> <span class="ruby-identifier">queue</span>, <span class="ruby-identifier">top</span>
+
+  <span class="ruby-identifier">map</span> = {}
+  <span class="ruby-identifier">maps</span>.<span class="ruby-identifier">sort_by</span> {<span class="ruby-operator">|</span>(<span class="ruby-identifier">time16</span>,<span class="ruby-identifier">chunk</span>)<span class="ruby-operator">|</span>
+    <span class="ruby-identifier">time16</span>
+  }.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span>(<span class="ruby-identifier">time16</span>,<span class="ruby-identifier">chunk</span>)<span class="ruby-operator">|</span>
+    <span class="ruby-identifier">map</span>[<span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">chunk</span>
+  }
+
+  <span class="ruby-identifier">queue</span> = <span class="ruby-identifier">queues</span>.<span class="ruby-identifier">sort_by</span> {<span class="ruby-operator">|</span>(<span class="ruby-identifier">time16</span>,<span class="ruby-identifier">chunk</span>)<span class="ruby-operator">|</span>
+    <span class="ruby-identifier">time16</span>
+  }.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span>(<span class="ruby-identifier">time16</span>,<span class="ruby-identifier">chunk</span>)<span class="ruby-operator">|</span>
+    <span class="ruby-identifier">chunk</span>
+  }
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">queue</span>, <span class="ruby-identifier">map</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- resume_queue-source -->
+            </div><!-- resume-source -->
             
           </div>
 
           
 
           
-        </div><!-- resume_queue-method -->
+        </div><!-- resume-method -->
 
       
         <div id="start-method" class="method-detail ">
@@ -476,9 +589,9 @@
             
             <div class="method-source-code" id="start-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 99</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 102</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span>
-  <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-ivar">@prefix</span>)
+  <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-ivar">@prefix</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;path&quot;</span>)
   <span class="ruby-keyword">super</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- start-source -->
@@ -497,13 +610,13 @@
         <h3 class="section-header">Protected Instance Methods</h3>
 
       
-        <div id="new_chunk_path-method" class="method-detail ">
-          <a name="method-i-new_chunk_path"></a>
+        <div id="decode_key-method" class="method-detail ">
+          <a name="method-i-decode_key"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">new_chunk_path</span><span
-              class="method-args">()</span>
+            <span class="method-name">decode_key</span><span
+              class="method-args">(encoded_key)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -514,30 +627,29 @@
             
 
             
-            <div class="method-source-code" id="new_chunk_path-source">
+            <div class="method-source-code" id="decode_key-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 118</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">new_chunk_path</span>
-  <span class="ruby-identifier">time16</span> = <span class="ruby-string">&quot;%016x&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>
-  <span class="ruby-identifier">path</span> = <span class="ruby-node">&quot;#{@prefix}#{time16}#{@suffix}&quot;</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 177</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">decode_key</span>(<span class="ruby-identifier">encoded_key</span>)
+              <span class="ruby-constant">URI</span>.<span class="ruby-identifier">decode</span>(<span class="ruby-identifier">encoded_key</span>, <span class="ruby-regexp">/[^-_.a-zA-Z0-9]/</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- new_chunk_path-source -->
+            </div><!-- decode_key-source -->
             
           </div>
 
           
 
           
-        </div><!-- new_chunk_path-method -->
+        </div><!-- decode_key-method -->
 
       
-        <div id="resume_queue_paths-method" class="method-detail ">
-          <a name="method-i-resume_queue_paths"></a>
+        <div id="encode_key-method" class="method-detail ">
+          <a name="method-i-encode_key"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">resume_queue_paths</span><span
-              class="method-args">()</span>
+            <span class="method-name">encode_key</span><span
+              class="method-args">(key)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -548,23 +660,20 @@
             
 
             
-            <div class="method-source-code" id="resume_queue_paths-source">
+            <div class="method-source-code" id="encode_key-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 123</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">resume_queue_paths</span>
-  <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-node">&quot;#{@prefix}*#{@suffix}&quot;</span>).<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">time16</span> = <span class="ruby-identifier">path</span>[<span class="ruby-ivar">@prefix</span>.<span class="ruby-identifier">length</span>,<span class="ruby-value">8</span>]
-    <span class="ruby-identifier">time16</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^[0-9a-f]{8}/</span>
-  }
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 173</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">encode_key</span>(<span class="ruby-identifier">key</span>)
+              <span class="ruby-constant">URI</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">key</span>, <span class="ruby-regexp">/[^-_.a-zA-Z0-9]/</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- resume_queue_paths-source -->
+            </div><!-- encode_key-source -->
             
           </div>
 
           
 
           
-        </div><!-- resume_queue_paths-method -->
+        </div><!-- encode_key-method -->
 
       
       </div><!-- protected-instance-method-details -->

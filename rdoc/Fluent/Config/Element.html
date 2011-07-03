@@ -69,7 +69,11 @@
           
           <li><a href="#method-i-2B">#+</a></li>
           
+          <li><a href="#method-i-5B-5D">#[]</a></li>
+          
           <li><a href="#method-i-add_element">#add_element</a></li>
+          
+          <li><a href="#method-i-check_not_fetched">#check_not_fetched</a></li>
           
           <li><a href="#method-i-to_s">#to_s</a></li>
           
@@ -114,8 +118,6 @@
           <li><a href="../../Fluent/BufferError.html">Fluent::BufferError</a></li>
         
           <li><a href="../../Fluent/BufferedOutput.html">Fluent::BufferedOutput</a></li>
-        
-          <li><a href="../../Fluent/BufferedOutput/WriterThread.html">Fluent::BufferedOutput::WriterThread</a></li>
         
           <li><a href="../../Fluent/Config.html">Fluent::Config</a></li>
         
@@ -165,6 +167,8 @@
         
           <li><a href="../../Fluent/OutputChain.html">Fluent::OutputChain</a></li>
         
+          <li><a href="../../Fluent/OutputThread.html">Fluent::OutputThread</a></li>
+        
           <li><a href="../../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
         
           <li><a href="../../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
@@ -192,6 +196,10 @@
           <li><a href="../../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
         
           <li><a href="../../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../../Fluent/TimeSlicedFileOutput.html">Fluent::TimeSlicedFileOutput</a></li>
+        
+          <li><a href="../../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
           <li><a href="../../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
         
@@ -285,6 +293,23 @@
           </div>
         </div>
         
+        <div id="used-attribute-method" class="method-detail">
+          <a name="used"></a>
+          
+          <a name="used="></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">used</span><span
+              class="attribute-access-type">[RW]</span>
+          </div>
+
+          <div class="method-description">
+          
+          
+          
+          </div>
+        </div>
+        
       </div><!-- attribute-method-details -->
       
 
@@ -300,7 +325,7 @@
           
           <div class="method-heading">
             <span class="method-name">new</span><span
-              class="method-args">(name, arg, attrs, elements)</span>
+              class="method-args">(name, arg, attrs, elements, used=[])</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -314,7 +339,7 @@
             <div class="method-source-code" id="new-source">
 <pre>
 <span class="ruby-comment"># File lib/fluent/config.rb, line 30</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">arg</span>, <span class="ruby-identifier">attrs</span>, <span class="ruby-identifier">elements</span>)
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">arg</span>, <span class="ruby-identifier">attrs</span>, <span class="ruby-identifier">elements</span>, <span class="ruby-identifier">used</span>=[])
   <span class="ruby-ivar">@name</span> = <span class="ruby-identifier">name</span>
   <span class="ruby-ivar">@arg</span> = <span class="ruby-identifier">arg</span>
   <span class="ruby-ivar">@elements</span> = <span class="ruby-identifier">elements</span>
@@ -322,6 +347,7 @@
   <span class="ruby-identifier">attrs</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">self</span>[<span class="ruby-identifier">k</span>] = <span class="ruby-identifier">v</span>
   }
+  <span class="ruby-ivar">@used</span> = <span class="ruby-identifier">used</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -358,9 +384,9 @@
             
             <div class="method-source-code" id="2B-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/config.rb, line 48</span>
+<span class="ruby-comment"># File lib/fluent/config.rb, line 49</span>
 <span class="ruby-keyword">def</span> <span class="ruby-operator">+</span>(<span class="ruby-identifier">o</span>)
-  <span class="ruby-constant">Element</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@name</span>.<span class="ruby-identifier">dup</span>, <span class="ruby-ivar">@arg</span>.<span class="ruby-identifier">dup</span>, <span class="ruby-identifier">o</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-keyword">self</span>), <span class="ruby-ivar">@elements</span><span class="ruby-operator">+</span><span class="ruby-identifier">o</span>.<span class="ruby-identifier">elements</span>)
+  <span class="ruby-constant">Element</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@name</span>.<span class="ruby-identifier">dup</span>, <span class="ruby-ivar">@arg</span>.<span class="ruby-identifier">dup</span>, <span class="ruby-identifier">o</span>.<span class="ruby-identifier">merge</span>(<span class="ruby-keyword">self</span>), <span class="ruby-ivar">@elements</span><span class="ruby-operator">+</span><span class="ruby-identifier">o</span>.<span class="ruby-identifier">elements</span>, <span class="ruby-ivar">@used</span><span class="ruby-operator">+</span><span class="ruby-identifier">o</span>.<span class="ruby-identifier">used</span>)
 <span class="ruby-keyword">end</span></pre>
             </div><!-- 2B-source -->
             
@@ -370,6 +396,40 @@
 
           
         </div><!-- 2B-method -->
+
+      
+        <div id="5B-5D-method" class="method-detail ">
+          <a name="method-i-5B-5D"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">[]</span><span
+              class="method-args">(key)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="5B-5D-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/config.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-operator">[]</span>(<span class="ruby-identifier">key</span>)
+  <span class="ruby-ivar">@used</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">key</span>
+  <span class="ruby-keyword">super</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- 5B-5D-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- 5B-5D-method -->
 
       
         <div id="add_element-method" class="method-detail ">
@@ -391,7 +451,7 @@
             
             <div class="method-source-code" id="add_element-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/config.rb, line 42</span>
+<span class="ruby-comment"># File lib/fluent/config.rb, line 43</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">add_element</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">arg</span>=<span class="ruby-string">''</span>)
   <span class="ruby-identifier">e</span> = <span class="ruby-constant">Element</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">arg</span>, {}, [])
   <span class="ruby-ivar">@elements</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">e</span>
@@ -405,6 +465,46 @@
 
           
         </div><!-- add_element-method -->
+
+      
+        <div id="check_not_fetched-method" class="method-detail ">
+          <a name="method-i-check_not_fetched"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">check_not_fetched</span><span
+              class="method-args">(&block)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="check_not_fetched-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/config.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">check_not_fetched</span>(&amp;<span class="ruby-identifier">block</span>)
+  <span class="ruby-identifier">each_key</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@used</span>.<span class="ruby-identifier">include?</span>(<span class="ruby-identifier">key</span>)
+      <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">key</span>, <span class="ruby-keyword">self</span>)
+    <span class="ruby-keyword">end</span>
+  }
+  <span class="ruby-ivar">@elements</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">e</span>.<span class="ruby-identifier">check_not_fetched</span>(&amp;<span class="ruby-identifier">block</span>)
+  }
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- check_not_fetched-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- check_not_fetched-method -->
 
       
         <div id="to_s-method" class="method-detail ">
@@ -426,9 +526,10 @@
             
             <div class="method-source-code" id="to_s-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/config.rb, line 52</span>
+<span class="ruby-comment"># File lib/fluent/config.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">to_s</span>(<span class="ruby-identifier">nest</span> = <span class="ruby-value">0</span>)
   <span class="ruby-identifier">indent</span> = <span class="ruby-string">&quot;  &quot;</span>*<span class="ruby-identifier">nest</span>
+  <span class="ruby-identifier">nindent</span> = <span class="ruby-string">&quot;  &quot;</span>*(<span class="ruby-identifier">nest</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)
   <span class="ruby-identifier">out</span> = <span class="ruby-string">&quot;&quot;</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@arg</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-identifier">out</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{indent}&lt;#{@name}&gt;\n&quot;</span>
@@ -436,7 +537,7 @@
     <span class="ruby-identifier">out</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{indent}&lt;#{@name} #{@name}&gt;\n&quot;</span>
   <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">each_pair</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">out</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{indent}#{k} = #{v}\n&quot;</span>
+    <span class="ruby-identifier">out</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{nindent}#{k} = #{v}\n&quot;</span>
   }
   <span class="ruby-ivar">@elements</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">out</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-identifier">nest</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)

@@ -5,7 +5,7 @@
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 
-  <title>Class: Fluent::Buffer</title>
+  <title>Class: Fluent::TimeSlicedFileOutput</title>
 
   <link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
 
@@ -34,8 +34,8 @@
         <div class="section-body">
           <ul>
           
-            <li><a href="../lib/fluent/buffer_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-              class="thickbox" title="lib/fluent/buffer.rb">lib/fluent/buffer.rb</a></li>
+            <li><a href="../lib/fluent/plugin/out_time_file_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/out_time_file.rb">lib/fluent/plugin/out_time_file.rb</a></li>
           
           </ul>
         </div>
@@ -50,7 +50,7 @@
       <div id="parent-class-section" class="section">
         <h3 class="section-header">Parent</h3>
         
-        <p class="link">Object</p>
+        <p class="link"><a href="TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></p>
         
       </div>
       
@@ -67,13 +67,11 @@
           
           <li><a href="#method-c-new">::new</a></li>
           
-          <li><a href="#method-i-before_shutdown">#before_shutdown</a></li>
-          
           <li><a href="#method-i-configure">#configure</a></li>
           
-          <li><a href="#method-i-shutdown">#shutdown</a></li>
+          <li><a href="#method-i-format">#format</a></li>
           
-          <li><a href="#method-i-start">#start</a></li>
+          <li><a href="#method-i-write">#write</a></li>
           
         </ul>
       </div>
@@ -220,7 +218,7 @@
   </div>
 
   <div id="documentation">
-    <h1 class="class">Fluent::Buffer</h1>
+    <h1 class="class">Fluent::TimeSlicedFileOutput</h1>
 
     <div id="description" class="description">
       
@@ -234,6 +232,30 @@
 
       
 
+      
+      <!-- Attributes -->
+      <div id="attribute-method-details" class="method-section section">
+        <h3 class="section-header">Attributes</h3>
+
+        
+        <div id="path-attribute-method" class="method-detail">
+          <a name="path"></a>
+          
+          <a name="path="></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">path</span><span
+              class="attribute-access-type">[RW]</span>
+          </div>
+
+          <div class="method-description">
+          
+          
+          
+          </div>
+        </div>
+        
+      </div><!-- attribute-method-details -->
       
 
       <!-- Methods -->
@@ -261,8 +283,9 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/buffer.rb, line 26</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_time_file.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+  <span class="ruby-keyword">super</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -278,38 +301,6 @@
     
       <div id="public-instance-method-details" class="method-section section">
         <h3 class="section-header">Public Instance Methods</h3>
-
-      
-        <div id="before_shutdown-method" class="method-detail ">
-          <a name="method-i-before_shutdown"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">before_shutdown</span><span
-              class="method-args">(out)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            
-            
-
-            
-            <div class="method-source-code" id="before_shutdown-source">
-<pre>
-<span class="ruby-comment"># File lib/fluent/buffer.rb, line 38</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">before_shutdown</span>(<span class="ruby-identifier">out</span>)
-<span class="ruby-keyword">end</span></pre>
-            </div><!-- before_shutdown-source -->
-            
-          </div>
-
-          
-
-          
-        </div><!-- before_shutdown-method -->
 
       
         <div id="configure-method" class="method-detail ">
@@ -331,8 +322,17 @@
             
             <div class="method-source-code" id="configure-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/buffer.rb, line 29</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_time_file.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
+  <span class="ruby-keyword">super</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'path'</span>]
+    <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">path</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConfigError</span>, <span class="ruby-string">&quot;'path' parameter is required on file output&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-comment"># TODO compression</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- configure-source -->
             
@@ -344,13 +344,13 @@
         </div><!-- configure-method -->
 
       
-        <div id="shutdown-method" class="method-detail ">
-          <a name="method-i-shutdown"></a>
+        <div id="format-method" class="method-detail ">
+          <a name="method-i-format"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">shutdown</span><span
-              class="method-args">()</span>
+            <span class="method-name">format</span><span
+              class="method-args">(tag, event)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -361,28 +361,36 @@
             
 
             
-            <div class="method-source-code" id="shutdown-source">
+            <div class="method-source-code" id="format-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/buffer.rb, line 35</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">shutdown</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_time_file.rb, line 42</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">format</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">event</span>)
+  <span class="ruby-comment"># TODO foramt</span>
+  <span class="ruby-comment">#msg = e.record.map {|k,v|</span>
+  <span class="ruby-comment">#   k = &quot;\&quot;#{k}\&quot;&quot; if k.include?(' ')</span>
+  <span class="ruby-comment">#   v = &quot;\&quot;#{v}\&quot;&quot; if v.include?(' ')</span>
+  <span class="ruby-comment">#   &quot;#{k}=#{v}&quot;</span>
+  <span class="ruby-comment">#}.join(' ')</span>
+  <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">event</span>.<span class="ruby-identifier">record</span>.<span class="ruby-identifier">to_json</span>
+  <span class="ruby-node">&quot;#{Time.at(event.time).to_s} #{tag}: #{msg}\n&quot;</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- shutdown-source -->
+            </div><!-- format-source -->
             
           </div>
 
           
 
           
-        </div><!-- shutdown-method -->
+        </div><!-- format-method -->
 
       
-        <div id="start-method" class="method-detail ">
-          <a name="method-i-start"></a>
+        <div id="write-method" class="method-detail ">
+          <a name="method-i-write"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">start</span><span
-              class="method-args">()</span>
+            <span class="method-name">write</span><span
+              class="method-args">(chunk)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -393,19 +401,24 @@
             
 
             
-            <div class="method-source-code" id="start-source">
+            <div class="method-source-code" id="write-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/buffer.rb, line 32</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_time_file.rb, line 53</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">write</span>(<span class="ruby-identifier">chunk</span>)
+  <span class="ruby-identifier">path</span> = <span class="ruby-node">&quot;#{@path}_#{chunk.key}&quot;</span>
+  <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&quot;a&quot;</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">read</span>)
+  }
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- start-source -->
+            </div><!-- write-source -->
             
           </div>
 
           
 
           
-        </div><!-- start-method -->
+        </div><!-- write-method -->
 
       
       </div><!-- public-instance-method-details -->
