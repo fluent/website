@@ -109,6 +109,36 @@ time_format
   See `Time#strptime <http://www.ruby-doc.org/core-1.9/classes/Time.html#M000326>`_.
 
 
+syslog
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**syslog** inplut plugin receives logs from syslogd using UDP.
+
+**configuration**::
+
+    <source>
+      type syslog
+      port 5140
+      bind 0.0.0.0
+      tag my.syslog
+    </source>
+
+port
+  port to listen on. Default is 5140.
+
+bind
+  bind address to listen on. Default is 0.0.0.0 (all addresses).
+
+tag (required)
+  Tag of the event. This parameter is required.
+  The syslog input plugin adds facility and priority to the tag. So the actual tag will be like *my.syslog.kern.info* in above configuration.
+
+To transfer logs from syslogd to fluent, add following line on /etc/syslog.conf or /etc/rsyslog.conf::
+
+   # match pattern    fluent host:port
+   *.*                @127.0.0.1:5140
+
+
 tcp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -268,6 +298,20 @@ localtime
   Uses local time zone for slicing. Default is UTC.
 
 
+stdout
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**stdout** output plugin prints event to the console. This is NOT buffered plugin.
+
+**configuration**::
+
+    <match pattern>
+      type stdout
+    </match>
+
+This output plugin is for debugging.
+
+
 tcp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -326,20 +370,6 @@ copy
 
 <store>
   Specifies output plugin. The format is same as <match> directive.
-
-
-stdout
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-**stdout** output plugin prints event to the console. This is NOT buffered plugin.
-
-**configuration**::
-
-    <match pattern>
-      type stdout
-    </match>
-
-This output plugin is for debugging.
 
 
 .. _buffer_plugin:

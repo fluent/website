@@ -53,22 +53,23 @@
 <li><a class="reference internal" href="#input-plugins" id="id5">Input plugins</a><ul>
 <li><a class="reference internal" href="#http" id="id6">http</a></li>
 <li><a class="reference internal" href="#tail" id="id7">tail</a></li>
-<li><a class="reference internal" href="#tcp" id="id8">tcp</a></li>
-<li><a class="reference internal" href="#unix" id="id9">unix</a></li>
+<li><a class="reference internal" href="#syslog" id="id8">syslog</a></li>
+<li><a class="reference internal" href="#tcp" id="id9">tcp</a></li>
+<li><a class="reference internal" href="#unix" id="id10">unix</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#output-plugins" id="id10">Output plugins</a><ul>
-<li><a class="reference internal" href="#file" id="id11">file</a></li>
-<li><a class="reference internal" href="#time-file" id="id12">time_file</a></li>
-<li><a class="reference internal" href="#id1" id="id13">tcp</a></li>
-<li><a class="reference internal" href="#id2" id="id14">unix</a></li>
-<li><a class="reference internal" href="#copy" id="id15">copy</a></li>
-<li><a class="reference internal" href="#stdout" id="id16">stdout</a></li>
+<li><a class="reference internal" href="#output-plugins" id="id11">Output plugins</a><ul>
+<li><a class="reference internal" href="#file" id="id12">file</a></li>
+<li><a class="reference internal" href="#time-file" id="id13">time_file</a></li>
+<li><a class="reference internal" href="#stdout" id="id14">stdout</a></li>
+<li><a class="reference internal" href="#id1" id="id15">tcp</a></li>
+<li><a class="reference internal" href="#id2" id="id16">unix</a></li>
+<li><a class="reference internal" href="#copy" id="id17">copy</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#buffer-plugins" id="id17">Buffer plugins</a><ul>
-<li><a class="reference internal" href="#memory" id="id18">memory</a></li>
-<li><a class="reference internal" href="#id3" id="id19">file</a></li>
+<li><a class="reference internal" href="#buffer-plugins" id="id18">Buffer plugins</a><ul>
+<li><a class="reference internal" href="#memory" id="id19">memory</a></li>
+<li><a class="reference internal" href="#id3" id="id20">file</a></li>
 </ul>
 </li>
 </ul>
@@ -180,6 +181,31 @@ time_format %b %d %H:%M:%S</pre>
 <dd>Format of the time field. This parameter is required only if the format includes &#8216;time&#8217; capture and it can&#8217;t be parsed automatically.
 See <a class="reference external" href="http://www.ruby-doc.org/core-1.9/classes/Time.html#M000326">Time#strptime</a>.</dd>
 </dl>
+</div>
+<div class="section" id="syslog">
+<h3>syslog<a class="headerlink" href="#syslog" title="Permalink to this headline">¶</a></h3>
+<p><strong>syslog</strong> inplut plugin receives logs from syslogd using UDP.</p>
+<p><strong>configuration</strong>:</p>
+<div class="highlight-python"><pre>&lt;source&gt;
+  type syslog
+  port 5140
+  bind 0.0.0.0
+  tag my.syslog
+&lt;/source&gt;</pre>
+</div>
+<dl class="docutils">
+<dt>port</dt>
+<dd>port to listen on. Default is 5140.</dd>
+<dt>bind</dt>
+<dd>bind address to listen on. Default is 0.0.0.0 (all addresses).</dd>
+<dt>tag (required)</dt>
+<dd>Tag of the event. This parameter is required.
+The syslog input plugin adds facility and priority to the tag. So the actual tag will be like <em>my.syslog.kern.info</em> in above configuration.</dd>
+</dl>
+<p>To transfer logs from syslogd to fluent, add following line on /etc/syslog.conf or /etc/rsyslog.conf:</p>
+<div class="highlight-python"><pre># match pattern    fluent host:port
+*.*                @127.0.0.1:5140</pre>
+</div>
 </div>
 <div class="section" id="tcp">
 <h3>tcp<a class="headerlink" href="#tcp" title="Permalink to this headline">¶</a></h3>
@@ -330,6 +356,16 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 <dd>Uses local time zone for slicing. Default is UTC.</dd>
 </dl>
 </div>
+<div class="section" id="stdout">
+<h3>stdout<a class="headerlink" href="#stdout" title="Permalink to this headline">¶</a></h3>
+<p><strong>stdout</strong> output plugin prints event to the console. This is NOT buffered plugin.</p>
+<p><strong>configuration</strong>:</p>
+<div class="highlight-python"><pre>&lt;match pattern&gt;
+  type stdout
+&lt;/match&gt;</pre>
+</div>
+<p>This output plugin is for debugging.</p>
+</div>
 <div class="section" id="id1">
 <h3>tcp<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p><strong>file</strong> buffered output plugin forwards events to another fluent server.</p>
@@ -383,16 +419,6 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 <dd>Specifies output plugin. The format is same as &lt;match&gt; directive.</dd>
 </dl>
 </div>
-<div class="section" id="stdout">
-<h3>stdout<a class="headerlink" href="#stdout" title="Permalink to this headline">¶</a></h3>
-<p><strong>stdout</strong> output plugin prints event to the console. This is NOT buffered plugin.</p>
-<p><strong>configuration</strong>:</p>
-<div class="highlight-python"><pre>&lt;match pattern&gt;
-  type stdout
-&lt;/match&gt;</pre>
-</div>
-<p>This output plugin is for debugging.</p>
-</div>
 </div>
 <div class="section" id="buffer-plugins">
 <span id="buffer-plugin"></span><h2>Buffer plugins<a class="headerlink" href="#buffer-plugins" title="Permalink to this headline">¶</a></h2>
@@ -438,6 +464,7 @@ This parameter is required.</dd>
 <li><a class="reference external" href="#input-plugins">Input plugins</a><ul>
 <li><a class="reference external" href="#http">http</a></li>
 <li><a class="reference external" href="#tail">tail</a></li>
+<li><a class="reference external" href="#syslog">syslog</a></li>
 <li><a class="reference external" href="#tcp">tcp</a></li>
 <li><a class="reference external" href="#unix">unix</a></li>
 </ul>
@@ -445,10 +472,10 @@ This parameter is required.</dd>
 <li><a class="reference external" href="#output-plugins">Output plugins</a><ul>
 <li><a class="reference external" href="#file">file</a></li>
 <li><a class="reference external" href="#time-file">time_file</a></li>
+<li><a class="reference external" href="#stdout">stdout</a></li>
 <li><a class="reference external" href="#id1">tcp</a></li>
 <li><a class="reference external" href="#id2">unix</a></li>
 <li><a class="reference external" href="#copy">copy</a></li>
-<li><a class="reference external" href="#stdout">stdout</a></li>
 </ul>
 </li>
 <li><a class="reference external" href="#buffer-plugins">Buffer plugins</a><ul>
