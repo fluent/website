@@ -15,66 +15,50 @@ Writing plugin
 
 Put following script to $install_prefix/etc/fluent/plugin directory::
 
-    # out_hourly_mongo.rb
-    class HourlyMongoOutput < Fluent::BufferedOutput
-      Fluent::Plugin.register_output('hourly_mongo', self)
+    # out_count_to_mongo.rb
+    class CountToMongoOutput < Fluent::TimeSlicedOutput
+      Fluent::Plugin.register_output('count_to_mongo', self)
     
       def initialize
         require 'mongo'
-        @host = nil
-        @port = 27017
-        @database = nil
-        @collection = nil
+        super
       end
     
       def configure(conf)
-        super(conf)
+        super
     
         @host = conf['host']
-        unless @host
-          raise Fluent::ConfigError, "'host' parameter is required on hourly_mongo output"
-        end
-    
         @port = (conf['port'] || @port).to_i
-    
         @database = conf['database']
-        unless @database
-          raise Fluent::ConfigError, "'database' parameter is required on hourly_mongo output"
-        end
-    
         @collection = conf['collection']
-        unless @collection
-          raise Fluent::ConfigError, "'collection' parameter is required on hourly_mongo output"
+
+        if !@host || !@database || !@collection
+          raise Fluent::ConfigError, "'host', 'database' and 'collection' parameters are required on count_to_mongo output"
         end
       end
     
       def start
-        super()
+        super
         @coll = Mongo::Connection.new(@host, @port)[@database][@collection]
       end
     
       def format(tag, event)
-        [event.time, event.record['path']].to_msgpack
+        event.record['path'].to_msgpack
       end
     
-      HOUR = 60*60
-    
       def write(chunk)
-        counts = {}  # (time/HOUR,path) => count
+        time = chunk.key  # get slike key (like "2011063023")
+    
+        counts = {}      # {path => count}
         chunk.open {|io|
-          u = MessagePack::Unpacker.new(io)
-          u.each {|time,path|
-            next if !time || !path
-            key = [time/HOUR, path]
-            n = counts[key] || 0
-            counts[key] = n + 1
+          MessagePack::Unpacker.new(io).each {|path|
+            counts[path] = counts.fetch(path, 0) + 1
           } rescue EOFError
         }
     
-        counts.each_pair {|(hour,path),count|
-          time = hour*HOUR
+        counts.each_pair {|path,count|
           obj = {"time"=>time, "path"=>path, "count"=>count}
-          $log.trace { "hourly_mongo: inserting #{obj.to_json}" }
+          $log.trace { "count_to_mongo: inserting #{obj.to_json}" }
           @coll.insert(obj)
           # FIXME get last error?
         }
@@ -94,19 +78,19 @@ $install_prefix/etc/fluent/fluent.conf::
       tag apache.access
     </source>
     
-    # configure hourly_mongo plugin
+    # configure count_to_mongo plugin
     <match apache.access>
-      type hourly_mongo
+      type count_to_mongo
       host 127.0.0.1
       database test
-      collection hourly
+      collection hourly_access
     
       # use file-based buffer
       buffer_type file
-      buffer_path /tmp/fluent/hourly_mongo.*.buffer
+      buffer_path /tmp/fluent/count_to_mongo.*.buffer
     
-      # write out buffered chunk every 1 hour
-      buffer_flush_interval 1h
+      # write out buffered chunk hourly
+      time_slice hourly
     
       # expand limit of the chunk size from 1MB (default) to 100MB
       buffer_chunk_limit 100m

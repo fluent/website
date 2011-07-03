@@ -97,6 +97,35 @@ Extend **Fluent::BufferedOutput** class and implement following methods::
     end
 
 
+Time sliced output plugins
+------------------------------------
+
+Extend **Fluent::TimeSlicedOutput** class and implement following methods::
+
+    class SomeOutput < Fluent::TimeSlicedOutput
+      Fluent::Plugin.register_output('NAME', self)
+
+      # configure(conf), start(), shutdown() and format(tag, event) are
+      # same as BufferedOutput.
+
+      def format(tag, event)
+        [tag, event.time, event.record].to_msgpack
+      end
+
+      # Writes a buffer chunk to a files or network.
+      # `chunk` is a buffer chunk that includes multiple formatted
+      # events. You can use `data = chunk.read` to get all events and
+      # `chunk.open {|io| }` to get IO object.
+      # Use `chunk.key` to get sliced time.
+      def write(chunk)
+        puts chunk.key  #=> e.g. "20110602" if daily
+        MessagePack::Unpacker.new.feed_each(chunk.read) {|obj|
+          p obj
+        }
+      end
+    end
+
+
 Non-buffered output plugins
 ------------------------------------
 

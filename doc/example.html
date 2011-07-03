@@ -5,13 +5,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Examples &mdash; fluent v0.9.1 documentation</title>
+    <title>Examples &mdash; fluent v0.9.2 documentation</title>
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '#',
-        VERSION:     '0.9.1',
+        VERSION:     '0.9.2',
         COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -19,7 +19,7 @@
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="fluent v0.9.1 documentation" href="index.html" />
+    <link rel="top" title="fluent v0.9.2 documentation" href="index.html" />
     <link rel="prev" title="Writing plugins" href="devel.html" /> 
   </head>
   <body>
@@ -32,7 +32,7 @@
         <li class="right" >
           <a href="devel.html" title="Writing plugins"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">fluent v0.9.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluent v0.9.2 documentation</a> &raquo;</li> 
       </ul>
     </div>  
 
@@ -57,66 +57,50 @@
 <div class="section" id="writing-plugin">
 <h3>Writing plugin<a class="headerlink" href="#writing-plugin" title="Permalink to this headline">¶</a></h3>
 <p>Put following script to $install_prefix/etc/fluent/plugin directory:</p>
-<div class="highlight-python"><pre># out_hourly_mongo.rb
-class HourlyMongoOutput &lt; Fluent::BufferedOutput
-  Fluent::Plugin.register_output('hourly_mongo', self)
+<div class="highlight-python"><pre># out_count_to_mongo.rb
+class CountToMongoOutput &lt; Fluent::TimeSlicedOutput
+  Fluent::Plugin.register_output('count_to_mongo', self)
 
   def initialize
     require 'mongo'
-    @host = nil
-    @port = 27017
-    @database = nil
-    @collection = nil
+    super
   end
 
   def configure(conf)
-    super(conf)
+    super
 
     @host = conf['host']
-    unless @host
-      raise Fluent::ConfigError, "'host' parameter is required on hourly_mongo output"
-    end
-
     @port = (conf['port'] || @port).to_i
-
     @database = conf['database']
-    unless @database
-      raise Fluent::ConfigError, "'database' parameter is required on hourly_mongo output"
-    end
-
     @collection = conf['collection']
-    unless @collection
-      raise Fluent::ConfigError, "'collection' parameter is required on hourly_mongo output"
+
+    if !@host || !@database || !@collection
+      raise Fluent::ConfigError, "'host', 'database' and 'collection' parameters are required on count_to_mongo output"
     end
   end
 
   def start
-    super()
+    super
     @coll = Mongo::Connection.new(@host, @port)[@database][@collection]
   end
 
   def format(tag, event)
-    [event.time, event.record['path']].to_msgpack
+    event.record['path'].to_msgpack
   end
 
-  HOUR = 60*60
-
   def write(chunk)
-    counts = {}  # (time/HOUR,path) =&gt; count
+    time = chunk.key  # get slike key (like "2011063023")
+
+    counts = {}      # {path =&gt; count}
     chunk.open {|io|
-      u = MessagePack::Unpacker.new(io)
-      u.each {|time,path|
-        next if !time || !path
-        key = [time/HOUR, path]
-        n = counts[key] || 0
-        counts[key] = n + 1
+      MessagePack::Unpacker.new(io).each {|path|
+        counts[path] = counts.fetch(path, 0) + 1
       } rescue EOFError
     }
 
-    counts.each_pair {|(hour,path),count|
-      time = hour*HOUR
+    counts.each_pair {|path,count|
       obj = {"time"=&gt;time, "path"=&gt;path, "count"=&gt;count}
-      $log.trace { "hourly_mongo: inserting #{obj.to_json}" }
+      $log.trace { "count_to_mongo: inserting #{obj.to_json}" }
       @coll.insert(obj)
       # FIXME get last error?
     }
@@ -135,19 +119,19 @@ end</pre>
   tag apache.access
 &lt;/source&gt;
 
-# configure hourly_mongo plugin
+# configure count_to_mongo plugin
 &lt;match apache.access&gt;
-  type hourly_mongo
+  type count_to_mongo
   host 127.0.0.1
   database test
-  collection hourly
+  collection hourly_access
 
   # use file-based buffer
   buffer_type file
-  buffer_path /tmp/fluent/hourly_mongo.*.buffer
+  buffer_path /tmp/fluent/count_to_mongo.*.buffer
 
-  # write out buffered chunk every 1 hour
-  buffer_flush_interval 1h
+  # write out buffered chunk hourly
+  time_slice hourly
 
   # expand limit of the chunk size from 1MB (default) to 100MB
   buffer_chunk_limit 100m
@@ -209,7 +193,7 @@ end</pre>
         <li class="right" >
           <a href="devel.html" title="Writing plugins"
              >previous</a> |</li>
-        <li><a href="index.html">fluent v0.9.1 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluent v0.9.2 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
