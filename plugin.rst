@@ -73,7 +73,7 @@ tail
 **configuration**::
 
     <source>
-      type http
+      type tail
       path /var/log/httpd-access.log
       tag apache.access
       format apache
@@ -85,7 +85,7 @@ path (required)
 tag (required)
   Tag of the event. This parameter is required.
 
-format
+format (required)
   Format of the log. It's name of a template or regexp surround by '/'.
 
   Regexp must have at least one named captures (?<NAME>PATTERN). If the regexp has capture named 'time', it is used as a time of the event. You can specify format of the time using *time_format* parameter. If the regexp has capture named 'tag', *tag* parameter + captured tag is used as the tag of the event.
