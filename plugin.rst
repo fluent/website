@@ -133,7 +133,7 @@ tag (required)
   Tag of the event. This parameter is required.
   The syslog input plugin adds facility and priority to the tag. So the actual tag will be like *my.syslog.kern.info* in above configuration.
 
-To transfer logs from syslogd to fluent, add following line on /etc/syslog.conf or /etc/rsyslog.conf::
+To transfer logs from syslogd to fluent, add following line to /etc/syslog.conf or /etc/rsyslog.conf::
 
    # match pattern    fluent host:port
    *.*                @127.0.0.1:5140
@@ -319,11 +319,11 @@ tcp
 
 **configuration**::
 
-    <source>
+    <match pattern>
       type tcp
       host 192.168.1.3
       port 24224
-    </source>
+    </match>
 
 host (required)
   IP address or host name to send events. This parameters is required.
@@ -339,10 +339,10 @@ unix
 
 **configuration**::
 
-    <source>
+    <match pattern>
       type unix
       path /var/run/fluent.sock
-    </source>
+    </match>
 
 path (required)
   Path to the UNIX domain socket. This parameters is required.

@@ -166,9 +166,9 @@ Run ``fluentd`` with ``-vv`` option to show debug messages::
 
     $ fluentd -vv
 
-**stdout** and **copy** output plugins will be useful to debug.  **stdout** output plugin dumps matched events to the console. It can be used as following::
+**stdout** and **copy** output plugins will be useful for debugging.  **stdout** output plugin dumps matched events to the console. It can be used as following::
 
-    # You want to debug thid plugin
+    # You want to debug this plugin
     <source>
       type your_custom_input_plugin
     </source>
