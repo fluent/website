@@ -46,7 +46,7 @@ To submit events, use ``Fluent::Engine.emit(tag, event)`` method as following::
     tag = "myapp.access"
     time = Time.now.to_i
     record = {"message"=>"body"}
-    Fluent::Engine.emit(tag, Fluent::Event.new(tag, record))
+    Fluent::Engine.emit(tag, Fluent::Event.new(time, record))
 
 RDoc of the Engine class is available from `Fluent RDoc <http://fluent.github.com/rdoc/Fluent/Engine.html>`_.
 
