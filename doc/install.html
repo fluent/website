@@ -119,9 +119,22 @@ $ gem install pkg/fluent-*.gem</pre>
 </div>
 <div class="section" id="confirm-installation">
 <span id="install-confirm"></span><h2>Confirm installation<a class="headerlink" href="#confirm-installation" title="Permalink to this headline">¶</a></h2>
-<p>Try to run <tt class="docutils literal"><span class="pre">fluentd</span></tt> and submit a log using <tt class="docutils literal"><span class="pre">fluent-cat</span></tt> command as following:</p>
-<div class="highlight-python"><pre>$ fluentd -vv &amp;
+<p>To confirm installation, create a temporal configuration file whose content is like below, and save it as &#8216;fluent_tmp.conf&#8217;:</p>
+<div class="highlight-python"><pre>&lt;source&gt;
+  type tcp
+  port 24224
+&lt;/source&gt;
+
+&lt;match *&gt;
+  type stdout
+&lt;/match&gt;</pre>
+</div>
+<p>Then, run following commands:</p>
+<div class="highlight-python"><pre>$ fluentd -c fluent_tmp.conf -vv &amp;
 $ echo '{"json":"message"}' | fluent-cat debug.test</pre>
+</div>
+<p>The first command <tt class="docutils literal"><span class="pre">fluentd</span> <span class="pre">-c</span> <span class="pre">fluent_tmp.conf</span> <span class="pre">-vv</span></tt> starts fluentd with the prepared configuration file. <tt class="docutils literal"><span class="pre">-vv</span></tt> option is for verbose logging. The second command sends fluentd a message &#8216;{&#8220;json&#8221;:&#8221;message&#8221;}&#8217; with a tag &#8220;debug.test&#8221;. If the installation was successful, fluentd will output a log containing a tag and a message passed for fluent-cat:</p>
+<div class="highlight-python"><pre>2011-07-10 16:49:50 +0900 debug.test: {"json":"message"}</pre>
 </div>
 </div>
 <div class="section" id="updating">

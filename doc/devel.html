@@ -91,7 +91,7 @@ end</pre>
 <div class="highlight-python"><pre>tag = "myapp.access"
 time = Time.now.to_i
 record = {"message"=&gt;"body"}
-Fluent::Engine.emit(tag, Fluent::Event.new(tag, record))</pre>
+Fluent::Engine.emit(tag, Fluent::Event.new(time, record))</pre>
 </div>
 <p>RDoc of the Engine class is available from <a class="reference external" href="http://fluent.github.com/rdoc/Fluent/Engine.html">Fluent RDoc</a>.</p>
 </div>
