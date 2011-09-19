@@ -24,6 +24,7 @@ There are 3 types of plugins:
 
 You can add your own plugin. See :ref:`devel`.
 
+
 .. _input_plugin:
 
 Input plugins
@@ -193,7 +194,7 @@ path
 
 .. _output_plugin:
 
-Output plugins
+Buffered output plugins
 ------------------------------------
 
 Most of output plugins are *buffered* which accumulates new events on memory or files.
@@ -358,6 +359,9 @@ path (required)
   Path to the UNIX domain socket. This parameters is required.
 
 
+Non-buffered output plugins
+------------------------------------
+
 copy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -455,4 +459,18 @@ It uses file to store buffer chunks.
 buffer_path (required)
   Path to store buffer chunks. '*' is replaced with random characters.
   This parameter is required.
+
+
+Searching plugins
+------------------------------------
+
+You can use following command to search plugins released on RubyGems::
+
+   $ fluent-gem search -r fluent-plugin
+
+Type following command to install it::
+
+   $ sudo fluent-gem install fluent-plugin-scribe
+
+Next step: :ref:`devel`
 
