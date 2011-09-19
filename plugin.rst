@@ -174,6 +174,7 @@ port
 bind
   bind address to listen on. Default is 0.0.0.0 (all addresses).
 
+
 unix
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -301,20 +302,6 @@ localtime
 ..   Uses local time zone for slicing. Default is UTC.
 
 
-stdout
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-**stdout** output plugin prints event to the console. This is NOT buffered plugin.
-
-**configuration**::
-
-    <match pattern>
-      type stdout
-    </match>
-
-This output plugin is for debugging.
-
-
 tcp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -365,7 +352,7 @@ Non-buffered output plugins
 copy
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**copy** output plugin copies events to multiple outputs. This is NOT buffered plugin.
+**copy** output plugin copies events to multiple outputs.
 
 **configuration**::
 
@@ -388,10 +375,11 @@ copy
 <store>
   Specifies output plugin. The format is same as <match> directive.
 
+
 roundrobin
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**roundrobin** output plugin distributes events to multiple outputs using round-robin algorithm. This is NOT buffered plugin.
+**roundrobin** output plugin distributes events to multiple outputs using round-robin algorithm.
 
 **configuration**::
 
@@ -413,6 +401,21 @@ roundrobin
 
 <store>
   Specifies output plugin. The format is same as <match> directive.
+
+
+stdout
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**stdout** output plugin prints event to the console.
+
+**configuration**::
+
+    <match pattern>
+      type stdout
+    </match>
+
+This output plugin is for debugging.
+
 
 null
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -460,6 +463,8 @@ buffer_path (required)
   Path to store buffer chunks. '*' is replaced with random characters.
   This parameter is required.
 
+
+.. _search_plugin:
 
 Searching plugins
 ------------------------------------

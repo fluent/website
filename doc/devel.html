@@ -6,13 +6,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Writing plugins &mdash; fluent v0.9.10 documentation</title>
+    <title>Writing plugins &mdash; fluent v0.9.11 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '#',
-        VERSION:     '0.9.10',
+        VERSION:     '0.9.11',
         COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -20,7 +20,7 @@
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="fluent v0.9.10 documentation" href="index.html" />
+    <link rel="top" title="fluent v0.9.11 documentation" href="index.html" />
     <link rel="next" title="Examples" href="example.html" />
     <link rel="prev" title="Plugins" href="plugin.html" /> 
   </head>
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="plugin.html" title="Plugins"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">fluent v0.9.10 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluent v0.9.11 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -45,7 +45,7 @@
             <h3><a href="index.html">Table Of Contents</a></h3>
             <ul>
 <li><a class="reference external" href="#">Writing plugins</a><ul>
-<li><a class="reference external" href="#installing-plugins">Installing plugins</a></li>
+<li><a class="reference external" href="#installing-custom-plugins">Installing custom plugins</a></li>
 <li><a class="reference external" href="#input-plugins">Input plugins</a></li>
 <li><a class="reference external" href="#buffered-output-plugins">Buffered output plugins</a></li>
 <li><a class="reference external" href="#non-buffered-output-plugins">Non-buffered output plugins</a></li>
@@ -91,7 +91,7 @@
 <span id="devel"></span><h1>Writing plugins<a class="headerlink" href="#writing-plugins" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#installing-plugins" id="id1">Installing plugins</a></li>
+<li><a class="reference internal" href="#installing-custom-plugins" id="id1">Installing custom plugins</a></li>
 <li><a class="reference internal" href="#input-plugins" id="id2">Input plugins</a></li>
 <li><a class="reference internal" href="#buffered-output-plugins" id="id3">Buffered output plugins</a></li>
 <li><a class="reference internal" href="#non-buffered-output-plugins" id="id4">Non-buffered output plugins</a></li>
@@ -99,10 +99,10 @@
 <li><a class="reference internal" href="#debugging-plugins" id="id6">Debugging plugins</a></li>
 </ul>
 </div>
-<div class="section" id="installing-plugins">
-<h2>Installing plugins<a class="headerlink" href="#installing-plugins" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="installing-custom-plugins">
+<h2>Installing custom plugins<a class="headerlink" href="#installing-custom-plugins" title="Permalink to this headline">¶</a></h2>
 <p>To install a plugin, put a ruby script to <tt class="docutils literal"><span class="pre">/etc/fluent/plugin</span></tt> directory.</p>
-<p>Or you can create gem package that includes <tt class="docutils literal"><span class="pre">lib/fluent/plugin/&lt;TYPE&gt;_&lt;NAME&gt;.rb</span></tt> file. <em>TYPE</em> is <tt class="docutils literal"><span class="pre">in</span></tt> for input plugins, <tt class="docutils literal"><span class="pre">out</span></tt> for output plugins and <tt class="docutils literal"><span class="pre">buf</span></tt> for buffer plugins. It&#8217;s like <tt class="docutils literal"><span class="pre">lib/fluent/plugin/out_mail.rb</span></tt>. The packaged gem can be distributed and installed using RubyGems.</p>
+<p>Or you can create gem package that includes <tt class="docutils literal"><span class="pre">lib/fluent/plugin/&lt;TYPE&gt;_&lt;NAME&gt;.rb</span></tt> file. <em>TYPE</em> is <tt class="docutils literal"><span class="pre">in</span></tt> for input plugins, <tt class="docutils literal"><span class="pre">out</span></tt> for output plugins and <tt class="docutils literal"><span class="pre">buf</span></tt> for buffer plugins. It&#8217;s like <tt class="docutils literal"><span class="pre">lib/fluent/plugin/out_mail.rb</span></tt>. The packaged gem can be distributed and installed using RubyGems. See <a class="reference external" href="plugin.html#search-plugin"><em>Searching plugins</em></a>.</p>
 </div>
 <div class="section" id="input-plugins">
 <h2>Input plugins<a class="headerlink" href="#input-plugins" title="Permalink to this headline">¶</a></h2>
@@ -291,7 +291,7 @@ end</pre>
         <li class="right" >
           <a href="plugin.html" title="Plugins"
              >previous</a> |</li>
-        <li><a href="index.html">fluent v0.9.10 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluent v0.9.11 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

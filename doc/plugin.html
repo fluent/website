@@ -6,13 +6,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Plugins &mdash; fluent v0.9.10 documentation</title>
+    <title>Plugins &mdash; fluent v0.9.11 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '#',
-        VERSION:     '0.9.10',
+        VERSION:     '0.9.11',
         COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -20,7 +20,7 @@
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="fluent v0.9.10 documentation" href="index.html" />
+    <link rel="top" title="fluent v0.9.11 documentation" href="index.html" />
     <link rel="next" title="Writing plugins" href="devel.html" />
     <link rel="prev" title="Configuration" href="config.html" /> 
   </head>
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="config.html" title="Configuration"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">fluent v0.9.10 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluent v0.9.11 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -56,7 +56,6 @@
 </li>
 <li><a class="reference external" href="#buffered-output-plugins">Buffered output plugins</a><ul>
 <li><a class="reference external" href="#file">file</a></li>
-<li><a class="reference external" href="#stdout">stdout</a></li>
 <li><a class="reference external" href="#id1">tcp</a></li>
 <li><a class="reference external" href="#id2">unix</a></li>
 </ul>
@@ -64,6 +63,7 @@
 <li><a class="reference external" href="#non-buffered-output-plugins">Non-buffered output plugins</a><ul>
 <li><a class="reference external" href="#copy">copy</a></li>
 <li><a class="reference external" href="#roundrobin">roundrobin</a></li>
+<li><a class="reference external" href="#stdout">stdout</a></li>
 <li><a class="reference external" href="#null">null</a></li>
 </ul>
 </li>
@@ -124,14 +124,14 @@
 </li>
 <li><a class="reference internal" href="#buffered-output-plugins" id="id11">Buffered output plugins</a><ul>
 <li><a class="reference internal" href="#file" id="id12">file</a></li>
-<li><a class="reference internal" href="#stdout" id="id13">stdout</a></li>
-<li><a class="reference internal" href="#id1" id="id14">tcp</a></li>
-<li><a class="reference internal" href="#id2" id="id15">unix</a></li>
+<li><a class="reference internal" href="#id1" id="id13">tcp</a></li>
+<li><a class="reference internal" href="#id2" id="id14">unix</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#non-buffered-output-plugins" id="id16">Non-buffered output plugins</a><ul>
-<li><a class="reference internal" href="#copy" id="id17">copy</a></li>
-<li><a class="reference internal" href="#roundrobin" id="id18">roundrobin</a></li>
+<li><a class="reference internal" href="#non-buffered-output-plugins" id="id15">Non-buffered output plugins</a><ul>
+<li><a class="reference internal" href="#copy" id="id16">copy</a></li>
+<li><a class="reference internal" href="#roundrobin" id="id17">roundrobin</a></li>
+<li><a class="reference internal" href="#stdout" id="id18">stdout</a></li>
 <li><a class="reference internal" href="#null" id="id19">null</a></li>
 </ul>
 </li>
@@ -403,16 +403,6 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 <dd>Uses local time zone for path formatting. Default is UTC.</dd>
 </dl>
 </div>
-<div class="section" id="stdout">
-<h3>stdout<a class="headerlink" href="#stdout" title="Permalink to this headline">¶</a></h3>
-<p><strong>stdout</strong> output plugin prints event to the console. This is NOT buffered plugin.</p>
-<p><strong>configuration</strong>:</p>
-<div class="highlight-python"><pre>&lt;match pattern&gt;
-  type stdout
-&lt;/match&gt;</pre>
-</div>
-<p>This output plugin is for debugging.</p>
-</div>
 <div class="section" id="id1">
 <h3>tcp<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
 <p><strong>file</strong> buffered output plugin forwards events to another fluent server.</p>
@@ -456,7 +446,7 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 <h2>Non-buffered output plugins<a class="headerlink" href="#non-buffered-output-plugins" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="copy">
 <h3>copy<a class="headerlink" href="#copy" title="Permalink to this headline">¶</a></h3>
-<p><strong>copy</strong> output plugin copies events to multiple outputs. This is NOT buffered plugin.</p>
+<p><strong>copy</strong> output plugin copies events to multiple outputs.</p>
 <p><strong>configuration</strong>:</p>
 <div class="highlight-python"><pre>&lt;match pattern&gt;
   type copy
@@ -481,7 +471,7 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 </div>
 <div class="section" id="roundrobin">
 <h3>roundrobin<a class="headerlink" href="#roundrobin" title="Permalink to this headline">¶</a></h3>
-<p><strong>roundrobin</strong> output plugin distributes events to multiple outputs using round-robin algorithm. This is NOT buffered plugin.</p>
+<p><strong>roundrobin</strong> output plugin distributes events to multiple outputs using round-robin algorithm.</p>
 <p><strong>configuration</strong>:</p>
 <div class="highlight-python"><pre>&lt;match pattern&gt;
   type roundrobin
@@ -503,6 +493,16 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 <dt>&lt;store&gt;</dt>
 <dd>Specifies output plugin. The format is same as &lt;match&gt; directive.</dd>
 </dl>
+</div>
+<div class="section" id="stdout">
+<h3>stdout<a class="headerlink" href="#stdout" title="Permalink to this headline">¶</a></h3>
+<p><strong>stdout</strong> output plugin prints event to the console.</p>
+<p><strong>configuration</strong>:</p>
+<div class="highlight-python"><pre>&lt;match pattern&gt;
+  type stdout
+&lt;/match&gt;</pre>
+</div>
+<p>This output plugin is for debugging.</p>
 </div>
 <div class="section" id="null">
 <h3>null<a class="headerlink" href="#null" title="Permalink to this headline">¶</a></h3>
@@ -544,7 +544,7 @@ This parameter is required.</dd>
 </div>
 </div>
 <div class="section" id="searching-plugins">
-<h2>Searching plugins<a class="headerlink" href="#searching-plugins" title="Permalink to this headline">¶</a></h2>
+<span id="search-plugin"></span><h2>Searching plugins<a class="headerlink" href="#searching-plugins" title="Permalink to this headline">¶</a></h2>
 <p>You can use following command to search plugins released on RubyGems:</p>
 <div class="highlight-python"><pre>$ fluent-gem search -r fluent-plugin</pre>
 </div>
@@ -573,7 +573,7 @@ This parameter is required.</dd>
         <li class="right" >
           <a href="config.html" title="Configuration"
              >previous</a> |</li>
-        <li><a href="index.html">fluent v0.9.10 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluent v0.9.11 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
