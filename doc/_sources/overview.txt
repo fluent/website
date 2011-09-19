@@ -9,35 +9,36 @@ Overview
 Architecture
 ------------------------------------
 
-Fluent collects events from various data sources and write tem to files, database or other storages::
+Fluent collects events from various data sources and write tem to files, databases or other storages::
 
-    Web apps  ---+                +--> file
-                 |                |
-                 +-->          ---+
-    /var/log  ------>  fluent  ------> mail
-                 +-->          ---+
-                 |                |
-    apache    ----                +--> fluent
+    +-------------------------------------------+
+    |                                           |
+    |  Web apps  ---+                +--> file  |
+    |               |                |          |
+    |               +-->          ---+          |
+    |  /var/log  ------>  fluent  ------> mail  |
+    |               +-->          ---+          |
+    |               |                |          |
+    |  apache    ---+                +--> S3    |
+    |                                           |
+    +-------------------------------------------+
 
 Fluent also supports log transfer::
 
     Web server
     +--------+
-    | fluent -------
-    +--------+|     |
-     +--------+     |
+    | fluent -------+
+    +--------+      |
                     |
-    Proxy server    |    Log server, Amazon S3, HDFS, ...
+    Proxy server    |
     +--------+      +--> +--------+
-    | fluent ----------> | fluent ||
-    +--------+|     +--> +--------+|
-     +--------+     |     +--------+
+    | fluent ----------> | fluent |
+    +--------+      +--> +--------+
                     |
     Database server |
     +--------+      |
-    | fluent ---------> mail
-    +--------+|
-     +--------+
+    | fluent -------+
+    +--------+
 
 An event collected consists of *tag*, *time* and *record*. Tag is a string separated with '.' (e.g. myapp.access). It is used to categorize events. Time is a UNIX time when the event occurs. Record is a JSON object.
 

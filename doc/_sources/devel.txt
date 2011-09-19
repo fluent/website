@@ -21,9 +21,12 @@ Input plugins
 Extend **Fluent::Input** class and implement following methods::
 
     class SomeInput < Fluent::Input
+      # Register plugin first. NAME is the name of this plugin
+      # which is used in the configuration file.
       Fluent::Plugin.register_input('NAME', self)
 
-      # `conf` is a Hash that includes configuration parameters.
+      # This method is called before starting.
+      # 'conf' is a Hash that includes configuration parameters.
       # If the configuration is invalid, raise Fluent::ConfigError.
       def configure(conf)
         @port = conf['port']
@@ -31,17 +34,19 @@ Extend **Fluent::Input** class and implement following methods::
       end
 
       # This method is called when starting.
-      # Open sockets or files here and create a Thread.
+      # Open sockets or files and create a thread here.
       def start
+        ...
       end
 
       # This method is called when shutting down.
-      # Shutdown the thread and Close sockets or files here.
+      # Shutdown the thread and close sockets or files here.
       def shutdown
+        ...
       end
     end
 
-To submit events, use ``Fluent::Engine.emit(tag, event)`` method as following::
+To submit events, use ``Fluent::Engine.emit(tag, event)`` method, where ``tag`` is the String and ``event`` is a ``Fluent::Event`` object::
 
     tag = "myapp.access"
     time = Time.now.to_i
@@ -57,9 +62,12 @@ Buffered output plugins
 Extend **Fluent::BufferedOutput** class and implement following methods::
 
     class SomeOutput < Fluent::BufferedOutput
+      # Register plugin first. NAME is the name of this plugin
+      # which is used in the configuration file.
       Fluent::Plugin.register_output('NAME', self)
 
-      # `conf` is a Hash that includes configuration parameters.
+      # This method is called before starting.
+      # 'conf' is a Hash that includes configuration parameters.
       # If the configuration is invalid, raise Fluent::ConfigError.
       def configure(conf)
         @path = conf['path']
@@ -68,27 +76,31 @@ Extend **Fluent::BufferedOutput** class and implement following methods::
 
       # This method is called when starting.
       # Open sockets or files here.
-      # Don't forgate call super()
+      # Don't forget to call super()
       def start
         super()
+        ...
       end
 
       # This method is called when shutting down.
       # Shutdown the thread and Close sockets or files here.
-      # Don't forgate call super()
+      # Don't forget to call super()
       def shutdown
         super()
+        ...
       end
 
+      # This method is called when an event is reached.
       # Convert event and tag to a raw string.
       def format(tag, event)
         [tag, event.time, event.record].to_json + "\n"
       end
 
-      # Writes a buffer chunk to a files or network.
-      # `chunk` is a buffer chunk that includes multiple formatted
+      # This method is called every flush interval. rite the buffer chunk
+      # to files or databases here.
+      # 'chunk' is a buffer chunk that includes multiple formatted
       # events. You can use `data = chunk.read` to get all events and
-      # `chunk.open {|io| }` to get IO object.
+      # 'chunk.open {|io| ... }' to get IO object.
       def write(chunk)
         objs = chunk.read.split("\n").map {|raw|
           JSON.load(raw)
@@ -97,33 +109,33 @@ Extend **Fluent::BufferedOutput** class and implement following methods::
     end
 
 
-Time sliced output plugins
-------------------------------------
-
-Extend **Fluent::TimeSlicedOutput** class and implement following methods::
-
-    class SomeOutput < Fluent::TimeSlicedOutput
-      Fluent::Plugin.register_output('NAME', self)
-
-      # configure(conf), start(), shutdown() and format(tag, event) are
-      # same as BufferedOutput.
-
-      def format(tag, event)
-        [tag, event.time, event.record].to_msgpack
-      end
-
-      # Writes a buffer chunk to a files or network.
-      # `chunk` is a buffer chunk that includes multiple formatted
-      # events. You can use `data = chunk.read` to get all events and
-      # `chunk.open {|io| }` to get IO object.
-      # Use `chunk.key` to get sliced time.
-      def write(chunk)
-        puts chunk.key  #=> e.g. "20110602" if daily
-        MessagePack::Unpacker.new.feed_each(chunk.read) {|obj|
-          p obj
-        }
-      end
-    end
+.. Time sliced output plugins
+.. ------------------------------------
+.. 
+.. Extend **Fluent::TimeSlicedOutput** class and implement following methods::
+.. 
+..     class SomeOutput < Fluent::TimeSlicedOutput
+..       Fluent::Plugin.register_output('NAME', self)
+.. 
+..       # configure(conf), start(), shutdown() and format(tag, event) are
+..       # same as BufferedOutput.
+.. 
+..       def format(tag, event)
+..         [tag, event.time, event.record].to_msgpack
+..       end
+.. 
+..       # Writes a buffer chunk to a files or network.
+..       # `chunk` is a buffer chunk that includes multiple formatted
+..       # events. You can use `data = chunk.read` to get all events and
+..       # `chunk.open {|io| }` to get IO object.
+..       # Use `chunk.key` to get sliced time.
+..       def write(chunk)
+..         puts chunk.key  #=> e.g. "20110602" if daily
+..         MessagePack::Unpacker.new.feed_each(chunk.read) {|obj|
+..           p obj
+..         }
+..       end
+..     end
 
 
 Non-buffered output plugins
@@ -132,15 +144,30 @@ Non-buffered output plugins
 Extend **Fluent::Output** class and implement following methods::
 
     class SomeOutput < Fluent::Output
+      # Register plugin first. NAME is the name of this plugin
+      # which is used in the configuration file.
+      Fluent::Plugin.register_output('NAME', self)
+
+      # This method is called before starting.
       def configure(conf)
+        ...
       end
     
+      # This method is called when starting.
       def start
+        ...
       end
     
+      # This method is called when shutting down.
       def shutdown
+        ...
       end
     
+      # This method is called when an event is reached.
+      # 'es' is a Fluent::EventStream object that includes multiple events.
+      # You can use 'es.each {|event| ... }' to retrieve events.
+      # 'chain' is an object that manages transaction. Call 'chain.next' at
+      # appropriate point and rollback if it raises exception.
       def emit(tag, es, chain)
         chain.next
         es.each {|event|
@@ -149,9 +176,6 @@ Extend **Fluent::Output** class and implement following methods::
       end
     end
 
-``emit`` outputs events provided by ``es.each`` method (**es** is **EventStream**).
-``chain.next`` in the emit is used in the CopyOutput. To write logs transactionally, call it appropriate point.
-
 
 Buffer plugins
 ------------------------------------
@@ -159,14 +183,14 @@ Buffer plugins
 TODO
 
 
-Debug
+Debugging plugins
 ------------------------------------
 
 Run ``fluentd`` with ``-vv`` option to show debug messages::
 
     $ fluentd -vv
 
-**stdout** and **copy** output plugins will be useful for debugging.  **stdout** output plugin dumps matched events to the console. It can be used as following::
+**stdout** and **copy** output plugins is useful for debugging. **stdout** output plugin dumps matched events to the console. It can be used as following::
 
     # You want to debug this plugin
     <source>

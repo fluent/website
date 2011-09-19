@@ -50,7 +50,7 @@
       <div id="parent-class-section" class="section">
         <h3 class="section-header">Parent</h3>
         
-        <p class="link"><a href="Output.html">Fluent::Output</a></p>
+        <p class="link"><a href="MultiOutput.html">Fluent::MultiOutput</a></p>
         
       </div>
       
@@ -73,6 +73,8 @@
           
           <li><a href="#method-i-next_bucket">#next_bucket</a></li>
           
+          <li><a href="#method-i-outputs">#outputs</a></li>
+          
           <li><a href="#method-i-shutdown">#shutdown</a></li>
           
           <li><a href="#method-i-start">#start</a></li>
@@ -86,6 +88,15 @@
 
     <div id="project-metadata">
       
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Files</h3>
+        <ul>
+        
+          <li class="file"><a href="../README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
       
 
       <div id="classindex-section" class="section project-section">
@@ -147,11 +158,17 @@
         
           <li><a href="../Fluent/HttpInput/Handler.html">Fluent::HttpInput::Handler</a></li>
         
+          <li><a href="../Fluent/HttpInput/KeepaliveManager.html">Fluent::HttpInput::KeepaliveManager</a></li>
+        
+          <li><a href="../Fluent/HttpInput/KeepaliveManager/TimerValue.html">Fluent::HttpInput::KeepaliveManager::TimerValue</a></li>
+        
           <li><a href="../Fluent/Input.html">Fluent::Input</a></li>
         
           <li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
         
           <li><a href="../Fluent/Log.html">Fluent::Log</a></li>
+        
+          <li><a href="../Fluent/Log/TTYColor.html">Fluent::Log::TTYColor</a></li>
         
           <li><a href="../Fluent/Match.html">Fluent::Match</a></li>
         
@@ -160,6 +177,8 @@
           <li><a href="../Fluent/MemoryBuffer.html">Fluent::MemoryBuffer</a></li>
         
           <li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
+        
+          <li><a href="../Fluent/MultiOutput.html">Fluent::MultiOutput</a></li>
         
           <li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
         
@@ -173,15 +192,15 @@
         
           <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
         
-          <li><a href="../Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
-        
           <li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
         
           <li><a href="../Fluent/StreamInput.html">Fluent::StreamInput</a></li>
         
-          <li><a href="../Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
+          <li><a href="../Fluent/StreamInput/Handler.html">Fluent::StreamInput::Handler</a></li>
         
           <li><a href="../Fluent/StreamOutput.html">Fluent::StreamOutput</a></li>
+        
+          <li><a href="../Fluent/StreamOutput/ReformatWriter.html">Fluent::StreamOutput::ReformatWriter</a></li>
         
           <li><a href="../Fluent/SyslogInput.html">Fluent::SyslogInput</a></li>
         
@@ -189,7 +208,7 @@
         
           <li><a href="../Fluent/TailInput.html">Fluent::TailInput</a></li>
         
-          <li><a href="../Fluent/TailInput/Tailer.html">Fluent::TailInput::Tailer</a></li>
+          <li><a href="../Fluent/TailInput/Handler.html">Fluent::TailInput::Handler</a></li>
         
           <li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
         
@@ -307,7 +326,7 @@
 <span class="ruby-comment"># File lib/fluent/plugin/out_bucket.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
   <span class="ruby-identifier">conf</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">e</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-string">'bucket'</span>
+    <span class="ruby-identifier">e</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-string">'store'</span>
   }.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">output</span> = <span class="ruby-constant">Plugin</span>.<span class="ruby-identifier">new_output</span>(<span class="ruby-identifier">e</span>.<span class="ruby-identifier">arg</span>)
     <span class="ruby-identifier">output</span>.<span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span><span class="ruby-operator">+</span><span class="ruby-identifier">e</span>)
@@ -358,6 +377,39 @@
 
           
         </div><!-- emit-method -->
+
+      
+        <div id="outputs-method" class="method-detail ">
+          <a name="method-i-outputs"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">outputs</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="outputs-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/out_bucket.rb, line 58</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">outputs</span>
+  <span class="ruby-ivar">@buckets</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- outputs-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- outputs-method -->
 
       
         <div id="shutdown-method" class="method-detail ">
@@ -455,7 +507,7 @@
             
             <div class="method-source-code" id="next_bucket-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/out_bucket.rb, line 59</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_bucket.rb, line 63</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">next_bucket</span>
   <span class="ruby-ivar">@rr</span> = <span class="ruby-value">0</span> <span class="ruby-keyword">if</span> (<span class="ruby-ivar">@rr</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>) <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@buckets</span>.<span class="ruby-identifier">size</span>
 <span class="ruby-keyword">end</span></pre>

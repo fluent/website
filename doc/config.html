@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -5,13 +6,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Configuration &mdash; fluent v0.9.3 documentation</title>
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <title>Configuration &mdash; fluent v0.9.10 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '#',
-        VERSION:     '0.9.3',
+        VERSION:     '0.9.10',
         COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -19,7 +20,7 @@
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="fluent v0.9.3 documentation" href="index.html" />
+    <link rel="top" title="fluent v0.9.10 documentation" href="index.html" />
     <link rel="next" title="Plugins" href="plugin.html" />
     <link rel="prev" title="Installation" href="install.html" /> 
   </head>
@@ -36,105 +37,9 @@
         <li class="right" >
           <a href="install.html" title="Installation"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">fluent v0.9.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluent v0.9.10 documentation</a> &raquo;</li> 
       </ul>
-    </div>  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body">
-            
-  <div class="section" id="configuration">
-<span id="config"></span><h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
-<p>You can control the flow of event stream using the configuration file. It is stored on $install_prefix/etc/fluent/fluent.conf.
-It describes the format of the file.</p>
-<div class="contents local topic" id="contents">
-<ul class="simple">
-<li><a class="reference internal" href="#configuration-file" id="id1">Configuration file</a><ul>
-<li><a class="reference internal" href="#source-directive" id="id2">&lt;source&gt; directive</a></li>
-<li><a class="reference internal" href="#match-directive" id="id3">&lt;match&gt; directive</a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#init-scripts" id="id4">Init scripts</a><ul>
-<li><a class="reference internal" href="#ubuntu-upstart" id="id5">Ubuntu upstart</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="section" id="configuration-file">
-<h2>Configuration file<a class="headerlink" href="#configuration-file" title="Permalink to this headline">¶</a></h2>
-<p>Configuration file consists of <strong>&lt;source&gt;</strong> directives and <strong>&lt;match&gt;</strong> directives.</p>
-<p><strong>&lt;source&gt;</strong> describes an entrance of events, like <tt class="docutils literal"><span class="pre">http</span></tt> or <tt class="docutils literal"><span class="pre">tcp</span></tt>.</p>
-<p><strong>&lt;match&gt;</strong> describes the match pattern of events and an exit of the matched events, like <tt class="docutils literal"><span class="pre">myapp.accesslog.*</span></tt> to <tt class="docutils literal"><span class="pre">file</span></tt> or <tt class="docutils literal"><span class="pre">system.error.*</span></tt> to <tt class="docutils literal"><span class="pre">mail</span></tt>.</p>
-<p>Overview of the configuration file will be like as following:</p>
-<div class="highlight-python"><pre># Read events from 24224/tcp
-&lt;source&gt;
-  type tcp
-  port 24224
-&lt;/source&gt;
-
-# http://this.host:9880/myapp.access?json={"event":"data"}
-&lt;source&gt;
-  type http
-  path 9880
-&lt;/source&gt;
-
-# Match events tagged with "myapp.access" and
-# store them to /var/log/fluent/access.%Y-%m-%d
-&lt;match myapp.access&gt;
-  type file
-  path /var/log/fluent/access
-&lt;/match&gt;
-
-&lt;match myapp.log.*&gt;
-  type file
-  format /var/log/fluent/myapp.%Y-%m-%d.log
-
-  buffer_type file
-  buffer_path /var/log/fluent/myapp
-&lt;/match&gt;</pre>
-</div>
-<div class="section" id="source-directive">
-<h3>&lt;source&gt; directive<a class="headerlink" href="#source-directive" title="Permalink to this headline">¶</a></h3>
-<p>&lt;source&gt; directive must have <tt class="docutils literal"><span class="pre">type</span></tt> parameter that specifies name of the input plugin.</p>
-<p>Next step: <a class="reference external" href="plugin.html#input-plugin"><em>Input plugins</em></a></p>
-</div>
-<div class="section" id="match-directive">
-<h3>&lt;match&gt; directive<a class="headerlink" href="#match-directive" title="Permalink to this headline">¶</a></h3>
-<p>&lt;source&gt; directive must have match pattern and <tt class="docutils literal"><span class="pre">type</span></tt> parameter that specifies name of the output plugin.</p>
-<p>Next step: <a class="reference external" href="plugin.html#output-plugin"><em>Output plugins</em></a></p>
-</div>
-</div>
-<div class="section" id="init-scripts">
-<h2>Init scripts<a class="headerlink" href="#init-scripts" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="ubuntu-upstart">
-<h3>Ubuntu upstart<a class="headerlink" href="#ubuntu-upstart" title="Permalink to this headline">¶</a></h3>
-<p>Put the file on <tt class="docutils literal"><span class="pre">$install_prefix/etc/init/fluent</span></tt>:</p>
-<div class="highlight-python"><pre>description "Fluent event collector"
-author "Sadayuki Furuhashi"
-
-start on (net-device-up and local-filesystems and runlevel [2345])
-stop on runlevel [016]
-
-respawn
-respawn limit 10 5
-
-# The default of 5 seconds is too low to flush buffers
-kill timeout 60
-
-exec bash -c "/usr/bin/fluentd -c /usr/local/etc/fluent/fluent.conf 2&gt;&amp;1 \| /usr/bin/cronolog /var/log/fluent.log /var/log/fluent/fluent.%Y_%m_%d.log"</pre>
-</div>
-<p><a class="reference external" href="http://cronolog.org/">cronolog</a> is used for logging error messages. Install it using <tt class="docutils literal"><span class="pre">apt-get</span> <span class="pre">install</span> <span class="pre">cronolog</span></tt>.</p>
-<p>TODO</p>
-</div>
-</div>
-</div>
-
-
-          </div>
-        </div>
-      </div>
+    </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
             <h3><a href="index.html">Table Of Contents</a></h3>
@@ -143,10 +48,7 @@ exec bash -c "/usr/bin/fluentd -c /usr/local/etc/fluent/fluent.conf 2&gt;&amp;1 
 <li><a class="reference external" href="#configuration-file">Configuration file</a><ul>
 <li><a class="reference external" href="#source-directive">&lt;source&gt; directive</a></li>
 <li><a class="reference external" href="#match-directive">&lt;match&gt; directive</a></li>
-</ul>
-</li>
-<li><a class="reference external" href="#init-scripts">Init scripts</a><ul>
-<li><a class="reference external" href="#ubuntu-upstart">Ubuntu upstart</a></li>
+<li><a class="reference external" href="#match-pattern">match pattern</a></li>
 </ul>
 </li>
 </ul>
@@ -179,6 +81,99 @@ exec bash -c "/usr/bin/fluentd -c /usr/local/etc/fluent/fluent.conf 2&gt;&amp;1 
           <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="configuration">
+<span id="config"></span><h1>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h1>
+<p>You can control the flow of event stream using the configuration file.  It describes the format of the file.</p>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#configuration-file" id="id1">Configuration file</a><ul>
+<li><a class="reference internal" href="#source-directive" id="id2">&lt;source&gt; directive</a></li>
+<li><a class="reference internal" href="#match-directive" id="id3">&lt;match&gt; directive</a></li>
+<li><a class="reference internal" href="#match-pattern" id="id4">match pattern</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="configuration-file">
+<h2>Configuration file<a class="headerlink" href="#configuration-file" title="Permalink to this headline">¶</a></h2>
+<p>Configuration file is stored on $install_prefix/etc/fluent/fluent.conf. If it not exist, create it using following command:</p>
+<div class="highlight-python"><pre>$ sudo fluentd --setup /etc/fluent
+$ edit /etc/fluent/fluent.conf</pre>
+</div>
+<p>Configuration file consists of <strong>&lt;source&gt;</strong> directives and <strong>&lt;match&gt;</strong> directives.</p>
+<p><strong>&lt;source&gt;</strong> describes an entrance of events, like <tt class="docutils literal"><span class="pre">http</span></tt> or <tt class="docutils literal"><span class="pre">tcp</span></tt>.</p>
+<p><strong>&lt;match&gt;</strong> describes the match pattern of events and an exit of the matched events, like <tt class="docutils literal"><span class="pre">myapp.accesslog.**</span></tt> to <tt class="docutils literal"><span class="pre">file</span></tt>.</p>
+<p>Overview of the configuration file will be like as following:</p>
+<div class="highlight-python"><pre># Receive events from 24224/tcp
+# This is used by log forwarding and fluent-cat command
+&lt;source&gt;
+  type tcp
+  port 24224
+&lt;/source&gt;
+
+# http://this.host:9880/myapp.access?json={"event":"data"}
+&lt;source&gt;
+  type http
+  path 9880
+&lt;/source&gt;
+
+# Match events tagged with "myapp.access" and
+# store them to /var/log/fluent/access.%Y-%m-%d
+&lt;match myapp.access&gt;
+  type file
+  path /var/log/fluent/access
+&lt;/match&gt;
+
+&lt;match myapp.log.**&gt;
+  type file
+  format /var/log/fluent/myapp.%Y-%m-%d.log
+
+  buffer_type file
+  buffer_path /var/log/fluent/myapp
+&lt;/match&gt;</pre>
+</div>
+<div class="section" id="source-directive">
+<h3>&lt;source&gt; directive<a class="headerlink" href="#source-directive" title="Permalink to this headline">¶</a></h3>
+<p>&lt;source&gt; directive must have <tt class="docutils literal"><span class="pre">type</span></tt> parameter that specifies name of the input plugin.</p>
+<p>Next step: <a class="reference external" href="plugin.html#input-plugin"><em>Input plugins</em></a></p>
+</div>
+<div class="section" id="match-directive">
+<h3>&lt;match&gt; directive<a class="headerlink" href="#match-directive" title="Permalink to this headline">¶</a></h3>
+<p>&lt;match&gt; directive must have match pattern and <tt class="docutils literal"><span class="pre">type</span></tt> parameter that specifies name of the output plugin.</p>
+<p>Next step: <a class="reference external" href="plugin.html#output-plugin"><em>Output plugins</em></a></p>
+</div>
+<div class="section" id="match-pattern">
+<h3>match pattern<a class="headerlink" href="#match-pattern" title="Permalink to this headline">¶</a></h3>
+<p>You can use following match patterns:</p>
+<ul class="simple">
+<li><tt class="docutils literal"><span class="pre">*</span></tt> matches a tag element.<ul>
+<li>For example, pattern <tt class="docutils literal"><span class="pre">a.*</span></tt> matches <tt class="docutils literal"><span class="pre">a.b</span></tt>, but not matches <tt class="docutils literal"><span class="pre">a</span></tt> or <tt class="docutils literal"><span class="pre">a.b.c</span></tt></li>
+</ul>
+</li>
+<li><tt class="docutils literal"><span class="pre">**</span></tt> matches zero or more tag elements.<ul>
+<li>For example, pattern <tt class="docutils literal"><span class="pre">a.**</span></tt> matches <tt class="docutils literal"><span class="pre">a</span></tt>, <tt class="docutils literal"><span class="pre">a.b</span></tt> and <tt class="docutils literal"><span class="pre">a.b.c</span></tt></li>
+</ul>
+</li>
+<li><tt class="docutils literal"><span class="pre">{X,Y,Z}</span></tt> matches X, Y or Z, where X,Y,Z are patterns.<ul>
+<li>For example, pattern <tt class="docutils literal"><span class="pre">{a,b}</span></tt> matches <tt class="docutils literal"><span class="pre">a</span></tt> and <tt class="docutils literal"><span class="pre">b</span></tt>, but not matches <tt class="docutils literal"><span class="pre">c</span></tt></li>
+<li>You can use it with <tt class="docutils literal"><span class="pre">*</span></tt> and <tt class="docutils literal"><span class="pre">**</span></tt> patterns, like <tt class="docutils literal"><span class="pre">a.{b,c}.*</span></tt> or <tt class="docutils literal"><span class="pre">a.{b,c.**}</span></tt></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
       <div class="clearer"></div>
     </div>
     <div class="related">
@@ -193,7 +188,7 @@ exec bash -c "/usr/bin/fluentd -c /usr/local/etc/fluent/fluent.conf 2&gt;&amp;1 
         <li class="right" >
           <a href="install.html" title="Installation"
              >previous</a> |</li>
-        <li><a href="index.html">fluent v0.9.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluent v0.9.10 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

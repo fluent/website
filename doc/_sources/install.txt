@@ -62,7 +62,7 @@ To install the latest development version from the `source repository <https://g
     $ rake
     $ gem install pkg/fluent-*.gem
 
-Next step: :ref:`devel`
+Next step: :ref:`install/confirm`
 
 
 .. _install/confirm:
@@ -70,25 +70,15 @@ Next step: :ref:`devel`
 Confirm installation
 ------------------------------------
 
-To confirm installation, create a temporal configuration file whose content is like below, and save it as 'fluent_tmp.conf'::
+To confirm installation, run following commands::
 
-  <source>
-    type tcp
-    port 24224
-  </source>
-
-  <match *>
-    type stdout
-  </match>
-
-Then, run following commands::
-
-    $ fluentd -c fluent_tmp.conf -vv &
+    $ fluentd --setup ./fluent
+    $ fluentd -c fluentd/fluent.conf -vv &&
     $ echo '{"json":"message"}' | fluent-cat debug.test
 
-The first command ``fluentd -c fluent_tmp.conf -vv`` starts fluentd with the prepared configuration file. ``-vv`` option is for verbose logging. The second command sends fluentd a message '{"json":"message"}' with a tag "debug.test". If the installation was successful, fluentd will output a log containing a tag and a message passed for fluent-cat::
+The last command sends fluentd a message '{"json":"message"}' with "debug.test" tag. If the installation was successful, fluentd will output following message::
 
- 2011-07-10 16:49:50 +0900 debug.test: {"json":"message"}
+    2011-07-10 16:49:50 +0900 debug.test: {"json":"message"}
 
 
 Updating
@@ -99,4 +89,6 @@ Once you installed, you can update to the latest version using following command
     $ sudo fluent-gem install fluent
 
 Next step: :ref:`config`
+
+Next step: :ref:`devel`
 

@@ -50,7 +50,7 @@
       <div id="parent-class-section" class="section">
         <h3 class="section-header">Parent</h3>
         
-        <p class="link">EventMachine::Connection</p>
+        <p class="link">Coolio::Socket</p>
         
       </div>
       
@@ -67,29 +67,50 @@
           
           <li><a href="#method-c-new">::new</a></li>
           
-          <li><a href="#method-i-process_http_request">#process_http_request</a></li>
+          <li><a href="#method-i-closing-3F">#closing?</a></li>
+          
+          <li><a href="#method-i-on_body">#on_body</a></li>
+          
+          <li><a href="#method-i-on_close">#on_close</a></li>
+          
+          <li><a href="#method-i-on_connect">#on_connect</a></li>
+          
+          <li><a href="#method-i-on_headers_complete">#on_headers_complete</a></li>
+          
+          <li><a href="#method-i-on_message_begin">#on_message_begin</a></li>
+          
+          <li><a href="#method-i-on_message_complete">#on_message_complete</a></li>
+          
+          <li><a href="#method-i-on_read">#on_read</a></li>
+          
+          <li><a href="#method-i-on_write_complete">#on_write_complete</a></li>
+          
+          <li><a href="#method-i-send_response">#send_response</a></li>
+          
+          <li><a href="#method-i-send_response_and_close">#send_response_and_close</a></li>
+          
+          <li><a href="#method-i-send_response_nobody">#send_response_nobody</a></li>
+          
+          <li><a href="#method-i-step_idle">#step_idle</a></li>
           
         </ul>
       </div>
       
 
       
-      <!-- Included Modules -->
-      <div id="includes-section" class="section">
-        <h3 class="section-header">Included Modules</h3>
-        <ul class="link-list">
-        
-        
-          <li><span class="include">EventMachine::HttpServer</span></li>
-        
-        
-        </ul>
-      </div>
-      
     </div>
 
     <div id="project-metadata">
       
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Files</h3>
+        <ul>
+        
+          <li class="file"><a href="../../README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
       
 
       <div id="classindex-section" class="section project-section">
@@ -151,11 +172,17 @@
         
           <li><a href="../../Fluent/HttpInput/Handler.html">Fluent::HttpInput::Handler</a></li>
         
+          <li><a href="../../Fluent/HttpInput/KeepaliveManager.html">Fluent::HttpInput::KeepaliveManager</a></li>
+        
+          <li><a href="../../Fluent/HttpInput/KeepaliveManager/TimerValue.html">Fluent::HttpInput::KeepaliveManager::TimerValue</a></li>
+        
           <li><a href="../../Fluent/Input.html">Fluent::Input</a></li>
         
           <li><a href="../../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
         
           <li><a href="../../Fluent/Log.html">Fluent::Log</a></li>
+        
+          <li><a href="../../Fluent/Log/TTYColor.html">Fluent::Log::TTYColor</a></li>
         
           <li><a href="../../Fluent/Match.html">Fluent::Match</a></li>
         
@@ -164,6 +191,8 @@
           <li><a href="../../Fluent/MemoryBuffer.html">Fluent::MemoryBuffer</a></li>
         
           <li><a href="../../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
+        
+          <li><a href="../../Fluent/MultiOutput.html">Fluent::MultiOutput</a></li>
         
           <li><a href="../../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
         
@@ -177,15 +206,15 @@
         
           <li><a href="../../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
         
-          <li><a href="../../Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
-        
           <li><a href="../../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
         
           <li><a href="../../Fluent/StreamInput.html">Fluent::StreamInput</a></li>
         
-          <li><a href="../../Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
+          <li><a href="../../Fluent/StreamInput/Handler.html">Fluent::StreamInput::Handler</a></li>
         
           <li><a href="../../Fluent/StreamOutput.html">Fluent::StreamOutput</a></li>
+        
+          <li><a href="../../Fluent/StreamOutput/ReformatWriter.html">Fluent::StreamOutput::ReformatWriter</a></li>
         
           <li><a href="../../Fluent/SyslogInput.html">Fluent::SyslogInput</a></li>
         
@@ -193,7 +222,7 @@
         
           <li><a href="../../Fluent/TailInput.html">Fluent::TailInput</a></li>
         
-          <li><a href="../../Fluent/TailInput/Tailer.html">Fluent::TailInput::Tailer</a></li>
+          <li><a href="../../Fluent/TailInput/Handler.html">Fluent::TailInput::Handler</a></li>
         
           <li><a href="../../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
         
@@ -254,7 +283,7 @@
           
           <div class="method-heading">
             <span class="method-name">new</span><span
-              class="method-args">(callback)</span>
+              class="method-args">(io, km, callback, body_size_limit)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -267,9 +296,17 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 86</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">callback</span>)
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 141</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">km</span>, <span class="ruby-identifier">callback</span>, <span class="ruby-identifier">body_size_limit</span>)
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">io</span>)
+  <span class="ruby-ivar">@km</span> = <span class="ruby-identifier">km</span>
   <span class="ruby-ivar">@callback</span> = <span class="ruby-identifier">callback</span>
+  <span class="ruby-ivar">@body_size_limit</span> = <span class="ruby-identifier">body_size_limit</span>
+  <span class="ruby-ivar">@content_type</span> = <span class="ruby-string">&quot;&quot;</span>
+  <span class="ruby-ivar">@next_close</span> = <span class="ruby-keyword">false</span>
+
+  <span class="ruby-ivar">@idle</span> = <span class="ruby-value">0</span>
+  <span class="ruby-ivar">@km</span>.<span class="ruby-identifier">add</span>(<span class="ruby-keyword">self</span>)
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -287,12 +324,12 @@
         <h3 class="section-header">Public Instance Methods</h3>
 
       
-        <div id="process_http_request-method" class="method-detail ">
-          <a name="method-i-process_http_request"></a>
+        <div id="closing-3F-method" class="method-detail ">
+          <a name="method-i-closing-3F"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">process_http_request</span><span
+            <span class="method-name">closing?</span><span
               class="method-args">()</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
@@ -304,41 +341,496 @@
             
 
             
-            <div class="method-source-code" id="process_http_request-source">
+            <div class="method-source-code" id="closing-3F-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 90</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">process_http_request</span>
-  <span class="ruby-identifier">resp</span> = <span class="ruby-constant">EventMachine</span><span class="ruby-operator">::</span><span class="ruby-constant">DelegatedHttpResponse</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
-
-  <span class="ruby-identifier">params</span> = <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPUtils</span>.<span class="ruby-identifier">parse_query</span>(<span class="ruby-ivar">@http_query_string</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@http_content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^application\/x-www-form-urlencoded/</span>
-    <span class="ruby-identifier">params</span>.<span class="ruby-identifier">update</span> <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPUtils</span>.<span class="ruby-identifier">parse_query</span>(<span class="ruby-ivar">@http_post_content</span>)
-  <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@http_content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^multipart\/form-data; boundary=(.+)/</span>
-    <span class="ruby-identifier">boundary</span> = <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPUtils</span>.<span class="ruby-identifier">dequote</span>(<span class="ruby-node">$1</span>)
-    <span class="ruby-identifier">params</span>.<span class="ruby-identifier">update</span> <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPUtils</span>.<span class="ruby-identifier">parse_form_data</span>(<span class="ruby-ivar">@http_post_content</span>, <span class="ruby-identifier">boundary</span>)
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-identifier">op</span> = <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> {
-    <span class="ruby-ivar">@callback</span>.<span class="ruby-identifier">call</span>(<span class="ruby-ivar">@http_path_info</span>, <span class="ruby-identifier">params</span>)
-  }
-
-  <span class="ruby-identifier">sender</span> = <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> {<span class="ruby-operator">|</span>(<span class="ruby-identifier">code</span>,<span class="ruby-identifier">header</span>,<span class="ruby-identifier">body</span>)<span class="ruby-operator">|</span>
-    <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">status</span> = <span class="ruby-identifier">code</span>
-    <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">headers</span> = <span class="ruby-identifier">header</span>
-    <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">content</span> = <span class="ruby-identifier">body</span>.<span class="ruby-identifier">to_s</span>
-    <span class="ruby-identifier">resp</span>.<span class="ruby-identifier">send_response</span>
-  }
-
-  <span class="ruby-constant">EventMachine</span>.<span class="ruby-identifier">defer</span>(<span class="ruby-identifier">op</span>, <span class="ruby-identifier">sender</span>)
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 258</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">closing?</span>
+  <span class="ruby-ivar">@next_close</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- process_http_request-source -->
+            </div><!-- closing-3F-source -->
             
           </div>
 
           
 
           
-        </div><!-- process_http_request-method -->
+        </div><!-- closing-3F-method -->
+
+      
+        <div id="on_body-method" class="method-detail ">
+          <a name="method-i-on_body"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">on_body</span><span
+              class="method-args">(chunk)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="on_body-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 215</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_body</span>(<span class="ruby-identifier">chunk</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@body</span>.<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@body_size_limit</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">closing?</span>
+      <span class="ruby-identifier">send_response_and_close</span>(<span class="ruby-string">&quot;413 Request Entity Too Large&quot;</span>, {}, <span class="ruby-string">&quot;Too large&quot;</span>)
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">return</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@body</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">chunk</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- on_body-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- on_body-method -->
+
+      
+        <div id="on_close-method" class="method-detail ">
+          <a name="method-i-on_close"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">on_close</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="on_close-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 157</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_close</span>
+  <span class="ruby-ivar">@km</span>.<span class="ruby-identifier">delete</span>(<span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- on_close-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- on_close-method -->
+
+      
+        <div id="on_connect-method" class="method-detail ">
+          <a name="method-i-on_connect"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">on_connect</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="on_connect-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 161</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_connect</span>
+  <span class="ruby-ivar">@parser</span> = <span class="ruby-constant">Http</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- on_connect-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- on_connect-method -->
+
+      
+        <div id="on_headers_complete-method" class="method-detail ">
+          <a name="method-i-on_headers_complete"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">on_headers_complete</span><span
+              class="method-args">(headers)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="on_headers_complete-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 178</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_headers_complete</span>(<span class="ruby-identifier">headers</span>)
+  <span class="ruby-identifier">expect</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-identifier">size</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@parser</span>.<span class="ruby-identifier">http_version</span> <span class="ruby-operator">==</span> [<span class="ruby-value">1</span>, <span class="ruby-value">1</span>]
+    <span class="ruby-ivar">@keep_alive</span> = <span class="ruby-keyword">true</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@keep_alive</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">headers</span>.<span class="ruby-identifier">each_pair</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">case</span> <span class="ruby-identifier">k</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/Expect/</span>
+      <span class="ruby-identifier">expect</span> = <span class="ruby-identifier">v</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/Content-Length/</span>
+      <span class="ruby-identifier">size</span> = <span class="ruby-identifier">v</span>.<span class="ruby-identifier">to_i</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/Content-Type/</span>
+      <span class="ruby-ivar">@content_type</span> = <span class="ruby-identifier">v</span>
+    <span class="ruby-keyword">when</span> <span class="ruby-regexp">/Connection/</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">v</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/close/</span>
+        <span class="ruby-ivar">@keep_alive</span> = <span class="ruby-keyword">false</span>
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">v</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/Keep-alive/</span>
+        <span class="ruby-ivar">@keep_alive</span> = <span class="ruby-keyword">true</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+  }
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">expect</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">expect</span> <span class="ruby-operator">==</span> <span class="ruby-string">'100-continue'</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-operator">!</span><span class="ruby-identifier">size</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@body_size_limit</span>
+        <span class="ruby-identifier">send_response_nobody</span>(<span class="ruby-string">&quot;100 Continue&quot;</span>, {})
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">send_response_and_close</span>(<span class="ruby-string">&quot;413 Request Entity Too Large&quot;</span>, {}, <span class="ruby-string">&quot;Too large&quot;</span>)
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">send_response_and_close</span>(<span class="ruby-string">&quot;417 Expectation Failed&quot;</span>, {}, <span class="ruby-string">&quot;&quot;</span>)
+    <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- on_headers_complete-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- on_headers_complete-method -->
+
+      
+        <div id="on_message_begin-method" class="method-detail ">
+          <a name="method-i-on_message_begin"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">on_message_begin</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="on_message_begin-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 174</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_message_begin</span>
+  <span class="ruby-ivar">@body</span> = <span class="ruby-string">''</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- on_message_begin-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- on_message_begin-method -->
+
+      
+        <div id="on_message_complete-method" class="method-detail ">
+          <a name="method-i-on_message_complete"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">on_message_complete</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="on_message_complete-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 225</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_message_complete</span>
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">closing?</span>
+
+  <span class="ruby-identifier">params</span> = <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPUtils</span>.<span class="ruby-identifier">parse_query</span>(<span class="ruby-ivar">@parser</span>.<span class="ruby-identifier">query_string</span>)
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^application\/x-www-form-urlencoded/</span>
+    <span class="ruby-identifier">params</span>.<span class="ruby-identifier">update</span> <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPUtils</span>.<span class="ruby-identifier">parse_query</span>(<span class="ruby-ivar">@body</span>)
+  <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@content_type</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/^multipart\/form-data; boundary=(.+)/</span>
+    <span class="ruby-identifier">boundary</span> = <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPUtils</span>.<span class="ruby-identifier">dequote</span>(<span class="ruby-node">$1</span>)
+    <span class="ruby-identifier">params</span>.<span class="ruby-identifier">update</span> <span class="ruby-constant">WEBrick</span><span class="ruby-operator">::</span><span class="ruby-constant">HTTPUtils</span>.<span class="ruby-identifier">parse_form_data</span>(<span class="ruby-ivar">@body</span>, <span class="ruby-identifier">boundary</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">path_info</span> = <span class="ruby-ivar">@parser</span>.<span class="ruby-identifier">request_path</span>
+
+  <span class="ruby-identifier">code</span>, <span class="ruby-identifier">header</span>, <span class="ruby-identifier">body</span> = *<span class="ruby-ivar">@callback</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">path_info</span>, <span class="ruby-identifier">params</span>)
+  <span class="ruby-identifier">body</span> = <span class="ruby-identifier">body</span>.<span class="ruby-identifier">to_s</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@keep_alive</span>
+    <span class="ruby-identifier">header</span>[<span class="ruby-string">'Connection'</span>] = <span class="ruby-string">'Keep-Alive'</span>
+    <span class="ruby-identifier">send_response</span>(<span class="ruby-identifier">code</span>, <span class="ruby-identifier">header</span>, <span class="ruby-identifier">body</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">send_response_and_close</span>(<span class="ruby-identifier">code</span>, <span class="ruby-identifier">header</span>, <span class="ruby-identifier">body</span>)
+  <span class="ruby-keyword">end</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- on_message_complete-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- on_message_complete-method -->
+
+      
+        <div id="on_read-method" class="method-detail ">
+          <a name="method-i-on_read"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">on_read</span><span
+              class="method-args">(data)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="on_read-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 165</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_read</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-ivar">@idle</span> = <span class="ruby-value">0</span>
+  <span class="ruby-ivar">@parser</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">data</span>
+<span class="ruby-keyword">rescue</span>
+  <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">warn</span> <span class="ruby-string">&quot;unexpected error&quot;</span>, <span class="ruby-value">:error=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">$!</span>.<span class="ruby-identifier">to_s</span>
+  <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">warn_backtrace</span>
+  <span class="ruby-identifier">close</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- on_read-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- on_read-method -->
+
+      
+        <div id="on_write_complete-method" class="method-detail ">
+          <a name="method-i-on_write_complete"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">on_write_complete</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="on_write_complete-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 249</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_write_complete</span>
+  <span class="ruby-identifier">close</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@next_close</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- on_write_complete-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- on_write_complete-method -->
+
+      
+        <div id="send_response-method" class="method-detail ">
+          <a name="method-i-send_response"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">send_response</span><span
+              class="method-args">(code, header, body)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="send_response-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 262</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">send_response</span>(<span class="ruby-identifier">code</span>, <span class="ruby-identifier">header</span>, <span class="ruby-identifier">body</span>)
+  <span class="ruby-identifier">header</span>[<span class="ruby-string">'Content-length'</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">body</span>.<span class="ruby-identifier">bytesize</span>
+  <span class="ruby-identifier">header</span>[<span class="ruby-string">'Content-type'</span>] <span class="ruby-operator">||=</span> <span class="ruby-string">'text/plain'</span>
+
+  <span class="ruby-identifier">data</span> = <span class="ruby-node">%[HTTP/1.1 #{code}\r\n]</span>
+  <span class="ruby-identifier">header</span>.<span class="ruby-identifier">each_pair</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{k}: #{v}\r\n&quot;</span>
+  }
+  <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\r\n&quot;</span>
+  <span class="ruby-identifier">write</span> <span class="ruby-identifier">data</span>
+
+  <span class="ruby-identifier">write</span> <span class="ruby-identifier">body</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- send_response-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- send_response-method -->
+
+      
+        <div id="send_response_and_close-method" class="method-detail ">
+          <a name="method-i-send_response_and_close"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">send_response_and_close</span><span
+              class="method-args">(code, header, body)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="send_response_and_close-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 253</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">send_response_and_close</span>(<span class="ruby-identifier">code</span>, <span class="ruby-identifier">header</span>, <span class="ruby-identifier">body</span>)
+  <span class="ruby-identifier">send_response</span>(<span class="ruby-identifier">code</span>, <span class="ruby-identifier">header</span>, <span class="ruby-identifier">body</span>)
+  <span class="ruby-ivar">@next_close</span> = <span class="ruby-keyword">true</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- send_response_and_close-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- send_response_and_close-method -->
+
+      
+        <div id="send_response_nobody-method" class="method-detail ">
+          <a name="method-i-send_response_nobody"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">send_response_nobody</span><span
+              class="method-args">(code, header)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="send_response_nobody-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 276</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">send_response_nobody</span>(<span class="ruby-identifier">code</span>, <span class="ruby-identifier">header</span>)
+  <span class="ruby-identifier">data</span> = <span class="ruby-node">%[HTTP/1.1 #{code}\r\n]</span>
+  <span class="ruby-identifier">header</span>.<span class="ruby-identifier">each_pair</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">k</span>,<span class="ruby-identifier">v</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;#{k}: #{v}\r\n&quot;</span>
+  }
+  <span class="ruby-identifier">data</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\r\n&quot;</span>
+  <span class="ruby-identifier">write</span> <span class="ruby-identifier">data</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- send_response_nobody-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- send_response_nobody-method -->
+
+      
+        <div id="step_idle-method" class="method-detail ">
+          <a name="method-i-step_idle"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">step_idle</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="step_idle-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/in_http.rb, line 153</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">step_idle</span>
+  <span class="ruby-ivar">@idle</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- step_idle-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- step_idle-method -->
 
       
       </div><!-- public-instance-method-details -->

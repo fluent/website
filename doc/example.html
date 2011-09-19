@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -5,13 +6,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Examples &mdash; fluent v0.9.3 documentation</title>
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <title>Examples &mdash; fluent v0.9.10 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '#',
-        VERSION:     '0.9.3',
+        VERSION:     '0.9.10',
         COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -19,7 +20,7 @@
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="fluent v0.9.3 documentation" href="index.html" />
+    <link rel="top" title="fluent v0.9.10 documentation" href="index.html" />
     <link rel="prev" title="Writing plugins" href="devel.html" /> 
   </head>
   <body>
@@ -32,129 +33,15 @@
         <li class="right" >
           <a href="devel.html" title="Writing plugins"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">fluent v0.9.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluent v0.9.10 documentation</a> &raquo;</li> 
       </ul>
-    </div>  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body">
-            
-  <div class="section" id="examples">
-<span id="example"></span><h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
-<div class="contents local topic" id="contents">
-<ul class="simple">
-<li><a class="reference internal" href="#calculate-web-accesses-hourly-and-write-it-to-mongodb" id="id1">Calculate web accesses hourly and write it to MongoDB</a><ul>
-<li><a class="reference internal" href="#writing-plugin" id="id2">Writing plugin</a></li>
-<li><a class="reference internal" href="#configuration" id="id3">Configuration</a></li>
-</ul>
-</li>
-</ul>
-</div>
-<div class="section" id="calculate-web-accesses-hourly-and-write-it-to-mongodb">
-<h2>Calculate web accesses hourly and write it to MongoDB<a class="headerlink" href="#calculate-web-accesses-hourly-and-write-it-to-mongodb" title="Permalink to this headline">¶</a></h2>
-<div class="section" id="writing-plugin">
-<h3>Writing plugin<a class="headerlink" href="#writing-plugin" title="Permalink to this headline">¶</a></h3>
-<p>Put following script to $install_prefix/etc/fluent/plugin directory:</p>
-<div class="highlight-python"><pre># out_count_to_mongo.rb
-class CountToMongoOutput &lt; Fluent::TimeSlicedOutput
-  Fluent::Plugin.register_output('count_to_mongo', self)
-
-  def initialize
-    require 'mongo'
-    super
-  end
-
-  def configure(conf)
-    super
-
-    @host = conf['host']
-    @port = (conf['port'] || @port).to_i
-    @database = conf['database']
-    @collection = conf['collection']
-
-    if !@host || !@database || !@collection
-      raise Fluent::ConfigError, "'host', 'database' and 'collection' parameters are required on count_to_mongo output"
-    end
-  end
-
-  def start
-    super
-    @coll = Mongo::Connection.new(@host, @port)[@database][@collection]
-  end
-
-  def format(tag, event)
-    event.record['path'].to_msgpack
-  end
-
-  def write(chunk)
-    time = chunk.key  # get slike key (like "2011063023")
-
-    counts = {}      # {path =&gt; count}
-    chunk.open {|io|
-      MessagePack::Unpacker.new(io).each {|path|
-        counts[path] = counts.fetch(path, 0) + 1
-      } rescue EOFError
-    }
-
-    counts.each_pair {|path,count|
-      obj = {"time"=&gt;time, "path"=&gt;path, "count"=&gt;count}
-      $log.trace { "count_to_mongo: inserting #{obj.to_json}" }
-      @coll.insert(obj)
-      # FIXME get last error?
-    }
-  end
-end</pre>
-</div>
-</div>
-<div class="section" id="configuration">
-<h3>Configuration<a class="headerlink" href="#configuration" title="Permalink to this headline">¶</a></h3>
-<p>$install_prefix/etc/fluent/fluent.conf:</p>
-<div class="highlight-python"><pre># read access log from /var/log/apache/access.log
-&lt;source&gt;
-  type tail
-  format apache
-  path /var/log/apache/access.log
-  tag apache.access
-&lt;/source&gt;
-
-# configure count_to_mongo plugin
-&lt;match apache.access&gt;
-  type count_to_mongo
-  host 127.0.0.1
-  database test
-  collection hourly_access
-
-  # use file-based buffer
-  buffer_type file
-  buffer_path /tmp/fluent/count_to_mongo.*.buffer
-
-  # write out buffered chunk hourly
-  time_slice hourly
-
-  # expand limit of the chunk size from 1MB (default) to 100MB
-  buffer_chunk_limit 100m
-&lt;/match&gt;</pre>
-</div>
-</div>
-</div>
-</div>
-
-
-          </div>
-        </div>
-      </div>
+    </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
             <h3><a href="index.html">Table Of Contents</a></h3>
             <ul>
 <li><a class="reference external" href="#">Examples</a><ul>
-<li><a class="reference external" href="#calculate-web-accesses-hourly-and-write-it-to-mongodb">Calculate web accesses hourly and write it to MongoDB</a><ul>
-<li><a class="reference external" href="#writing-plugin">Writing plugin</a></li>
-<li><a class="reference external" href="#configuration">Configuration</a></li>
-</ul>
-</li>
+<li><a class="reference external" href="#reliable-log-forwarding">Reliable log forwarding</a></li>
 </ul>
 </li>
 </ul>
@@ -182,6 +69,41 @@ end</pre>
           <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="examples">
+<span id="example"></span><h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#reliable-log-forwarding" id="id1">Reliable log forwarding</a></li>
+</ul>
+</div>
+<div class="section" id="reliable-log-forwarding">
+<h2>Reliable log forwarding<a class="headerlink" href="#reliable-log-forwarding" title="Permalink to this headline">¶</a></h2>
+<p>This example assumes following network:</p>
+<div class="highlight-python"><pre>_
+                   active log server
+                   +--------+
+                +--&gt; fluent |
+front server    |  +--------+
++--------+      |
+| fluent -------+
++--------+      |  backup log server
+                |  +--------+
+                +--&gt; fluent |
+                   +--------+</pre>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
       <div class="clearer"></div>
     </div>
     <div class="related">
@@ -193,7 +115,7 @@ end</pre>
         <li class="right" >
           <a href="devel.html" title="Writing plugins"
              >previous</a> |</li>
-        <li><a href="index.html">fluent v0.9.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluent v0.9.10 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

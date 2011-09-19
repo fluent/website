@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -5,13 +6,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Overview &mdash; fluent v0.9.3 documentation</title>
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <title>Overview &mdash; fluent v0.9.10 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '#',
-        VERSION:     '0.9.3',
+        VERSION:     '0.9.10',
         COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -19,7 +20,7 @@
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="fluent v0.9.3 documentation" href="index.html" />
+    <link rel="top" title="fluent v0.9.10 documentation" href="index.html" />
     <link rel="next" title="Installation" href="install.html" />
     <link rel="prev" title="Welcome to Fluent’s documentation!" href="index.html" /> 
   </head>
@@ -36,78 +37,9 @@
         <li class="right" >
           <a href="index.html" title="Welcome to Fluent’s documentation!"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">fluent v0.9.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluent v0.9.10 documentation</a> &raquo;</li> 
       </ul>
-    </div>  
-
-    <div class="document">
-      <div class="documentwrapper">
-        <div class="bodywrapper">
-          <div class="body">
-            
-  <div class="section" id="overview">
-<span id="id1"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
-<p><strong>Fluent</strong> is an event collector service. It&#8217;s said that Fluent is generalized version of syslogd, which can deal with JSON object for the log message.</p>
-<div class="section" id="architecture">
-<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
-<p>Fluent collects events from various data sources and write tem to files, database or other storages:</p>
-<div class="highlight-python"><pre>Web apps  ---+                +--&gt; file
-             |                |
-             +--&gt;          ---+
-/var/log  ------&gt;  fluent  ------&gt; mail
-             +--&gt;          ---+
-             |                |
-apache    ----                +--&gt; fluent</pre>
-</div>
-<p>Fluent also supports log transfer:</p>
-<div class="highlight-python"><pre>Web server
-+--------+
-| fluent -------
-+--------+|     |
- +--------+     |
-                |
-Proxy server    |    Log server, Amazon S3, HDFS, ...
-+--------+      +--&gt; +--------+
-| fluent ----------&gt; | fluent ||
-+--------+|     +--&gt; +--------+|
- +--------+     |     +--------+
-                |
-Database server |
-+--------+      |
-| fluent ---------&gt; mail
-+--------+|
- +--------+</pre>
-</div>
-<p>An event collected consists of <em>tag</em>, <em>time</em> and <em>record</em>. Tag is a string separated with &#8216;.&#8217; (e.g. myapp.access). It is used to categorize events. Time is a UNIX time when the event occurs. Record is a JSON object.</p>
-</div>
-<div class="section" id="reliability">
-<h2>Reliability<a class="headerlink" href="#reliability" title="Permalink to this headline">¶</a></h2>
-<p>Fluent provides reliable buffering strategy to prevent loss of events from failure of servers.</p>
-<p>The structure of the buffer is a queue of chunks:</p>
-<div class="highlight-python"><pre>queue
-+---------+
-|         |
-|  chunk &lt;-- write events to the top chunk
-|         |  (never block)
-|  chunk  |
-|         |
-|  chunk  |
-|         |
-|  chunk --&gt; wirte out the bottom chunk
-|         |  (transactional)
-+---------+</pre>
-</div>
-<p>When a event is reached to a fluent server, it is appended to a top buffer chunk. This operation never blocks even if next server is down.</p>
-<p>When size of the the top chunk exceeds limit or timer is expired, new empty chunk is pushed. And another thread get the bottom chunk and forward it to the next server (or send to a storage server). If it succeeded, the chunk is removed. Otherwise the thread leaves the chunk in the queue and retries to send it later.</p>
-<p>The implementation of the buffer is pluggable. Default plugin named &#8216;memory&#8217; stores chunks in memory. It is fast but not persistent. Another plugin named &#8216;file&#8217; stores chunks in file.</p>
-<p>Next step: <a class="reference external" href="install.html#install"><em>Installation</em></a></p>
-</div>
-</div>
-
-
-          </div>
-        </div>
-      </div>
+    </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
             <h3><a href="index.html">Table Of Contents</a></h3>
@@ -145,6 +77,76 @@ Database server |
           <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="overview">
+<span id="id1"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
+<p><strong>Fluent</strong> is an event collector service. It&#8217;s said that Fluent is generalized version of syslogd, which can deal with JSON object for the log message.</p>
+<div class="section" id="architecture">
+<h2>Architecture<a class="headerlink" href="#architecture" title="Permalink to this headline">¶</a></h2>
+<p>Fluent collects events from various data sources and write tem to files, databases or other storages:</p>
+<div class="highlight-python"><pre>+-------------------------------------------+
+|                                           |
+|  Web apps  ---+                +--&gt; file  |
+|               |                |          |
+|               +--&gt;          ---+          |
+|  /var/log  ------&gt;  fluent  ------&gt; mail  |
+|               +--&gt;          ---+          |
+|               |                |          |
+|  apache    ---+                +--&gt; S3    |
+|                                           |
++-------------------------------------------+</pre>
+</div>
+<p>Fluent also supports log transfer:</p>
+<div class="highlight-python"><pre>Web server
++--------+
+| fluent -------+
++--------+      |
+                |
+Proxy server    |
++--------+      +--&gt; +--------+
+| fluent ----------&gt; | fluent |
++--------+      +--&gt; +--------+
+                |
+Database server |
++--------+      |
+| fluent -------+
++--------+</pre>
+</div>
+<p>An event collected consists of <em>tag</em>, <em>time</em> and <em>record</em>. Tag is a string separated with &#8216;.&#8217; (e.g. myapp.access). It is used to categorize events. Time is a UNIX time when the event occurs. Record is a JSON object.</p>
+</div>
+<div class="section" id="reliability">
+<h2>Reliability<a class="headerlink" href="#reliability" title="Permalink to this headline">¶</a></h2>
+<p>Fluent provides reliable buffering strategy to prevent loss of events from failure of servers.</p>
+<p>The structure of the buffer is a queue of chunks:</p>
+<div class="highlight-python"><pre>queue
++---------+
+|         |
+|  chunk &lt;-- write events to the top chunk
+|         |  (never block)
+|  chunk  |
+|         |
+|  chunk  |
+|         |
+|  chunk --&gt; wirte out the bottom chunk
+|         |  (transactional)
++---------+</pre>
+</div>
+<p>When a event is reached to a fluent server, it is appended to a top buffer chunk. This operation never blocks even if next server is down.</p>
+<p>When size of the the top chunk exceeds limit or timer is expired, new empty chunk is pushed. And another thread get the bottom chunk and forward it to the next server (or send to a storage server). If it succeeded, the chunk is removed. Otherwise the thread leaves the chunk in the queue and retries to send it later.</p>
+<p>The implementation of the buffer is pluggable. Default plugin named &#8216;memory&#8217; stores chunks in memory. It is fast but not persistent. Another plugin named &#8216;file&#8217; stores chunks in file.</p>
+<p>Next step: <a class="reference external" href="install.html#install"><em>Installation</em></a></p>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
       <div class="clearer"></div>
     </div>
     <div class="related">
@@ -159,7 +161,7 @@ Database server |
         <li class="right" >
           <a href="index.html" title="Welcome to Fluent’s documentation!"
              >previous</a> |</li>
-        <li><a href="index.html">fluent v0.9.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluent v0.9.10 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

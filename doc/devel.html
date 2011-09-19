@@ -1,3 +1,4 @@
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -5,13 +6,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Writing plugins &mdash; fluent v0.9.3 documentation</title>
-    <link rel="stylesheet" href="_static/default.css" type="text/css" />
+    <title>Writing plugins &mdash; fluent v0.9.10 documentation</title>
+    <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '#',
-        VERSION:     '0.9.3',
+        VERSION:     '0.9.10',
         COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -19,7 +20,7 @@
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="fluent v0.9.3 documentation" href="index.html" />
+    <link rel="top" title="fluent v0.9.10 documentation" href="index.html" />
     <link rel="next" title="Examples" href="example.html" />
     <link rel="prev" title="Plugins" href="plugin.html" /> 
   </head>
@@ -36,9 +37,50 @@
         <li class="right" >
           <a href="plugin.html" title="Plugins"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">fluent v0.9.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluent v0.9.10 documentation</a> &raquo;</li> 
       </ul>
-    </div>  
+    </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Writing plugins</a><ul>
+<li><a class="reference external" href="#installing-plugins">Installing plugins</a></li>
+<li><a class="reference external" href="#input-plugins">Input plugins</a></li>
+<li><a class="reference external" href="#buffered-output-plugins">Buffered output plugins</a></li>
+<li><a class="reference external" href="#non-buffered-output-plugins">Non-buffered output plugins</a></li>
+<li><a class="reference external" href="#buffer-plugins">Buffer plugins</a></li>
+<li><a class="reference external" href="#debugging-plugins">Debugging plugins</a></li>
+</ul>
+</li>
+</ul>
+
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="plugin.html"
+                                  title="previous chapter">Plugins</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="example.html"
+                                  title="next chapter">Examples</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/devel.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
 
     <div class="document">
       <div class="documentwrapper">
@@ -52,10 +94,9 @@
 <li><a class="reference internal" href="#installing-plugins" id="id1">Installing plugins</a></li>
 <li><a class="reference internal" href="#input-plugins" id="id2">Input plugins</a></li>
 <li><a class="reference internal" href="#buffered-output-plugins" id="id3">Buffered output plugins</a></li>
-<li><a class="reference internal" href="#time-sliced-output-plugins" id="id4">Time sliced output plugins</a></li>
-<li><a class="reference internal" href="#non-buffered-output-plugins" id="id5">Non-buffered output plugins</a></li>
-<li><a class="reference internal" href="#buffer-plugins" id="id6">Buffer plugins</a></li>
-<li><a class="reference internal" href="#debug" id="id7">Debug</a></li>
+<li><a class="reference internal" href="#non-buffered-output-plugins" id="id4">Non-buffered output plugins</a></li>
+<li><a class="reference internal" href="#buffer-plugins" id="id5">Buffer plugins</a></li>
+<li><a class="reference internal" href="#debugging-plugins" id="id6">Debugging plugins</a></li>
 </ul>
 </div>
 <div class="section" id="installing-plugins">
@@ -67,9 +108,12 @@
 <h2>Input plugins<a class="headerlink" href="#input-plugins" title="Permalink to this headline">¶</a></h2>
 <p>Extend <strong>Fluent::Input</strong> class and implement following methods:</p>
 <div class="highlight-python"><pre>class SomeInput &lt; Fluent::Input
+  # Register plugin first. NAME is the name of this plugin
+  # which is used in the configuration file.
   Fluent::Plugin.register_input('NAME', self)
 
-  # `conf` is a Hash that includes configuration parameters.
+  # This method is called before starting.
+  # 'conf' is a Hash that includes configuration parameters.
   # If the configuration is invalid, raise Fluent::ConfigError.
   def configure(conf)
     @port = conf['port']
@@ -77,17 +121,19 @@
   end
 
   # This method is called when starting.
-  # Open sockets or files here and create a Thread.
+  # Open sockets or files and create a thread here.
   def start
+    ...
   end
 
   # This method is called when shutting down.
-  # Shutdown the thread and Close sockets or files here.
+  # Shutdown the thread and close sockets or files here.
   def shutdown
+    ...
   end
 end</pre>
 </div>
-<p>To submit events, use <tt class="docutils literal"><span class="pre">Fluent::Engine.emit(tag,</span> <span class="pre">event)</span></tt> method as following:</p>
+<p>To submit events, use <tt class="docutils literal"><span class="pre">Fluent::Engine.emit(tag,</span> <span class="pre">event)</span></tt> method, where <tt class="docutils literal"><span class="pre">tag</span></tt> is the String and <tt class="docutils literal"><span class="pre">event</span></tt> is a <tt class="docutils literal"><span class="pre">Fluent::Event</span></tt> object:</p>
 <div class="highlight-python"><pre>tag = "myapp.access"
 time = Time.now.to_i
 record = {"message"=&gt;"body"}
@@ -99,9 +145,12 @@ Fluent::Engine.emit(tag, Fluent::Event.new(time, record))</pre>
 <h2>Buffered output plugins<a class="headerlink" href="#buffered-output-plugins" title="Permalink to this headline">¶</a></h2>
 <p>Extend <strong>Fluent::BufferedOutput</strong> class and implement following methods:</p>
 <div class="highlight-python"><pre>class SomeOutput &lt; Fluent::BufferedOutput
+  # Register plugin first. NAME is the name of this plugin
+  # which is used in the configuration file.
   Fluent::Plugin.register_output('NAME', self)
 
-  # `conf` is a Hash that includes configuration parameters.
+  # This method is called before starting.
+  # 'conf' is a Hash that includes configuration parameters.
   # If the configuration is invalid, raise Fluent::ConfigError.
   def configure(conf)
     @path = conf['path']
@@ -110,57 +159,34 @@ Fluent::Engine.emit(tag, Fluent::Event.new(time, record))</pre>
 
   # This method is called when starting.
   # Open sockets or files here.
-  # Don't forgate call super()
+  # Don't forget to call super()
   def start
     super()
+    ...
   end
 
   # This method is called when shutting down.
   # Shutdown the thread and Close sockets or files here.
-  # Don't forgate call super()
+  # Don't forget to call super()
   def shutdown
     super()
+    ...
   end
 
+  # This method is called when an event is reached.
   # Convert event and tag to a raw string.
   def format(tag, event)
     [tag, event.time, event.record].to_json + "\n"
   end
 
-  # Writes a buffer chunk to a files or network.
-  # `chunk` is a buffer chunk that includes multiple formatted
+  # This method is called every flush interval. rite the buffer chunk
+  # to files or databases here.
+  # 'chunk' is a buffer chunk that includes multiple formatted
   # events. You can use `data = chunk.read` to get all events and
-  # `chunk.open {|io| }` to get IO object.
+  # 'chunk.open {|io| ... }' to get IO object.
   def write(chunk)
     objs = chunk.read.split("\n").map {|raw|
       JSON.load(raw)
-    }
-  end
-end</pre>
-</div>
-</div>
-<div class="section" id="time-sliced-output-plugins">
-<h2>Time sliced output plugins<a class="headerlink" href="#time-sliced-output-plugins" title="Permalink to this headline">¶</a></h2>
-<p>Extend <strong>Fluent::TimeSlicedOutput</strong> class and implement following methods:</p>
-<div class="highlight-python"><pre>class SomeOutput &lt; Fluent::TimeSlicedOutput
-  Fluent::Plugin.register_output('NAME', self)
-
-  # configure(conf), start(), shutdown() and format(tag, event) are
-  # same as BufferedOutput.
-
-  def format(tag, event)
-    [tag, event.time, event.record].to_msgpack
-  end
-
-  # Writes a buffer chunk to a files or network.
-  # `chunk` is a buffer chunk that includes multiple formatted
-  # events. You can use `data = chunk.read` to get all events and
-  # `chunk.open {|io| }` to get IO object.
-  # Use `chunk.key` to get sliced time.
-  def write(chunk)
-    puts chunk.key  #=&gt; e.g. "20110602" if daily
-    MessagePack::Unpacker.new.feed_each(chunk.read) {|obj|
-      p obj
     }
   end
 end</pre>
@@ -170,15 +196,30 @@ end</pre>
 <h2>Non-buffered output plugins<a class="headerlink" href="#non-buffered-output-plugins" title="Permalink to this headline">¶</a></h2>
 <p>Extend <strong>Fluent::Output</strong> class and implement following methods:</p>
 <div class="highlight-python"><pre>class SomeOutput &lt; Fluent::Output
+  # Register plugin first. NAME is the name of this plugin
+  # which is used in the configuration file.
+  Fluent::Plugin.register_output('NAME', self)
+
+  # This method is called before starting.
   def configure(conf)
+    ...
   end
 
+  # This method is called when starting.
   def start
+    ...
   end
 
+  # This method is called when shutting down.
   def shutdown
+    ...
   end
 
+  # This method is called when an event is reached.
+  # 'es' is a Fluent::EventStream object that includes multiple events.
+  # You can use 'es.each {|event| ... }' to retrieve events.
+  # 'chain' is an object that manages transaction. Call 'chain.next' at
+  # appropriate point and rollback if it raises exception.
   def emit(tag, es, chain)
     chain.next
     es.each {|event|
@@ -187,19 +228,17 @@ end</pre>
   end
 end</pre>
 </div>
-<p><tt class="docutils literal"><span class="pre">emit</span></tt> outputs events provided by <tt class="docutils literal"><span class="pre">es.each</span></tt> method (<strong>es</strong> is <strong>EventStream</strong>).
-<tt class="docutils literal"><span class="pre">chain.next</span></tt> in the emit is used in the CopyOutput. To write logs transactionally, call it appropriate point.</p>
 </div>
 <div class="section" id="buffer-plugins">
 <h2>Buffer plugins<a class="headerlink" href="#buffer-plugins" title="Permalink to this headline">¶</a></h2>
 <p>TODO</p>
 </div>
-<div class="section" id="debug">
-<h2>Debug<a class="headerlink" href="#debug" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="debugging-plugins">
+<h2>Debugging plugins<a class="headerlink" href="#debugging-plugins" title="Permalink to this headline">¶</a></h2>
 <p>Run <tt class="docutils literal"><span class="pre">fluentd</span></tt> with <tt class="docutils literal"><span class="pre">-vv</span></tt> option to show debug messages:</p>
 <div class="highlight-python"><pre>$ fluentd -vv</pre>
 </div>
-<p><strong>stdout</strong> and <strong>copy</strong> output plugins will be useful for debugging.  <strong>stdout</strong> output plugin dumps matched events to the console. It can be used as following:</p>
+<p><strong>stdout</strong> and <strong>copy</strong> output plugins is useful for debugging. <strong>stdout</strong> output plugin dumps matched events to the console. It can be used as following:</p>
 <div class="highlight-python"><pre># You want to debug this plugin
 &lt;source&gt;
   type your_custom_input_plugin
@@ -238,48 +277,6 @@ end</pre>
           </div>
         </div>
       </div>
-      <div class="sphinxsidebar">
-        <div class="sphinxsidebarwrapper">
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference external" href="#">Writing plugins</a><ul>
-<li><a class="reference external" href="#installing-plugins">Installing plugins</a></li>
-<li><a class="reference external" href="#input-plugins">Input plugins</a></li>
-<li><a class="reference external" href="#buffered-output-plugins">Buffered output plugins</a></li>
-<li><a class="reference external" href="#time-sliced-output-plugins">Time sliced output plugins</a></li>
-<li><a class="reference external" href="#non-buffered-output-plugins">Non-buffered output plugins</a></li>
-<li><a class="reference external" href="#buffer-plugins">Buffer plugins</a></li>
-<li><a class="reference external" href="#debug">Debug</a></li>
-</ul>
-</li>
-</ul>
-
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="plugin.html"
-                                  title="previous chapter">Plugins</a></p>
-            <h4>Next topic</h4>
-            <p class="topless"><a href="example.html"
-                                  title="next chapter">Examples</a></p>
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-              <li><a href="_sources/devel.txt"
-                     rel="nofollow">Show Source</a></li>
-            </ul>
-          <div id="searchbox" style="display: none">
-            <h3>Quick search</h3>
-              <form class="search" action="search.html" method="get">
-                <input type="text" name="q" size="18" />
-                <input type="submit" value="Go" />
-                <input type="hidden" name="check_keywords" value="yes" />
-                <input type="hidden" name="area" value="default" />
-              </form>
-              <p class="searchtip" style="font-size: 90%">
-              Enter search terms or a module, class or function name.
-              </p>
-          </div>
-          <script type="text/javascript">$('#searchbox').show(0);</script>
-        </div>
-      </div>
       <div class="clearer"></div>
     </div>
     <div class="related">
@@ -294,7 +291,7 @@ end</pre>
         <li class="right" >
           <a href="plugin.html" title="Plugins"
              >previous</a> |</li>
-        <li><a href="index.html">fluent v0.9.3 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluent v0.9.10 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

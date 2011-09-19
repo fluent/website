@@ -67,9 +67,9 @@
           
           <li><a href="#method-c-new">::new</a></li>
           
-          <li><a href="#method-i-load_built_in_plugin">#load_built_in_plugin</a></li>
-          
           <li><a href="#method-i-load_plugin_dir">#load_plugin_dir</a></li>
+          
+          <li><a href="#method-i-load_plugins">#load_plugins</a></li>
           
           <li><a href="#method-i-new_buffer">#new_buffer</a></li>
           
@@ -92,6 +92,15 @@
 
     <div id="project-metadata">
       
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Files</h3>
+        <ul>
+        
+          <li class="file"><a href="../README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
       
 
       <div id="classindex-section" class="section project-section">
@@ -153,11 +162,17 @@
         
           <li><a href="../Fluent/HttpInput/Handler.html">Fluent::HttpInput::Handler</a></li>
         
+          <li><a href="../Fluent/HttpInput/KeepaliveManager.html">Fluent::HttpInput::KeepaliveManager</a></li>
+        
+          <li><a href="../Fluent/HttpInput/KeepaliveManager/TimerValue.html">Fluent::HttpInput::KeepaliveManager::TimerValue</a></li>
+        
           <li><a href="../Fluent/Input.html">Fluent::Input</a></li>
         
           <li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
         
           <li><a href="../Fluent/Log.html">Fluent::Log</a></li>
+        
+          <li><a href="../Fluent/Log/TTYColor.html">Fluent::Log::TTYColor</a></li>
         
           <li><a href="../Fluent/Match.html">Fluent::Match</a></li>
         
@@ -166,6 +181,8 @@
           <li><a href="../Fluent/MemoryBuffer.html">Fluent::MemoryBuffer</a></li>
         
           <li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
+        
+          <li><a href="../Fluent/MultiOutput.html">Fluent::MultiOutput</a></li>
         
           <li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
         
@@ -179,15 +196,15 @@
         
           <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
         
-          <li><a href="../Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
-        
           <li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
         
           <li><a href="../Fluent/StreamInput.html">Fluent::StreamInput</a></li>
         
-          <li><a href="../Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
+          <li><a href="../Fluent/StreamInput/Handler.html">Fluent::StreamInput::Handler</a></li>
         
           <li><a href="../Fluent/StreamOutput.html">Fluent::StreamOutput</a></li>
+        
+          <li><a href="../Fluent/StreamOutput/ReformatWriter.html">Fluent::StreamOutput::ReformatWriter</a></li>
         
           <li><a href="../Fluent/SyslogInput.html">Fluent::SyslogInput</a></li>
         
@@ -195,7 +212,7 @@
         
           <li><a href="../Fluent/TailInput.html">Fluent::TailInput</a></li>
         
-          <li><a href="../Fluent/TailInput/Tailer.html">Fluent::TailInput::Tailer</a></li>
+          <li><a href="../Fluent/TailInput/Handler.html">Fluent::TailInput::Handler</a></li>
         
           <li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
         
@@ -291,40 +308,6 @@
         <h3 class="section-header">Public Instance Methods</h3>
 
       
-        <div id="load_built_in_plugin-method" class="method-detail ">
-          <a name="method-i-load_built_in_plugin"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">load_built_in_plugin</span><span
-              class="method-args">()</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            
-            
-
-            
-            <div class="method-source-code" id="load_built_in_plugin-source">
-<pre>
-<span class="ruby-comment"># File lib/fluent/plugin.rb, line 52</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">load_built_in_plugin</span>
-  <span class="ruby-identifier">dir</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-keyword">__FILE__</span>), <span class="ruby-string">&quot;plugin&quot;</span>)
-  <span class="ruby-identifier">load_plugin_dir</span>(<span class="ruby-identifier">dir</span>)
-<span class="ruby-keyword">end</span></pre>
-            </div><!-- load_built_in_plugin-source -->
-            
-          </div>
-
-          
-
-          
-        </div><!-- load_built_in_plugin-method -->
-
-      
         <div id="load_plugin_dir-method" class="method-detail ">
           <a name="method-i-load_plugin_dir"></a>
 
@@ -344,7 +327,7 @@
             
             <div class="method-source-code" id="load_plugin_dir-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin.rb, line 57</span>
+<span class="ruby-comment"># File lib/fluent/plugin.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">load_plugin_dir</span>(<span class="ruby-identifier">dir</span>)
   <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">entries</span>(<span class="ruby-identifier">dir</span>).<span class="ruby-identifier">sort</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">fname</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">fname</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/\.rb$/</span>
@@ -361,6 +344,41 @@
 
           
         </div><!-- load_plugin_dir-method -->
+
+      
+        <div id="load_plugins-method" class="method-detail ">
+          <a name="method-i-load_plugins"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">load_plugins</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="load_plugins-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin.rb, line 52</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">load_plugins</span>
+  <span class="ruby-identifier">dir</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">join</span>(<span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-keyword">__FILE__</span>), <span class="ruby-string">&quot;plugin&quot;</span>)
+  <span class="ruby-identifier">load_plugin_dir</span>(<span class="ruby-identifier">dir</span>)
+  <span class="ruby-identifier">load_gem_plugins</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- load_plugins-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- load_plugins-method -->
 
       
         <div id="new_buffer-method" class="method-detail ">

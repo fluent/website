@@ -69,6 +69,8 @@
           
           <li><a href="#method-i-empty-3F">#empty?</a></li>
           
+          <li><a href="#method-i-write_to">#write_to</a></li>
+          
         </ul>
       </div>
       
@@ -90,6 +92,15 @@
 
     <div id="project-metadata">
       
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Files</h3>
+        <ul>
+        
+          <li class="file"><a href="../README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
       
 
       <div id="classindex-section" class="section project-section">
@@ -151,11 +162,17 @@
         
           <li><a href="../Fluent/HttpInput/Handler.html">Fluent::HttpInput::Handler</a></li>
         
+          <li><a href="../Fluent/HttpInput/KeepaliveManager.html">Fluent::HttpInput::KeepaliveManager</a></li>
+        
+          <li><a href="../Fluent/HttpInput/KeepaliveManager/TimerValue.html">Fluent::HttpInput::KeepaliveManager::TimerValue</a></li>
+        
           <li><a href="../Fluent/Input.html">Fluent::Input</a></li>
         
           <li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
         
           <li><a href="../Fluent/Log.html">Fluent::Log</a></li>
+        
+          <li><a href="../Fluent/Log/TTYColor.html">Fluent::Log::TTYColor</a></li>
         
           <li><a href="../Fluent/Match.html">Fluent::Match</a></li>
         
@@ -164,6 +181,8 @@
           <li><a href="../Fluent/MemoryBuffer.html">Fluent::MemoryBuffer</a></li>
         
           <li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
+        
+          <li><a href="../Fluent/MultiOutput.html">Fluent::MultiOutput</a></li>
         
           <li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
         
@@ -177,15 +196,15 @@
         
           <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
         
-          <li><a href="../Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
-        
           <li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
         
           <li><a href="../Fluent/StreamInput.html">Fluent::StreamInput</a></li>
         
-          <li><a href="../Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
+          <li><a href="../Fluent/StreamInput/Handler.html">Fluent::StreamInput::Handler</a></li>
         
           <li><a href="../Fluent/StreamOutput.html">Fluent::StreamOutput</a></li>
+        
+          <li><a href="../Fluent/StreamOutput/ReformatWriter.html">Fluent::StreamOutput::ReformatWriter</a></li>
         
           <li><a href="../Fluent/SyslogInput.html">Fluent::SyslogInput</a></li>
         
@@ -193,7 +212,7 @@
         
           <li><a href="../Fluent/TailInput.html">Fluent::TailInput</a></li>
         
-          <li><a href="../Fluent/TailInput/Tailer.html">Fluent::TailInput::Tailer</a></li>
+          <li><a href="../Fluent/TailInput/Handler.html">Fluent::TailInput::Handler</a></li>
         
           <li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
         
@@ -341,6 +360,41 @@
 
           
         </div><!-- empty-3F-method -->
+
+      
+        <div id="write_to-method" class="method-detail ">
+          <a name="method-i-write_to"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">write_to</span><span
+              class="method-args">(io)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            <p>def open end</p>
+            
+
+            
+            <div class="method-source-code" id="write_to-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/buffer.rb, line 90</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">write_to</span>(<span class="ruby-identifier">io</span>)
+  <span class="ruby-identifier">open</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">i</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">copy_stream</span>(<span class="ruby-identifier">i</span>, <span class="ruby-identifier">io</span>)
+  }
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- write_to-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- write_to-method -->
 
       
       </div><!-- public-instance-method-details -->

@@ -7,10 +7,10 @@ Plugins
    :backlinks: none
    :local:
 
-Kind of plugins
+Type of plugins
 ------------------------------------
 
-There are 3 kinds of plugins:
+There are 3 types of plugins:
 
   Input plugin
     Provides an entrance of events. It usually creates a thread and listen socket. Or pull data from data sources periodically.
@@ -32,13 +32,7 @@ Input plugins
 http
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**http** input plugin listens HTTP clients. The URL is a tag of events and event body is included on the POST parameter::
-
-    POST /myapp.access HTTP/1.1
-    Content-Length: 21
-    Content-Type: application/x-www-form-urlencoded
-    
-    json={"event":"body"}
+**http** input plugin listens HTTP clients. The URL is a tag of events and event body is included on the POST parameter.
 
 +------------+------------------------------------------------------------------+----------------------------+
 | Parameter  | Description                                                      | Required?                  |
@@ -49,6 +43,14 @@ http
 +------------+------------------------------------------------------------------+----------------------------+
 | time       | time of the event in integer (UNIX time)                         | no                         |
 +------------+------------------------------------------------------------------+----------------------------+
+
+**example**::
+
+    POST /myapp.access HTTP/1.1
+    Content-Length: 21
+    Content-Type: application/x-www-form-urlencoded
+    
+    json={"event":"body"}
 
 **configuration**::
 
@@ -68,7 +70,7 @@ bind
 tail
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**tail** input plugin reads events from the tail of text files. It's like ``tail -f``.
+**tail** input plugin reads events from the tail of text files, like ``tail -f`` command.
 
 **configuration**::
 
@@ -194,7 +196,7 @@ path
 Output plugins
 ------------------------------------
 
-Most of output plugins are *buffered* that accumulates new events in the buffer.
+Most of output plugins are *buffered* which accumulates new events on memory or files.
 
 The structure of the buffer is a queue of chunks like following::
 
@@ -211,7 +213,7 @@ The structure of the buffer is a queue of chunks like following::
     |         |
     +---------+
 
-When chunk size exceeds limit (*buffer_chunk_limit*) or specified time elapsed (*buffer_flush_interval*), new empty chunk is pushed.
+When chunk size exceeds limit (*buffer_chunk_limit*) or specified time elapsed (*flush_interval*), new empty chunk is pushed.
 The bottom chunk is wirtten out immediately when new chunk is pushed.
 
 If it failed to write, the chunk is left in the queue and retried to write after seconds (*retry_wait*).
@@ -222,16 +224,16 @@ All buffered output plugins supports following parameters described above::
 
     <match pattern>
       buffer_type memory
-      buffer_flush_interval 60s
       buffer_chunk_limit 1m
       buffer_queue_limit 100
-      retry_limit 10
+      flush_interval 60s
+      retry_limit 8
       retry_wait 1.0s
     </match>
 
 *buffer_type* specifies the type of buffer plugin. Default is ``memory``.
 
-Suffixes "s" (seconds), "m" (minutes), "h" (hours) can be used for *buffer_flush_interval* and *retry_wait*. *retry_wait* can be a decimal.
+Suffixes "s" (seconds), "m" (minutes), "h" (hours) can be used for *flush_interval* and *retry_wait*. *retry_wait* can be a decimal.
 
 Suffixes "k" (KB), "m" (MB), "g" (GB) can be used for *buffer_chunk_limit*.
 
@@ -270,32 +272,32 @@ localtime
   Uses local time zone for path formatting. Default is UTC.
 
 
-time_file
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-**time_file** buffered output plugin writes events to files. It splits files exactly based on the time.
-
-**configuration**::
-
-    <store>
-      type time_file
-      path /var/log/fluent/myapp
-      time_slice hourly
-      time_slice_wait 10m
-      localtime
-    </store>
-
-path (required)
-  Path of the file. Actual name of the file will be path + time where time is yyyyMM (hourly), yyyyMMdd (daily) or yyyyMMddmm (minutely).
-
-time_slice (required)
-  One of 'monthly', 'daily', 'hourly' or 'minutely'
-
-time_slice_wait
-  Time before writing file. Default is 10m (10 minutes).
-
-localtime
-  Uses local time zone for slicing. Default is UTC.
+.. time_file
+.. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. 
+.. **time_file** buffered output plugin writes events to files. It splits files exactly based on the time.
+.. 
+.. **configuration**::
+.. 
+..     <store>
+..       type time_file
+..       path /var/log/fluent/myapp
+..       time_slice hourly
+..       time_slice_wait 10m
+..       localtime
+..     </store>
+.. 
+.. path (required)
+..   Path of the file. Actual name of the file will be path + time where time is yyyyMM (hourly), yyyyMMdd (daily) or yyyyMMddmm (minutely).
+.. 
+.. time_slice (required)
+..   One of 'monthly', 'daily', 'hourly' or 'minutely'
+.. 
+.. time_slice_wait
+..   Time before writing file. Default is 10m (10 minutes).
+.. 
+.. localtime
+..   Uses local time zone for slicing. Default is UTC.
 
 
 stdout
@@ -323,6 +325,11 @@ tcp
       type tcp
       host 192.168.1.3
       port 24224
+      send_timeout 10s
+      <secondary>
+        host 192.168.1.4
+        port 24224
+      </secondary>
     </match>
 
 host (required)
@@ -330,6 +337,9 @@ host (required)
 
 port
   Port number of the host to send. Default is 24224.
+
+<secondary>
+  Backup destination whch is used when the primary destination is failed.
 
 
 unix
@@ -356,16 +366,18 @@ copy
 **configuration**::
 
     <match pattern>
+      type copy
       <store>
         type file
         path /var/log/fluent/myapp1
         ...
       </store>
       <store>
-        type stdout
         ...
       </store>
-      ...
+      <store>
+        ...
+      </store>
     </match>
 
 <store>

@@ -5,7 +5,7 @@
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 
-  <title>Class: Fluent::TailInput::Tailer</title>
+  <title>Class: Fluent::StreamInput::Handler</title>
 
   <link rel="stylesheet" href="../../rdoc.css" type="text/css" media="screen" />
 
@@ -34,8 +34,8 @@
         <div class="section-body">
           <ul>
           
-            <li><a href="../../lib/fluent/plugin/in_tail_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-              class="thickbox" title="lib/fluent/plugin/in_tail.rb">lib/fluent/plugin/in_tail.rb</a></li>
+            <li><a href="../../lib/fluent/plugin/in_stream_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/in_stream.rb">lib/fluent/plugin/in_stream.rb</a></li>
           
           </ul>
         </div>
@@ -50,7 +50,7 @@
       <div id="parent-class-section" class="section">
         <h3 class="section-header">Parent</h3>
         
-        <p class="link">EventMachine::FileTail</p>
+        <p class="link">Coolio::Socket</p>
         
       </div>
       
@@ -67,11 +67,11 @@
           
           <li><a href="#method-c-new">::new</a></li>
           
-          <li><a href="#method-i-on_exception">#on_exception</a></li>
+          <li><a href="#method-i-on_close">#on_close</a></li>
           
-          <li><a href="#method-i-read">#read</a></li>
+          <li><a href="#method-i-on_connect">#on_connect</a></li>
           
-          <li><a href="#method-i-receive_data">#receive_data</a></li>
+          <li><a href="#method-i-on_read">#on_read</a></li>
           
         </ul>
       </div>
@@ -82,6 +82,15 @@
 
     <div id="project-metadata">
       
+      
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Files</h3>
+        <ul>
+        
+          <li class="file"><a href="../../README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
       
 
       <div id="classindex-section" class="section project-section">
@@ -143,11 +152,17 @@
         
           <li><a href="../../Fluent/HttpInput/Handler.html">Fluent::HttpInput::Handler</a></li>
         
+          <li><a href="../../Fluent/HttpInput/KeepaliveManager.html">Fluent::HttpInput::KeepaliveManager</a></li>
+        
+          <li><a href="../../Fluent/HttpInput/KeepaliveManager/TimerValue.html">Fluent::HttpInput::KeepaliveManager::TimerValue</a></li>
+        
           <li><a href="../../Fluent/Input.html">Fluent::Input</a></li>
         
           <li><a href="../../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
         
           <li><a href="../../Fluent/Log.html">Fluent::Log</a></li>
+        
+          <li><a href="../../Fluent/Log/TTYColor.html">Fluent::Log::TTYColor</a></li>
         
           <li><a href="../../Fluent/Match.html">Fluent::Match</a></li>
         
@@ -156,6 +171,8 @@
           <li><a href="../../Fluent/MemoryBuffer.html">Fluent::MemoryBuffer</a></li>
         
           <li><a href="../../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
+        
+          <li><a href="../../Fluent/MultiOutput.html">Fluent::MultiOutput</a></li>
         
           <li><a href="../../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
         
@@ -169,15 +186,15 @@
         
           <li><a href="../../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
         
-          <li><a href="../../Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
-        
           <li><a href="../../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
         
           <li><a href="../../Fluent/StreamInput.html">Fluent::StreamInput</a></li>
         
-          <li><a href="../../Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
+          <li><a href="../../Fluent/StreamInput/Handler.html">Fluent::StreamInput::Handler</a></li>
         
           <li><a href="../../Fluent/StreamOutput.html">Fluent::StreamOutput</a></li>
+        
+          <li><a href="../../Fluent/StreamOutput/ReformatWriter.html">Fluent::StreamOutput::ReformatWriter</a></li>
         
           <li><a href="../../Fluent/SyslogInput.html">Fluent::SyslogInput</a></li>
         
@@ -185,7 +202,7 @@
         
           <li><a href="../../Fluent/TailInput.html">Fluent::TailInput</a></li>
         
-          <li><a href="../../Fluent/TailInput/Tailer.html">Fluent::TailInput::Tailer</a></li>
+          <li><a href="../../Fluent/TailInput/Handler.html">Fluent::TailInput::Handler</a></li>
         
           <li><a href="../../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
         
@@ -218,7 +235,7 @@
   </div>
 
   <div id="documentation">
-    <h1 class="class">Fluent::TailInput::Tailer</h1>
+    <h1 class="class">Fluent::StreamInput::Handler</h1>
 
     <div id="description" class="description">
       
@@ -246,7 +263,7 @@
           
           <div class="method-heading">
             <span class="method-name">new</span><span
-              class="method-args">(path, startpos=-1, &callback)</span>
+              class="method-args">(io, callback)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -259,11 +276,13 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 82</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">startpos</span>=<span class="ruby-value">-1</span>, &amp;<span class="ruby-identifier">callback</span>)
-  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">startpos</span>)
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 98</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">callback</span>)
+  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">io</span>)
+  <span class="ruby-identifier">opt</span> = [<span class="ruby-value">1</span>, <span class="ruby-ivar">@timeout</span>.<span class="ruby-identifier">to_i</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">'I!I!'</span>)  <span class="ruby-comment"># { int l_onoff; int l_linger; }</span>
+  <span class="ruby-identifier">io</span>.<span class="ruby-identifier">setsockopt</span>(<span class="ruby-constant">Socket</span><span class="ruby-operator">::</span><span class="ruby-constant">SOL_SOCKET</span>, <span class="ruby-constant">Socket</span><span class="ruby-operator">::</span><span class="ruby-constant">SO_LINGER</span>, <span class="ruby-identifier">opt</span>)
+  <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">trace</span> { <span class="ruby-node">&quot;accepted fluent socket object_id=#{self.object_id}&quot;</span> }
   <span class="ruby-ivar">@callback</span> = <span class="ruby-identifier">callback</span>
-  <span class="ruby-ivar">@buffer</span> = <span class="ruby-constant">BufferedTokenizer</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -281,49 +300,12 @@
         <h3 class="section-header">Public Instance Methods</h3>
 
       
-        <div id="on_exception-method" class="method-detail ">
-          <a name="method-i-on_exception"></a>
+        <div id="on_close-method" class="method-detail ">
+          <a name="method-i-on_close"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">on_exception</span><span
-              class="method-args">(e)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            
-            
-
-            
-            <div class="method-source-code" id="on_exception-source">
-<pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 110</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_exception</span>(<span class="ruby-identifier">e</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span>
-    <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">error</span> <span class="ruby-node">&quot;tail: #{path} does not exist&quot;</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-comment"># raise error</span>
-  <span class="ruby-keyword">super</span>(<span class="ruby-identifier">e</span>)
-<span class="ruby-keyword">end</span></pre>
-            </div><!-- on_exception-source -->
-            
-          </div>
-
-          
-
-          
-        </div><!-- on_exception-method -->
-
-      
-        <div id="read-method" class="method-detail ">
-          <a name="method-i-read"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">read</span><span
+            <span class="method-name">on_close</span><span
               class="method-args">()</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
@@ -331,39 +313,65 @@
 
           <div class="method-description">
             
-            <p>FIXME for event-machine-tail-0.6.1</p>
+            
             
 
             
-            <div class="method-source-code" id="read-source">
+            <div class="method-source-code" id="on_close-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 99</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">read</span>
-  <span class="ruby-keyword">super</span>
-<span class="ruby-keyword">rescue</span>
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">$!</span>.<span class="ruby-identifier">to_s</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;closed stream&quot;</span>
-    <span class="ruby-ivar">@file</span> = <span class="ruby-keyword">nil</span>
-    <span class="ruby-identifier">schedule_reopen</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span>
-  <span class="ruby-keyword">end</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 118</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_close</span>
+  <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">trace</span> { <span class="ruby-node">&quot;closed fluent socket object_id=#{self.object_id}&quot;</span> }
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- read-source -->
+            </div><!-- on_close-source -->
             
           </div>
 
           
 
           
-        </div><!-- read-method -->
+        </div><!-- on_close-method -->
 
       
-        <div id="receive_data-method" class="method-detail ">
-          <a name="method-i-receive_data"></a>
+        <div id="on_connect-method" class="method-detail ">
+          <a name="method-i-on_connect"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">receive_data</span><span
+            <span class="method-name">on_connect</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="on_connect-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 106</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_connect</span>
+  <span class="ruby-ivar">@u</span> = <span class="ruby-constant">MessagePack</span><span class="ruby-operator">::</span><span class="ruby-constant">Unpacker</span>.<span class="ruby-identifier">new</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- on_connect-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- on_connect-method -->
+
+      
+        <div id="on_read-method" class="method-detail ">
+          <a name="method-i-on_read"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">on_read</span><span
               class="method-args">(data)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
@@ -375,26 +383,24 @@
             
 
             
-            <div class="method-source-code" id="receive_data-source">
+            <div class="method-source-code" id="on_read-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 88</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">receive_data</span>(<span class="ruby-identifier">data</span>)
-  <span class="ruby-identifier">lines</span> = []
-  <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">extract</span>(<span class="ruby-identifier">data</span>).<span class="ruby-identifier">each</span> <span class="ruby-keyword">do</span> <span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-constant">EventMachine</span>.<span class="ruby-identifier">defer</span> {
-    <span class="ruby-ivar">@callback</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">lines</span>)
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 110</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_read</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-identifier">msgs</span> = []
+  <span class="ruby-ivar">@u</span>.<span class="ruby-identifier">feed_each</span>(<span class="ruby-identifier">data</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">msgs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">msg</span>
   }
+  <span class="ruby-ivar">@callback</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">msgs</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- receive_data-source -->
+            </div><!-- on_read-source -->
             
           </div>
 
           
 
           
-        </div><!-- receive_data-method -->
+        </div><!-- on_read-method -->
 
       
       </div><!-- public-instance-method-details -->

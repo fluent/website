@@ -79,6 +79,15 @@
     <div id="project-metadata">
       
       
+      <div id="fileindex-section" class="section project-section">
+        <h3 class="section-header">Files</h3>
+        <ul>
+        
+          <li class="file"><a href="../README_rdoc.html">README.rdoc</a></li>
+        
+        </ul>
+      </div>
+      
 
       <div id="classindex-section" class="section project-section">
         <h3 class="section-header">Class/Module Index
@@ -139,11 +148,17 @@
         
           <li><a href="../Fluent/HttpInput/Handler.html">Fluent::HttpInput::Handler</a></li>
         
+          <li><a href="../Fluent/HttpInput/KeepaliveManager.html">Fluent::HttpInput::KeepaliveManager</a></li>
+        
+          <li><a href="../Fluent/HttpInput/KeepaliveManager/TimerValue.html">Fluent::HttpInput::KeepaliveManager::TimerValue</a></li>
+        
           <li><a href="../Fluent/Input.html">Fluent::Input</a></li>
         
           <li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
         
           <li><a href="../Fluent/Log.html">Fluent::Log</a></li>
+        
+          <li><a href="../Fluent/Log/TTYColor.html">Fluent::Log::TTYColor</a></li>
         
           <li><a href="../Fluent/Match.html">Fluent::Match</a></li>
         
@@ -152,6 +167,8 @@
           <li><a href="../Fluent/MemoryBuffer.html">Fluent::MemoryBuffer</a></li>
         
           <li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
+        
+          <li><a href="../Fluent/MultiOutput.html">Fluent::MultiOutput</a></li>
         
           <li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
         
@@ -165,15 +182,15 @@
         
           <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
         
-          <li><a href="../Fluent/RegexMatchPattern.html">Fluent::RegexMatchPattern</a></li>
-        
           <li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
         
           <li><a href="../Fluent/StreamInput.html">Fluent::StreamInput</a></li>
         
-          <li><a href="../Fluent/StreamInput/StreamInputThread.html">Fluent::StreamInput::StreamInputThread</a></li>
+          <li><a href="../Fluent/StreamInput/Handler.html">Fluent::StreamInput::Handler</a></li>
         
           <li><a href="../Fluent/StreamOutput.html">Fluent::StreamOutput</a></li>
+        
+          <li><a href="../Fluent/StreamOutput/ReformatWriter.html">Fluent::StreamOutput::ReformatWriter</a></li>
         
           <li><a href="../Fluent/SyslogInput.html">Fluent::SyslogInput</a></li>
         
@@ -181,7 +198,7 @@
         
           <li><a href="../Fluent/TailInput.html">Fluent::TailInput</a></li>
         
-          <li><a href="../Fluent/TailInput/Tailer.html">Fluent::TailInput::Tailer</a></li>
+          <li><a href="../Fluent/TailInput/Handler.html">Fluent::TailInput::Handler</a></li>
         
           <li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
         
@@ -218,6 +235,20 @@
 
     <div id="description" class="description">
       
+<pre>TODO</pre>
+
+<p>class RegexMatchPattern &lt; <a href="MatchPattern.html">MatchPattern</a></p>
+
+<pre>def initialize(regex)
+  @regex = regex
+end
+
+def match(str)
+  @regex.match(str) != nil
+end</pre>
+
+<p>end</p>
+
     </div><!-- description -->
 
     
@@ -255,28 +286,97 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/match.rb, line 71</span>
+<span class="ruby-comment"># File lib/fluent/match.rb, line 74</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">pat</span>)
-  <span class="ruby-identifier">regex</span> = <span class="ruby-string">''</span>
+  <span class="ruby-identifier">stack</span> = []
+  <span class="ruby-identifier">regex</span> = [<span class="ruby-string">''</span>]
   <span class="ruby-identifier">escape</span> = <span class="ruby-keyword">false</span>
-  <span class="ruby-comment"># FIXME</span>
-  <span class="ruby-identifier">pat</span>.<span class="ruby-identifier">scan</span>(<span class="ruby-regexp">/./</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span>
+  <span class="ruby-identifier">dot</span> = <span class="ruby-keyword">false</span>
+
+  <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
+  <span class="ruby-keyword">while</span> <span class="ruby-identifier">i</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">pat</span>.<span class="ruby-identifier">length</span>
+    <span class="ruby-identifier">c</span> = <span class="ruby-identifier">pat</span>[<span class="ruby-identifier">i</span>,<span class="ruby-value">1</span>]
+
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">escape</span>
-      <span class="ruby-identifier">regex</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">c</span>
+      <span class="ruby-identifier">regex</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">escape</span>(<span class="ruby-identifier">c</span>)
       <span class="ruby-identifier">escape</span> = <span class="ruby-keyword">false</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-string">'/'</span>
-      <span class="ruby-identifier">escape</span> = <span class="ruby-keyword">true</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/[a-zA-Z0-9_]/</span>
-      <span class="ruby-identifier">regex</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">c</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-string">'*'</span>
-      <span class="ruby-identifier">regex</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'[^\.]*'</span>
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-string">'?'</span>
-      <span class="ruby-identifier">regex</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">'.'</span>
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-identifier">regex</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;\\#{c}&quot;</span>
+      <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+      <span class="ruby-keyword">next</span>
+
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">pat</span>[<span class="ruby-identifier">i</span>,<span class="ruby-value">2</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;**&quot;</span>
+      <span class="ruby-comment"># recursive any</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">dot</span>
+        <span class="ruby-identifier">regex</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;(?![^\\.])&quot;</span>
+        <span class="ruby-identifier">dot</span> = <span class="ruby-keyword">false</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">pat</span>[<span class="ruby-identifier">i</span><span class="ruby-operator">+</span><span class="ruby-value">2</span>,<span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-string">&quot;.&quot;</span>
+        <span class="ruby-identifier">regex</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;(?:.*\\.|\\A)&quot;</span>
+        <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">3</span>
+      <span class="ruby-keyword">else</span>
+        <span class="ruby-identifier">regex</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;.*&quot;</span>
+        <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">2</span>
+      <span class="ruby-keyword">end</span>
+      <span class="ruby-keyword">next</span>
+
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">dot</span>
+      <span class="ruby-identifier">regex</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;\\.&quot;</span>
+      <span class="ruby-identifier">dot</span> = <span class="ruby-keyword">false</span>
     <span class="ruby-keyword">end</span>
-  }
-  <span class="ruby-ivar">@regex</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">regex</span>)
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;\\&quot;</span>
+      <span class="ruby-identifier">escape</span> = <span class="ruby-keyword">true</span>
+
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;.&quot;</span>
+      <span class="ruby-identifier">dot</span> = <span class="ruby-keyword">true</span>
+
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;*&quot;</span>
+      <span class="ruby-comment"># any</span>
+      <span class="ruby-identifier">regex</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-string">&quot;[^\\.]*&quot;</span>
+
+    <span class="ruby-comment"># TODO</span>
+    <span class="ruby-comment">#elsif c == &quot;[&quot;</span>
+    <span class="ruby-comment">#  # character class</span>
+    <span class="ruby-comment">#  chars = ''</span>
+    <span class="ruby-comment">#  while i &lt; pat.length</span>
+    <span class="ruby-comment">#    c = pat[i,1]</span>
+    <span class="ruby-comment">#    if c == &quot;]&quot;</span>
+    <span class="ruby-comment">#      break</span>
+    <span class="ruby-comment">#    else</span>
+    <span class="ruby-comment">#      chars &lt;&lt; c</span>
+    <span class="ruby-comment">#    end</span>
+    <span class="ruby-comment">#    i += 1</span>
+    <span class="ruby-comment">#  end</span>
+    <span class="ruby-comment">#  regex.last &lt;&lt; '['+Regexp.escape(chars).gsub(&quot;\\-&quot;,'-')+']'</span>
+
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;{&quot;</span>
+      <span class="ruby-comment"># or</span>
+      <span class="ruby-identifier">stack</span>.<span class="ruby-identifier">push</span> []
+      <span class="ruby-identifier">regex</span>.<span class="ruby-identifier">push</span> <span class="ruby-string">''</span>
+
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;}&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">stack</span>.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-identifier">stack</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">regex</span>.<span class="ruby-identifier">pop</span>
+      <span class="ruby-identifier">regex</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">union</span>(*<span class="ruby-identifier">stack</span>.<span class="ruby-identifier">pop</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">r</span><span class="ruby-operator">|</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">r</span>) }).<span class="ruby-identifier">to_s</span>
+
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">==</span> <span class="ruby-string">&quot;,&quot;</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-operator">!</span><span class="ruby-identifier">stack</span>.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-identifier">stack</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">regex</span>.<span class="ruby-identifier">pop</span>
+      <span class="ruby-identifier">regex</span>.<span class="ruby-identifier">push</span> <span class="ruby-string">''</span>
+
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">c</span> <span class="ruby-operator">=~</span> <span class="ruby-regexp">/[a-zA-Z0-9_]/</span>
+      <span class="ruby-identifier">regex</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">c</span>
+
+    <span class="ruby-keyword">else</span>
+      <span class="ruby-identifier">regex</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-node">&quot;\\#{c}&quot;</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">until</span> <span class="ruby-identifier">stack</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-identifier">stack</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">regex</span>.<span class="ruby-identifier">pop</span>
+    <span class="ruby-identifier">regex</span>.<span class="ruby-identifier">last</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">union</span>(*<span class="ruby-identifier">stack</span>.<span class="ruby-identifier">pop</span>).<span class="ruby-identifier">to_s</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@regex</span> = <span class="ruby-constant">Regexp</span>.<span class="ruby-identifier">new</span>(<span class="ruby-string">&quot;\\A&quot;</span><span class="ruby-operator">+</span><span class="ruby-identifier">regex</span>.<span class="ruby-identifier">last</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;\\Z&quot;</span>)
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -313,7 +413,7 @@
             
             <div class="method-source-code" id="match-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/match.rb, line 94</span>
+<span class="ruby-comment"># File lib/fluent/match.rb, line 166</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">match</span>(<span class="ruby-identifier">str</span>)
   <span class="ruby-ivar">@regex</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">str</span>) <span class="ruby-operator">!=</span> <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
