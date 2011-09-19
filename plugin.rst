@@ -367,6 +367,7 @@ copy
 
     <match pattern>
       type copy
+
       <store>
         type file
         path /var/log/fluent/myapp1
@@ -383,6 +384,42 @@ copy
 <store>
   Specifies output plugin. The format is same as <match> directive.
 
+roundrobin
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**roundrobin** output plugin distributes events to multiple outputs using round-robin algorithm. This is NOT buffered plugin.
+
+**configuration**::
+
+    <match pattern>
+      type roundrobin
+
+      <store>
+        type file
+        path /var/log/fluent/myapp1
+        ...
+      </store>
+      <store>
+        ...
+      </store>
+      <store>
+        ...
+      </store>
+    </match>
+
+<store>
+  Specifies output plugin. The format is same as <match> directive.
+
+null
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**roundrobin** output plugin just throw away events.
+
+**configuration**::
+
+    <match pattern>
+      type null
+    </match>
 
 .. _buffer_plugin:
 

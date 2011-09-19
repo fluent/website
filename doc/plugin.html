@@ -60,6 +60,8 @@
 <li><a class="reference external" href="#id1">tcp</a></li>
 <li><a class="reference external" href="#id2">unix</a></li>
 <li><a class="reference external" href="#copy">copy</a></li>
+<li><a class="reference external" href="#roundrobin">roundrobin</a></li>
+<li><a class="reference external" href="#null">null</a></li>
 </ul>
 </li>
 <li><a class="reference external" href="#buffer-plugins">Buffer plugins</a><ul>
@@ -122,11 +124,13 @@
 <li><a class="reference internal" href="#id1" id="id14">tcp</a></li>
 <li><a class="reference internal" href="#id2" id="id15">unix</a></li>
 <li><a class="reference internal" href="#copy" id="id16">copy</a></li>
+<li><a class="reference internal" href="#roundrobin" id="id17">roundrobin</a></li>
+<li><a class="reference internal" href="#null" id="id18">null</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#buffer-plugins" id="id17">Buffer plugins</a><ul>
-<li><a class="reference internal" href="#memory" id="id18">memory</a></li>
-<li><a class="reference internal" href="#id3" id="id19">file</a></li>
+<li><a class="reference internal" href="#buffer-plugins" id="id19">Buffer plugins</a><ul>
+<li><a class="reference internal" href="#memory" id="id20">memory</a></li>
+<li><a class="reference internal" href="#id3" id="id21">file</a></li>
 </ul>
 </li>
 </ul>
@@ -445,6 +449,7 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 <p><strong>configuration</strong>:</p>
 <div class="highlight-python"><pre>&lt;match pattern&gt;
   type copy
+
   &lt;store&gt;
     type file
     path /var/log/fluent/myapp1
@@ -462,6 +467,40 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 <dt>&lt;store&gt;</dt>
 <dd>Specifies output plugin. The format is same as &lt;match&gt; directive.</dd>
 </dl>
+</div>
+<div class="section" id="roundrobin">
+<h3>roundrobin<a class="headerlink" href="#roundrobin" title="Permalink to this headline">¶</a></h3>
+<p><strong>roundrobin</strong> output plugin distributes events to multiple outputs using round-robin algorithm. This is NOT buffered plugin.</p>
+<p><strong>configuration</strong>:</p>
+<div class="highlight-python"><pre>&lt;match pattern&gt;
+  type roundrobin
+
+  &lt;store&gt;
+    type file
+    path /var/log/fluent/myapp1
+    ...
+  &lt;/store&gt;
+  &lt;store&gt;
+    ...
+  &lt;/store&gt;
+  &lt;store&gt;
+    ...
+  &lt;/store&gt;
+&lt;/match&gt;</pre>
+</div>
+<dl class="docutils">
+<dt>&lt;store&gt;</dt>
+<dd>Specifies output plugin. The format is same as &lt;match&gt; directive.</dd>
+</dl>
+</div>
+<div class="section" id="null">
+<h3>null<a class="headerlink" href="#null" title="Permalink to this headline">¶</a></h3>
+<p><strong>roundrobin</strong> output plugin just throw away events.</p>
+<p><strong>configuration</strong>:</p>
+<div class="highlight-python"><pre>&lt;match pattern&gt;
+  type null
+&lt;/match&gt;</pre>
+</div>
 </div>
 </div>
 <div class="section" id="buffer-plugins">
