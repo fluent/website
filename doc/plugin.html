@@ -363,15 +363,20 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 <p><strong>configuration</strong>:</p>
 <div class="highlight-python"><pre>&lt;match pattern&gt;
   type file
-  path /var/log/fluent/myapp.%Y-%m-%d-%H.log
+  path /var/log/fluent/myapp
+  time_format %Y%m%d
+  time_wait 10m
+  compress gzip
   localtime
 &lt;/match&gt;</pre>
 </div>
 <dl class="docutils">
 <dt>path (required)</dt>
-<dd><p class="first">Path of the file. Following characters are replaced with values:</p>
-<blockquote class="last">
-<table border="1" class="docutils">
+<dd>Path of the file. Actual path becomes path + time + &#8220;.log&#8221;. See also <tt class="docutils literal"><span class="pre">time_format</span></tt> option descried below.</dd>
+<dt>time_format</dt>
+<dd><dl class="first docutils">
+<dt>Format of the time in the file path. Following characters are replaced with values:</dt>
+<dd><table border="1" class="first last docutils">
 <colgroup>
 <col width="11%" />
 <col width="89%" />
@@ -397,11 +402,18 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 </tr>
 </tbody>
 </table>
-</blockquote>
 </dd>
+</dl>
+<p class="last">Default is <tt class="docutils literal"><span class="pre">%Y%m%d</span></tt> which slices files every day. Use <tt class="docutils literal"><span class="pre">%Y%m%d%H</span></tt> to slice files every hour.</p>
+</dd>
+<dt>time_wait</dt>
+<dd>Wait time before flushing the buffer. Default is 10 minutes.</dd>
 <dt>localtime</dt>
 <dd>Uses local time zone for path formatting. Default is UTC.</dd>
+<dt>compress</dt>
+<dd>Compress flushed files. Supported algorithm is gzip. Default is no-compression.</dd>
 </dl>
+<p>Note that this output plugin uses file buffer by default.</p>
 </div>
 <div class="section" id="id1">
 <h3>tcp<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>

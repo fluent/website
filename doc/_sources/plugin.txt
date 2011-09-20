@@ -249,13 +249,18 @@ file
 
     <match pattern>
       type file
-      path /var/log/fluent/myapp.%Y-%m-%d-%H.log
+      path /var/log/fluent/myapp
+      time_format %Y%m%d
+      time_wait 10m
+      compress gzip
       localtime
     </match>
 
 path (required)
-  Path of the file. Following characters are replaced with values:
+  Path of the file. Actual path becomes path + time + ".log". See also ``time_format`` option descried below.
 
+time_format
+  Format of the time in the file path. Following characters are replaced with values:
       +-----+------------------------------------------+
       | %Y  | Year with century                        |
       +-----+------------------------------------------+
@@ -269,10 +274,18 @@ path (required)
       +-----+------------------------------------------+
       | %S  | Second of the minute (00..60)            |
       +-----+------------------------------------------+
+  Default is ``%Y%m%d`` which slices files every day. Use ``%Y%m%d%H`` to slice files every hour.
+
+time_wait
+  Wait time before flushing the buffer. Default is 10 minutes.
 
 localtime
   Uses local time zone for path formatting. Default is UTC.
 
+compress
+  Compress flushed files. Supported algorithm is gzip. Default is no-compression.
+
+Note that this output plugin uses file buffer by default.
 
 .. time_file
 .. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
