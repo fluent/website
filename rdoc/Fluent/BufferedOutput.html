@@ -226,8 +226,6 @@
         
           <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
         
-          <li><a href="../Fluent/TimeSlicedFileOutput.html">Fluent::TimeSlicedFileOutput</a></li>
-        
           <li><a href="../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
           <li><a href="../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
@@ -294,6 +292,7 @@
 <pre>
 <span class="ruby-comment"># File lib/fluent/output.rb, line 268</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+  <span class="ruby-ivar">@buffer_type</span> = <span class="ruby-string">'memory'</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -330,7 +329,7 @@
             
             <div class="method-source-code" id="before_shutdown-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 326</span>
+<span class="ruby-comment"># File lib/fluent/output.rb, line 329</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">before_shutdown</span>
   <span class="ruby-keyword">begin</span>
     <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">before_shutdown</span>(<span class="ruby-keyword">self</span>)
@@ -368,10 +367,12 @@
             
             <div class="method-source-code" id="configure-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 271</span>
+<span class="ruby-comment"># File lib/fluent/output.rb, line 272</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
-  <span class="ruby-identifier">buffer_type</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'buffer_type'</span>] <span class="ruby-operator">||</span> <span class="ruby-string">'memory'</span>
-  <span class="ruby-ivar">@buffer</span> = <span class="ruby-constant">Plugin</span>.<span class="ruby-identifier">new_buffer</span>(<span class="ruby-identifier">buffer_type</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">buffer_type</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'buffer_type'</span>]
+    <span class="ruby-ivar">@buffer_type</span> = <span class="ruby-identifier">buffer_type</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@buffer</span> = <span class="ruby-constant">Plugin</span>.<span class="ruby-identifier">new_buffer</span>(<span class="ruby-ivar">@buffer_type</span>)
   <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
 
   <span class="ruby-ivar">@writer</span> = <span class="ruby-constant">OutputThread</span>.<span class="ruby-identifier">new</span>(<span class="ruby-keyword">self</span>)
@@ -406,7 +407,7 @@
             
             <div class="method-source-code" id="emit-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 290</span>
+<span class="ruby-comment"># File lib/fluent/output.rb, line 293</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">emit</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>, <span class="ruby-identifier">chain</span>, <span class="ruby-identifier">key</span>=<span class="ruby-string">&quot;&quot;</span>)
   <span class="ruby-identifier">data</span> = <span class="ruby-identifier">format_stream</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">emit</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">data</span>, <span class="ruby-identifier">chain</span>)
@@ -442,7 +443,7 @@
             
             <div class="method-source-code" id="flush_secondary-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 339</span>
+<span class="ruby-comment"># File lib/fluent/output.rb, line 342</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">flush_secondary</span>(<span class="ruby-identifier">secondary</span>)
   <span class="ruby-keyword">while</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">pop</span>(<span class="ruby-identifier">secondary</span>)
   <span class="ruby-keyword">end</span>
@@ -476,7 +477,7 @@
             
             <div class="method-source-code" id="format_stream-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 301</span>
+<span class="ruby-comment"># File lib/fluent/output.rb, line 304</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">format_stream</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>)
   <span class="ruby-identifier">out</span> = <span class="ruby-string">''</span>
   <span class="ruby-identifier">es</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">event</span><span class="ruby-operator">|</span>
@@ -513,7 +514,7 @@
             
             <div class="method-source-code" id="shutdown-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 285</span>
+<span class="ruby-comment"># File lib/fluent/output.rb, line 288</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">shutdown</span>
   <span class="ruby-ivar">@writer</span>.<span class="ruby-identifier">shutdown</span>
   <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">shutdown</span>
@@ -547,7 +548,7 @@
             
             <div class="method-source-code" id="start-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 280</span>
+<span class="ruby-comment"># File lib/fluent/output.rb, line 283</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span>
   <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">start</span>
   <span class="ruby-ivar">@writer</span>.<span class="ruby-identifier">start</span>
@@ -581,7 +582,7 @@
             
             <div class="method-source-code" id="submit_flush-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 297</span>
+<span class="ruby-comment"># File lib/fluent/output.rb, line 300</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">submit_flush</span>
   <span class="ruby-ivar">@writer</span>.<span class="ruby-identifier">submit_flush</span>
 <span class="ruby-keyword">end</span></pre>
@@ -614,7 +615,7 @@
             
             <div class="method-source-code" id="try_flush-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 315</span>
+<span class="ruby-comment"># File lib/fluent/output.rb, line 318</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">try_flush</span>
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">queue_size</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
     <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
@@ -654,7 +655,7 @@
             
             <div class="method-source-code" id="write_abort-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 335</span>
+<span class="ruby-comment"># File lib/fluent/output.rb, line 338</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">write_abort</span>
   <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">clear!</span>
 <span class="ruby-keyword">end</span></pre>

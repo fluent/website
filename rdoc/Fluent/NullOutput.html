@@ -5,7 +5,7 @@
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 
-  <title>Class: Fluent::TimeSlicedFileOutput</title>
+  <title>Class: Fluent::NullOutput</title>
 
   <link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
 
@@ -34,8 +34,8 @@
         <div class="section-body">
           <ul>
           
-            <li><a href="../lib/fluent/plugin/out_time_file_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-              class="thickbox" title="lib/fluent/plugin/out_time_file.rb">lib/fluent/plugin/out_time_file.rb</a></li>
+            <li><a href="../lib/fluent/plugin/out_null_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/plugin/out_null.rb">lib/fluent/plugin/out_null.rb</a></li>
           
           </ul>
         </div>
@@ -50,7 +50,7 @@
       <div id="parent-class-section" class="section">
         <h3 class="section-header">Parent</h3>
         
-        <p class="link"><a href="TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></p>
+        <p class="link"><a href="Output.html">Fluent::Output</a></p>
         
       </div>
       
@@ -69,9 +69,11 @@
           
           <li><a href="#method-i-configure">#configure</a></li>
           
-          <li><a href="#method-i-format">#format</a></li>
+          <li><a href="#method-i-emit">#emit</a></li>
           
-          <li><a href="#method-i-write">#write</a></li>
+          <li><a href="#method-i-shutdown">#shutdown</a></li>
+          
+          <li><a href="#method-i-start">#start</a></li>
           
         </ul>
       </div>
@@ -212,8 +214,6 @@
         
           <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
         
-          <li><a href="../Fluent/TimeSlicedFileOutput.html">Fluent::TimeSlicedFileOutput</a></li>
-        
           <li><a href="../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
           <li><a href="../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
@@ -237,7 +237,7 @@
   </div>
 
   <div id="documentation">
-    <h1 class="class">Fluent::TimeSlicedFileOutput</h1>
+    <h1 class="class">Fluent::NullOutput</h1>
 
     <div id="description" class="description">
       
@@ -251,30 +251,6 @@
 
       
 
-      
-      <!-- Attributes -->
-      <div id="attribute-method-details" class="method-section section">
-        <h3 class="section-header">Attributes</h3>
-
-        
-        <div id="path-attribute-method" class="method-detail">
-          <a name="path"></a>
-          
-          <a name="path="></a>
-          
-          <div class="method-heading attribute-method-heading">
-            <span class="method-name">path</span><span
-              class="attribute-access-type">[RW]</span>
-          </div>
-
-          <div class="method-description">
-          
-          
-          
-          </div>
-        </div>
-        
-      </div><!-- attribute-method-details -->
       
 
       <!-- Methods -->
@@ -302,9 +278,8 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/out_time_file.rb, line 24</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_null.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
-  <span class="ruby-keyword">super</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -341,17 +316,8 @@
             
             <div class="method-source-code" id="configure-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/out_time_file.rb, line 30</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_null.rb, line 27</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
-  <span class="ruby-keyword">super</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'path'</span>]
-    <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">path</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConfigError</span>, <span class="ruby-string">&quot;'path' parameter is required on file output&quot;</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-comment"># TODO compression</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- configure-source -->
             
@@ -363,13 +329,13 @@
         </div><!-- configure-method -->
 
       
-        <div id="format-method" class="method-detail ">
-          <a name="method-i-format"></a>
+        <div id="emit-method" class="method-detail ">
+          <a name="method-i-emit"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">format</span><span
-              class="method-args">(tag, event)</span>
+            <span class="method-name">emit</span><span
+              class="method-args">(tag, es, chain)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -380,36 +346,29 @@
             
 
             
-            <div class="method-source-code" id="format-source">
+            <div class="method-source-code" id="emit-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/out_time_file.rb, line 42</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">format</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">event</span>)
-  <span class="ruby-comment"># TODO foramt</span>
-  <span class="ruby-comment">#msg = e.record.map {|k,v|</span>
-  <span class="ruby-comment">#   k = &quot;\&quot;#{k}\&quot;&quot; if k.include?(' ')</span>
-  <span class="ruby-comment">#   v = &quot;\&quot;#{v}\&quot;&quot; if v.include?(' ')</span>
-  <span class="ruby-comment">#   &quot;#{k}=#{v}&quot;</span>
-  <span class="ruby-comment">#}.join(' ')</span>
-  <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">event</span>.<span class="ruby-identifier">record</span>.<span class="ruby-identifier">to_json</span>
-  <span class="ruby-node">&quot;#{Time.at(event.time).to_s} #{tag}: #{msg}\n&quot;</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_null.rb, line 36</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">emit</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>, <span class="ruby-identifier">chain</span>)
+  <span class="ruby-identifier">chain</span>.<span class="ruby-identifier">next</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- format-source -->
+            </div><!-- emit-source -->
             
           </div>
 
           
 
           
-        </div><!-- format-method -->
+        </div><!-- emit-method -->
 
       
-        <div id="write-method" class="method-detail ">
-          <a name="method-i-write"></a>
+        <div id="shutdown-method" class="method-detail ">
+          <a name="method-i-shutdown"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">write</span><span
-              class="method-args">(chunk)</span>
+            <span class="method-name">shutdown</span><span
+              class="method-args">()</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -420,24 +379,51 @@
             
 
             
-            <div class="method-source-code" id="write-source">
+            <div class="method-source-code" id="shutdown-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/out_time_file.rb, line 53</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">write</span>(<span class="ruby-identifier">chunk</span>)
-  <span class="ruby-identifier">path</span> = <span class="ruby-node">&quot;#{@path}_#{chunk.key}&quot;</span>
-  <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">path</span>)
-  <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>, <span class="ruby-string">&quot;a&quot;</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">f</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">read</span>)
-  }
+<span class="ruby-comment"># File lib/fluent/plugin/out_null.rb, line 33</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">shutdown</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- write-source -->
+            </div><!-- shutdown-source -->
             
           </div>
 
           
 
           
-        </div><!-- write-method -->
+        </div><!-- shutdown-method -->
+
+      
+        <div id="start-method" class="method-detail ">
+          <a name="method-i-start"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">start</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="start-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/out_null.rb, line 30</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- start-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- start-method -->
 
       
       </div><!-- public-instance-method-details -->

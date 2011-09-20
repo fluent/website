@@ -220,8 +220,6 @@
         
           <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
         
-          <li><a href="../Fluent/TimeSlicedFileOutput.html">Fluent::TimeSlicedFileOutput</a></li>
-        
           <li><a href="../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
           <li><a href="../Fluent/UnixInput.html">Fluent::UnixInput</a></li>
@@ -278,30 +276,13 @@
         <h3 class="section-header">Attributes</h3>
 
         
-        <div id="prefix-attribute-method" class="method-detail">
-          <a name="prefix"></a>
+        <div id="buffer_path-attribute-method" class="method-detail">
+          <a name="buffer_path"></a>
           
-          <a name="prefix="></a>
-          
-          <div class="method-heading attribute-method-heading">
-            <span class="method-name">prefix</span><span
-              class="attribute-access-type">[RW]</span>
-          </div>
-
-          <div class="method-description">
-          
-          
-          
-          </div>
-        </div>
-        
-        <div id="suffix-attribute-method" class="method-detail">
-          <a name="suffix"></a>
-          
-          <a name="suffix="></a>
+          <a name="buffer_path="></a>
           
           <div class="method-heading attribute-method-heading">
-            <span class="method-name">suffix</span><span
+            <span class="method-name">buffer_path</span><span
               class="attribute-access-type">[RW]</span>
           </div>
 
@@ -344,8 +325,7 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">'uri'</span>
   <span class="ruby-keyword">super</span>
-  <span class="ruby-ivar">@prefix</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@suffix</span> = <span class="ruby-keyword">nil</span>
+  <span class="ruby-ivar">@buffer_path</span> = <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -382,20 +362,23 @@
             
             <div class="method-source-code" id="configure-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 86</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
   <span class="ruby-keyword">super</span>
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'buffer_path'</span>]
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">pos</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">'*'</span>)
-      <span class="ruby-ivar">@prefix</span> = <span class="ruby-identifier">path</span>[<span class="ruby-value">0</span>,<span class="ruby-identifier">pos</span>]
-      <span class="ruby-ivar">@suffix</span> = <span class="ruby-identifier">path</span>[<span class="ruby-identifier">pos</span><span class="ruby-operator">+</span><span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
-    <span class="ruby-keyword">else</span>
-      <span class="ruby-ivar">@prefix</span> = <span class="ruby-identifier">path</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.&quot;</span>
-      <span class="ruby-ivar">@suffix</span> = <span class="ruby-string">&quot;.log&quot;</span>
-    <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">else</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">buffer_path</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'buffer_path'</span>]
+    <span class="ruby-ivar">@buffer_path</span> = <span class="ruby-identifier">buffer_path</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@buffer_path</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConfigError</span>, <span class="ruby-string">&quot;'buffer_path' parameter is required on file buffer&quot;</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">pos</span> = <span class="ruby-ivar">@buffer_path</span>.<span class="ruby-identifier">index</span>(<span class="ruby-string">'*'</span>)
+    <span class="ruby-ivar">@buffer_path_prefix</span> = <span class="ruby-ivar">@buffer_path</span>[<span class="ruby-value">0</span>,<span class="ruby-identifier">pos</span>]
+    <span class="ruby-ivar">@buffer_path_suffix</span> = <span class="ruby-ivar">@buffer_path</span>[<span class="ruby-identifier">pos</span><span class="ruby-operator">+</span><span class="ruby-value">1</span><span class="ruby-operator">..</span><span class="ruby-value">-1</span>]
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@buffer_path_prefix</span> = <span class="ruby-ivar">@buffer_path</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;.&quot;</span>
+    <span class="ruby-ivar">@buffer_path_suffix</span> = <span class="ruby-string">&quot;.log&quot;</span>
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- configure-source -->
@@ -427,16 +410,16 @@
             
             <div class="method-source-code" id="enqueue-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 153</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 155</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">enqueue</span>(<span class="ruby-identifier">chunk</span>)
   <span class="ruby-identifier">path</span> = <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">path</span>
-  <span class="ruby-identifier">mp</span> = <span class="ruby-identifier">path</span>[<span class="ruby-ivar">@prefix</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">..</span><span class="ruby-operator">-</span>(<span class="ruby-ivar">@suffix</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)]
+  <span class="ruby-identifier">mp</span> = <span class="ruby-identifier">path</span>[<span class="ruby-ivar">@buffer_path_prefix</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">..</span><span class="ruby-operator">-</span>(<span class="ruby-ivar">@buffer_path_suffix</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)]
 
   <span class="ruby-identifier">m</span> = <span class="ruby-constant">PATH_MATCH</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">mp</span>)
   <span class="ruby-identifier">encoded_key</span> = <span class="ruby-identifier">m</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">:</span> <span class="ruby-string">&quot;&quot;</span>
-  <span class="ruby-identifier">time16</span> = <span class="ruby-string">&quot;%016x&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>
+  <span class="ruby-identifier">tsuffix</span> = <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-value">16</span>)
 
-  <span class="ruby-identifier">path</span> = <span class="ruby-node">&quot;#{@prefix}#{encoded_key}_r#{time16}#{@suffix}&quot;</span>
+  <span class="ruby-identifier">path</span> = <span class="ruby-node">&quot;#{@buffer_path_prefix}#{encoded_key}.q#{tsuffix}#{@buffer_path_suffix}&quot;</span>
   <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">mv</span>(<span class="ruby-identifier">path</span>)
 <span class="ruby-keyword">end</span></pre>
             </div><!-- enqueue-source -->
@@ -468,11 +451,11 @@
             
             <div class="method-source-code" id="new_chunk-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 109</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new_chunk</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">time16</span> = <span class="ruby-string">&quot;%016x&quot;</span> <span class="ruby-operator">%</span> <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>
+  <span class="ruby-identifier">tsuffix</span> = <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-value">16</span>)
   <span class="ruby-identifier">encoded_key</span> = <span class="ruby-identifier">encode_key</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">path</span> = <span class="ruby-node">&quot;#{@prefix}#{encoded_key}_a#{time16}#{@suffix}&quot;</span>
+  <span class="ruby-identifier">path</span> = <span class="ruby-node">&quot;#{@buffer_path_prefix}#{encoded_key}.b#{tsuffix}#{@buffer_path_suffix}&quot;</span>
   <span class="ruby-constant">FileBufferChunk</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">path</span>)
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new_chunk-source -->
@@ -504,38 +487,38 @@
             
             <div class="method-source-code" id="resume-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 116</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">resume</span>
   <span class="ruby-identifier">maps</span> = []
   <span class="ruby-identifier">queues</span> = []
 
-  <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-node">&quot;#{@prefix}*#{@suffix}&quot;</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">match</span> = <span class="ruby-identifier">path</span>[<span class="ruby-ivar">@prefix</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">..</span><span class="ruby-operator">-</span>(<span class="ruby-ivar">@suffix</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)]
+  <span class="ruby-constant">Dir</span>.<span class="ruby-identifier">glob</span>(<span class="ruby-node">&quot;#{@buffer_path_prefix}*#{@buffer_path_suffix}&quot;</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">match</span> = <span class="ruby-identifier">path</span>[<span class="ruby-ivar">@buffer_path_prefix</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">..</span><span class="ruby-operator">-</span>(<span class="ruby-ivar">@buffer_path_suffix</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">+</span><span class="ruby-value">1</span>)]
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">m</span> = <span class="ruby-constant">PATH_MATCH</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">match</span>)
       <span class="ruby-identifier">key</span> = <span class="ruby-identifier">decode_key</span>(<span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>])
-      <span class="ruby-identifier">ar</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">2</span>]
-      <span class="ruby-identifier">time16</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">3</span>].<span class="ruby-identifier">to_i</span>(<span class="ruby-value">16</span>)
+      <span class="ruby-identifier">bq</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">2</span>]
+      <span class="ruby-identifier">tsuffix</span> = <span class="ruby-identifier">m</span>[<span class="ruby-value">3</span>].<span class="ruby-identifier">to_i</span>(<span class="ruby-value">16</span>)
 
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">ar</span> <span class="ruby-operator">==</span> <span class="ruby-string">'a'</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-identifier">bq</span> <span class="ruby-operator">==</span> <span class="ruby-string">'b'</span>
         <span class="ruby-identifier">chunk</span> = <span class="ruby-constant">FileBufferChunk</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">path</span>, <span class="ruby-string">&quot;a+&quot;</span>)
-        <span class="ruby-identifier">maps</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">time16</span>, <span class="ruby-identifier">chunk</span>]
-      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">ar</span> <span class="ruby-operator">==</span> <span class="ruby-string">'r'</span>
+        <span class="ruby-identifier">maps</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">tsuffix</span>, <span class="ruby-identifier">chunk</span>]
+      <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">bq</span> <span class="ruby-operator">==</span> <span class="ruby-string">'q'</span>
         <span class="ruby-identifier">chunk</span> = <span class="ruby-constant">FileBufferChunk</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">path</span>, <span class="ruby-string">&quot;r&quot;</span>)
-        <span class="ruby-identifier">queues</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">time16</span>, <span class="ruby-identifier">chunk</span>]
+        <span class="ruby-identifier">queues</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">tsuffix</span>, <span class="ruby-identifier">chunk</span>]
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">end</span>
   }
 
   <span class="ruby-identifier">map</span> = {}
-  <span class="ruby-identifier">maps</span>.<span class="ruby-identifier">sort_by</span> {<span class="ruby-operator">|</span>(<span class="ruby-identifier">time16</span>,<span class="ruby-identifier">chunk</span>)<span class="ruby-operator">|</span>
-    <span class="ruby-identifier">time16</span>
-  }.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span>(<span class="ruby-identifier">time16</span>,<span class="ruby-identifier">chunk</span>)<span class="ruby-operator">|</span>
+  <span class="ruby-identifier">maps</span>.<span class="ruby-identifier">sort_by</span> {<span class="ruby-operator">|</span>(<span class="ruby-identifier">tsuffix</span>,<span class="ruby-identifier">chunk</span>)<span class="ruby-operator">|</span>
+    <span class="ruby-identifier">tsuffix</span>
+  }.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span>(<span class="ruby-identifier">tsuffix</span>,<span class="ruby-identifier">chunk</span>)<span class="ruby-operator">|</span>
     <span class="ruby-identifier">map</span>[<span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">key</span>] = <span class="ruby-identifier">chunk</span>
   }
 
-  <span class="ruby-identifier">queue</span> = <span class="ruby-identifier">queues</span>.<span class="ruby-identifier">sort_by</span> {<span class="ruby-operator">|</span>(<span class="ruby-identifier">time16</span>,<span class="ruby-identifier">chunk</span>)<span class="ruby-operator">|</span>
-    <span class="ruby-identifier">time16</span>
-  }.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span>(<span class="ruby-identifier">time16</span>,<span class="ruby-identifier">chunk</span>)<span class="ruby-operator">|</span>
+  <span class="ruby-identifier">queue</span> = <span class="ruby-identifier">queues</span>.<span class="ruby-identifier">sort_by</span> {<span class="ruby-operator">|</span>(<span class="ruby-identifier">tsuffix</span>,<span class="ruby-identifier">chunk</span>)<span class="ruby-operator">|</span>
+    <span class="ruby-identifier">tsuffix</span>
+  }.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span>(<span class="ruby-identifier">tsuffix</span>,<span class="ruby-identifier">chunk</span>)<span class="ruby-operator">|</span>
     <span class="ruby-identifier">chunk</span>
   }
 
@@ -570,9 +553,9 @@
             
             <div class="method-source-code" id="start-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 102</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 104</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span>
-  <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-ivar">@prefix</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;path&quot;</span>)
+  <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-ivar">@buffer_path_prefix</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;path&quot;</span>)
   <span class="ruby-keyword">super</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- start-source -->
@@ -610,7 +593,7 @@
             
             <div class="method-source-code" id="decode_key-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 170</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 172</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">decode_key</span>(<span class="ruby-identifier">encoded_key</span>)
               <span class="ruby-constant">URI</span>.<span class="ruby-identifier">decode</span>(<span class="ruby-identifier">encoded_key</span>, <span class="ruby-regexp">/[^-_.a-zA-Z0-9]/</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -643,7 +626,7 @@
             
             <div class="method-source-code" id="encode_key-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 166</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 168</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">encode_key</span>(<span class="ruby-identifier">key</span>)
               <span class="ruby-constant">URI</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">key</span>, <span class="ruby-regexp">/[^-_.a-zA-Z0-9]/</span>)
 <span class="ruby-keyword">end</span></pre>
