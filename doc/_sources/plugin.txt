@@ -253,7 +253,7 @@ file
       time_format %Y%m%d
       time_wait 10m
       compress gzip
-      localtime
+      utc
     </match>
 
 path (required)
@@ -276,43 +276,16 @@ time_format
       +-----+------------------------------------------+
   Default is ``%Y%m%d`` which slices files every day. Use ``%Y%m%d%H`` to slice files every hour.
 
+utc
+  Uses UTC for path formatting. Default is localtime.
+
 time_wait
   Wait time before flushing the buffer. Default is 10 minutes.
-
-localtime
-  Uses local time zone for path formatting. Default is UTC.
 
 compress
   Compress flushed files. Supported algorithm is gzip. Default is no-compression.
 
 Note that this output plugin uses file buffer by default.
-
-.. time_file
-.. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-.. 
-.. **time_file** buffered output plugin writes events to files. It splits files exactly based on the time.
-.. 
-.. **configuration**::
-.. 
-..     <store>
-..       type time_file
-..       path /var/log/fluent/myapp
-..       time_slice hourly
-..       time_slice_wait 10m
-..       localtime
-..     </store>
-.. 
-.. path (required)
-..   Path of the file. Actual name of the file will be path + time where time is yyyyMM (hourly), yyyyMMdd (daily) or yyyyMMddmm (minutely).
-.. 
-.. time_slice (required)
-..   One of 'monthly', 'daily', 'hourly' or 'minutely'
-.. 
-.. time_slice_wait
-..   Time before writing file. Default is 10m (10 minutes).
-.. 
-.. localtime
-..   Uses local time zone for slicing. Default is UTC.
 
 
 tcp

@@ -367,7 +367,7 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
   time_format %Y%m%d
   time_wait 10m
   compress gzip
-  localtime
+  utc
 &lt;/match&gt;</pre>
 </div>
 <dl class="docutils">
@@ -406,10 +406,10 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 </dl>
 <p class="last">Default is <tt class="docutils literal"><span class="pre">%Y%m%d</span></tt> which slices files every day. Use <tt class="docutils literal"><span class="pre">%Y%m%d%H</span></tt> to slice files every hour.</p>
 </dd>
+<dt>utc</dt>
+<dd>Uses UTC for path formatting. Default is localtime.</dd>
 <dt>time_wait</dt>
 <dd>Wait time before flushing the buffer. Default is 10 minutes.</dd>
-<dt>localtime</dt>
-<dd>Uses local time zone for path formatting. Default is UTC.</dd>
 <dt>compress</dt>
 <dd>Compress flushed files. Supported algorithm is gzip. Default is no-compression.</dd>
 </dl>

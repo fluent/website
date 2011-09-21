@@ -48,6 +48,7 @@
 <li><a class="reference external" href="#installing-custom-plugins">Installing custom plugins</a></li>
 <li><a class="reference external" href="#input-plugins">Input plugins</a></li>
 <li><a class="reference external" href="#buffered-output-plugins">Buffered output plugins</a></li>
+<li><a class="reference external" href="#time-sliced-output-plugins">Time sliced output plugins</a></li>
 <li><a class="reference external" href="#non-buffered-output-plugins">Non-buffered output plugins</a></li>
 <li><a class="reference external" href="#buffer-plugins">Buffer plugins</a></li>
 <li><a class="reference external" href="#debugging-plugins">Debugging plugins</a></li>
@@ -94,9 +95,10 @@
 <li><a class="reference internal" href="#installing-custom-plugins" id="id1">Installing custom plugins</a></li>
 <li><a class="reference internal" href="#input-plugins" id="id2">Input plugins</a></li>
 <li><a class="reference internal" href="#buffered-output-plugins" id="id3">Buffered output plugins</a></li>
-<li><a class="reference internal" href="#non-buffered-output-plugins" id="id4">Non-buffered output plugins</a></li>
-<li><a class="reference internal" href="#buffer-plugins" id="id5">Buffer plugins</a></li>
-<li><a class="reference internal" href="#debugging-plugins" id="id6">Debugging plugins</a></li>
+<li><a class="reference internal" href="#time-sliced-output-plugins" id="id4">Time sliced output plugins</a></li>
+<li><a class="reference internal" href="#non-buffered-output-plugins" id="id5">Non-buffered output plugins</a></li>
+<li><a class="reference internal" href="#buffer-plugins" id="id6">Buffer plugins</a></li>
+<li><a class="reference internal" href="#debugging-plugins" id="id7">Debugging plugins</a></li>
 </ul>
 </div>
 <div class="section" id="installing-custom-plugins">
@@ -153,23 +155,24 @@ Fluent::Engine.emit(tag, Fluent::Event.new(time, record))</pre>
   # 'conf' is a Hash that includes configuration parameters.
   # If the configuration is invalid, raise Fluent::ConfigError.
   def configure(conf)
+    super
     @path = conf['path']
     ...
   end
 
   # This method is called when starting.
   # Open sockets or files here.
-  # Don't forget to call super()
+  # Don't forget to call super
   def start
-    super()
+    super
     ...
   end
 
   # This method is called when shutting down.
   # Shutdown the thread and Close sockets or files here.
-  # Don't forget to call super()
+  # Don't forget to call super
   def shutdown
-    super()
+    super
     ...
   end
 
@@ -182,12 +185,31 @@ Fluent::Engine.emit(tag, Fluent::Event.new(time, record))</pre>
   # This method is called every flush interval. rite the buffer chunk
   # to files or databases here.
   # 'chunk' is a buffer chunk that includes multiple formatted
-  # events. You can use `data = chunk.read` to get all events and
+  # events. You can use 'data = chunk.read' to get all events and
   # 'chunk.open {|io| ... }' to get IO object.
   def write(chunk)
     objs = chunk.read.split("\n").map {|raw|
       JSON.load(raw)
     }
+  end
+end</pre>
+</div>
+</div>
+<div class="section" id="time-sliced-output-plugins">
+<h2>Time sliced output plugins<a class="headerlink" href="#time-sliced-output-plugins" title="Permalink to this headline">¶</a></h2>
+<p>Time sliced output plugins are extended version of buffered output plugin. One of the examples of time sliced output is <tt class="docutils literal"><span class="pre">out_file</span></tt> plugin.</p>
+<p>Note that it uses file buffer by default. Thus <tt class="docutils literal"><span class="pre">buffer_path</span></tt> option is required.</p>
+<p>To implement time sliced output plugin, Extend <strong>Fluent::TimeSlicedOutput</strong> class and implement following methods:</p>
+<div class="highlight-python"><pre>class SomeOutput &lt; Fluent::TimeSlicedOutput
+  # configure(conf), start(), shutdown() and format(tag, event) are
+  # same as BufferedOutput.
+  ...
+
+  # You can use 'chunk.key' to get sliced time. Format of the 'chunk.key'
+  # can be configured by 'time_format' option. Default format is %Y%m%d.
+  def write(chunk)
+    day = chunk.key
+    ...
   end
 end</pre>
 </div>

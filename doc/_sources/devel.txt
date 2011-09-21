@@ -70,23 +70,24 @@ Extend **Fluent::BufferedOutput** class and implement following methods::
       # 'conf' is a Hash that includes configuration parameters.
       # If the configuration is invalid, raise Fluent::ConfigError.
       def configure(conf)
+        super
         @path = conf['path']
         ...
       end
 
       # This method is called when starting.
       # Open sockets or files here.
-      # Don't forget to call super()
+      # Don't forget to call super
       def start
-        super()
+        super
         ...
       end
 
       # This method is called when shutting down.
       # Shutdown the thread and Close sockets or files here.
-      # Don't forget to call super()
+      # Don't forget to call super
       def shutdown
-        super()
+        super
         ...
       end
 
@@ -99,7 +100,7 @@ Extend **Fluent::BufferedOutput** class and implement following methods::
       # This method is called every flush interval. rite the buffer chunk
       # to files or databases here.
       # 'chunk' is a buffer chunk that includes multiple formatted
-      # events. You can use `data = chunk.read` to get all events and
+      # events. You can use 'data = chunk.read' to get all events and
       # 'chunk.open {|io| ... }' to get IO object.
       def write(chunk)
         objs = chunk.read.split("\n").map {|raw|
@@ -109,33 +110,27 @@ Extend **Fluent::BufferedOutput** class and implement following methods::
     end
 
 
-.. Time sliced output plugins
-.. ------------------------------------
-.. 
-.. Extend **Fluent::TimeSlicedOutput** class and implement following methods::
-.. 
-..     class SomeOutput < Fluent::TimeSlicedOutput
-..       Fluent::Plugin.register_output('NAME', self)
-.. 
-..       # configure(conf), start(), shutdown() and format(tag, event) are
-..       # same as BufferedOutput.
-.. 
-..       def format(tag, event)
-..         [tag, event.time, event.record].to_msgpack
-..       end
-.. 
-..       # Writes a buffer chunk to a files or network.
-..       # `chunk` is a buffer chunk that includes multiple formatted
-..       # events. You can use `data = chunk.read` to get all events and
-..       # `chunk.open {|io| }` to get IO object.
-..       # Use `chunk.key` to get sliced time.
-..       def write(chunk)
-..         puts chunk.key  #=> e.g. "20110602" if daily
-..         MessagePack::Unpacker.new.feed_each(chunk.read) {|obj|
-..           p obj
-..         }
-..       end
-..     end
+Time sliced output plugins
+------------------------------------
+
+Time sliced output plugins are extended version of buffered output plugin. One of the examples of time sliced output is ``out_file`` plugin.
+
+Note that it uses file buffer by default. Thus ``buffer_path`` option is required.
+
+To implement time sliced output plugin, Extend **Fluent::TimeSlicedOutput** class and implement following methods::
+
+    class SomeOutput < Fluent::TimeSlicedOutput
+      # configure(conf), start(), shutdown() and format(tag, event) are
+      # same as BufferedOutput.
+      ...
+
+      # You can use 'chunk.key' to get sliced time. Format of the 'chunk.key'
+      # can be configured by 'time_format' option. Default format is %Y%m%d.
+      def write(chunk)
+        day = chunk.key
+        ...
+      end
+    end
 
 
 Non-buffered output plugins
