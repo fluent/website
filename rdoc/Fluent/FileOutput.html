@@ -333,6 +333,7 @@
 <span class="ruby-comment"># File lib/fluent/plugin/out_file.rb, line 29</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">'zlib'</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">'time'</span>
   <span class="ruby-keyword">super</span>
   <span class="ruby-ivar">@path</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@compress</span> = <span class="ruby-keyword">nil</span>
@@ -372,7 +373,7 @@
             
             <div class="method-source-code" id="configure-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/out_file.rb, line 38</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_file.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'path'</span>]
     <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">path</span>
@@ -399,6 +400,16 @@
       <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConfigError</span>, <span class="ruby-node">&quot;Unsupported compression algorithm '#{compress}'&quot;</span>
     <span class="ruby-keyword">end</span>
     <span class="ruby-ivar">@compress</span> = <span class="ruby-identifier">c</span>
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@localtime</span>
+    <span class="ruby-ivar">@formatter</span> = <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">tag</span>,<span class="ruby-identifier">event</span><span class="ruby-operator">|</span>
+      <span class="ruby-node">&quot;#{Time.at(event.time).iso8601}\t#{tag}\t#{event.record.to_json}\n&quot;</span>
+    }
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@formatter</span> = <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">tag</span>,<span class="ruby-identifier">event</span><span class="ruby-operator">|</span>
+      <span class="ruby-node">&quot;#{Time.at(event.time).utc.iso8601}\t#{tag}\t#{event.record.to_json}\n&quot;</span>
+    }
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- configure-source -->
@@ -430,16 +441,9 @@
             
             <div class="method-source-code" id="format-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/out_file.rb, line 67</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_file.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">format</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">event</span>)
-  <span class="ruby-comment"># TODO foramt</span>
-  <span class="ruby-comment">#msg = e.record.map {|k,v|</span>
-  <span class="ruby-comment">#   k = &quot;\&quot;#{k}\&quot;&quot; if k.include?(' ')</span>
-  <span class="ruby-comment">#   v = &quot;\&quot;#{v}\&quot;&quot; if v.include?(' ')</span>
-  <span class="ruby-comment">#   &quot;#{k}=#{v}&quot;</span>
-  <span class="ruby-comment">#}.join(' ')</span>
-  <span class="ruby-identifier">msg</span> = <span class="ruby-identifier">event</span>.<span class="ruby-identifier">record</span>.<span class="ruby-identifier">to_json</span>
-  <span class="ruby-node">&quot;#{Time.at(event.time).to_s} #{tag}: #{msg}\n&quot;</span>
+  <span class="ruby-ivar">@formatter</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">event</span>)
 <span class="ruby-keyword">end</span></pre>
             </div><!-- format-source -->
             
@@ -470,7 +474,7 @@
             
             <div class="method-source-code" id="write-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/out_file.rb, line 78</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_file.rb, line 82</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">write</span>(<span class="ruby-identifier">chunk</span>)
   <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
   <span class="ruby-keyword">begin</span>
