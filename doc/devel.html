@@ -110,147 +110,152 @@
 </div>
 <div class="section" id="input-plugins">
 <h2>Input plugins<a class="headerlink" href="#input-plugins" title="Permalink to this headline">¶</a></h2>
-<p>Extend <strong>Fluent::Input</strong> class and implement following methods:</p>
-<div class="highlight-python"><pre>class SomeInput &lt; Fluent::Input
-  # Register plugin first. NAME is the name of this plugin
-  # which is used in the configuration file.
-  Fluent::Plugin.register_input('NAME', self)
+<p>Extend <strong>Fluent::Input</strong> class and implement following methods.</p>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SomeInput</span> <span class="o">&lt;</span> <span class="no">Fluent</span><span class="o">::</span><span class="no">Input</span>
+  <span class="c1"># Register plugin first. NAME is the name of this plugin</span>
+  <span class="c1"># which is used in the configuration file.</span>
+  <span class="no">Fluent</span><span class="o">::</span><span class="no">Plugin</span><span class="o">.</span><span class="n">register_input</span><span class="p">(</span><span class="s1">&#39;NAME&#39;</span><span class="p">,</span> <span class="nb">self</span><span class="p">)</span>
 
-  # This method is called before starting.
-  # 'conf' is a Hash that includes configuration parameters.
-  # If the configuration is invalid, raise Fluent::ConfigError.
-  def configure(conf)
-    @port = conf['port']
-    ...
-  end
+  <span class="c1"># This method is called before starting.</span>
+  <span class="c1"># &#39;conf&#39; is a Hash that includes configuration parameters.</span>
+  <span class="c1"># If the configuration is invalid, raise Fluent::ConfigError.</span>
+  <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+    <span class="vi">@port</span> <span class="o">=</span> <span class="n">conf</span><span class="o">[</span><span class="s1">&#39;port&#39;</span><span class="o">]</span>
+    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+  <span class="k">end</span>
 
-  # This method is called when starting.
-  # Open sockets or files and create a thread here.
-  def start
-    ...
-  end
+  <span class="c1"># This method is called when starting.</span>
+  <span class="c1"># Open sockets or files and create a thread here.</span>
+  <span class="k">def</span> <span class="nf">start</span>
+    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+  <span class="k">end</span>
 
-  # This method is called when shutting down.
-  # Shutdown the thread and close sockets or files here.
-  def shutdown
-    ...
-  end
-end</pre>
+  <span class="c1"># This method is called when shutting down.</span>
+  <span class="c1"># Shutdown the thread and close sockets or files here.</span>
+  <span class="k">def</span> <span class="nf">shutdown</span>
+    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
 </div>
-<p>To submit events, use <tt class="docutils literal"><span class="pre">Fluent::Engine.emit(tag,</span> <span class="pre">event)</span></tt> method, where <tt class="docutils literal"><span class="pre">tag</span></tt> is the String and <tt class="docutils literal"><span class="pre">event</span></tt> is a <tt class="docutils literal"><span class="pre">Fluent::Event</span></tt> object:</p>
-<div class="highlight-python"><pre>tag = "myapp.access"
-time = Time.now.to_i
-record = {"message"=&gt;"body"}
-Fluent::Engine.emit(tag, Fluent::Event.new(time, record))</pre>
+<p>To submit events, use <tt class="docutils literal"><span class="pre">Fluent::Engine.emit(tag,</span> <span class="pre">event)</span></tt> method, where <tt class="docutils literal"><span class="pre">tag</span></tt> is the String and <tt class="docutils literal"><span class="pre">event</span></tt> is a <tt class="docutils literal"><span class="pre">Fluent::Event</span></tt> object.</p>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="n">tag</span> <span class="o">=</span> <span class="s2">&quot;myapp.access&quot;</span>
+<span class="n">time</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">to_i</span>
+<span class="n">record</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;body&quot;</span><span class="p">}</span>
+<span class="no">Fluent</span><span class="o">::</span><span class="no">Engine</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="no">Fluent</span><span class="o">::</span><span class="no">Event</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">record</span><span class="p">))</span>
+</pre></div>
 </div>
 <p>RDoc of the Engine class is available from <a class="reference external" href="http://fluent.github.com/rdoc/Fluent/Engine.html">Fluent RDoc</a>.</p>
 </div>
 <div class="section" id="buffered-output-plugins">
 <h2>Buffered output plugins<a class="headerlink" href="#buffered-output-plugins" title="Permalink to this headline">¶</a></h2>
-<p>Extend <strong>Fluent::BufferedOutput</strong> class and implement following methods:</p>
-<div class="highlight-python"><pre>class SomeOutput &lt; Fluent::BufferedOutput
-  # Register plugin first. NAME is the name of this plugin
-  # which is used in the configuration file.
-  Fluent::Plugin.register_output('NAME', self)
+<p>Extend <strong>Fluent::BufferedOutput</strong> class and implement following methods.</p>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SomeOutput</span> <span class="o">&lt;</span> <span class="no">Fluent</span><span class="o">::</span><span class="no">BufferedOutput</span>
+  <span class="c1"># Register plugin first. NAME is the name of this plugin</span>
+  <span class="c1"># which is used in the configuration file.</span>
+  <span class="no">Fluent</span><span class="o">::</span><span class="no">Plugin</span><span class="o">.</span><span class="n">register_output</span><span class="p">(</span><span class="s1">&#39;NAME&#39;</span><span class="p">,</span> <span class="nb">self</span><span class="p">)</span>
 
-  # This method is called before starting.
-  # 'conf' is a Hash that includes configuration parameters.
-  # If the configuration is invalid, raise Fluent::ConfigError.
-  def configure(conf)
-    super
-    @path = conf['path']
-    ...
-  end
+  <span class="c1"># This method is called before starting.</span>
+  <span class="c1"># &#39;conf&#39; is a Hash that includes configuration parameters.</span>
+  <span class="c1"># If the configuration is invalid, raise Fluent::ConfigError.</span>
+  <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+    <span class="k">super</span>
+    <span class="vi">@path</span> <span class="o">=</span> <span class="n">conf</span><span class="o">[</span><span class="s1">&#39;path&#39;</span><span class="o">]</span>
+    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+  <span class="k">end</span>
 
-  # This method is called when starting.
-  # Open sockets or files here.
-  # Don't forget to call super
-  def start
-    super
-    ...
-  end
+  <span class="c1"># This method is called when starting.</span>
+  <span class="c1"># Open sockets or files here.</span>
+  <span class="c1"># Don&#39;t forget to call super</span>
+  <span class="k">def</span> <span class="nf">start</span>
+    <span class="k">super</span>
+    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+  <span class="k">end</span>
 
-  # This method is called when shutting down.
-  # Shutdown the thread and Close sockets or files here.
-  # Don't forget to call super
-  def shutdown
-    super
-    ...
-  end
+  <span class="c1"># This method is called when shutting down.</span>
+  <span class="c1"># Shutdown the thread and Close sockets or files here.</span>
+  <span class="c1"># Don&#39;t forget to call super</span>
+  <span class="k">def</span> <span class="nf">shutdown</span>
+    <span class="k">super</span>
+    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+  <span class="k">end</span>
 
-  # This method is called when an event is reached.
-  # Convert event and tag to a raw string.
-  def format(tag, event)
-    [tag, event.time, event.record].to_json + "\n"
-  end
+  <span class="c1"># This method is called when an event is reached.</span>
+  <span class="c1"># Convert event and tag to a raw string.</span>
+  <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
+    <span class="o">[</span><span class="n">tag</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">record</span><span class="o">].</span><span class="n">to_json</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+  <span class="k">end</span>
 
-  # This method is called every flush interval. rite the buffer chunk
-  # to files or databases here.
-  # 'chunk' is a buffer chunk that includes multiple formatted
-  # events. You can use 'data = chunk.read' to get all events and
-  # 'chunk.open {|io| ... }' to get IO object.
-  def write(chunk)
-    objs = chunk.read.split("\n").map {|raw|
-      JSON.load(raw)
-    }
-  end
-end</pre>
+  <span class="c1"># This method is called every flush interval. rite the buffer chunk</span>
+  <span class="c1"># to files or databases here.</span>
+  <span class="c1"># &#39;chunk&#39; is a buffer chunk that includes multiple formatted</span>
+  <span class="c1"># events. You can use &#39;data = chunk.read&#39; to get all events and</span>
+  <span class="c1"># &#39;chunk.open {|io| ... }&#39; to get IO object.</span>
+  <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+    <span class="n">objs</span> <span class="o">=</span> <span class="n">chunk</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span><span class="o">|</span><span class="n">raw</span><span class="o">|</span>
+      <span class="no">JSON</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
+    <span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="time-sliced-output-plugins">
 <h2>Time sliced output plugins<a class="headerlink" href="#time-sliced-output-plugins" title="Permalink to this headline">¶</a></h2>
 <p>Time sliced output plugins are extended version of buffered output plugin. One of the examples of time sliced output is <tt class="docutils literal"><span class="pre">out_file</span></tt> plugin.</p>
 <p>Note that it uses file buffer by default. Thus <tt class="docutils literal"><span class="pre">buffer_path</span></tt> option is required.</p>
-<p>To implement time sliced output plugin, Extend <strong>Fluent::TimeSlicedOutput</strong> class and implement following methods:</p>
-<div class="highlight-python"><pre>class SomeOutput &lt; Fluent::TimeSlicedOutput
-  # configure(conf), start(), shutdown() and format(tag, event) are
-  # same as BufferedOutput.
-  ...
+<p>To implement time sliced output plugin, Extend <strong>Fluent::TimeSlicedOutput</strong> class and implement following methods.</p>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SomeOutput</span> <span class="o">&lt;</span> <span class="no">Fluent</span><span class="o">::</span><span class="no">TimeSlicedOutput</span>
+  <span class="c1"># configure(conf), start(), shutdown() and format(tag, event) are</span>
+  <span class="c1"># same as BufferedOutput.</span>
+  <span class="o">.</span><span class="n">.</span><span class="o">.</span>
 
-  # You can use 'chunk.key' to get sliced time. Format of the 'chunk.key'
-  # can be configured by 'time_format' option. Default format is %Y%m%d.
-  def write(chunk)
-    day = chunk.key
-    ...
-  end
-end</pre>
+  <span class="c1"># You can use &#39;chunk.key&#39; to get sliced time. Format of the &#39;chunk.key&#39;</span>
+  <span class="c1"># can be configured by &#39;time_format&#39; option. Default format is %Y%m%d.</span>
+  <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
+    <span class="n">day</span> <span class="o">=</span> <span class="n">chunk</span><span class="o">.</span><span class="n">key</span>
+    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="non-buffered-output-plugins">
 <h2>Non-buffered output plugins<a class="headerlink" href="#non-buffered-output-plugins" title="Permalink to this headline">¶</a></h2>
-<p>Extend <strong>Fluent::Output</strong> class and implement following methods:</p>
-<div class="highlight-python"><pre>class SomeOutput &lt; Fluent::Output
-  # Register plugin first. NAME is the name of this plugin
-  # which is used in the configuration file.
-  Fluent::Plugin.register_output('NAME', self)
+<p>Extend <strong>Fluent::Output</strong> class and implement following methods.</p>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SomeOutput</span> <span class="o">&lt;</span> <span class="no">Fluent</span><span class="o">::</span><span class="no">Output</span>
+  <span class="c1"># Register plugin first. NAME is the name of this plugin</span>
+  <span class="c1"># which is used in the configuration file.</span>
+  <span class="no">Fluent</span><span class="o">::</span><span class="no">Plugin</span><span class="o">.</span><span class="n">register_output</span><span class="p">(</span><span class="s1">&#39;NAME&#39;</span><span class="p">,</span> <span class="nb">self</span><span class="p">)</span>
 
-  # This method is called before starting.
-  def configure(conf)
-    ...
-  end
+  <span class="c1"># This method is called before starting.</span>
+  <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+  <span class="k">end</span>
 
-  # This method is called when starting.
-  def start
-    ...
-  end
+  <span class="c1"># This method is called when starting.</span>
+  <span class="k">def</span> <span class="nf">start</span>
+    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+  <span class="k">end</span>
 
-  # This method is called when shutting down.
-  def shutdown
-    ...
-  end
+  <span class="c1"># This method is called when shutting down.</span>
+  <span class="k">def</span> <span class="nf">shutdown</span>
+    <span class="o">.</span><span class="n">.</span><span class="o">.</span>
+  <span class="k">end</span>
 
-  # This method is called when an event is reached.
-  # 'es' is a Fluent::EventStream object that includes multiple events.
-  # You can use 'es.each {|event| ... }' to retrieve events.
-  # 'chain' is an object that manages transaction. Call 'chain.next' at
-  # appropriate point and rollback if it raises exception.
-  def emit(tag, es, chain)
-    chain.next
-    es.each {|event|
-      $stderr.puts "OK!"
-    }
-  end
-end</pre>
+  <span class="c1"># This method is called when an event is reached.</span>
+  <span class="c1"># &#39;es&#39; is a Fluent::EventStream object that includes multiple events.</span>
+  <span class="c1"># You can use &#39;es.each {|event| ... }&#39; to retrieve events.</span>
+  <span class="c1"># &#39;chain&#39; is an object that manages transaction. Call &#39;chain.next&#39; at</span>
+  <span class="c1"># appropriate point and rollback if it raises exception.</span>
+  <span class="k">def</span> <span class="nf">emit</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">es</span><span class="p">,</span> <span class="n">chain</span><span class="p">)</span>
+    <span class="n">chain</span><span class="o">.</span><span class="n">next</span>
+    <span class="n">es</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span><span class="o">|</span><span class="n">event</span><span class="o">|</span>
+      <span class="vg">$stderr</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;OK!&quot;</span>
+    <span class="p">}</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
 </div>
 </div>
 <div class="section" id="buffer-plugins">
@@ -262,8 +267,8 @@ end</pre>
 <p>Run <tt class="docutils literal"><span class="pre">fluentd</span></tt> with <tt class="docutils literal"><span class="pre">-vv</span></tt> option to show debug messages:</p>
 <div class="highlight-python"><pre>$ fluentd -vv</pre>
 </div>
-<p><strong>stdout</strong> and <strong>copy</strong> output plugins are useful for debugging. <strong>stdout</strong> output plugin dumps matched events to the console. It can be used as following:</p>
-<div class="highlight-python"><pre># You want to debug this plugin
+<p><strong>stdout</strong> and <strong>copy</strong> output plugins are useful for debugging. <strong>stdout</strong> output plugin dumps matched events to the console. It can be used as following.</p>
+<div class="highlight-xml"><pre># You want to debug this plugin
 &lt;source&gt;
   type your_custom_input_plugin
 &lt;/source&gt;

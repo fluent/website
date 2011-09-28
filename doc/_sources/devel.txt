@@ -18,7 +18,9 @@ Or you can create gem package that includes ``lib/fluent/plugin/<TYPE>_<NAME>.rb
 Input plugins
 ------------------------------------
 
-Extend **Fluent::Input** class and implement following methods::
+Extend **Fluent::Input** class and implement following methods.
+
+.. code-block:: ruby
 
     class SomeInput < Fluent::Input
       # Register plugin first. NAME is the name of this plugin
@@ -46,7 +48,9 @@ Extend **Fluent::Input** class and implement following methods::
       end
     end
 
-To submit events, use ``Fluent::Engine.emit(tag, event)`` method, where ``tag`` is the String and ``event`` is a ``Fluent::Event`` object::
+To submit events, use ``Fluent::Engine.emit(tag, event)`` method, where ``tag`` is the String and ``event`` is a ``Fluent::Event`` object.
+
+.. code-block:: ruby
 
     tag = "myapp.access"
     time = Time.now.to_i
@@ -59,7 +63,9 @@ RDoc of the Engine class is available from `Fluent RDoc <http://fluent.github.co
 Buffered output plugins
 ------------------------------------
 
-Extend **Fluent::BufferedOutput** class and implement following methods::
+Extend **Fluent::BufferedOutput** class and implement following methods.
+
+.. code-block:: ruby
 
     class SomeOutput < Fluent::BufferedOutput
       # Register plugin first. NAME is the name of this plugin
@@ -117,7 +123,9 @@ Time sliced output plugins are extended version of buffered output plugin. One o
 
 Note that it uses file buffer by default. Thus ``buffer_path`` option is required.
 
-To implement time sliced output plugin, Extend **Fluent::TimeSlicedOutput** class and implement following methods::
+To implement time sliced output plugin, Extend **Fluent::TimeSlicedOutput** class and implement following methods.
+
+.. code-block:: ruby
 
     class SomeOutput < Fluent::TimeSlicedOutput
       # configure(conf), start(), shutdown() and format(tag, event) are
@@ -136,7 +144,9 @@ To implement time sliced output plugin, Extend **Fluent::TimeSlicedOutput** clas
 Non-buffered output plugins
 ------------------------------------
 
-Extend **Fluent::Output** class and implement following methods::
+Extend **Fluent::Output** class and implement following methods.
+
+.. code-block:: ruby
 
     class SomeOutput < Fluent::Output
       # Register plugin first. NAME is the name of this plugin
@@ -185,7 +195,9 @@ Run ``fluentd`` with ``-vv`` option to show debug messages::
 
     $ fluentd -vv
 
-**stdout** and **copy** output plugins are useful for debugging. **stdout** output plugin dumps matched events to the console. It can be used as following::
+**stdout** and **copy** output plugins are useful for debugging. **stdout** output plugin dumps matched events to the console. It can be used as following.
+
+.. code-block:: xml
 
     # You want to debug this plugin
     <source>
