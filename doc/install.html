@@ -48,6 +48,7 @@
   <ul>
 <li><a class="reference internal" href="#">Installation</a><ul>
 <li><a class="reference internal" href="#id1">Installation</a><ul>
+<li><a class="reference internal" href="#install-from-binary-package">Install from Binary Package</a></li>
 <li><a class="reference internal" href="#install-from-gem">Install from Gem</a></li>
 <li><a class="reference internal" href="#install-from-tar-gz">Install from .tar.gz</a></li>
 <li><a class="reference internal" href="#install-from-latest-repository">Install from Latest Repository</a></li>
@@ -96,18 +97,34 @@
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#id1" id="id3">Installation</a><ul>
-<li><a class="reference internal" href="#install-from-gem" id="id4">Install from Gem</a></li>
-<li><a class="reference internal" href="#install-from-tar-gz" id="id5">Install from .tar.gz</a></li>
-<li><a class="reference internal" href="#install-from-latest-repository" id="id6">Install from Latest Repository</a></li>
+<li><a class="reference internal" href="#install-from-binary-package" id="id4">Install from Binary Package</a></li>
+<li><a class="reference internal" href="#install-from-gem" id="id5">Install from Gem</a></li>
+<li><a class="reference internal" href="#install-from-tar-gz" id="id6">Install from .tar.gz</a></li>
+<li><a class="reference internal" href="#install-from-latest-repository" id="id7">Install from Latest Repository</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#confirm-installation" id="id7">Confirm Installation</a></li>
-<li><a class="reference internal" href="#update" id="id8">Update</a></li>
+<li><a class="reference internal" href="#confirm-installation" id="id8">Confirm Installation</a></li>
+<li><a class="reference internal" href="#update" id="id9">Update</a></li>
 </ul>
 </div>
 <div class="section" id="id1">
 <h2>Installation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <p>To install fluent, there&#8217;re some ways: from 1) Gem, 2) .tar.gz, 3) git. The first one is recommended for most cases.</p>
+<div class="section" id="install-from-binary-package">
+<h3>Install from Binary Package<a class="headerlink" href="#install-from-binary-package" title="Permalink to this headline">¶</a></h3>
+<p>Currently, Treasure Data Inc. provides the stable distribution of fluent, called td-agent. It consists of the following components:</p>
+<ul class="simple">
+<li>Ruby interpreter</li>
+<li>Fluent</li>
+<li>Several plugins with stable &amp; compatible versions</li>
+</ul>
+<p>It&#8217;s actively updated, and used in the production environments. To install it, please have a look at the following documentations.</p>
+<ul class="simple">
+<li><a class="reference external" href="http://help.treasure-data.com/kb/installing-td-agent-daemon/installing-td-agent-for-debian-and-ubuntu">Installing td-agent for Debian and Ubuntu</a></li>
+<li><a class="reference external" href="http://help.treasure-data.com/kb/installing-td-agent-daemon/installing-td-agent-for-redhat-and-centos">Installing td-agent for Redhat and CentOS</a></li>
+</ul>
+<p>Please note that the server command is &#8216;td-agent&#8217; instead of &#8216;fluentd&#8217; in this case. And the config file is located at &#8216;/etc/td-agent/td-agent.conf&#8217;.</p>
+</div>
 <div class="section" id="install-from-gem">
 <h3>Install from Gem<a class="headerlink" href="#install-from-gem" title="Permalink to this headline">¶</a></h3>
 <p>If you have installed <a class="reference external" href="http://www.ruby-lang.org/">Ruby</a> &gt;= 1.9.2, you can use RubyGems to download and install Fluent. You can confirm installed Ruby&#8217;s version as following:</p>

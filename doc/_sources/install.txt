@@ -12,6 +12,22 @@ Installation
 
 To install fluent, there're some ways: from 1) Gem, 2) .tar.gz, 3) git. The first one is recommended for most cases.
 
+Install from Binary Package
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+Currently, Treasure Data Inc. provides the stable distribution of fluent, called td-agent. It consists of the following components:
+
+* Ruby interpreter
+* Fluent
+* Several plugins with stable & compatible versions
+
+It's actively updated, and used in the production environments. To install it, please have a look at the following documentations.
+
+* `Installing td-agent for Debian and Ubuntu <http://help.treasure-data.com/kb/installing-td-agent-daemon/installing-td-agent-for-debian-and-ubuntu>`_
+* `Installing td-agent for Redhat and CentOS <http://help.treasure-data.com/kb/installing-td-agent-daemon/installing-td-agent-for-redhat-and-centos>`_
+
+Please note that the server command is 'td-agent' instead of 'fluentd' in this case. And the config file is located at '/etc/td-agent/td-agent.conf'.
+
 Install from Gem
 ^^^^^^^^^^^^^^^^
 
