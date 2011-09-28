@@ -88,6 +88,12 @@ You can use following match patterns:
   * You can use it with ``*`` and ``**`` patterns, like ``a.{b,c}.*`` or ``a.{b,c.**}``
 
 
+.. Configuration
+.. ========================
+.. 
+.. Shut down
+.. ========================
+
 .. Init scripts
 .. ------------------------------------
 .. 
