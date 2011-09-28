@@ -11,7 +11,7 @@ Many web/mobile applications generate huge amount of **event logs** (c,f. login,
 * Small Footprint
 * Flexible Plugin Mechanism
 * Reliable Buffering
-* Support Log Forwarding
+* Log Forwarding
 
 Easy Installation
 -----------------
@@ -73,8 +73,8 @@ When size of the the top chunk exceeds limit or timer is expired, new empty chun
 
 The implementation of the buffer is pluggable. Default plugin named 'memory' stores chunks in memory. It is fast but not persistent. Another plugin named 'file' stores chunks in file.
 
-Support Log Forwarding
-----------------------
+Log Forwarding
+--------------
 
 To analyze the event logs later, these are usually collected into one place. Fluent supports the log transfer functinality, to collect logs from various nodes, to the central server.::
 

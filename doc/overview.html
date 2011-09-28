@@ -51,7 +51,7 @@
 <li><a class="reference internal" href="#small-footprint">Small Footprint</a></li>
 <li><a class="reference internal" href="#flexible-plugin-mechanism">Flexible Plugin Mechanism</a></li>
 <li><a class="reference internal" href="#reliabile-buffering">Reliabile Buffering</a></li>
-<li><a class="reference internal" href="#support-log-forwarding">Support Log Forwarding</a></li>
+<li><a class="reference internal" href="#log-forwarding">Log Forwarding</a></li>
 </ul>
 </li>
 </ul>
@@ -97,7 +97,7 @@
 <li>Small Footprint</li>
 <li>Flexible Plugin Mechanism</li>
 <li>Reliable Buffering</li>
-<li>Support Log Forwarding</li>
+<li>Log Forwarding</li>
 </ul>
 <div class="section" id="easy-installation">
 <h2>Easy Installation<a class="headerlink" href="#easy-installation" title="Permalink to this headline">¶</a></h2>
@@ -149,8 +149,8 @@
 <p>When size of the the top chunk exceeds limit or timer is expired, new empty chunk is pushed. And another thread get the bottom chunk and forward it to the next server (or send to a storage server). If it succeeded, the chunk is removed. Otherwise the thread leaves the chunk in the queue and retries to send it later.</p>
 <p>The implementation of the buffer is pluggable. Default plugin named &#8216;memory&#8217; stores chunks in memory. It is fast but not persistent. Another plugin named &#8216;file&#8217; stores chunks in file.</p>
 </div>
-<div class="section" id="support-log-forwarding">
-<h2>Support Log Forwarding<a class="headerlink" href="#support-log-forwarding" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="log-forwarding">
+<h2>Log Forwarding<a class="headerlink" href="#log-forwarding" title="Permalink to this headline">¶</a></h2>
 <p>To analyze the event logs later, these are usually collected into one place. Fluent supports the log transfer functinality, to collect logs from various nodes, to the central server.:</p>
 <div class="highlight-python"><pre>Web server
 +--------+
