@@ -260,14 +260,14 @@ end</pre>
 <p>Run <tt class="docutils literal"><span class="pre">fluentd</span></tt> with <tt class="docutils literal"><span class="pre">-vv</span></tt> option to show debug messages:</p>
 <div class="highlight-python"><pre>$ fluentd -vv</pre>
 </div>
-<p><strong>stdout</strong> and <strong>copy</strong> output plugins is useful for debugging. <strong>stdout</strong> output plugin dumps matched events to the console. It can be used as following:</p>
+<p><strong>stdout</strong> and <strong>copy</strong> output plugins are useful for debugging. <strong>stdout</strong> output plugin dumps matched events to the console. It can be used as following:</p>
 <div class="highlight-python"><pre># You want to debug this plugin
 &lt;source&gt;
   type your_custom_input_plugin
 &lt;/source&gt;
 
 # Dump all events to stdout
-&lt;match *&gt;
+&lt;match **&gt;
   type stdout
 &lt;/match&gt;</pre>
 </div>

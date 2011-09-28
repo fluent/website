@@ -112,34 +112,34 @@ time_format
   See `Time#strptime <http://www.ruby-doc.org/core-1.9/classes/Time.html#M000326>`_.
 
 
-syslog
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-**syslog** inplut plugin receives logs from syslogd using UDP.
-
-**configuration**::
-
-    <source>
-      type syslog
-      port 5140
-      bind 0.0.0.0
-      tag my.syslog
-    </source>
-
-port
-  port to listen on. Default is 5140.
-
-bind
-  bind address to listen on. Default is 0.0.0.0 (all addresses).
-
-tag (required)
-  Tag of the event. This parameter is required.
-  The syslog input plugin adds facility and priority to the tag. So the actual tag will be like *my.syslog.kern.info* in above configuration.
-
-To transfer logs from syslogd to fluent, add following line to /etc/syslog.conf or /etc/rsyslog.conf::
-
-   # match pattern    fluent host:port
-   *.*                @127.0.0.1:5140
+.. syslog
+.. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. 
+.. **syslog** inplut plugin receives logs from syslogd using UDP.
+.. 
+.. **configuration**::
+.. 
+..     <source>
+..       type syslog
+..       port 5140
+..       bind 0.0.0.0
+..       tag my.syslog
+..     </source>
+.. 
+.. port
+..   port to listen on. Default is 5140.
+.. 
+.. bind
+..   bind address to listen on. Default is 0.0.0.0 (all addresses).
+.. 
+.. tag (required)
+..   Tag of the event. This parameter is required.
+..   The syslog input plugin adds facility and priority to the tag. So the actual tag will be like *my.syslog.kern.info* in above configuration.
+.. 
+.. To transfer logs from syslogd to fluent, add following line to /etc/syslog.conf or /etc/rsyslog.conf::
+.. 
+..    # match pattern    fluent host:port
+..    *.*                @127.0.0.1:5140
 
 
 tcp
@@ -274,7 +274,7 @@ time_format
       +-----+------------------------------------------+
       | %S  | Second of the minute (00..60)            |
       +-----+------------------------------------------+
-  Default is ``%Y%m%d`` which slices files every day. Use ``%Y%m%d%H`` to slice files every hour.
+  Default is ``%Y%m%d`` which splits files every day. Use ``%Y%m%d%H`` to split files every hour.
 
 utc
   Uses UTC for path formatting. Default is localtime.

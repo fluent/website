@@ -7,7 +7,26 @@ Installation
    :backlinks: none
    :local:
 
-A. Normal installation
+A. Gem installation
+------------------------------------
+
+If you have installed `Ruby <http://www.ruby-lang.org/>`_ >= 1.9.2, you can use RubyGems to download and install Fluent.
+
+You can confirm installed Ruby's version as following::
+
+    $ ruby --version
+    ruby 1.9.2p180 (2011-02-18 revision 30909) [x86_64-darwin10.6.0]
+
+It's recommended to use rvm to upgrade ruby if it is needed.
+
+If it says ruby 1.9.2 or above, use ``gem`` command to install fluent::
+
+    $ gem install fluent
+
+Next step: :ref:`install/confirm`
+
+
+B. ./configure && make installation
 ------------------------------------
 
 Before building the source package, make sure following libraries are installed:
@@ -31,23 +50,6 @@ Finally, build and install using ./configure && make && sudo make install::
     $ sudo make install
 
 Above commands install Fluent to ``$prefix`` and Ruby to ``$prefix/lib/fluent/ruby``.
-
-Next step: :ref:`install/confirm`
-
-
-B. Gem installation
-------------------------------------
-
-If you have installed `Ruby <http://www.ruby-lang.org/>`_ >= 1.9.2, you can use RubyGems to download and install Fluent.
-
-You can confirm installed Ruby's version as following::
-
-    $ ruby --version
-    ruby 1.9.2p180 (2011-02-18 revision 30909) [x86_64-darwin10.6.0]
-
-If it says ruby 1.9.2 or above, use ``gem`` command to install fluent::
-
-    $ sudo gem install fluent
 
 Next step: :ref:`install/confirm`
 
