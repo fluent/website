@@ -3,14 +3,31 @@
 Overview
 ========================
 
-**Fluent** is an event collector service. It's said that Fluent is generalized version of syslogd, which can deal with JSON object for the log message.
+Many web/mobile applications generate huge amount of **event logs** (c,f. login, logout, purchase, follow, etc). To analyze these event logs could be really valuable for improving the service. However, the challenge is collecting these logs from applicaiton serverseasily and reliably.
 
+**Fluent** is an event collector daemon for solving that problem by having:
 
-Architecture
-------------------------------------
+* Easy Installtion
+* Small Footprint
+* Flexible Plugin Mechanism
+* Reliable Buffering
+* Support Log Forwarding
 
-Fluent collects events from various data sources and write tem to files, databases or other storages::
+Easy Installation
+-----------------
 
+**Fluent** is packaged as Ruby gem. You can install it by just one command.
+
+Small Footprint
+---------------
+
+The core part of Fluent consists of only about 2,000 lines of Ruby, because of its simple architecture. Fluent collects events from various **input** sources and write them to **output** sinks.
+
+The examples of input is: HTTP, Syslog, Apache Log, etc. And the examples of output is: Files, Mails, RDBMS databases, NoSQL storages.
+
+This figure shows the basic idea of **input** and **output**::
+
+        Input                          Output
     +-------------------------------------------+
     |                                           |
     |  Web apps  ---+                +--> file  |
@@ -23,32 +40,19 @@ Fluent collects events from various data sources and write tem to files, databas
     |                                           |
     +-------------------------------------------+
 
-Fluent also supports log transfer::
+An collected event consists of *tag*, *time* and *record*. Tag is a string separated with '.' (e.g. myapp.access). It is used to categorize events. Time is a UNIX time when the event occurs. Record is a JSON object.
 
-    Web server
-    +--------+
-    | fluent -------+
-    +--------+      |
-                    |
-    Proxy server    |
-    +--------+      +--> +--------+
-    | fluent ----------> | fluent |
-    +--------+      +--> +--------+
-                    |
-    Database server |
-    +--------+      |
-    | fluent -------+
-    +--------+
+Flexible Plugin Mechanism
+-------------------------
 
-An event collected consists of *tag*, *time* and *record*. Tag is a string separated with '.' (e.g. myapp.access). It is used to categorize events. Time is a UNIX time when the event occurs. Record is a JSON object.
+The input and output can also be written in Ruby, and publishable by Ruby gems. You can search the available plugins by the following command::
 
+  $ gem search -r fluent-plugin
 
-Reliability
-------------------------------------
+Reliabile Buffering
+-------------------
 
-Fluent provides reliable buffering strategy to prevent loss of events from failure of servers.
-
-The structure of the buffer is a queue of chunks::
+Sometimes writing the collected events to output fails by unexpected causes like network failure. That means the loss of the events. To prevent this problem, Fluent provides reliable buffering strategy. Fluent has a buffer, consisted of a queue of chunks, to temporarily store the collected events::
 
     queue
     +---------+
@@ -69,6 +73,24 @@ When size of the the top chunk exceeds limit or timer is expired, new empty chun
 
 The implementation of the buffer is pluggable. Default plugin named 'memory' stores chunks in memory. It is fast but not persistent. Another plugin named 'file' stores chunks in file.
 
+Support Log Forwarding
+----------------------
+
+To analyze the event logs later, these are usually collected into one place. Fluent supports the log transfer functinality, to collect logs from various nodes, to the central server.::
+
+    Web server
+    +--------+
+    | fluent -------+
+    +--------+      |
+                    |
+    Proxy server    |
+    +--------+      +--> +--------+
+    | fluent ----------> | fluent |
+    +--------+      +--> +--------+
+                    |
+    Database server |
+    +--------+      |
+    | fluent -------+
+    +--------+
 
 Next step: :ref:`install`
-

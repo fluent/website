@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -11,14 +12,15 @@
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '#',
+        URL_ROOT:    '',
         VERSION:     '0.9.13',
-        COLLAPSE_MODINDEX: false,
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="fluent v0.9.13 documentation" href="index.html" />
     <link rel="next" title="Writing plugins" href="devel.html" />
@@ -42,64 +44,64 @@
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference external" href="#">Plugins</a><ul>
-<li><a class="reference external" href="#type-of-plugins">Type of plugins</a></li>
-<li><a class="reference external" href="#input-plugins">Input plugins</a><ul>
-<li><a class="reference external" href="#http">http</a></li>
-<li><a class="reference external" href="#tail">tail</a></li>
-<li><a class="reference external" href="#tcp">tcp</a></li>
-<li><a class="reference external" href="#unix">unix</a></li>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Plugins</a><ul>
+<li><a class="reference internal" href="#type-of-plugins">Type of plugins</a></li>
+<li><a class="reference internal" href="#input-plugins">Input plugins</a><ul>
+<li><a class="reference internal" href="#http">http</a></li>
+<li><a class="reference internal" href="#tail">tail</a></li>
+<li><a class="reference internal" href="#tcp">tcp</a></li>
+<li><a class="reference internal" href="#unix">unix</a></li>
 </ul>
 </li>
-<li><a class="reference external" href="#buffered-output-plugins">Buffered output plugins</a><ul>
-<li><a class="reference external" href="#file">file</a></li>
-<li><a class="reference external" href="#id1">tcp</a></li>
-<li><a class="reference external" href="#id2">unix</a></li>
+<li><a class="reference internal" href="#buffered-output-plugins">Buffered output plugins</a><ul>
+<li><a class="reference internal" href="#file">file</a></li>
+<li><a class="reference internal" href="#id1">tcp</a></li>
+<li><a class="reference internal" href="#id2">unix</a></li>
 </ul>
 </li>
-<li><a class="reference external" href="#non-buffered-output-plugins">Non-buffered output plugins</a><ul>
-<li><a class="reference external" href="#copy">copy</a></li>
-<li><a class="reference external" href="#roundrobin">roundrobin</a></li>
-<li><a class="reference external" href="#stdout">stdout</a></li>
-<li><a class="reference external" href="#null">null</a></li>
+<li><a class="reference internal" href="#non-buffered-output-plugins">Non-buffered output plugins</a><ul>
+<li><a class="reference internal" href="#copy">copy</a></li>
+<li><a class="reference internal" href="#roundrobin">roundrobin</a></li>
+<li><a class="reference internal" href="#stdout">stdout</a></li>
+<li><a class="reference internal" href="#null">null</a></li>
 </ul>
 </li>
-<li><a class="reference external" href="#buffer-plugins">Buffer plugins</a><ul>
-<li><a class="reference external" href="#memory">memory</a></li>
-<li><a class="reference external" href="#id3">file</a></li>
+<li><a class="reference internal" href="#buffer-plugins">Buffer plugins</a><ul>
+<li><a class="reference internal" href="#memory">memory</a></li>
+<li><a class="reference internal" href="#id3">file</a></li>
 </ul>
 </li>
-<li><a class="reference external" href="#searching-plugins">Searching plugins</a></li>
+<li><a class="reference internal" href="#searching-plugins">Searching plugins</a></li>
 </ul>
 </li>
 </ul>
 
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="config.html"
-                                  title="previous chapter">Configuration</a></p>
-            <h4>Next topic</h4>
-            <p class="topless"><a href="devel.html"
-                                  title="next chapter">Writing plugins</a></p>
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-              <li><a href="_sources/plugin.txt"
-                     rel="nofollow">Show Source</a></li>
-            </ul>
-          <div id="searchbox" style="display: none">
-            <h3>Quick search</h3>
-              <form class="search" action="search.html" method="get">
-                <input type="text" name="q" size="18" />
-                <input type="submit" value="Go" />
-                <input type="hidden" name="check_keywords" value="yes" />
-                <input type="hidden" name="area" value="default" />
-              </form>
-              <p class="searchtip" style="font-size: 90%">
-              Enter search terms or a module, class or function name.
-              </p>
-          </div>
-          <script type="text/javascript">$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="config.html"
+                        title="previous chapter">Configuration</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="devel.html"
+                        title="next chapter">Writing plugins</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/plugin.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -155,7 +157,7 @@ Some output plugins are fully customized plugin that doesn&#8217;t use buffer pl
 <dd>Provides a buffer implementation. Buffer plugin manages performance and reliability.</dd>
 </dl>
 </blockquote>
-<p>You can add your own plugin. See <a class="reference external" href="devel.html#devel"><em>Writing plugins</em></a>.</p>
+<p>You can add your own plugin. See <a class="reference internal" href="devel.html#devel"><em>Writing plugins</em></a>.</p>
 </div>
 <div class="section" id="input-plugins">
 <span id="input-plugin"></span><h2>Input plugins<a class="headerlink" href="#input-plugins" title="Permalink to this headline">¶</a></h2>
@@ -345,7 +347,7 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 </div>
 <dl class="docutils">
 <dt>path (required)</dt>
-<dd>Path of the file. Actual path becomes path + time + &#8220;.log&#8221;. See also <tt class="docutils literal"><span class="pre">time_format</span></tt> option descried below.</dd>
+<dd>Path of the file. Actual path becomes path + time + &#8221;.log&#8221;. See also <tt class="docutils literal"><span class="pre">time_format</span></tt> option descried below.</dd>
 <dt>time_format</dt>
 <dd><dl class="first docutils">
 <dt>Format of the time in the file path. Following characters are replaced with values:</dt>
@@ -536,7 +538,7 @@ This parameter is required.</dd>
 <p>Type following command to install it:</p>
 <div class="highlight-python"><pre>$ sudo fluent-gem install fluent-plugin-scribe</pre>
 </div>
-<p>Next step: <a class="reference external" href="devel.html#devel"><em>Writing plugins</em></a></p>
+<p>Next step: <a class="reference internal" href="devel.html#devel"><em>Writing plugins</em></a></p>
 </div>
 </div>
 
@@ -562,8 +564,8 @@ This parameter is required.</dd>
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2011, Sadayuki Furuhashi.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+        &copy; Copyright 2011, Sadayuki Furuhashi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
     </div>
   </body>
 </html>
