@@ -73,7 +73,7 @@ Confirm installation
 To confirm installation, run following commands::
 
     $ fluentd --setup ./fluent
-    $ fluentd -c fluentd/fluent.conf -vv &&
+    $ fluentd -c ./fluent/fluent.conf -vv &
     $ echo '{"json":"message"}' | fluent-cat debug.test
 
 The last command sends fluentd a message '{"json":"message"}' with "debug.test" tag. If the installation was successful, fluentd will output following message::
