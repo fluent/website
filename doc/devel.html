@@ -94,13 +94,13 @@
 <span id="devel"></span><h1>Writing plugins<a class="headerlink" href="#writing-plugins" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#installing-custom-plugins" id="id1">Installing custom plugins</a></li>
-<li><a class="reference internal" href="#input-plugins" id="id2">Input plugins</a></li>
-<li><a class="reference internal" href="#buffered-output-plugins" id="id3">Buffered output plugins</a></li>
-<li><a class="reference internal" href="#time-sliced-output-plugins" id="id4">Time sliced output plugins</a></li>
-<li><a class="reference internal" href="#non-buffered-output-plugins" id="id5">Non-buffered output plugins</a></li>
-<li><a class="reference internal" href="#buffer-plugins" id="id6">Buffer plugins</a></li>
-<li><a class="reference internal" href="#debugging-plugins" id="id7">Debugging plugins</a></li>
+<li><a class="reference internal" href="#installing-custom-plugins" id="id3">Installing custom plugins</a></li>
+<li><a class="reference internal" href="#input-plugins" id="id4">Input plugins</a></li>
+<li><a class="reference internal" href="#buffered-output-plugins" id="id5">Buffered output plugins</a></li>
+<li><a class="reference internal" href="#time-sliced-output-plugins" id="id6">Time sliced output plugins</a></li>
+<li><a class="reference internal" href="#non-buffered-output-plugins" id="id7">Non-buffered output plugins</a></li>
+<li><a class="reference internal" href="#buffer-plugins" id="id8">Buffer plugins</a></li>
+<li><a class="reference internal" href="#debugging-plugins" id="id9">Debugging plugins</a></li>
 </ul>
 </div>
 <div class="section" id="installing-custom-plugins">
@@ -268,16 +268,18 @@
 <div class="highlight-python"><pre>$ fluentd -vv</pre>
 </div>
 <p><strong>stdout</strong> and <strong>copy</strong> output plugins are useful for debugging. <strong>stdout</strong> output plugin dumps matched events to the console. It can be used as following.</p>
-<div class="highlight-xml"><pre># You want to debug this plugin
-&lt;source&gt;
-  type your_custom_input_plugin
-&lt;/source&gt;
-
-# Dump all events to stdout
-&lt;match **&gt;
-  type stdout
-&lt;/match&gt;</pre>
-</div>
+<blockquote>
+<p># You want to debug this plugin
+&lt;source&gt;</p>
+<blockquote>
+type your_custom_input_plugin</blockquote>
+<p>&lt;/source&gt;</p>
+<p># Dump all events to stdout
+&lt;match <a href="#id1"><span class="problematic" id="id2">**</span></a>&gt;</p>
+<blockquote>
+type stdout</blockquote>
+<p>&lt;/match&gt;</p>
+</blockquote>
 <p><strong>copy</strong> output plugin copies matched events to multiple output plugins. You can use it with the stdout plugin:</p>
 <div class="highlight-python"><pre># Use tcp input plugin and fluent-cat command to feed events:
 #  $ echo '{"event":"message"}' | fluent-cat test.tag

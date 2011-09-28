@@ -7,7 +7,7 @@ Many web/mobile applications generate huge amount of **event logs** (c,f. login,
 
 **Fluent** is an event collector daemon for solving that problem by having:
 
-* Easy Installtion
+* Easy Installation
 * Small Footprint
 * Flexible Plugin Mechanism
 * Reliable Buffering
