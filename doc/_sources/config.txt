@@ -35,7 +35,7 @@ Overview of the configuration file will be like as following::
     # http://this.host:9880/myapp.access?json={"event":"data"}
     <source>
       type http
-      path 9880
+      port 9880
     </source>
     
     # Match events tagged with "myapp.access" and
