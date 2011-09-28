@@ -1,14 +1,19 @@
 .. _install:
 
 Installation
-========================
+============
 
 .. contents::
    :backlinks: none
    :local:
 
+Installation
+------------
+
+To install fluent, there're some ways: from 1) Gem, 2) .tar.gz, 3) git. The first one is recommended for most cases.
+
 Install from Gem
-----------------
+^^^^^^^^^^^^^^^^
 
 If you have installed `Ruby <http://www.ruby-lang.org/>`_ >= 1.9.2, you can use RubyGems to download and install Fluent. You can confirm installed Ruby's version as following::
 
@@ -26,7 +31,7 @@ It's recommended to use `rvm (Ruby Version Manager) <https://rvm.beginrescueend.
 Next step: :ref:`install/confirm`
 
 Install from .tar.gz
---------------------
+^^^^^^^^^^^^^^^^^^^^
 
 Before building the source package, make sure following libraries are installed:
 
@@ -52,9 +57,8 @@ Above commands install Fluent to ``$prefix`` and Ruby to ``$prefix/lib/fluent/ru
 
 Next step: :ref:`install/confirm`
 
-
 Install from Latest Repository
-------------------------------
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 To install the latest development version from the `source repository <https://github.com/fluent/fluent>`_, prepare `Ruby <http://www.ruby-lang.org/>`_ >= 1.9.2 and run following commands::
 
@@ -68,7 +72,7 @@ Next step: :ref:`install/confirm`
 .. _install/confirm:
 
 Confirm Installation
-====================
+--------------------
 
 To confirm installation, run following commands::
 
@@ -82,7 +86,7 @@ The last command sends fluentd a message '{"json":"message"}' with "debug.test" 
 
 
 Update
-======
+------
 
 Once you installed, you can update to the latest version by using the following command::
 
@@ -91,4 +95,3 @@ Once you installed, you can update to the latest version by using the following 
 Next step: :ref:`config`
 
 Next step: :ref:`devel`
-
