@@ -7,27 +7,26 @@ Installation
    :backlinks: none
    :local:
 
-A. Gem installation
-------------------------------------
+Install from Gem
+----------------
 
-If you have installed `Ruby <http://www.ruby-lang.org/>`_ >= 1.9.2, you can use RubyGems to download and install Fluent.
-
-You can confirm installed Ruby's version as following::
+If you have installed `Ruby <http://www.ruby-lang.org/>`_ >= 1.9.2, you can use RubyGems to download and install Fluent. You can confirm installed Ruby's version as following::
 
     $ ruby --version
     ruby 1.9.2p180 (2011-02-18 revision 30909) [x86_64-darwin10.6.0]
 
-It's recommended to use rvm to upgrade ruby if it is needed.
+It's recommended to use `rvm (Ruby Version Manager) <https://rvm.beginrescueend.com/>`_ to install ruby. Then, please use ``gem`` command to install fluent::
 
-If it says ruby 1.9.2 or above, use ``gem`` command to install fluent::
+    # system-wide ruby
+    $ sudo gem install fluent
 
+    # via rvm
     $ gem install fluent
 
 Next step: :ref:`install/confirm`
 
-
-B. ./configure && make installation
-------------------------------------
+Install from .tar.gz
+--------------------
 
 Before building the source package, make sure following libraries are installed:
 
@@ -54,8 +53,8 @@ Above commands install Fluent to ``$prefix`` and Ruby to ``$prefix/lib/fluent/ru
 Next step: :ref:`install/confirm`
 
 
-C. Latest repository installation
-------------------------------------
+Install from Latest Repository
+------------------------------
 
 To install the latest development version from the `source repository <https://github.com/fluent/fluent>`_, prepare `Ruby <http://www.ruby-lang.org/>`_ >= 1.9.2 and run following commands::
 
@@ -66,11 +65,10 @@ To install the latest development version from the `source repository <https://g
 
 Next step: :ref:`install/confirm`
 
-
 .. _install/confirm:
 
-Confirm installation
-------------------------------------
+Confirm Installation
+====================
 
 To confirm installation, run following commands::
 
@@ -83,10 +81,10 @@ The last command sends fluentd a message '{"json":"message"}' with "debug.test" 
     2011-07-10 16:49:50 +0900 debug.test: {"json":"message"}
 
 
-Updating
-------------------------------------
+Update
+======
 
-Once you installed, you can update to the latest version using following command::
+Once you installed, you can update to the latest version by using the following command::
 
     $ sudo fluent-gem install fluent
 

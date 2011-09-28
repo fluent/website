@@ -47,13 +47,13 @@
   <h3><a href="index.html">Table Of Contents</a></h3>
   <ul>
 <li><a class="reference internal" href="#">Installation</a><ul>
-<li><a class="reference internal" href="#a-gem-installation">A. Gem installation</a></li>
-<li><a class="reference internal" href="#b-configure-make-installation">B. ./configure &amp;&amp; make installation</a></li>
-<li><a class="reference internal" href="#c-latest-repository-installation">C. Latest repository installation</a></li>
-<li><a class="reference internal" href="#confirm-installation">Confirm installation</a></li>
-<li><a class="reference internal" href="#updating">Updating</a></li>
+<li><a class="reference internal" href="#install-from-gem">Install from Gem</a></li>
+<li><a class="reference internal" href="#install-from-tar-gz">Install from .tar.gz</a></li>
+<li><a class="reference internal" href="#install-from-latest-repository">Install from Latest Repository</a></li>
 </ul>
 </li>
+<li><a class="reference internal" href="#confirm-installation">Confirm Installation</a></li>
+<li><a class="reference internal" href="#update">Update</a></li>
 </ul>
 
   <h4>Previous topic</h4>
@@ -92,28 +92,28 @@
 <span id="install"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#a-gem-installation" id="id2">A. Gem installation</a></li>
-<li><a class="reference internal" href="#b-configure-make-installation" id="id3">B. ./configure &amp;&amp; make installation</a></li>
-<li><a class="reference internal" href="#c-latest-repository-installation" id="id4">C. Latest repository installation</a></li>
-<li><a class="reference internal" href="#confirm-installation" id="id5">Confirm installation</a></li>
-<li><a class="reference internal" href="#updating" id="id6">Updating</a></li>
+<li><a class="reference internal" href="#install-from-gem" id="id2">Install from Gem</a></li>
+<li><a class="reference internal" href="#install-from-tar-gz" id="id3">Install from .tar.gz</a></li>
+<li><a class="reference internal" href="#install-from-latest-repository" id="id4">Install from Latest Repository</a></li>
 </ul>
 </div>
-<div class="section" id="a-gem-installation">
-<h2>A. Gem installation<a class="headerlink" href="#a-gem-installation" title="Permalink to this headline">¶</a></h2>
-<p>If you have installed <a class="reference external" href="http://www.ruby-lang.org/">Ruby</a> &gt;= 1.9.2, you can use RubyGems to download and install Fluent.</p>
-<p>You can confirm installed Ruby&#8217;s version as following:</p>
+<div class="section" id="install-from-gem">
+<h2>Install from Gem<a class="headerlink" href="#install-from-gem" title="Permalink to this headline">¶</a></h2>
+<p>If you have installed <a class="reference external" href="http://www.ruby-lang.org/">Ruby</a> &gt;= 1.9.2, you can use RubyGems to download and install Fluent. You can confirm installed Ruby&#8217;s version as following:</p>
 <div class="highlight-python"><pre>$ ruby --version
 ruby 1.9.2p180 (2011-02-18 revision 30909) [x86_64-darwin10.6.0]</pre>
 </div>
-<p>It&#8217;s recommended to use rvm to upgrade ruby if it is needed.</p>
-<p>If it says ruby 1.9.2 or above, use <tt class="docutils literal"><span class="pre">gem</span></tt> command to install fluent:</p>
-<div class="highlight-python"><pre>$ gem install fluent</pre>
+<p>It&#8217;s recommended to use <a class="reference external" href="https://rvm.beginrescueend.com/">rvm (Ruby Version Manager)</a> to install ruby. Then, please use <tt class="docutils literal"><span class="pre">gem</span></tt> command to install fluent:</p>
+<div class="highlight-python"><pre># system-wide ruby
+$ sudo gem install fluent
+
+# via rvm
+$ gem install fluent</pre>
 </div>
-<p>Next step: <a class="reference internal" href="#install-confirm"><em>Confirm installation</em></a></p>
+<p>Next step: <a class="reference internal" href="#install-confirm"><em>Confirm Installation</em></a></p>
 </div>
-<div class="section" id="b-configure-make-installation">
-<h2>B. ./configure &amp;&amp; make installation<a class="headerlink" href="#b-configure-make-installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="install-from-tar-gz">
+<h2>Install from .tar.gz<a class="headerlink" href="#install-from-tar-gz" title="Permalink to this headline">¶</a></h2>
 <p>Before building the source package, make sure following libraries are installed:</p>
 <table border="1" class="docutils">
 <colgroup>
@@ -149,20 +149,21 @@ $ make
 $ sudo make install</pre>
 </div>
 <p>Above commands install Fluent to <tt class="docutils literal"><span class="pre">$prefix</span></tt> and Ruby to <tt class="docutils literal"><span class="pre">$prefix/lib/fluent/ruby</span></tt>.</p>
-<p>Next step: <a class="reference internal" href="#install-confirm"><em>Confirm installation</em></a></p>
+<p>Next step: <a class="reference internal" href="#install-confirm"><em>Confirm Installation</em></a></p>
 </div>
-<div class="section" id="c-latest-repository-installation">
-<h2>C. Latest repository installation<a class="headerlink" href="#c-latest-repository-installation" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="install-from-latest-repository">
+<h2>Install from Latest Repository<a class="headerlink" href="#install-from-latest-repository" title="Permalink to this headline">¶</a></h2>
 <p>To install the latest development version from the <a class="reference external" href="https://github.com/fluent/fluent">source repository</a>, prepare <a class="reference external" href="http://www.ruby-lang.org/">Ruby</a> &gt;= 1.9.2 and run following commands:</p>
 <div class="highlight-python"><pre>$ git clone https://github.com/fluent/fluent.git
 $ cd fluent
 $ rake
 $ gem install pkg/fluent-*.gem</pre>
 </div>
-<p>Next step: <a class="reference internal" href="#install-confirm"><em>Confirm installation</em></a></p>
+<p>Next step: <a class="reference internal" href="#install-confirm"><em>Confirm Installation</em></a></p>
+</div>
 </div>
 <div class="section" id="confirm-installation">
-<span id="install-confirm"></span><h2>Confirm installation<a class="headerlink" href="#confirm-installation" title="Permalink to this headline">¶</a></h2>
+<span id="install-confirm"></span><h1>Confirm Installation<a class="headerlink" href="#confirm-installation" title="Permalink to this headline">¶</a></h1>
 <p>To confirm installation, run following commands:</p>
 <div class="highlight-python"><pre>$ fluentd --setup ./fluent
 $ fluentd -c ./fluent/fluent.conf -vv &amp;
@@ -172,14 +173,13 @@ $ echo '{"json":"message"}' | fluent-cat debug.test</pre>
 <div class="highlight-python"><pre>2011-07-10 16:49:50 +0900 debug.test: {"json":"message"}</pre>
 </div>
 </div>
-<div class="section" id="updating">
-<h2>Updating<a class="headerlink" href="#updating" title="Permalink to this headline">¶</a></h2>
-<p>Once you installed, you can update to the latest version using following command:</p>
+<div class="section" id="update">
+<h1>Update<a class="headerlink" href="#update" title="Permalink to this headline">¶</a></h1>
+<p>Once you installed, you can update to the latest version by using the following command:</p>
 <div class="highlight-python"><pre>$ sudo fluent-gem install fluent</pre>
 </div>
 <p>Next step: <a class="reference internal" href="config.html#config"><em>Configuration</em></a></p>
 <p>Next step: <a class="reference internal" href="devel.html#devel"><em>Writing plugins</em></a></p>
-</div>
 </div>
 
 

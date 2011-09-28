@@ -3,7 +3,7 @@
 Overview
 ========================
 
-Many web/mobile applications generate huge amount of **event logs** (c,f. login, logout, purchase, follow, etc). To analyze these event logs could be really valuable for improving the service. However, the challenge is collecting these logs from applicaiton serverseasily and reliably.
+Many web/mobile applications generate huge amount of **event logs** (c,f. login, logout, purchase, follow, etc). To analyze these event logs could be really valuable for improving the service. However, the challenge is collecting these logs seasily and reliably.
 
 **Fluent** is an event collector daemon for solving that problem by having:
 
