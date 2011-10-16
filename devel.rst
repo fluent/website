@@ -59,7 +59,7 @@ To submit events, use ``Fluent::Engine.emit(tag, event)`` method, where ``tag`` 
     record = {"message"=>"body"}
     Fluent::Engine.emit(tag, Fluent::Event.new(time, record))
 
-RDoc of the Engine class is available from `Fluent RDoc <http://fluent.github.com/rdoc/Fluent/Engine.html>`_.
+RDoc of the Engine class is available from `Fluent RDoc <http://fluentd.org/rdoc/Fluent/Engine.html>`_.
 
 
 Buffered output plugins

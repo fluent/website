@@ -19,7 +19,7 @@ Welcome to Fluent's documentation!
 RDoc
 ==================
 
-`Fluent RDoc <http://fluent.github.com/rdoc/>`_
+`Fluent RDoc <http://fluentd.org/rdoc/>`_
 
 Indices and tables
 ==================
