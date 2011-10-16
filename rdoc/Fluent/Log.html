@@ -127,6 +127,8 @@
           
           <li><a href="#method-i-trace">#trace</a></li>
           
+          <li><a href="#method-i-trace_backtrace">#trace_backtrace</a></li>
+          
           <li><a href="#method-i-warn">#warn</a></li>
           
           <li><a href="#method-i-warn_backtrace">#warn_backtrace</a></li>
@@ -188,11 +190,15 @@
         
           <li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
         
+          <li><a href="../Fluent/Configurable.html">Fluent::Configurable</a></li>
+        
+          <li><a href="../Fluent/Configurable/ClassMethods.html">Fluent::Configurable::ClassMethods</a></li>
+        
           <li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
         
           <li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
         
-          <li><a href="../Fluent/Event.html">Fluent::Event</a></li>
+          <li><a href="../Fluent/EngineClass/NoMatchMatch.html">Fluent::EngineClass::NoMatchMatch</a></li>
         
           <li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
@@ -214,8 +220,6 @@
         
           <li><a href="../Fluent/Input.html">Fluent::Input</a></li>
         
-          <li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
-        
           <li><a href="../Fluent/Log.html">Fluent::Log</a></li>
         
           <li><a href="../Fluent/Log/TTYColor.html">Fluent::Log::TTYColor</a></li>
@@ -228,11 +232,19 @@
         
           <li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
         
+          <li><a href="../Fluent/MessagePackEventStream.html">Fluent::MessagePackEventStream</a></li>
+        
+          <li><a href="../Fluent/MultiEventStream.html">Fluent::MultiEventStream</a></li>
+        
           <li><a href="../Fluent/MultiOutput.html">Fluent::MultiOutput</a></li>
         
           <li><a href="../Fluent/NullOutput.html">Fluent::NullOutput</a></li>
         
           <li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
+        
+          <li><a href="../Fluent/OneEventStream.html">Fluent::OneEventStream</a></li>
+        
+          <li><a href="../Fluent/OrMatchPattern.html">Fluent::OrMatchPattern</a></li>
         
           <li><a href="../Fluent/Output.html">Fluent::Output</a></li>
         
@@ -242,9 +254,13 @@
         
           <li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
         
-          <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
+          <li><a href="../Fluent/RecordFilterMixin.html">Fluent::RecordFilterMixin</a></li>
         
           <li><a href="../Fluent/RoundRobinOutput.html">Fluent::RoundRobinOutput</a></li>
+        
+          <li><a href="../Fluent/SetTagKeyMixin.html">Fluent::SetTagKeyMixin</a></li>
+        
+          <li><a href="../Fluent/SetTimeKeyMixin.html">Fluent::SetTimeKeyMixin</a></li>
         
           <li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
         
@@ -268,7 +284,23 @@
         
           <li><a href="../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
         
+          <li><a href="../Fluent/Test.html">Fluent::Test</a></li>
+        
+          <li><a href="../Fluent/Test/BufferedOutputTestDriver.html">Fluent::Test::BufferedOutputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/InputTestDriver.html">Fluent::Test::InputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/OutputTestDriver.html">Fluent::Test::OutputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/TestDriver.html">Fluent::Test::TestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/TestOutputChain.html">Fluent::Test::TestOutputChain</a></li>
+        
+          <li><a href="../Fluent/TestOutput.html">Fluent::TestOutput</a></li>
+        
           <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../Fluent/TimeFormatter.html">Fluent::TimeFormatter</a></li>
         
           <li><a href="../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
@@ -299,6 +331,8 @@
       
     </div><!-- description -->
 
+    
+    
     
     <div id="5Buntitled-5D" class="documentation-section">
       
@@ -666,7 +700,7 @@
             
             <div class="method-source-code" id="debug-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/log.rb, line 107</span>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 116</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">debug</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_DEBUG</span>
   <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
@@ -706,7 +740,7 @@
             
             <div class="method-source-code" id="debug_backtrace-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/log.rb, line 115</span>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 124</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">debug_backtrace</span>(<span class="ruby-identifier">backtrace</span>=<span class="ruby-identifier">$!</span>.<span class="ruby-identifier">backtrace</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_DEBUG</span>
   <span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
@@ -862,7 +896,7 @@
             
             <div class="method-source-code" id="error-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/log.rb, line 173</span>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 182</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">error</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_ERROR</span>
   <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
@@ -902,7 +936,7 @@
             
             <div class="method-source-code" id="error_backtrace-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/log.rb, line 181</span>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 190</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">error_backtrace</span>(<span class="ruby-identifier">backtrace</span>=<span class="ruby-identifier">$!</span>.<span class="ruby-identifier">backtrace</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_ERROR</span>
   <span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
@@ -940,7 +974,7 @@
             
             <div class="method-source-code" id="fatal-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/log.rb, line 195</span>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 204</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">fatal</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_FATAL</span>
   <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
@@ -980,7 +1014,7 @@
             
             <div class="method-source-code" id="fatal_backtrace-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/log.rb, line 203</span>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 212</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">fatal_backtrace</span>(<span class="ruby-identifier">backtrace</span>=<span class="ruby-identifier">$!</span>.<span class="ruby-identifier">backtrace</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_FATAL</span>
   <span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
@@ -1018,7 +1052,7 @@
             
             <div class="method-source-code" id="info-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/log.rb, line 129</span>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 138</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">info</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_INFO</span>
   <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
@@ -1058,7 +1092,7 @@
             
             <div class="method-source-code" id="info_backtrace-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/log.rb, line 137</span>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 146</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">info_backtrace</span>(<span class="ruby-identifier">backtrace</span>=<span class="ruby-identifier">$!</span>.<span class="ruby-identifier">backtrace</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_INFO</span>
   <span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
@@ -1096,7 +1130,7 @@
             
             <div class="method-source-code" id="on_debug-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/log.rb, line 102</span>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 111</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_debug</span>(&amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_DEBUG</span>
   <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
@@ -1130,7 +1164,7 @@
             
             <div class="method-source-code" id="on_error-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/log.rb, line 168</span>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 177</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_error</span>(&amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_ERROR</span>
   <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
@@ -1164,7 +1198,7 @@
             
             <div class="method-source-code" id="on_fatal-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/log.rb, line 190</span>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 199</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_fatal</span>(&amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_FATAL</span>
   <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
@@ -1198,7 +1232,7 @@
             
             <div class="method-source-code" id="on_info-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/log.rb, line 124</span>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 133</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_info</span>(&amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_INFO</span>
   <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
@@ -1266,7 +1300,7 @@
             
             <div class="method-source-code" id="on_warn-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/log.rb, line 146</span>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 155</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_warn</span>(&amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_WARN</span>
   <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
@@ -1300,7 +1334,7 @@
             
             <div class="method-source-code" id="puts-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/log.rb, line 212</span>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 221</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">puts</span>(<span class="ruby-identifier">msg</span>)
   <span class="ruby-ivar">@out</span>.<span class="ruby-identifier">puts</span>(<span class="ruby-identifier">msg</span>)
   <span class="ruby-ivar">@out</span>.<span class="ruby-identifier">flush</span>
@@ -1359,6 +1393,44 @@
         </div><!-- trace-method -->
 
       
+        <div id="trace_backtrace-method" class="method-detail ">
+          <a name="method-i-trace_backtrace"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">trace_backtrace</span><span
+              class="method-args">(backtrace=$!.backtrace)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="trace_backtrace-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 102</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">trace_backtrace</span>(<span class="ruby-identifier">backtrace</span>=<span class="ruby-identifier">$!</span>.<span class="ruby-identifier">backtrace</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_TRACE</span>
+  <span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>
+  <span class="ruby-identifier">backtrace</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">puts</span> [<span class="ruby-string">&quot;  &quot;</span>, <span class="ruby-identifier">caller_line</span>(<span class="ruby-identifier">time</span>,<span class="ruby-value">4</span>), <span class="ruby-identifier">msg</span>].<span class="ruby-identifier">join</span>
+  }
+  <span class="ruby-keyword">nil</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- trace_backtrace-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- trace_backtrace-method -->
+
+      
         <div id="warn-method" class="method-detail ">
           <a name="method-i-warn"></a>
 
@@ -1378,7 +1450,7 @@
             
             <div class="method-source-code" id="warn-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/log.rb, line 151</span>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 160</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">warn</span>(*<span class="ruby-identifier">args</span>, &amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_WARN</span>
   <span class="ruby-identifier">args</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">block</span>.<span class="ruby-identifier">call</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
@@ -1418,7 +1490,7 @@
             
             <div class="method-source-code" id="warn_backtrace-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/log.rb, line 159</span>
+<span class="ruby-comment"># File lib/fluent/log.rb, line 168</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">warn_backtrace</span>(<span class="ruby-identifier">backtrace</span>=<span class="ruby-identifier">$!</span>.<span class="ruby-identifier">backtrace</span>)
   <span class="ruby-keyword">return</span> <span class="ruby-keyword">if</span> <span class="ruby-ivar">@level</span> <span class="ruby-operator">&gt;</span> <span class="ruby-constant">LEVEL_WARN</span>
   <span class="ruby-identifier">time</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>

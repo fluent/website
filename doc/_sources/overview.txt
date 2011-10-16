@@ -28,17 +28,17 @@ The examples of input is: HTTP, Syslog, Apache Log, etc. And the examples of out
 This figure shows the basic idea of **input** and **output**::
 
         Input                          Output
-    +-------------------------------------------+
-    |                                           |
-    |  Web apps  ---+                +--> file  |
-    |               |                |          |
-    |               +-->          ---+          |
-    |  /var/log  ------>  fluent  ------> mail  |
-    |               +-->          ---+          |
-    |               |                |          |
-    |  apache    ---+                +--> S3    |
-    |                                           |
-    +-------------------------------------------+
+    +--------------------------------------------+
+    |                                            |
+    |  Web apps  ---+                 +--> file  |
+    |               |                 |          |
+    |               +-->           ---+          |
+    |  /var/log  ------>  fluentd  ------> mail  |
+    |               +-->           ---+          |
+    |               |                 |          |
+    |  apache    ---+                 +--> S3    |
+    |                                            |
+    +--------------------------------------------+
 
 An collected event consists of *tag*, *time* and *record*. Tag is a string separated with '.' (e.g. myapp.access). It is used to categorize events. Time is a UNIX time when the event occurs. Record is a JSON object.
 
@@ -47,7 +47,7 @@ Flexible Plugin Mechanism
 
 The input and output can also be written in Ruby, and publishable by Ruby gems. You can search the available plugins by the following command::
 
-  $ gem search -r fluent-plugin
+  $ gem search -rd fluent-plugin
 
 Reliabile Buffering
 -------------------
@@ -67,7 +67,7 @@ Sometimes writing the collected events to output fails by unexpected causes like
     |         |  (transactional)
     +---------+
 
-When a event is reached to a fluent server, it is appended to a top buffer chunk. This operation never blocks even if next server is down.
+When a event is reached to a fluentd, it is appended to a top buffer chunk. This operation never blocks even if next server is down.
 
 When size of the the top chunk exceeds limit or timer is expired, new empty chunk is pushed. And another thread get the bottom chunk and forward it to the next server (or send to a storage server). If it succeeded, the chunk is removed. Otherwise the thread leaves the chunk in the queue and retries to send it later.
 
@@ -79,18 +79,18 @@ Log Forwarding
 To analyze the event logs later, these are usually collected into one place. Fluent supports the log transfer functinality, to collect logs from various nodes, to the central server.::
 
     Web server
-    +--------+
-    | fluent -------+
-    +--------+      |
-                    |
-    Proxy server    |
-    +--------+      +--> +--------+
-    | fluent ----------> | fluent |
-    +--------+      +--> +--------+
-                    |
-    Database server |
-    +--------+      |
-    | fluent -------+
-    +--------+
+    +---------+
+    | fluentd -------+
+    +---------+      |
+                     |
+    Proxy server     |
+    +---------+      +--> +---------+
+    | fluentd ----------> | fluentd |
+    +---------+      +--> +---------+
+                     |
+    Database server  |
+    +---------+      |
+    | fluentd -------+
+    +---------+
 
 Next step: :ref:`install`

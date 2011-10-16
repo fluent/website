@@ -77,8 +77,6 @@
           
           <li><a href="#method-c-new">::new</a></li>
           
-          <li><a href="#method-i-callback">#callback</a></li>
-          
           <li><a href="#method-i-on_message">#on_message</a></li>
           
           <li><a href="#method-i-run">#run</a></li>
@@ -144,11 +142,15 @@
         
           <li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
         
+          <li><a href="../Fluent/Configurable.html">Fluent::Configurable</a></li>
+        
+          <li><a href="../Fluent/Configurable/ClassMethods.html">Fluent::Configurable::ClassMethods</a></li>
+        
           <li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
         
           <li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
         
-          <li><a href="../Fluent/Event.html">Fluent::Event</a></li>
+          <li><a href="../Fluent/EngineClass/NoMatchMatch.html">Fluent::EngineClass::NoMatchMatch</a></li>
         
           <li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
@@ -170,8 +172,6 @@
         
           <li><a href="../Fluent/Input.html">Fluent::Input</a></li>
         
-          <li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
-        
           <li><a href="../Fluent/Log.html">Fluent::Log</a></li>
         
           <li><a href="../Fluent/Log/TTYColor.html">Fluent::Log::TTYColor</a></li>
@@ -184,11 +184,19 @@
         
           <li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
         
+          <li><a href="../Fluent/MessagePackEventStream.html">Fluent::MessagePackEventStream</a></li>
+        
+          <li><a href="../Fluent/MultiEventStream.html">Fluent::MultiEventStream</a></li>
+        
           <li><a href="../Fluent/MultiOutput.html">Fluent::MultiOutput</a></li>
         
           <li><a href="../Fluent/NullOutput.html">Fluent::NullOutput</a></li>
         
           <li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
+        
+          <li><a href="../Fluent/OneEventStream.html">Fluent::OneEventStream</a></li>
+        
+          <li><a href="../Fluent/OrMatchPattern.html">Fluent::OrMatchPattern</a></li>
         
           <li><a href="../Fluent/Output.html">Fluent::Output</a></li>
         
@@ -198,9 +206,13 @@
         
           <li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
         
-          <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
+          <li><a href="../Fluent/RecordFilterMixin.html">Fluent::RecordFilterMixin</a></li>
         
           <li><a href="../Fluent/RoundRobinOutput.html">Fluent::RoundRobinOutput</a></li>
+        
+          <li><a href="../Fluent/SetTagKeyMixin.html">Fluent::SetTagKeyMixin</a></li>
+        
+          <li><a href="../Fluent/SetTimeKeyMixin.html">Fluent::SetTimeKeyMixin</a></li>
         
           <li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
         
@@ -224,7 +236,23 @@
         
           <li><a href="../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
         
+          <li><a href="../Fluent/Test.html">Fluent::Test</a></li>
+        
+          <li><a href="../Fluent/Test/BufferedOutputTestDriver.html">Fluent::Test::BufferedOutputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/InputTestDriver.html">Fluent::Test::InputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/OutputTestDriver.html">Fluent::Test::OutputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/TestDriver.html">Fluent::Test::TestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/TestOutputChain.html">Fluent::Test::TestOutputChain</a></li>
+        
+          <li><a href="../Fluent/TestOutput.html">Fluent::TestOutput</a></li>
+        
           <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../Fluent/TimeFormatter.html">Fluent::TimeFormatter</a></li>
         
           <li><a href="../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
@@ -255,6 +283,8 @@
       
     </div><!-- description -->
 
+    
+    
     
     <div id="5Buntitled-5D" class="documentation-section">
       
@@ -293,6 +323,8 @@
 <span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">'socket'</span>
+  <span class="ruby-identifier">require</span> <span class="ruby-string">'yajl'</span>
+  <span class="ruby-keyword">super</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -329,7 +361,7 @@
             
             <div class="method-source-code" id="run-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 42</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 45</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>
   <span class="ruby-ivar">@loop</span>.<span class="ruby-identifier">run</span>
 <span class="ruby-keyword">rescue</span>
@@ -365,11 +397,11 @@
             
             <div class="method-source-code" id="shutdown-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 33</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 36</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">shutdown</span>
   <span class="ruby-ivar">@lsock</span>.<span class="ruby-identifier">close</span>
   <span class="ruby-ivar">@loop</span>.<span class="ruby-identifier">stop</span>
-  <span class="ruby-comment">#@thread.join  # TODO</span>
+  <span class="ruby-ivar">@thread</span>.<span class="ruby-identifier">join</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- shutdown-source -->
             
@@ -400,12 +432,13 @@
             
             <div class="method-source-code" id="start-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 26</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 28</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span>
   <span class="ruby-ivar">@loop</span> = <span class="ruby-constant">Coolio</span><span class="ruby-operator">::</span><span class="ruby-constant">Loop</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@lsock</span> = <span class="ruby-identifier">listen</span>
   <span class="ruby-ivar">@loop</span>.<span class="ruby-identifier">attach</span>(<span class="ruby-ivar">@lsock</span>)
   <span class="ruby-ivar">@thread</span> = <span class="ruby-constant">Thread</span>.<span class="ruby-identifier">new</span>(&amp;<span class="ruby-identifier">method</span>(<span class="ruby-value">:run</span>))
+  <span class="ruby-ivar">@cached_unpacker</span> = <span class="ruby-constant">MessagePack</span><span class="ruby-operator">::</span><span class="ruby-constant">Unpacker</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- start-source -->
             
@@ -423,41 +456,6 @@
         <h3 class="section-header">Protected Instance Methods</h3>
 
       
-        <div id="callback-method" class="method-detail ">
-          <a name="method-i-callback"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">callback</span><span
-              class="method-args">(msgs)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            
-            
-
-            
-            <div class="method-source-code" id="callback-source">
-<pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 50</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">callback</span>(<span class="ruby-identifier">msgs</span>)
-  <span class="ruby-identifier">msgs</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">on_message</span>(<span class="ruby-identifier">msg</span>)
-  }
-<span class="ruby-keyword">end</span></pre>
-            </div><!-- callback-source -->
-            
-          </div>
-
-          
-
-          
-        </div><!-- callback-method -->
-
-      
         <div id="on_message-method" class="method-detail ">
           <a name="method-i-on_message"></a>
 
@@ -473,7 +471,7 @@
             
             <p>message Entry {</p>
 
-<pre>1: long? time
+<pre>1: long time
 2: object record</pre>
 
 <p>}</p>
@@ -482,6 +480,13 @@
 
 <pre>1: string tag
 2: list&lt;Entry&gt; entries</pre>
+
+<p>}</p>
+
+<p>message PackedForward {</p>
+
+<pre>1: string tag
+2: raw entries  # msgpack stream of Entry</pre>
 
 <p>}</p>
 
@@ -497,31 +502,35 @@
             
             <div class="method-source-code" id="on_message-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 71</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 73</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_message</span>(<span class="ruby-identifier">msg</span>)
   <span class="ruby-comment"># TODO format error</span>
   <span class="ruby-identifier">tag</span> = <span class="ruby-identifier">msg</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_s</span>
   <span class="ruby-identifier">entries</span> = <span class="ruby-identifier">msg</span>[<span class="ruby-value">1</span>]
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Array</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">String</span>
+    <span class="ruby-comment"># PackedForward</span>
+    <span class="ruby-identifier">es</span> = <span class="ruby-constant">MessagePackEventStream</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">entries</span>, <span class="ruby-ivar">@cached_unpacker</span>)
+    <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">emit_stream</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>)
+
+  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">class</span> <span class="ruby-operator">==</span> <span class="ruby-constant">Array</span>
     <span class="ruby-comment"># Forward</span>
-    <span class="ruby-identifier">array</span> = <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">es</span> = <span class="ruby-constant">MultiEventStream</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">time</span> = <span class="ruby-identifier">e</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_i</span>
-      <span class="ruby-identifier">time</span> = <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">time</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">time</span> = (<span class="ruby-identifier">now</span> <span class="ruby-operator">||=</span> <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span>) <span class="ruby-keyword">if</span> <span class="ruby-identifier">time</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
       <span class="ruby-identifier">record</span> = <span class="ruby-identifier">e</span>[<span class="ruby-value">1</span>]
-      <span class="ruby-constant">Event</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">record</span>)
+      <span class="ruby-identifier">es</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">record</span>)
     }
-    <span class="ruby-identifier">es</span> = <span class="ruby-constant">ArrayEventStream</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">array</span>)
+    <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">emit_stream</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>)
+
   <span class="ruby-keyword">else</span>
     <span class="ruby-comment"># Message</span>
     <span class="ruby-identifier">time</span> = <span class="ruby-identifier">msg</span>[<span class="ruby-value">1</span>]
     <span class="ruby-identifier">time</span> = <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span> <span class="ruby-keyword">if</span> <span class="ruby-identifier">time</span> <span class="ruby-operator">==</span> <span class="ruby-value">0</span>
     <span class="ruby-identifier">record</span> = <span class="ruby-identifier">msg</span>[<span class="ruby-value">2</span>]
-    <span class="ruby-identifier">event</span> = <span class="ruby-constant">Event</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">record</span>)
-    <span class="ruby-identifier">es</span> = <span class="ruby-constant">ArrayEventStream</span>.<span class="ruby-identifier">new</span>([<span class="ruby-identifier">event</span>])
+    <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">emit</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">time</span>, <span class="ruby-identifier">record</span>)
   <span class="ruby-keyword">end</span>
-
-  <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">emit_stream</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>)
 <span class="ruby-keyword">end</span></pre>
             </div><!-- on_message-source -->
             

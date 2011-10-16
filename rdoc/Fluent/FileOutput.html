@@ -71,6 +71,8 @@
           
           <li><a href="#method-i-format">#format</a></li>
           
+          <li><a href="#method-i-secondary_init">#secondary_init</a></li>
+          
           <li><a href="#method-i-write">#write</a></li>
           
         </ul>
@@ -130,11 +132,15 @@
         
           <li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
         
+          <li><a href="../Fluent/Configurable.html">Fluent::Configurable</a></li>
+        
+          <li><a href="../Fluent/Configurable/ClassMethods.html">Fluent::Configurable::ClassMethods</a></li>
+        
           <li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
         
           <li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
         
-          <li><a href="../Fluent/Event.html">Fluent::Event</a></li>
+          <li><a href="../Fluent/EngineClass/NoMatchMatch.html">Fluent::EngineClass::NoMatchMatch</a></li>
         
           <li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
@@ -156,8 +162,6 @@
         
           <li><a href="../Fluent/Input.html">Fluent::Input</a></li>
         
-          <li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
-        
           <li><a href="../Fluent/Log.html">Fluent::Log</a></li>
         
           <li><a href="../Fluent/Log/TTYColor.html">Fluent::Log::TTYColor</a></li>
@@ -170,11 +174,19 @@
         
           <li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
         
+          <li><a href="../Fluent/MessagePackEventStream.html">Fluent::MessagePackEventStream</a></li>
+        
+          <li><a href="../Fluent/MultiEventStream.html">Fluent::MultiEventStream</a></li>
+        
           <li><a href="../Fluent/MultiOutput.html">Fluent::MultiOutput</a></li>
         
           <li><a href="../Fluent/NullOutput.html">Fluent::NullOutput</a></li>
         
           <li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
+        
+          <li><a href="../Fluent/OneEventStream.html">Fluent::OneEventStream</a></li>
+        
+          <li><a href="../Fluent/OrMatchPattern.html">Fluent::OrMatchPattern</a></li>
         
           <li><a href="../Fluent/Output.html">Fluent::Output</a></li>
         
@@ -184,9 +196,13 @@
         
           <li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
         
-          <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
+          <li><a href="../Fluent/RecordFilterMixin.html">Fluent::RecordFilterMixin</a></li>
         
           <li><a href="../Fluent/RoundRobinOutput.html">Fluent::RoundRobinOutput</a></li>
+        
+          <li><a href="../Fluent/SetTagKeyMixin.html">Fluent::SetTagKeyMixin</a></li>
+        
+          <li><a href="../Fluent/SetTimeKeyMixin.html">Fluent::SetTimeKeyMixin</a></li>
         
           <li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
         
@@ -210,7 +226,23 @@
         
           <li><a href="../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
         
+          <li><a href="../Fluent/Test.html">Fluent::Test</a></li>
+        
+          <li><a href="../Fluent/Test/BufferedOutputTestDriver.html">Fluent::Test::BufferedOutputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/InputTestDriver.html">Fluent::Test::InputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/OutputTestDriver.html">Fluent::Test::OutputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/TestDriver.html">Fluent::Test::TestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/TestOutputChain.html">Fluent::Test::TestOutputChain</a></li>
+        
+          <li><a href="../Fluent/TestOutput.html">Fluent::TestOutput</a></li>
+        
           <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../Fluent/TimeFormatter.html">Fluent::TimeFormatter</a></li>
         
           <li><a href="../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
@@ -242,6 +274,8 @@
     </div><!-- description -->
 
     
+    
+    
     <div id="5Buntitled-5D" class="documentation-section">
       
 
@@ -262,47 +296,6 @@
       </div>
       
 
-      
-      <!-- Attributes -->
-      <div id="attribute-method-details" class="method-section section">
-        <h3 class="section-header">Attributes</h3>
-
-        
-        <div id="compress-attribute-method" class="method-detail">
-          <a name="compress"></a>
-          
-          <a name="compress="></a>
-          
-          <div class="method-heading attribute-method-heading">
-            <span class="method-name">compress</span><span
-              class="attribute-access-type">[RW]</span>
-          </div>
-
-          <div class="method-description">
-          
-          
-          
-          </div>
-        </div>
-        
-        <div id="path-attribute-method" class="method-detail">
-          <a name="path"></a>
-          
-          <a name="path="></a>
-          
-          <div class="method-heading attribute-method-heading">
-            <span class="method-name">path</span><span
-              class="attribute-access-type">[RW]</span>
-          </div>
-
-          <div class="method-description">
-          
-          
-          
-          </div>
-        </div>
-        
-      </div><!-- attribute-method-details -->
       
 
       <!-- Methods -->
@@ -330,13 +323,11 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/out_file.rb, line 29</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_file.rb, line 41</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">'zlib'</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">'time'</span>
   <span class="ruby-keyword">super</span>
-  <span class="ruby-ivar">@path</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@compress</span> = <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -373,7 +364,7 @@
             
             <div class="method-source-code" id="configure-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/out_file.rb, line 39</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_file.rb, line 47</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'path'</span>]
     <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">path</span>
@@ -394,23 +385,7 @@
 
   <span class="ruby-keyword">super</span>
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">compress</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'compress'</span>]
-    <span class="ruby-identifier">c</span> = <span class="ruby-constant">SUPPORTED_COMPRESS</span>[<span class="ruby-identifier">compress</span>.<span class="ruby-identifier">to_sym</span>]
-    <span class="ruby-keyword">unless</span> <span class="ruby-identifier">c</span>
-      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConfigError</span>, <span class="ruby-node">&quot;Unsupported compression algorithm '#{compress}'&quot;</span>
-    <span class="ruby-keyword">end</span>
-    <span class="ruby-ivar">@compress</span> = <span class="ruby-identifier">c</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@localtime</span>
-    <span class="ruby-ivar">@formatter</span> = <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">tag</span>,<span class="ruby-identifier">event</span><span class="ruby-operator">|</span>
-      <span class="ruby-node">&quot;#{Time.at(event.time).iso8601}\t#{tag}\t#{event.record.to_json}\n&quot;</span>
-    }
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-ivar">@formatter</span> = <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">tag</span>,<span class="ruby-identifier">event</span><span class="ruby-operator">|</span>
-      <span class="ruby-node">&quot;#{Time.at(event.time).utc.iso8601}\t#{tag}\t#{event.record.to_json}\n&quot;</span>
-    }
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@timef</span> = <span class="ruby-constant">TimeFormatter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@time_format</span>, <span class="ruby-ivar">@localtime</span>)
 <span class="ruby-keyword">end</span></pre>
             </div><!-- configure-source -->
             
@@ -428,7 +403,7 @@
           
           <div class="method-heading">
             <span class="method-name">format</span><span
-              class="method-args">(tag, event)</span>
+              class="method-args">(tag, time, record)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -441,9 +416,10 @@
             
             <div class="method-source-code" id="format-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/out_file.rb, line 78</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">format</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">event</span>)
-  <span class="ruby-ivar">@formatter</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">event</span>)
+<span class="ruby-comment"># File lib/fluent/plugin/out_file.rb, line 70</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">format</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">time</span>, <span class="ruby-identifier">record</span>)
+  <span class="ruby-identifier">time_str</span> = <span class="ruby-ivar">@timef</span>.<span class="ruby-identifier">format</span>(<span class="ruby-identifier">time</span>)
+  <span class="ruby-node">&quot;#{time_str}\t#{tag}\t#{record.to_json}\n&quot;</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- format-source -->
             
@@ -453,6 +429,39 @@
 
           
         </div><!-- format-method -->
+
+      
+        <div id="secondary_init-method" class="method-detail ">
+          <a name="method-i-secondary_init"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">secondary_init</span><span
+              class="method-args">(primary)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="secondary_init-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/out_file.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">secondary_init</span>(<span class="ruby-identifier">primary</span>)
+  <span class="ruby-comment"># don't warn even if primary.class is not FileOutput</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- secondary_init-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- secondary_init-method -->
 
       
         <div id="write-method" class="method-detail ">
@@ -474,11 +483,18 @@
             
             <div class="method-source-code" id="write-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/out_file.rb, line 82</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_file.rb, line 75</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">write</span>(<span class="ruby-identifier">chunk</span>)
+  <span class="ruby-keyword">case</span> <span class="ruby-ivar">@compress</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-keyword">nil</span>
+    <span class="ruby-identifier">suffix</span> = <span class="ruby-string">''</span>
+  <span class="ruby-keyword">when</span> <span class="ruby-value">:gz</span>
+    <span class="ruby-identifier">suffix</span> = <span class="ruby-string">&quot;.gz&quot;</span>
+  <span class="ruby-keyword">end</span>
+
   <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
   <span class="ruby-keyword">begin</span>
-    <span class="ruby-identifier">path</span> = <span class="ruby-node">&quot;#{@path_prefix}#{chunk.key}_#{i}#{@path_suffix}&quot;</span>
+    <span class="ruby-identifier">path</span> = <span class="ruby-node">&quot;#{@path_prefix}#{chunk.key}_#{i}#{@path_suffix}#{suffix}&quot;</span>
     <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>
   <span class="ruby-keyword">end</span> <span class="ruby-keyword">while</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-identifier">path</span>)
   <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-identifier">path</span>)
@@ -489,10 +505,12 @@
       <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">write_to</span>(<span class="ruby-identifier">f</span>)
     }
   <span class="ruby-keyword">when</span> <span class="ruby-value">:gz</span>
-    <span class="ruby-constant">Zlib</span><span class="ruby-operator">::</span><span class="ruby-constant">GzipWriter</span>.<span class="ruby-identifier">open</span>(<span class="ruby-node">&quot;#{path}.gz&quot;</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
+    <span class="ruby-constant">Zlib</span><span class="ruby-operator">::</span><span class="ruby-constant">GzipWriter</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">write_to</span>(<span class="ruby-identifier">f</span>)
     }
   <span class="ruby-keyword">end</span>
+
+  <span class="ruby-keyword">return</span> <span class="ruby-identifier">path</span>  <span class="ruby-comment"># for test</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- write-source -->
             

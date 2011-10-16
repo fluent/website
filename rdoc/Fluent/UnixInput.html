@@ -126,11 +126,15 @@
         
           <li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
         
+          <li><a href="../Fluent/Configurable.html">Fluent::Configurable</a></li>
+        
+          <li><a href="../Fluent/Configurable/ClassMethods.html">Fluent::Configurable::ClassMethods</a></li>
+        
           <li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
         
           <li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
         
-          <li><a href="../Fluent/Event.html">Fluent::Event</a></li>
+          <li><a href="../Fluent/EngineClass/NoMatchMatch.html">Fluent::EngineClass::NoMatchMatch</a></li>
         
           <li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
@@ -152,8 +156,6 @@
         
           <li><a href="../Fluent/Input.html">Fluent::Input</a></li>
         
-          <li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
-        
           <li><a href="../Fluent/Log.html">Fluent::Log</a></li>
         
           <li><a href="../Fluent/Log/TTYColor.html">Fluent::Log::TTYColor</a></li>
@@ -166,11 +168,19 @@
         
           <li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
         
+          <li><a href="../Fluent/MessagePackEventStream.html">Fluent::MessagePackEventStream</a></li>
+        
+          <li><a href="../Fluent/MultiEventStream.html">Fluent::MultiEventStream</a></li>
+        
           <li><a href="../Fluent/MultiOutput.html">Fluent::MultiOutput</a></li>
         
           <li><a href="../Fluent/NullOutput.html">Fluent::NullOutput</a></li>
         
           <li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
+        
+          <li><a href="../Fluent/OneEventStream.html">Fluent::OneEventStream</a></li>
+        
+          <li><a href="../Fluent/OrMatchPattern.html">Fluent::OrMatchPattern</a></li>
         
           <li><a href="../Fluent/Output.html">Fluent::Output</a></li>
         
@@ -180,9 +190,13 @@
         
           <li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
         
-          <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
+          <li><a href="../Fluent/RecordFilterMixin.html">Fluent::RecordFilterMixin</a></li>
         
           <li><a href="../Fluent/RoundRobinOutput.html">Fluent::RoundRobinOutput</a></li>
+        
+          <li><a href="../Fluent/SetTagKeyMixin.html">Fluent::SetTagKeyMixin</a></li>
+        
+          <li><a href="../Fluent/SetTimeKeyMixin.html">Fluent::SetTimeKeyMixin</a></li>
         
           <li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
         
@@ -206,7 +220,23 @@
         
           <li><a href="../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
         
+          <li><a href="../Fluent/Test.html">Fluent::Test</a></li>
+        
+          <li><a href="../Fluent/Test/BufferedOutputTestDriver.html">Fluent::Test::BufferedOutputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/InputTestDriver.html">Fluent::Test::InputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/OutputTestDriver.html">Fluent::Test::OutputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/TestDriver.html">Fluent::Test::TestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/TestOutputChain.html">Fluent::Test::TestOutputChain</a></li>
+        
+          <li><a href="../Fluent/TestOutput.html">Fluent::TestOutput</a></li>
+        
           <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../Fluent/TimeFormatter.html">Fluent::TimeFormatter</a></li>
         
           <li><a href="../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
@@ -237,6 +267,8 @@
       
     </div><!-- description -->
 
+    
+    
     
     <div id="5Buntitled-5D" class="documentation-section">
       
@@ -272,9 +304,9 @@
             
             <div class="method-source-code" id="configure-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 143</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 171</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
-  <span class="ruby-ivar">@path</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'path'</span>] <span class="ruby-operator">||</span> <span class="ruby-constant">DEFAULT_SOCKET_PATH</span>
+  <span class="ruby-keyword">super</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- configure-source -->
             
@@ -305,14 +337,14 @@
             
             <div class="method-source-code" id="listen-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 147</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 175</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">listen</span>
   <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-ivar">@path</span>)
     <span class="ruby-constant">File</span>.<span class="ruby-identifier">unlink</span>(<span class="ruby-ivar">@path</span>)
   <span class="ruby-keyword">end</span>
   <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-ivar">@path</span>)
   <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;listening fluent socket on #{@path}&quot;</span>
-  <span class="ruby-constant">Coolio</span><span class="ruby-operator">::</span><span class="ruby-constant">UNIXServer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@path</span>, <span class="ruby-constant">Handler</span>, <span class="ruby-identifier">method</span>(<span class="ruby-value">:callback</span>))
+  <span class="ruby-constant">Coolio</span><span class="ruby-operator">::</span><span class="ruby-constant">UNIXServer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@path</span>, <span class="ruby-constant">Handler</span>, <span class="ruby-identifier">method</span>(<span class="ruby-value">:on_message</span>))
 <span class="ruby-keyword">end</span></pre>
             </div><!-- listen-source -->
             

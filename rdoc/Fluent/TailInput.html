@@ -79,6 +79,10 @@
           
           <li><a href="#method-i-configure">#configure</a></li>
           
+          <li><a href="#method-i-configure_parser">#configure_parser</a></li>
+          
+          <li><a href="#method-i-parse_line">#parse_line</a></li>
+          
           <li><a href="#method-i-receive_lines">#receive_lines</a></li>
           
           <li><a href="#method-i-run">#run</a></li>
@@ -144,11 +148,15 @@
         
           <li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
         
+          <li><a href="../Fluent/Configurable.html">Fluent::Configurable</a></li>
+        
+          <li><a href="../Fluent/Configurable/ClassMethods.html">Fluent::Configurable::ClassMethods</a></li>
+        
           <li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
         
           <li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
         
-          <li><a href="../Fluent/Event.html">Fluent::Event</a></li>
+          <li><a href="../Fluent/EngineClass/NoMatchMatch.html">Fluent::EngineClass::NoMatchMatch</a></li>
         
           <li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
@@ -170,8 +178,6 @@
         
           <li><a href="../Fluent/Input.html">Fluent::Input</a></li>
         
-          <li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
-        
           <li><a href="../Fluent/Log.html">Fluent::Log</a></li>
         
           <li><a href="../Fluent/Log/TTYColor.html">Fluent::Log::TTYColor</a></li>
@@ -184,11 +190,19 @@
         
           <li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
         
+          <li><a href="../Fluent/MessagePackEventStream.html">Fluent::MessagePackEventStream</a></li>
+        
+          <li><a href="../Fluent/MultiEventStream.html">Fluent::MultiEventStream</a></li>
+        
           <li><a href="../Fluent/MultiOutput.html">Fluent::MultiOutput</a></li>
         
           <li><a href="../Fluent/NullOutput.html">Fluent::NullOutput</a></li>
         
           <li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
+        
+          <li><a href="../Fluent/OneEventStream.html">Fluent::OneEventStream</a></li>
+        
+          <li><a href="../Fluent/OrMatchPattern.html">Fluent::OrMatchPattern</a></li>
         
           <li><a href="../Fluent/Output.html">Fluent::Output</a></li>
         
@@ -198,9 +212,13 @@
         
           <li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
         
-          <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
+          <li><a href="../Fluent/RecordFilterMixin.html">Fluent::RecordFilterMixin</a></li>
         
           <li><a href="../Fluent/RoundRobinOutput.html">Fluent::RoundRobinOutput</a></li>
+        
+          <li><a href="../Fluent/SetTagKeyMixin.html">Fluent::SetTagKeyMixin</a></li>
+        
+          <li><a href="../Fluent/SetTimeKeyMixin.html">Fluent::SetTimeKeyMixin</a></li>
         
           <li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
         
@@ -224,7 +242,23 @@
         
           <li><a href="../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
         
+          <li><a href="../Fluent/Test.html">Fluent::Test</a></li>
+        
+          <li><a href="../Fluent/Test/BufferedOutputTestDriver.html">Fluent::Test::BufferedOutputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/InputTestDriver.html">Fluent::Test::InputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/OutputTestDriver.html">Fluent::Test::OutputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/TestDriver.html">Fluent::Test::TestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/TestOutputChain.html">Fluent::Test::TestOutputChain</a></li>
+        
+          <li><a href="../Fluent/TestOutput.html">Fluent::TestOutput</a></li>
+        
           <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../Fluent/TimeFormatter.html">Fluent::TimeFormatter</a></li>
         
           <li><a href="../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
@@ -255,6 +289,8 @@
       
     </div><!-- description -->
 
+    
+    
     
     <div id="5Buntitled-5D" class="documentation-section">
       
@@ -292,8 +328,8 @@
 <pre>
 <span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 24</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+  <span class="ruby-keyword">super</span>
   <span class="ruby-ivar">@paths</span> = []
-  <span class="ruby-ivar">@parser</span> = <span class="ruby-constant">TextParser</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -330,23 +366,16 @@
             
             <div class="method-source-code" id="configure-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 29</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 32</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">path</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'path'</span>]
-    <span class="ruby-ivar">@paths</span> = <span class="ruby-identifier">path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">','</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">strip</span> }
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">super</span>
 
+  <span class="ruby-ivar">@paths</span> = <span class="ruby-ivar">@path</span>.<span class="ruby-identifier">split</span>(<span class="ruby-string">','</span>).<span class="ruby-identifier">map</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span> <span class="ruby-identifier">path</span>.<span class="ruby-identifier">strip</span> }
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@paths</span>.<span class="ruby-identifier">empty?</span>
     <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConfigError</span>, <span class="ruby-string">&quot;tail: 'path' parameter is required on tail input&quot;</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-ivar">@parser</span>.<span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">tag</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'tag'</span>]
-    <span class="ruby-ivar">@tag</span> = <span class="ruby-identifier">tag</span>
-  <span class="ruby-keyword">else</span>
-    <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConfigError</span>, <span class="ruby-string">&quot;tail: 'tag' parameter is required on tail input&quot;</span>
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">configure_parser</span>(<span class="ruby-identifier">conf</span>)
 <span class="ruby-keyword">end</span></pre>
             </div><!-- configure-source -->
             
@@ -356,6 +385,73 @@
 
           
         </div><!-- configure-method -->
+
+      
+        <div id="configure_parser-method" class="method-detail ">
+          <a name="method-i-configure_parser"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">configure_parser</span><span
+              class="method-args">(conf)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="configure_parser-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 43</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">configure_parser</span>(<span class="ruby-identifier">conf</span>)
+  <span class="ruby-ivar">@parser</span> = <span class="ruby-constant">TextParser</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-ivar">@parser</span>.<span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- configure_parser-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- configure_parser-method -->
+
+      
+        <div id="parse_line-method" class="method-detail ">
+          <a name="method-i-parse_line"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">parse_line</span><span
+              class="method-args">(line)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="parse_line-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 89</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">parse_line</span>(<span class="ruby-identifier">line</span>)
+  <span class="ruby-keyword">return</span> <span class="ruby-ivar">@parser</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">line</span>)
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- parse_line-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- parse_line-method -->
 
       
         <div id="receive_lines-method" class="method-detail ">
@@ -377,15 +473,15 @@
             
             <div class="method-source-code" id="receive_lines-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 68</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 69</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">receive_lines</span>(<span class="ruby-identifier">lines</span>)
-  <span class="ruby-identifier">array</span> = []
+  <span class="ruby-identifier">es</span> = <span class="ruby-constant">MultiEventStream</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">line</span><span class="ruby-operator">|</span>
     <span class="ruby-keyword">begin</span>
       <span class="ruby-identifier">line</span>.<span class="ruby-identifier">rstrip!</span>  <span class="ruby-comment"># remove \n</span>
-      <span class="ruby-identifier">time</span>, <span class="ruby-identifier">record</span> = <span class="ruby-ivar">@parser</span>.<span class="ruby-identifier">parse</span>(<span class="ruby-identifier">line</span>)
+      <span class="ruby-identifier">time</span>, <span class="ruby-identifier">record</span> = <span class="ruby-identifier">parse_line</span>(<span class="ruby-identifier">line</span>)
       <span class="ruby-keyword">if</span> <span class="ruby-identifier">time</span> <span class="ruby-operator">&amp;&amp;</span> <span class="ruby-identifier">record</span>
-        <span class="ruby-identifier">array</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-constant">Event</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">record</span>)
+        <span class="ruby-identifier">es</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">time</span>, <span class="ruby-identifier">record</span>)
       <span class="ruby-keyword">end</span>
     <span class="ruby-keyword">rescue</span>
       <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">warn</span> <span class="ruby-identifier">line</span>.<span class="ruby-identifier">dump</span>, <span class="ruby-value">:error=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">$!</span>.<span class="ruby-identifier">to_s</span>
@@ -393,8 +489,8 @@
     <span class="ruby-keyword">end</span>
   }
 
-  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">array</span>.<span class="ruby-identifier">empty?</span>
-    <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">emit_stream</span>(<span class="ruby-ivar">@tag</span>, <span class="ruby-constant">ArrayEventStream</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">array</span>))
+  <span class="ruby-keyword">unless</span> <span class="ruby-identifier">es</span>.<span class="ruby-identifier">empty?</span>
+    <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">emit_stream</span>(<span class="ruby-ivar">@tag</span>, <span class="ruby-identifier">es</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- receive_lines-source -->
@@ -426,7 +522,7 @@
             
             <div class="method-source-code" id="run-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 61</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>
   <span class="ruby-ivar">@loop</span>.<span class="ruby-identifier">run</span>
 <span class="ruby-keyword">rescue</span>
@@ -462,7 +558,7 @@
             
             <div class="method-source-code" id="shutdown-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 56</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 57</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">shutdown</span>
   <span class="ruby-ivar">@loop</span>.<span class="ruby-identifier">stop</span>
   <span class="ruby-ivar">@thread</span>.<span class="ruby-identifier">join</span>
@@ -496,7 +592,7 @@
             
             <div class="method-source-code" id="start-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 47</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 48</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span>
   <span class="ruby-ivar">@loop</span> = <span class="ruby-constant">Coolio</span><span class="ruby-operator">::</span><span class="ruby-constant">Loop</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@paths</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">path</span><span class="ruby-operator">|</span>

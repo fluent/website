@@ -132,11 +132,15 @@
         
           <li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
         
+          <li><a href="../Fluent/Configurable.html">Fluent::Configurable</a></li>
+        
+          <li><a href="../Fluent/Configurable/ClassMethods.html">Fluent::Configurable::ClassMethods</a></li>
+        
           <li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
         
           <li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
         
-          <li><a href="../Fluent/Event.html">Fluent::Event</a></li>
+          <li><a href="../Fluent/EngineClass/NoMatchMatch.html">Fluent::EngineClass::NoMatchMatch</a></li>
         
           <li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
@@ -158,8 +162,6 @@
         
           <li><a href="../Fluent/Input.html">Fluent::Input</a></li>
         
-          <li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
-        
           <li><a href="../Fluent/Log.html">Fluent::Log</a></li>
         
           <li><a href="../Fluent/Log/TTYColor.html">Fluent::Log::TTYColor</a></li>
@@ -172,11 +174,19 @@
         
           <li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
         
+          <li><a href="../Fluent/MessagePackEventStream.html">Fluent::MessagePackEventStream</a></li>
+        
+          <li><a href="../Fluent/MultiEventStream.html">Fluent::MultiEventStream</a></li>
+        
           <li><a href="../Fluent/MultiOutput.html">Fluent::MultiOutput</a></li>
         
           <li><a href="../Fluent/NullOutput.html">Fluent::NullOutput</a></li>
         
           <li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
+        
+          <li><a href="../Fluent/OneEventStream.html">Fluent::OneEventStream</a></li>
+        
+          <li><a href="../Fluent/OrMatchPattern.html">Fluent::OrMatchPattern</a></li>
         
           <li><a href="../Fluent/Output.html">Fluent::Output</a></li>
         
@@ -186,9 +196,13 @@
         
           <li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
         
-          <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
+          <li><a href="../Fluent/RecordFilterMixin.html">Fluent::RecordFilterMixin</a></li>
         
           <li><a href="../Fluent/RoundRobinOutput.html">Fluent::RoundRobinOutput</a></li>
+        
+          <li><a href="../Fluent/SetTagKeyMixin.html">Fluent::SetTagKeyMixin</a></li>
+        
+          <li><a href="../Fluent/SetTimeKeyMixin.html">Fluent::SetTimeKeyMixin</a></li>
         
           <li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
         
@@ -212,7 +226,23 @@
         
           <li><a href="../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
         
+          <li><a href="../Fluent/Test.html">Fluent::Test</a></li>
+        
+          <li><a href="../Fluent/Test/BufferedOutputTestDriver.html">Fluent::Test::BufferedOutputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/InputTestDriver.html">Fluent::Test::InputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/OutputTestDriver.html">Fluent::Test::OutputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/TestDriver.html">Fluent::Test::TestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/TestOutputChain.html">Fluent::Test::TestOutputChain</a></li>
+        
+          <li><a href="../Fluent/TestOutput.html">Fluent::TestOutput</a></li>
+        
           <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../Fluent/TimeFormatter.html">Fluent::TimeFormatter</a></li>
         
           <li><a href="../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
@@ -244,6 +274,8 @@
     </div><!-- description -->
 
     
+    
+    
     <div id="5Buntitled-5D" class="documentation-section">
       
 
@@ -256,23 +288,6 @@
       <div id="attribute-method-details" class="method-section section">
         <h3 class="section-header">Attributes</h3>
 
-        
-        <div id="fallback_count-attribute-method" class="method-detail">
-          <a name="fallback_count"></a>
-          
-          <a name="fallback_count="></a>
-          
-          <div class="method-heading attribute-method-heading">
-            <span class="method-name">fallback_count</span><span
-              class="attribute-access-type">[RW]</span>
-          </div>
-
-          <div class="method-description">
-          
-          
-          
-          </div>
-        </div>
         
         <div id="flush_interval-attribute-method" class="method-detail">
           <a name="flush_interval"></a>
@@ -325,6 +340,23 @@
           </div>
         </div>
         
+        <div id="secondary_limit-attribute-method" class="method-detail">
+          <a name="secondary_limit"></a>
+          
+          <a name="secondary_limit="></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">secondary_limit</span><span
+              class="attribute-access-type">[RW]</span>
+          </div>
+
+          <div class="method-description">
+          
+          
+          
+          </div>
+        </div>
+        
       </div><!-- attribute-method-details -->
       
 
@@ -353,7 +385,7 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 68</span>
+<span class="ruby-comment"># File lib/fluent/output.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">output</span>)
   <span class="ruby-ivar">@output</span> = <span class="ruby-identifier">output</span>
   <span class="ruby-ivar">@error_history</span> = []
@@ -365,7 +397,7 @@
   <span class="ruby-ivar">@retry_wait</span> = <span class="ruby-value">1.0</span>  <span class="ruby-comment"># TODO default</span>
 
   <span class="ruby-ivar">@secondary</span> = <span class="ruby-keyword">nil</span>
-  <span class="ruby-ivar">@fallback_count</span> = <span class="ruby-value">3</span>
+  <span class="ruby-ivar">@secondary_limit</span> = <span class="ruby-value">8</span>  <span class="ruby-comment"># TODO default</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -402,7 +434,7 @@
             
             <div class="method-source-code" id="configure-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 84</span>
+<span class="ruby-comment"># File lib/fluent/output.rb, line 94</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">flush_interval</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'flush_interval'</span>]
     <span class="ruby-ivar">@flush_interval</span> = <span class="ruby-constant">Config</span>.<span class="ruby-identifier">time_value</span>(<span class="ruby-identifier">flush_interval</span>).<span class="ruby-identifier">to_i</span>
@@ -410,6 +442,9 @@
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">retry_limit</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'retry_limit'</span>]
     <span class="ruby-ivar">@retry_limit</span> = <span class="ruby-identifier">retry_limit</span>.<span class="ruby-identifier">to_i</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@retry_limit</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConfigError</span>, <span class="ruby-node">&quot;invalid parameter 'retry_limit #{retry_limit}'&quot;</span>
+    <span class="ruby-keyword">end</span>
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">retry_wait</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'retry_wait'</span>]
@@ -420,11 +455,17 @@
 
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">econf</span> = <span class="ruby-identifier">conf</span>.<span class="ruby-identifier">elements</span>.<span class="ruby-identifier">select</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">e</span><span class="ruby-operator">|</span> <span class="ruby-identifier">e</span>.<span class="ruby-identifier">name</span> <span class="ruby-operator">==</span> <span class="ruby-string">'secondary'</span> }.<span class="ruby-identifier">first</span>
     <span class="ruby-identifier">type</span> = <span class="ruby-identifier">econf</span>[<span class="ruby-string">'type'</span>] <span class="ruby-operator">||</span> <span class="ruby-identifier">conf</span>[<span class="ruby-string">'type'</span>]
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">type</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">conf</span>[<span class="ruby-string">'type'</span>]
-      <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">warn</span> <span class="ruby-node">&quot;type of secondary output should be same as primary output: #{econf}&quot;</span>
-    <span class="ruby-keyword">end</span>
     <span class="ruby-ivar">@secondary</span> = <span class="ruby-constant">Plugin</span>.<span class="ruby-identifier">new_output</span>(<span class="ruby-identifier">type</span>)
     <span class="ruby-ivar">@secondary</span>.<span class="ruby-identifier">configure</span>(<span class="ruby-identifier">econf</span>)
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">secondary_limit</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'secondary_limit'</span>]
+      <span class="ruby-ivar">@secondary_limit</span> = <span class="ruby-identifier">secondary_limit</span>.<span class="ruby-identifier">to_i</span>
+      <span class="ruby-keyword">if</span> <span class="ruby-ivar">@secondary_limit</span> <span class="ruby-operator">&lt;</span> <span class="ruby-value">0</span>
+        <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConfigError</span>, <span class="ruby-node">&quot;invalid parameter 'secondary_limit #{secondary_limit}'&quot;</span>
+      <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-ivar">@secondary</span>.<span class="ruby-identifier">secondary_init</span>(<span class="ruby-ivar">@output</span>)
   <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- configure-source -->
@@ -456,7 +497,7 @@
             
             <div class="method-source-code" id="shutdown-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 120</span>
+<span class="ruby-comment"># File lib/fluent/output.rb, line 139</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">shutdown</span>
   <span class="ruby-ivar">@finish</span> = <span class="ruby-keyword">true</span>
   <span class="ruby-ivar">@mutex</span>.<span class="ruby-identifier">synchronize</span> {
@@ -495,7 +536,7 @@
             
             <div class="method-source-code" id="start-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 109</span>
+<span class="ruby-comment"># File lib/fluent/output.rb, line 128</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span>
   <span class="ruby-ivar">@mutex</span> = <span class="ruby-constant">Mutex</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-ivar">@cond</span> = <span class="ruby-constant">ConditionVariable</span>.<span class="ruby-identifier">new</span>
@@ -535,7 +576,7 @@
             
             <div class="method-source-code" id="submit_flush-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 130</span>
+<span class="ruby-comment"># File lib/fluent/output.rb, line 149</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">submit_flush</span>
   <span class="ruby-ivar">@mutex</span>.<span class="ruby-identifier">synchronize</span> {
     <span class="ruby-ivar">@flush_now</span> = <span class="ruby-keyword">true</span>

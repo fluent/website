@@ -73,6 +73,10 @@
           
           <li><a href="#method-i-on_read">#on_read</a></li>
           
+          <li><a href="#method-i-on_read_json">#on_read_json</a></li>
+          
+          <li><a href="#method-i-on_read_msgpack">#on_read_msgpack</a></li>
+          
         </ul>
       </div>
       
@@ -130,11 +134,15 @@
         
           <li><a href="../../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
         
+          <li><a href="../../Fluent/Configurable.html">Fluent::Configurable</a></li>
+        
+          <li><a href="../../Fluent/Configurable/ClassMethods.html">Fluent::Configurable::ClassMethods</a></li>
+        
           <li><a href="../../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
         
           <li><a href="../../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
         
-          <li><a href="../../Fluent/Event.html">Fluent::Event</a></li>
+          <li><a href="../../Fluent/EngineClass/NoMatchMatch.html">Fluent::EngineClass::NoMatchMatch</a></li>
         
           <li><a href="../../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
@@ -156,8 +164,6 @@
         
           <li><a href="../../Fluent/Input.html">Fluent::Input</a></li>
         
-          <li><a href="../../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
-        
           <li><a href="../../Fluent/Log.html">Fluent::Log</a></li>
         
           <li><a href="../../Fluent/Log/TTYColor.html">Fluent::Log::TTYColor</a></li>
@@ -170,11 +176,19 @@
         
           <li><a href="../../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
         
+          <li><a href="../../Fluent/MessagePackEventStream.html">Fluent::MessagePackEventStream</a></li>
+        
+          <li><a href="../../Fluent/MultiEventStream.html">Fluent::MultiEventStream</a></li>
+        
           <li><a href="../../Fluent/MultiOutput.html">Fluent::MultiOutput</a></li>
         
           <li><a href="../../Fluent/NullOutput.html">Fluent::NullOutput</a></li>
         
           <li><a href="../../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
+        
+          <li><a href="../../Fluent/OneEventStream.html">Fluent::OneEventStream</a></li>
+        
+          <li><a href="../../Fluent/OrMatchPattern.html">Fluent::OrMatchPattern</a></li>
         
           <li><a href="../../Fluent/Output.html">Fluent::Output</a></li>
         
@@ -184,9 +198,13 @@
         
           <li><a href="../../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
         
-          <li><a href="../../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
+          <li><a href="../../Fluent/RecordFilterMixin.html">Fluent::RecordFilterMixin</a></li>
         
           <li><a href="../../Fluent/RoundRobinOutput.html">Fluent::RoundRobinOutput</a></li>
+        
+          <li><a href="../../Fluent/SetTagKeyMixin.html">Fluent::SetTagKeyMixin</a></li>
+        
+          <li><a href="../../Fluent/SetTimeKeyMixin.html">Fluent::SetTimeKeyMixin</a></li>
         
           <li><a href="../../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
         
@@ -210,7 +228,23 @@
         
           <li><a href="../../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
         
+          <li><a href="../../Fluent/Test.html">Fluent::Test</a></li>
+        
+          <li><a href="../../Fluent/Test/BufferedOutputTestDriver.html">Fluent::Test::BufferedOutputTestDriver</a></li>
+        
+          <li><a href="../../Fluent/Test/InputTestDriver.html">Fluent::Test::InputTestDriver</a></li>
+        
+          <li><a href="../../Fluent/Test/OutputTestDriver.html">Fluent::Test::OutputTestDriver</a></li>
+        
+          <li><a href="../../Fluent/Test/TestDriver.html">Fluent::Test::TestDriver</a></li>
+        
+          <li><a href="../../Fluent/Test/TestOutputChain.html">Fluent::Test::TestOutputChain</a></li>
+        
+          <li><a href="../../Fluent/TestOutput.html">Fluent::TestOutput</a></li>
+        
           <li><a href="../../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../../Fluent/TimeFormatter.html">Fluent::TimeFormatter</a></li>
         
           <li><a href="../../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
@@ -242,6 +276,8 @@
     </div><!-- description -->
 
     
+    
+    
     <div id="5Buntitled-5D" class="documentation-section">
       
 
@@ -263,7 +299,7 @@
           
           <div class="method-heading">
             <span class="method-name">new</span><span
-              class="method-args">(io, callback)</span>
+              class="method-args">(io, on_message)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -276,13 +312,15 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 98</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">callback</span>)
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 104</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">on_message</span>)
   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">io</span>)
-  <span class="ruby-identifier">opt</span> = [<span class="ruby-value">1</span>, <span class="ruby-ivar">@timeout</span>.<span class="ruby-identifier">to_i</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">'I!I!'</span>)  <span class="ruby-comment"># { int l_onoff; int l_linger; }</span>
-  <span class="ruby-identifier">io</span>.<span class="ruby-identifier">setsockopt</span>(<span class="ruby-constant">Socket</span><span class="ruby-operator">::</span><span class="ruby-constant">SOL_SOCKET</span>, <span class="ruby-constant">Socket</span><span class="ruby-operator">::</span><span class="ruby-constant">SO_LINGER</span>, <span class="ruby-identifier">opt</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">io</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">TCPSocket</span>)
+    <span class="ruby-identifier">opt</span> = [<span class="ruby-value">1</span>, <span class="ruby-ivar">@timeout</span>.<span class="ruby-identifier">to_i</span>].<span class="ruby-identifier">pack</span>(<span class="ruby-string">'I!I!'</span>)  <span class="ruby-comment"># { int l_onoff; int l_linger; }</span>
+    <span class="ruby-identifier">io</span>.<span class="ruby-identifier">setsockopt</span>(<span class="ruby-constant">Socket</span><span class="ruby-operator">::</span><span class="ruby-constant">SOL_SOCKET</span>, <span class="ruby-constant">Socket</span><span class="ruby-operator">::</span><span class="ruby-constant">SO_LINGER</span>, <span class="ruby-identifier">opt</span>)
+  <span class="ruby-keyword">end</span>
   <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">trace</span> { <span class="ruby-node">&quot;accepted fluent socket object_id=#{self.object_id}&quot;</span> }
-  <span class="ruby-ivar">@callback</span> = <span class="ruby-identifier">callback</span>
+  <span class="ruby-ivar">@on_message</span> = <span class="ruby-identifier">on_message</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -319,7 +357,7 @@
             
             <div class="method-source-code" id="on_close-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 118</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 142</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_close</span>
   <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">trace</span> { <span class="ruby-node">&quot;closed fluent socket object_id=#{self.object_id}&quot;</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -352,9 +390,8 @@
             
             <div class="method-source-code" id="on_connect-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 106</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 114</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_connect</span>
-  <span class="ruby-ivar">@u</span> = <span class="ruby-constant">MessagePack</span><span class="ruby-operator">::</span><span class="ruby-constant">Unpacker</span>.<span class="ruby-identifier">new</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- on_connect-source -->
             
@@ -385,13 +422,22 @@
             
             <div class="method-source-code" id="on_read-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 110</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 117</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_read</span>(<span class="ruby-identifier">data</span>)
-  <span class="ruby-identifier">msgs</span> = []
-  <span class="ruby-ivar">@u</span>.<span class="ruby-identifier">feed_each</span>(<span class="ruby-identifier">data</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">msg</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">msgs</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">msg</span>
-  }
-  <span class="ruby-ivar">@callback</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">msgs</span>)
+  <span class="ruby-identifier">first</span> = <span class="ruby-identifier">data</span>[<span class="ruby-value">0</span>]
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-string">'{'</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-string">'['</span>
+    <span class="ruby-identifier">m</span> = <span class="ruby-identifier">method</span>(<span class="ruby-value">:on_read_json</span>)
+    <span class="ruby-ivar">@y</span> = <span class="ruby-constant">Yajl</span><span class="ruby-operator">::</span><span class="ruby-constant">Parser</span>.<span class="ruby-identifier">new</span>
+    <span class="ruby-ivar">@y</span>.<span class="ruby-identifier">on_parse_complete</span> = <span class="ruby-ivar">@on_message</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-identifier">m</span> = <span class="ruby-identifier">method</span>(<span class="ruby-value">:on_read_msgpack</span>)
+    <span class="ruby-ivar">@u</span> = <span class="ruby-constant">MessagePack</span><span class="ruby-operator">::</span><span class="ruby-constant">Unpacker</span>.<span class="ruby-identifier">new</span>
+  <span class="ruby-keyword">end</span>
+
+  (<span class="ruby-keyword">class</span><span class="ruby-operator">&lt;&lt;</span><span class="ruby-keyword">self</span>;<span class="ruby-keyword">self</span>;<span class="ruby-keyword">end</span>).<span class="ruby-identifier">module_eval</span> <span class="ruby-keyword">do</span>
+    <span class="ruby-identifier">define_method</span>(<span class="ruby-value">:on_read</span>, <span class="ruby-identifier">m</span>)
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-identifier">m</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">data</span>)
 <span class="ruby-keyword">end</span></pre>
             </div><!-- on_read-source -->
             
@@ -401,6 +447,72 @@
 
           
         </div><!-- on_read-method -->
+
+      
+        <div id="on_read_json-method" class="method-detail ">
+          <a name="method-i-on_read_json"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">on_read_json</span><span
+              class="method-args">(data)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="on_read_json-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 134</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_read_json</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-ivar">@y</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">data</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- on_read_json-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- on_read_json-method -->
+
+      
+        <div id="on_read_msgpack-method" class="method-detail ">
+          <a name="method-i-on_read_msgpack"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">on_read_msgpack</span><span
+              class="method-args">(data)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="on_read_msgpack-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 138</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_read_msgpack</span>(<span class="ruby-identifier">data</span>)
+  <span class="ruby-ivar">@u</span>.<span class="ruby-identifier">feed_each</span>(<span class="ruby-identifier">data</span>, &amp;<span class="ruby-ivar">@on_message</span>)
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- on_read_msgpack-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- on_read_msgpack-method -->
 
       
       </div><!-- public-instance-method-details -->

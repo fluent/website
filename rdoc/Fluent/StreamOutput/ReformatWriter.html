@@ -126,11 +126,15 @@
         
           <li><a href="../../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
         
+          <li><a href="../../Fluent/Configurable.html">Fluent::Configurable</a></li>
+        
+          <li><a href="../../Fluent/Configurable/ClassMethods.html">Fluent::Configurable::ClassMethods</a></li>
+        
           <li><a href="../../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
         
           <li><a href="../../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
         
-          <li><a href="../../Fluent/Event.html">Fluent::Event</a></li>
+          <li><a href="../../Fluent/EngineClass/NoMatchMatch.html">Fluent::EngineClass::NoMatchMatch</a></li>
         
           <li><a href="../../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
@@ -152,8 +156,6 @@
         
           <li><a href="../../Fluent/Input.html">Fluent::Input</a></li>
         
-          <li><a href="../../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
-        
           <li><a href="../../Fluent/Log.html">Fluent::Log</a></li>
         
           <li><a href="../../Fluent/Log/TTYColor.html">Fluent::Log::TTYColor</a></li>
@@ -166,11 +168,19 @@
         
           <li><a href="../../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
         
+          <li><a href="../../Fluent/MessagePackEventStream.html">Fluent::MessagePackEventStream</a></li>
+        
+          <li><a href="../../Fluent/MultiEventStream.html">Fluent::MultiEventStream</a></li>
+        
           <li><a href="../../Fluent/MultiOutput.html">Fluent::MultiOutput</a></li>
         
           <li><a href="../../Fluent/NullOutput.html">Fluent::NullOutput</a></li>
         
           <li><a href="../../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
+        
+          <li><a href="../../Fluent/OneEventStream.html">Fluent::OneEventStream</a></li>
+        
+          <li><a href="../../Fluent/OrMatchPattern.html">Fluent::OrMatchPattern</a></li>
         
           <li><a href="../../Fluent/Output.html">Fluent::Output</a></li>
         
@@ -180,9 +190,13 @@
         
           <li><a href="../../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
         
-          <li><a href="../../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
+          <li><a href="../../Fluent/RecordFilterMixin.html">Fluent::RecordFilterMixin</a></li>
         
           <li><a href="../../Fluent/RoundRobinOutput.html">Fluent::RoundRobinOutput</a></li>
+        
+          <li><a href="../../Fluent/SetTagKeyMixin.html">Fluent::SetTagKeyMixin</a></li>
+        
+          <li><a href="../../Fluent/SetTimeKeyMixin.html">Fluent::SetTimeKeyMixin</a></li>
         
           <li><a href="../../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
         
@@ -206,7 +220,23 @@
         
           <li><a href="../../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
         
+          <li><a href="../../Fluent/Test.html">Fluent::Test</a></li>
+        
+          <li><a href="../../Fluent/Test/BufferedOutputTestDriver.html">Fluent::Test::BufferedOutputTestDriver</a></li>
+        
+          <li><a href="../../Fluent/Test/InputTestDriver.html">Fluent::Test::InputTestDriver</a></li>
+        
+          <li><a href="../../Fluent/Test/OutputTestDriver.html">Fluent::Test::OutputTestDriver</a></li>
+        
+          <li><a href="../../Fluent/Test/TestDriver.html">Fluent::Test::TestDriver</a></li>
+        
+          <li><a href="../../Fluent/Test/TestOutputChain.html">Fluent::Test::TestOutputChain</a></li>
+        
+          <li><a href="../../Fluent/TestOutput.html">Fluent::TestOutput</a></li>
+        
           <li><a href="../../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../../Fluent/TimeFormatter.html">Fluent::TimeFormatter</a></li>
         
           <li><a href="../../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
@@ -237,6 +267,8 @@
       
     </div><!-- description -->
 
+    
+    
     
     <div id="5Buntitled-5D" class="documentation-section">
       
@@ -272,7 +304,7 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/out_stream.rb, line 69</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_stream.rb, line 62</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">secondary</span>)
   <span class="ruby-ivar">@secondary</span> = <span class="ruby-identifier">secondary</span>
 <span class="ruby-keyword">end</span></pre>
@@ -311,15 +343,18 @@
             
             <div class="method-source-code" id="write-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/out_stream.rb, line 73</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_stream.rb, line 66</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">write</span>(<span class="ruby-identifier">chunk</span>)
   <span class="ruby-identifier">chain</span> = <span class="ruby-constant">NullOutputChain</span>.<span class="ruby-identifier">instance</span>
   <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">open</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">io</span><span class="ruby-operator">|</span>
+    <span class="ruby-comment"># TODO use MessagePackIoEventStream</span>
     <span class="ruby-identifier">u</span> = <span class="ruby-constant">MessagePack</span><span class="ruby-operator">::</span><span class="ruby-constant">Unpacker</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">io</span>)
     <span class="ruby-keyword">begin</span>
       <span class="ruby-identifier">u</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span>(<span class="ruby-identifier">tag</span>,<span class="ruby-identifier">entries</span>)<span class="ruby-operator">|</span>
-        <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">map!</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span> <span class="ruby-constant">Event</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">from_msgpack</span>(<span class="ruby-identifier">o</span>) }
-        <span class="ruby-identifier">es</span> = <span class="ruby-constant">ArrayEventStream</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">entries</span>)
+        <span class="ruby-identifier">es</span> = <span class="ruby-constant">MultiEventStream</span>.<span class="ruby-identifier">new</span>
+        <span class="ruby-identifier">entries</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">o</span><span class="ruby-operator">|</span>
+          <span class="ruby-identifier">es</span>.<span class="ruby-identifier">add</span>(<span class="ruby-identifier">o</span>[<span class="ruby-value">0</span>], <span class="ruby-identifier">o</span>[<span class="ruby-value">1</span>])
+        }
         <span class="ruby-ivar">@secondary</span>.<span class="ruby-identifier">emit</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>, <span class="ruby-identifier">chain</span>)
       }
     <span class="ruby-keyword">rescue</span> <span class="ruby-constant">EOFError</span>

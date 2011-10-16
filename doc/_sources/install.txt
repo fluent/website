@@ -36,13 +36,13 @@ If you have installed `Ruby <http://www.ruby-lang.org/>`_ >= 1.9.2, you can use 
     $ ruby --version
     ruby 1.9.2p180 (2011-02-18 revision 30909) [x86_64-darwin10.6.0]
 
-It's recommended to use `rvm (Ruby Version Manager) <https://rvm.beginrescueend.com/>`_ to install ruby. Then, please use ``gem`` command to install fluent::
+It's recommended to use `rvm (Ruby Version Manager) <https://rvm.beginrescueend.com/>`_ to install ruby. Then, please use ``gem`` command to install fluentd::
 
     # system-wide ruby
-    $ sudo gem install fluent
+    $ sudo gem install fluentd
 
     # via rvm
-    $ gem install fluent
+    $ gem install fluentd
 
 Next step: :ref:`install/confirm`
 
@@ -76,12 +76,12 @@ Next step: :ref:`install/confirm`
 Install from Latest Repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To install the latest development version from the `source repository <https://github.com/fluent/fluent>`_, prepare `Ruby <http://www.ruby-lang.org/>`_ >= 1.9.2 and run following commands::
+To install the latest development version from the `source repository <https://github.com/fluent/fluentd>`_, prepare `Ruby <http://www.ruby-lang.org/>`_ >= 1.9.2 and run following commands::
 
-    $ git clone https://github.com/fluent/fluent.git
-    $ cd fluent
+    $ git clone https://github.com/fluent/fluentd.git
+    $ cd fluentd
     $ rake
-    $ gem install pkg/fluent-*.gem
+    $ gem install pkg/fluentd-*.gem
 
 Next step: :ref:`install/confirm`
 
@@ -106,7 +106,7 @@ Update
 
 Once you installed, you can update to the latest version by using the following command::
 
-    $ sudo fluent-gem install fluent
+    $ sudo fluent-gem install fluentd
 
 Next step: :ref:`config`
 

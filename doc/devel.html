@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -7,22 +6,21 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Writing plugins &mdash; fluent v0.9.13 documentation</title>
+    <title>Writing plugins &mdash; fluentd v0.10.0 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
-        VERSION:     '0.9.13',
-        COLLAPSE_INDEX: false,
+        URL_ROOT:    '#',
+        VERSION:     '0.10.0',
+        COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="fluent v0.9.13 documentation" href="index.html" />
+    <link rel="top" title="fluentd v0.10.0 documentation" href="index.html" />
     <link rel="next" title="Examples" href="example.html" />
     <link rel="prev" title="Plugins" href="plugin.html" /> 
   </head>
@@ -39,49 +37,49 @@
         <li class="right" >
           <a href="plugin.html" title="Plugins"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">fluent v0.9.13 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluentd v0.10.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Writing plugins</a><ul>
-<li><a class="reference internal" href="#installing-custom-plugins">Installing custom plugins</a></li>
-<li><a class="reference internal" href="#input-plugins">Input plugins</a></li>
-<li><a class="reference internal" href="#buffered-output-plugins">Buffered output plugins</a></li>
-<li><a class="reference internal" href="#time-sliced-output-plugins">Time sliced output plugins</a></li>
-<li><a class="reference internal" href="#non-buffered-output-plugins">Non-buffered output plugins</a></li>
-<li><a class="reference internal" href="#buffer-plugins">Buffer plugins</a></li>
-<li><a class="reference internal" href="#debugging-plugins">Debugging plugins</a></li>
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Writing plugins</a><ul>
+<li><a class="reference external" href="#installing-custom-plugins">Installing custom plugins</a></li>
+<li><a class="reference external" href="#input-plugins">Input plugins</a></li>
+<li><a class="reference external" href="#buffered-output-plugins">Buffered output plugins</a></li>
+<li><a class="reference external" href="#time-sliced-output-plugins">Time sliced output plugins</a></li>
+<li><a class="reference external" href="#non-buffered-output-plugins">Non-buffered output plugins</a></li>
+<li><a class="reference external" href="#buffer-plugins">Buffer plugins</a></li>
+<li><a class="reference external" href="#debugging-plugins">Debugging plugins</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="plugin.html"
-                        title="previous chapter">Plugins</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="example.html"
-                        title="next chapter">Examples</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/devel.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="plugin.html"
+                                  title="previous chapter">Plugins</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="example.html"
+                                  title="next chapter">Examples</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/devel.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -106,7 +104,7 @@
 <div class="section" id="installing-custom-plugins">
 <h2>Installing custom plugins<a class="headerlink" href="#installing-custom-plugins" title="Permalink to this headline">¶</a></h2>
 <p>To install a plugin, put a ruby script to <tt class="docutils literal"><span class="pre">/etc/fluent/plugin</span></tt> directory.</p>
-<p>Or you can create gem package that includes <tt class="docutils literal"><span class="pre">lib/fluent/plugin/&lt;TYPE&gt;_&lt;NAME&gt;.rb</span></tt> file. <em>TYPE</em> is <tt class="docutils literal"><span class="pre">in</span></tt> for input plugins, <tt class="docutils literal"><span class="pre">out</span></tt> for output plugins and <tt class="docutils literal"><span class="pre">buf</span></tt> for buffer plugins. It&#8217;s like <tt class="docutils literal"><span class="pre">lib/fluent/plugin/out_mail.rb</span></tt>. The packaged gem can be distributed and installed using RubyGems. See <a class="reference internal" href="plugin.html#search-plugin"><em>Searching plugins</em></a>.</p>
+<p>Or you can create gem package that includes <tt class="docutils literal"><span class="pre">lib/fluent/plugin/&lt;TYPE&gt;_&lt;NAME&gt;.rb</span></tt> file. <em>TYPE</em> is <tt class="docutils literal"><span class="pre">in</span></tt> for input plugins, <tt class="docutils literal"><span class="pre">out</span></tt> for output plugins and <tt class="docutils literal"><span class="pre">buf</span></tt> for buffer plugins. It&#8217;s like <tt class="docutils literal"><span class="pre">lib/fluent/plugin/out_mail.rb</span></tt>. The packaged gem can be distributed and installed using RubyGems. See <a class="reference external" href="plugin.html#search-plugin"><em>Searching plugins</em></a>.</p>
 </div>
 <div class="section" id="input-plugins">
 <h2>Input plugins<a class="headerlink" href="#input-plugins" title="Permalink to this headline">¶</a></h2>
@@ -120,6 +118,7 @@
   <span class="c1"># &#39;conf&#39; is a Hash that includes configuration parameters.</span>
   <span class="c1"># If the configuration is invalid, raise Fluent::ConfigError.</span>
   <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+    <span class="k">super</span>
     <span class="vi">@port</span> <span class="o">=</span> <span class="n">conf</span><span class="o">[</span><span class="s1">&#39;port&#39;</span><span class="o">]</span>
     <span class="o">.</span><span class="n">.</span><span class="o">.</span>
   <span class="k">end</span>
@@ -127,6 +126,7 @@
   <span class="c1"># This method is called when starting.</span>
   <span class="c1"># Open sockets or files and create a thread here.</span>
   <span class="k">def</span> <span class="nf">start</span>
+    <span class="k">super</span>
     <span class="o">.</span><span class="n">.</span><span class="o">.</span>
   <span class="k">end</span>
 
@@ -166,7 +166,6 @@
 
   <span class="c1"># This method is called when starting.</span>
   <span class="c1"># Open sockets or files here.</span>
-  <span class="c1"># Don&#39;t forget to call super</span>
   <span class="k">def</span> <span class="nf">start</span>
     <span class="k">super</span>
     <span class="o">.</span><span class="n">.</span><span class="o">.</span>
@@ -174,7 +173,6 @@
 
   <span class="c1"># This method is called when shutting down.</span>
   <span class="c1"># Shutdown the thread and Close sockets or files here.</span>
-  <span class="c1"># Don&#39;t forget to call super</span>
   <span class="k">def</span> <span class="nf">shutdown</span>
     <span class="k">super</span>
     <span class="o">.</span><span class="n">.</span><span class="o">.</span>
@@ -230,16 +228,19 @@
 
   <span class="c1"># This method is called before starting.</span>
   <span class="k">def</span> <span class="nf">configure</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+    <span class="k">super</span>
     <span class="o">.</span><span class="n">.</span><span class="o">.</span>
   <span class="k">end</span>
 
   <span class="c1"># This method is called when starting.</span>
   <span class="k">def</span> <span class="nf">start</span>
+    <span class="k">super</span>
     <span class="o">.</span><span class="n">.</span><span class="o">.</span>
   <span class="k">end</span>
 
   <span class="c1"># This method is called when shutting down.</span>
   <span class="k">def</span> <span class="nf">shutdown</span>
+    <span class="k">super</span>
     <span class="o">.</span><span class="n">.</span><span class="o">.</span>
   <span class="k">end</span>
 
@@ -322,12 +323,12 @@ type stdout</blockquote>
         <li class="right" >
           <a href="plugin.html" title="Plugins"
              >previous</a> |</li>
-        <li><a href="index.html">fluent v0.9.13 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluentd v0.10.0 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Sadayuki Furuhashi.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
+      &copy; Copyright 2011, Sadayuki Furuhashi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
     </div>
   </body>
 </html>

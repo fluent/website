@@ -31,6 +31,7 @@ Extend **Fluent::Input** class and implement following methods.
       # 'conf' is a Hash that includes configuration parameters.
       # If the configuration is invalid, raise Fluent::ConfigError.
       def configure(conf)
+        super
         @port = conf['port']
         ...
       end
@@ -38,6 +39,7 @@ Extend **Fluent::Input** class and implement following methods.
       # This method is called when starting.
       # Open sockets or files and create a thread here.
       def start
+        super
         ...
       end
 
@@ -83,7 +85,6 @@ Extend **Fluent::BufferedOutput** class and implement following methods.
 
       # This method is called when starting.
       # Open sockets or files here.
-      # Don't forget to call super
       def start
         super
         ...
@@ -91,7 +92,6 @@ Extend **Fluent::BufferedOutput** class and implement following methods.
 
       # This method is called when shutting down.
       # Shutdown the thread and Close sockets or files here.
-      # Don't forget to call super
       def shutdown
         super
         ...
@@ -155,16 +155,19 @@ Extend **Fluent::Output** class and implement following methods.
 
       # This method is called before starting.
       def configure(conf)
+        super
         ...
       end
     
       # This method is called when starting.
       def start
+        super
         ...
       end
     
       # This method is called when shutting down.
       def shutdown
+        super
         ...
       end
     

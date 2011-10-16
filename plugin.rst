@@ -59,6 +59,8 @@ http
       type http
       port 9880
       bind 0.0.0.0
+      body_size_limit 32m
+      keepalive_timeout 10s
     </source>
 
 port
@@ -66,6 +68,12 @@ port
 
 bind
   bind address to listen on. Default is 0.0.0.0 (all addresses).
+
+body_size_limit
+  limit of the body size. Default is 32MB.
+
+keepalive_timeout
+  timeout of keep-alived connection. Default is 10 seconds.
 
 
 tail
@@ -226,11 +234,11 @@ All buffered output plugins supports following parameters described above::
 
     <match pattern>
       buffer_type memory
-      buffer_chunk_limit 1m
-      buffer_queue_limit 100
+      buffer_chunk_limit 16m
+      buffer_queue_limit 64
       flush_interval 60s
-      retry_limit 8
-      retry_wait 1.0s
+      retry_limit 17
+      retry_wait 1s
     </match>
 
 *buffer_type* specifies the type of buffer plugin. Default is ``memory``.
@@ -250,16 +258,17 @@ file
     <match pattern>
       type file
       path /var/log/fluent/myapp
-      time_format %Y%m%d
-      time_wait 10m
+      time_slice_format %Y%m%d
+      time_slice_wait 10m
+      time_format %Y%m%dT%H%M%S%z
       compress gzip
       utc
     </match>
 
 path (required)
-  Path of the file. Actual path becomes path + time + ".log". See also ``time_format`` option descried below.
+  Path of the file. Actual path becomes path + time + ".log". See also ``time_slice_format`` option descried below.
 
-time_format
+time_slice_format
   Format of the time in the file path. Following characters are replaced with values:
       +-----+------------------------------------------+
       | %Y  | Year with century                        |
@@ -276,11 +285,14 @@ time_format
       +-----+------------------------------------------+
   Default is ``%Y%m%d`` which splits files every day. Use ``%Y%m%d%H`` to split files every hour.
 
+time_slice_wait
+  Wait time before flushing the buffer. Default is 10 minutes.
+
+time_format
+  Format of the time written in files. Default is ISO-8601.
+
 utc
   Uses UTC for path formatting. Default is localtime.
-
-time_wait
-  Wait time before flushing the buffer. Default is 10 minutes.
 
 compress
   Compress flushed files. Supported algorithm is gzip. Default is no-compression.
@@ -299,7 +311,7 @@ tcp
       type tcp
       host 192.168.1.3
       port 24224
-      send_timeout 10s
+      send_timeout 60s
       <secondary>
         host 192.168.1.4
         port 24224
@@ -373,8 +385,8 @@ roundrobin
       type roundrobin
 
       <store>
-        type file
-        path /var/log/fluent/myapp1
+        type tcp
+        host 192.168.1.21
         ...
       </store>
       <store>
@@ -413,6 +425,7 @@ null
     <match pattern>
       type null
     </match>
+
 
 .. _buffer_plugin:
 
@@ -457,7 +470,7 @@ Searching plugins
 
 You can use following command to search plugins released on RubyGems::
 
-   $ fluent-gem search -r fluent-plugin
+   $ fluent-gem search -rd fluent-plugin
 
 Type following command to install it::
 

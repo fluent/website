@@ -142,11 +142,15 @@
         
           <li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
         
+          <li><a href="../Fluent/Configurable.html">Fluent::Configurable</a></li>
+        
+          <li><a href="../Fluent/Configurable/ClassMethods.html">Fluent::Configurable::ClassMethods</a></li>
+        
           <li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
         
           <li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
         
-          <li><a href="../Fluent/Event.html">Fluent::Event</a></li>
+          <li><a href="../Fluent/EngineClass/NoMatchMatch.html">Fluent::EngineClass::NoMatchMatch</a></li>
         
           <li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
@@ -168,8 +172,6 @@
         
           <li><a href="../Fluent/Input.html">Fluent::Input</a></li>
         
-          <li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
-        
           <li><a href="../Fluent/Log.html">Fluent::Log</a></li>
         
           <li><a href="../Fluent/Log/TTYColor.html">Fluent::Log::TTYColor</a></li>
@@ -182,11 +184,19 @@
         
           <li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
         
+          <li><a href="../Fluent/MessagePackEventStream.html">Fluent::MessagePackEventStream</a></li>
+        
+          <li><a href="../Fluent/MultiEventStream.html">Fluent::MultiEventStream</a></li>
+        
           <li><a href="../Fluent/MultiOutput.html">Fluent::MultiOutput</a></li>
         
           <li><a href="../Fluent/NullOutput.html">Fluent::NullOutput</a></li>
         
           <li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
+        
+          <li><a href="../Fluent/OneEventStream.html">Fluent::OneEventStream</a></li>
+        
+          <li><a href="../Fluent/OrMatchPattern.html">Fluent::OrMatchPattern</a></li>
         
           <li><a href="../Fluent/Output.html">Fluent::Output</a></li>
         
@@ -196,9 +206,13 @@
         
           <li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
         
-          <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
+          <li><a href="../Fluent/RecordFilterMixin.html">Fluent::RecordFilterMixin</a></li>
         
           <li><a href="../Fluent/RoundRobinOutput.html">Fluent::RoundRobinOutput</a></li>
+        
+          <li><a href="../Fluent/SetTagKeyMixin.html">Fluent::SetTagKeyMixin</a></li>
+        
+          <li><a href="../Fluent/SetTimeKeyMixin.html">Fluent::SetTimeKeyMixin</a></li>
         
           <li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
         
@@ -222,7 +236,23 @@
         
           <li><a href="../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
         
+          <li><a href="../Fluent/Test.html">Fluent::Test</a></li>
+        
+          <li><a href="../Fluent/Test/BufferedOutputTestDriver.html">Fluent::Test::BufferedOutputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/InputTestDriver.html">Fluent::Test::InputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/OutputTestDriver.html">Fluent::Test::OutputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/TestDriver.html">Fluent::Test::TestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/TestOutputChain.html">Fluent::Test::TestOutputChain</a></li>
+        
+          <li><a href="../Fluent/TestOutput.html">Fluent::TestOutput</a></li>
+        
           <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../Fluent/TimeFormatter.html">Fluent::TimeFormatter</a></li>
         
           <li><a href="../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
@@ -253,6 +283,8 @@
       
     </div><!-- description -->
 
+    
+    
     
     <div id="5Buntitled-5D" class="documentation-section">
       
@@ -290,10 +322,9 @@
 <pre>
 <span class="ruby-comment"># File lib/fluent/plugin/out_stream.rb, line 22</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
-  <span class="ruby-keyword">super</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">'socket'</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">'fileutils'</span>
-  <span class="ruby-ivar">@send_timeout</span> = <span class="ruby-value">60</span>
+  <span class="ruby-keyword">super</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -330,13 +361,9 @@
             
             <div class="method-source-code" id="configure-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/out_stream.rb, line 29</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_stream.rb, line 30</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
   <span class="ruby-keyword">super</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">send_timeout</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'send_timeout'</span>]
-    <span class="ruby-ivar">@send_timeout</span> = <span class="ruby-constant">Config</span>.<span class="ruby-identifier">time_value</span>(<span class="ruby-identifier">send_timeout</span>).<span class="ruby-identifier">to_i</span>
-  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- configure-source -->
             
@@ -367,13 +394,12 @@
             
             <div class="method-source-code" id="flush_secondary-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/out_stream.rb, line 60</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_stream.rb, line 54</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">flush_secondary</span>(<span class="ruby-identifier">secondary</span>)
   <span class="ruby-keyword">unless</span> <span class="ruby-identifier">secondary</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">StreamOutput</span>)
     <span class="ruby-identifier">secondary</span> = <span class="ruby-constant">ReformatWriter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">secondary</span>)
   <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">while</span> <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">pop</span>(<span class="ruby-identifier">secondary</span>)
-  <span class="ruby-keyword">end</span>
+  <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">pop</span>(<span class="ruby-identifier">secondary</span>)
 <span class="ruby-keyword">end</span></pre>
             </div><!-- flush_secondary-source -->
             
@@ -404,13 +430,10 @@
             
             <div class="method-source-code" id="format_stream-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/out_stream.rb, line 37</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_stream.rb, line 34</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">format_stream</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>)
-  <span class="ruby-identifier">entries</span> = []
-  <span class="ruby-identifier">es</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">event</span><span class="ruby-operator">|</span>
-    <span class="ruby-identifier">entries</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">event</span>
-  }
-  [<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">entries</span>].<span class="ruby-identifier">to_msgpack</span>
+  <span class="ruby-comment"># use PackedForward</span>
+  [<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>.<span class="ruby-identifier">to_msgpack_stream</span>].<span class="ruby-identifier">to_msgpack</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- format_stream-source -->
             
@@ -441,7 +464,7 @@
             
             <div class="method-source-code" id="write-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/out_stream.rb, line 45</span>
+<span class="ruby-comment"># File lib/fluent/plugin/out_stream.rb, line 39</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">write</span>(<span class="ruby-identifier">chunk</span>)
   <span class="ruby-identifier">sock</span> = <span class="ruby-identifier">connect</span>
   <span class="ruby-keyword">begin</span>

@@ -5,7 +5,7 @@
 <head>
   <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
 
-  <title>Class: Fluent::RawEventStream</title>
+  <title>Module: Fluent::SetTagKeyMixin</title>
 
   <link rel="stylesheet" href="../rdoc.css" type="text/css" media="screen" />
 
@@ -15,7 +15,7 @@
   <script src="../js/darkfish.js" type="text/javascript" charset="utf-8"></script>
 
 </head>
-<body id="top" class="class">
+<body id="top" class="module">
 
   <div id="metadata">
     <div id="home-metadata">
@@ -34,8 +34,8 @@
         <div class="section-body">
           <ul>
           
-            <li><a href="../lib/fluent/event_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
-              class="thickbox" title="lib/fluent/event.rb">lib/fluent/event.rb</a></li>
+            <li><a href="../lib/fluent/mixin_rb.html?TB_iframe=true&amp;height=550&amp;width=785"
+              class="thickbox" title="lib/fluent/mixin.rb">lib/fluent/mixin.rb</a></li>
           
           </ul>
         </div>
@@ -45,14 +45,6 @@
     </div>
 
     <div id="class-metadata">
-      
-      <!-- Parent Class -->
-      <div id="parent-class-section" class="section">
-        <h3 class="section-header">Parent</h3>
-        
-        <p class="link"><a href="EventStream.html">Fluent::EventStream</a></p>
-        
-      </div>
       
 
       
@@ -65,16 +57,26 @@
         <h3 class="section-header">Methods</h3>
         <ul class="link-list">
           
-          <li><a href="#method-c-new">::new</a></li>
+          <li><a href="#method-i-configure">#configure</a></li>
           
-          <li><a href="#method-i-each">#each</a></li>
-          
-          <li><a href="#method-i-repeatable-3F">#repeatable?</a></li>
+          <li><a href="#method-i-filter_record">#filter_record</a></li>
           
         </ul>
       </div>
       
 
+      
+      <!-- Included Modules -->
+      <div id="includes-section" class="section">
+        <h3 class="section-header">Included Modules</h3>
+        <ul class="link-list">
+        
+        
+          <li><a class="include" href="RecordFilterMixin.html">Fluent::RecordFilterMixin</a></li>
+        
+        
+        </ul>
+      </div>
       
     </div>
 
@@ -128,11 +130,15 @@
         
           <li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
         
+          <li><a href="../Fluent/Configurable.html">Fluent::Configurable</a></li>
+        
+          <li><a href="../Fluent/Configurable/ClassMethods.html">Fluent::Configurable::ClassMethods</a></li>
+        
           <li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
         
           <li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
         
-          <li><a href="../Fluent/Event.html">Fluent::Event</a></li>
+          <li><a href="../Fluent/EngineClass/NoMatchMatch.html">Fluent::EngineClass::NoMatchMatch</a></li>
         
           <li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
@@ -154,8 +160,6 @@
         
           <li><a href="../Fluent/Input.html">Fluent::Input</a></li>
         
-          <li><a href="../Fluent/IoEventStream.html">Fluent::IoEventStream</a></li>
-        
           <li><a href="../Fluent/Log.html">Fluent::Log</a></li>
         
           <li><a href="../Fluent/Log/TTYColor.html">Fluent::Log::TTYColor</a></li>
@@ -168,11 +172,19 @@
         
           <li><a href="../Fluent/MemoryBufferChunk.html">Fluent::MemoryBufferChunk</a></li>
         
+          <li><a href="../Fluent/MessagePackEventStream.html">Fluent::MessagePackEventStream</a></li>
+        
+          <li><a href="../Fluent/MultiEventStream.html">Fluent::MultiEventStream</a></li>
+        
           <li><a href="../Fluent/MultiOutput.html">Fluent::MultiOutput</a></li>
         
           <li><a href="../Fluent/NullOutput.html">Fluent::NullOutput</a></li>
         
           <li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
+        
+          <li><a href="../Fluent/OneEventStream.html">Fluent::OneEventStream</a></li>
+        
+          <li><a href="../Fluent/OrMatchPattern.html">Fluent::OrMatchPattern</a></li>
         
           <li><a href="../Fluent/Output.html">Fluent::Output</a></li>
         
@@ -182,9 +194,13 @@
         
           <li><a href="../Fluent/PluginClass.html">Fluent::PluginClass</a></li>
         
-          <li><a href="../Fluent/RawEventStream.html">Fluent::RawEventStream</a></li>
+          <li><a href="../Fluent/RecordFilterMixin.html">Fluent::RecordFilterMixin</a></li>
         
           <li><a href="../Fluent/RoundRobinOutput.html">Fluent::RoundRobinOutput</a></li>
+        
+          <li><a href="../Fluent/SetTagKeyMixin.html">Fluent::SetTagKeyMixin</a></li>
+        
+          <li><a href="../Fluent/SetTimeKeyMixin.html">Fluent::SetTimeKeyMixin</a></li>
         
           <li><a href="../Fluent/StdoutOutput.html">Fluent::StdoutOutput</a></li>
         
@@ -208,7 +224,23 @@
         
           <li><a href="../Fluent/TcpOutput.html">Fluent::TcpOutput</a></li>
         
+          <li><a href="../Fluent/Test.html">Fluent::Test</a></li>
+        
+          <li><a href="../Fluent/Test/BufferedOutputTestDriver.html">Fluent::Test::BufferedOutputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/InputTestDriver.html">Fluent::Test::InputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/OutputTestDriver.html">Fluent::Test::OutputTestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/TestDriver.html">Fluent::Test::TestDriver</a></li>
+        
+          <li><a href="../Fluent/Test/TestOutputChain.html">Fluent::Test::TestOutputChain</a></li>
+        
+          <li><a href="../Fluent/TestOutput.html">Fluent::TestOutput</a></li>
+        
           <li><a href="../Fluent/TextParser.html">Fluent::TextParser</a></li>
+        
+          <li><a href="../Fluent/TimeFormatter.html">Fluent::TimeFormatter</a></li>
         
           <li><a href="../Fluent/TimeSlicedOutput.html">Fluent::TimeSlicedOutput</a></li>
         
@@ -233,12 +265,14 @@
   </div>
 
   <div id="documentation">
-    <h1 class="class">Fluent::RawEventStream</h1>
+    <h1 class="module">Fluent::SetTagKeyMixin</h1>
 
     <div id="description" class="description">
       
     </div><!-- description -->
 
+    
+    
     
     <div id="5Buntitled-5D" class="documentation-section">
       
@@ -248,59 +282,44 @@
       
 
       
+      <!-- Attributes -->
+      <div id="attribute-method-details" class="method-section section">
+        <h3 class="section-header">Attributes</h3>
+
+        
+        <div id="tag_key-attribute-method" class="method-detail">
+          <a name="tag_key"></a>
+          
+          <a name="tag_key="></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">tag_key</span><span
+              class="attribute-access-type">[RW]</span>
+          </div>
+
+          <div class="method-description">
+          
+          
+          
+          </div>
+        </div>
+        
+      </div><!-- attribute-method-details -->
+      
 
       <!-- Methods -->
       
-      <div id="public-class-method-details" class="method-section section">
-        <h3 class="section-header">Public Class Methods</h3>
-
-      
-        <div id="new-method" class="method-detail ">
-          <a name="method-c-new"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">new</span><span
-              class="method-args">(data)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            
-            
-
-            
-            <div class="method-source-code" id="new-source">
-<pre>
-<span class="ruby-comment"># File lib/fluent/event.rb, line 66</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">data</span>)
-        <span class="ruby-ivar">@data</span> = <span class="ruby-identifier">data</span>
-<span class="ruby-keyword">end</span></pre>
-            </div><!-- new-source -->
-            
-          </div>
-
-          
-
-          
-        </div><!-- new-method -->
-
-      
-      </div><!-- public-class-method-details -->
-    
       <div id="public-instance-method-details" class="method-section section">
         <h3 class="section-header">Public Instance Methods</h3>
 
       
-        <div id="each-method" class="method-detail ">
-          <a name="method-i-each"></a>
+        <div id="configure-method" class="method-detail ">
+          <a name="method-i-configure"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">each</span><span
-              class="method-args">(&block)</span>
+            <span class="method-name">configure</span><span
+              class="method-args">(conf)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -311,33 +330,36 @@
             
 
             
-            <div class="method-source-code" id="each-source">
+            <div class="method-source-code" id="configure-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/event.rb, line 74</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">each</span>(&amp;<span class="ruby-identifier">block</span>)
-        <span class="ruby-identifier">array</span> = []
-        <span class="ruby-identifier">u</span> = <span class="ruby-constant">MessagePack</span><span class="ruby-operator">::</span><span class="ruby-constant">Unpacker</span>.<span class="ruby-identifier">new</span>
-        <span class="ruby-identifier">u</span>.<span class="ruby-identifier">feed_each</span>(<span class="ruby-ivar">@data</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">obj</span><span class="ruby-operator">|</span>
-                <span class="ruby-keyword">yield</span> <span class="ruby-constant">Event</span>.<span class="ruby-identifier">new</span>.<span class="ruby-identifier">from_msgpack</span>(<span class="ruby-identifier">obj</span>)
-        }
+<span class="ruby-comment"># File lib/fluent/mixin.rb, line 144</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
+  <span class="ruby-keyword">super</span>
+
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">tag_key</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'tag_key'</span>]
+    <span class="ruby-ivar">@tag_key</span> = <span class="ruby-identifier">tag_key</span>
+  <span class="ruby-keyword">end</span>
+  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@tag_key</span>
+    <span class="ruby-ivar">@tag_key</span> = <span class="ruby-string">'tag'</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- each-source -->
+            </div><!-- configure-source -->
             
           </div>
 
           
 
           
-        </div><!-- each-method -->
+        </div><!-- configure-method -->
 
       
-        <div id="repeatable-3F-method" class="method-detail ">
-          <a name="method-i-repeatable-3F"></a>
+        <div id="filter_record-method" class="method-detail ">
+          <a name="method-i-filter_record"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">repeatable?</span><span
-              class="method-args">()</span>
+            <span class="method-name">filter_record</span><span
+              class="method-args">(tag, time, record)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -348,20 +370,21 @@
             
 
             
-            <div class="method-source-code" id="repeatable-3F-source">
+            <div class="method-source-code" id="filter_record-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/event.rb, line 70</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">repeatable?</span>
-        <span class="ruby-keyword">true</span>
+<span class="ruby-comment"># File lib/fluent/mixin.rb, line 155</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">filter_record</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">time</span>, <span class="ruby-identifier">record</span>)
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-identifier">record</span>[<span class="ruby-ivar">@time_key</span>] = <span class="ruby-ivar">@timef</span>.<span class="ruby-identifier">format</span>(<span class="ruby-identifier">time</span>)
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- repeatable-3F-source -->
+            </div><!-- filter_record-source -->
             
           </div>
 
           
 
           
-        </div><!-- repeatable-3F-method -->
+        </div><!-- filter_record-method -->
 
       
       </div><!-- public-instance-method-details -->

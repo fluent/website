@@ -47,10 +47,8 @@ Overview of the configuration file will be like as following::
     
     <match myapp.log.**>
       type file
-      format /var/log/fluent/myapp.%Y-%m-%d.log
-    
-      buffer_type file
-      buffer_path /var/log/fluent/myapp
+      format /var/log/fluent/myapp_hourly
+      time_slice_format %Y%m%d%H
     </match>
 
 <source> directive
