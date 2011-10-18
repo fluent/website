@@ -40,7 +40,7 @@ end
 splits = cmdout.split(/^(\S+)\s+\(([^\)]+)\)\n/)
 splits.shift  # remove first ""
 
-Plugin = Struct.new(:name, :version, :url, :author, :summary, :downloads)
+Plugin = Struct.new(:name, :gemname, :version, :url, :author, :summary, :downloads)
 
 plugins = []
 
@@ -48,9 +48,10 @@ http = Net::HTTP.new("rubygems.org", 80)
 http.start do
 
   until splits.empty?
-    name = splits.shift
+    gemname = splits.shift
     version = splits.shift
     meta, summary = splits.shift.split("\n\n")
+    name = gemname.sub(/^fluent-plugin-/,'')
 
     url = nil
     author = nil
@@ -68,12 +69,12 @@ http.start do
       summary.strip
     }.join("\n")
 
-    res = http.get("/api/v1/gems/#{e name}.json")
+    res = http.get("/api/v1/gems/#{e gemname}.json")
     js = JSON.parse(res.body)
 
     downloads = js['downloads']
 
-    plugins << Plugin.new(name, version, url, author, summary, downloads)
+    plugins << Plugin.new(name, gemname, version, url, author, summary, downloads)
   end
 
 end
