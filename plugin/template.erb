@@ -1,0 +1,87 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Fluent plugins</title>
+    <link rel="stylesheet" href="../doc/_static/bizstyle.css" type="text/css" />
+    <link rel="stylesheet" href="../doc/_static/pygments.css" type="text/css" />
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '#',
+        VERSION:     '0.10.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="../doc/_static/jquery.js"></script>
+    <script type="text/javascript" src="../doc/_static/doctools.js"></script>
+    <style type="text/css">
+      div.body h2 a {
+        color: #336699!important;
+        text-decoration: none;
+      }
+      div.body h2 a:hover {
+        text-decoration: underline;
+      }
+      div.body h2 .nolink {
+        color: #888888;
+      }
+      div.body .author {
+        color: #336699;
+        font-size: 90%;
+      }
+      div.body .version {
+        margin-left: 0.1em;
+        font-size: 75%;
+      }
+      div.body .downloads {
+        margin-left: 0.1em;
+        font-size: 75%;
+        color: #999999;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li><a href="../doc/">fluentd documentation</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            <h1>Fluent plugins</h1>
+
+            <% plugins.each {|pl| %>
+            <h2>
+            <% if pl.url %>
+              <a href="<%= pl.url %>" title="<%= h pl.name %>">
+            <% else %>
+              <span class="nolink">
+            <% end %>
+              <%= h pl.name %> <span class="version"><%= h pl.version %></span> <span class="downloads">[<%= h pl.downloads %> downloads]</span>
+            <% if h pl.url %>
+              </a>
+            <% else %>
+              </span>
+            <% end %>
+            </h2>
+            <p><%= pl.summary %>
+            <% if pl.author %>
+            <span class="author">[<%= h pl.author %>]</span>
+            <% end %>
+            </p>
+            <% } %>
+          </div>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+  </body>
+</html>
+
