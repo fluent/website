@@ -16,6 +16,11 @@ Welcome to Fluent's documentation!
    devel
    example
 
+Plugins
+==================
+
+`Fluent plugins <http://fluentd.org/plugin/>`_
+
 RDoc
 ==================
 

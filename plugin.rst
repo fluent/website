@@ -472,6 +472,8 @@ You can use following command to search plugins released on RubyGems::
 
    $ fluent-gem search -rd fluent-plugin
 
+You can also find plugins at the `Fluent plugins <http://fluentd.org/plugin/>`_ page.
+
 Type following command to install it::
 
    $ sudo fluent-gem install fluent-plugin-scribe
