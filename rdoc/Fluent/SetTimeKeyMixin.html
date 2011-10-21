@@ -126,6 +126,8 @@
         
           <li><a href="../Fluent/Config/Element.html">Fluent::Config::Element</a></li>
         
+          <li><a href="../Fluent/Config/Parser.html">Fluent::Config::Parser</a></li>
+        
           <li><a href="../Fluent/ConfigError.html">Fluent::ConfigError</a></li>
         
           <li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
@@ -287,6 +289,23 @@
         <h3 class="section-header">Attributes</h3>
 
         
+        <div id="include_time_key-attribute-method" class="method-detail">
+          <a name="include_time_key"></a>
+          
+          <a name="include_time_key="></a>
+          
+          <div class="method-heading attribute-method-heading">
+            <span class="method-name">include_time_key</span><span
+              class="attribute-access-type">[RW]</span>
+          </div>
+
+          <div class="method-description">
+          
+          
+          
+          </div>
+        </div>
+        
         <div id="localtime-attribute-method" class="method-detail">
           <a name="localtime"></a>
           
@@ -353,24 +372,39 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
   <span class="ruby-keyword">super</span>
 
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">time_key</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'time_key'</span>]
-    <span class="ruby-ivar">@time_key</span> = <span class="ruby-identifier">time_key</span>
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@time_key</span>
-    <span class="ruby-ivar">@time_key</span> = <span class="ruby-string">'time'</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">time_format</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'time_format'</span>]
-    <span class="ruby-ivar">@time_format</span> = <span class="ruby-identifier">time_format</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">localtime</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'localtime'</span>]
-    <span class="ruby-ivar">@localtime</span> = <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">utc</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'utc'</span>]
-    <span class="ruby-ivar">@localtime</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'include_time_key'</span>]
+    <span class="ruby-identifier">b</span> = <span class="ruby-constant">Config</span>.<span class="ruby-identifier">bool_value</span>(<span class="ruby-identifier">s</span>)
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">s</span>.<span class="ruby-identifier">empty?</span>
+      <span class="ruby-identifier">b</span> = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">b</span> <span class="ruby-operator">==</span> <span class="ruby-keyword">nil</span>
+      <span class="ruby-identifier">raise</span> <span class="ruby-constant">ConfigError</span>, <span class="ruby-node">&quot;Invalid boolean expression '#{s}' for include_time_key parameter&quot;</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-ivar">@include_time_key</span> = <span class="ruby-identifier">b</span>
   <span class="ruby-keyword">end</span>
 
-  <span class="ruby-ivar">@timef</span> = <span class="ruby-constant">TimeFormatter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@time_format</span>, <span class="ruby-ivar">@localtime</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@include_time_key</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">time_key</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'time_key'</span>]
+      <span class="ruby-ivar">@time_key</span> = <span class="ruby-identifier">time_key</span>
+    <span class="ruby-keyword">end</span>
+    <span class="ruby-keyword">unless</span> <span class="ruby-ivar">@time_key</span>
+      <span class="ruby-ivar">@time_key</span> = <span class="ruby-string">'time'</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">time_format</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'time_format'</span>]
+      <span class="ruby-ivar">@time_format</span> = <span class="ruby-identifier">time_format</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">localtime</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'localtime'</span>]
+      <span class="ruby-ivar">@localtime</span> = <span class="ruby-keyword">true</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">utc</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'utc'</span>]
+      <span class="ruby-ivar">@localtime</span> = <span class="ruby-keyword">false</span>
+    <span class="ruby-keyword">end</span>
+
+    <span class="ruby-ivar">@timef</span> = <span class="ruby-constant">TimeFormatter</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@time_format</span>, <span class="ruby-ivar">@localtime</span>)
+
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@include_time_key</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- configure-source -->
             
@@ -401,10 +435,12 @@
             
             <div class="method-source-code" id="filter_record-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/mixin.rb, line 132</span>
+<span class="ruby-comment"># File lib/fluent/mixin.rb, line 147</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">filter_record</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">time</span>, <span class="ruby-identifier">record</span>)
   <span class="ruby-keyword">super</span>
-  <span class="ruby-identifier">record</span>[<span class="ruby-ivar">@time_key</span>] = <span class="ruby-ivar">@timef</span>.<span class="ruby-identifier">format</span>(<span class="ruby-identifier">time</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@include_time_key</span>
+    <span class="ruby-identifier">record</span>[<span class="ruby-ivar">@time_key</span>] = <span class="ruby-ivar">@timef</span>.<span class="ruby-identifier">format</span>(<span class="ruby-identifier">time</span>)
+  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- filter_record-source -->
             

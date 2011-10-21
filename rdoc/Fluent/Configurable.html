@@ -126,6 +126,8 @@
         
           <li><a href="../Fluent/Config/Element.html">Fluent::Config::Element</a></li>
         
+          <li><a href="../Fluent/Config/Parser.html">Fluent::Config::Parser</a></li>
+        
           <li><a href="../Fluent/ConfigError.html">Fluent::ConfigError</a></li>
         
           <li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
@@ -308,7 +310,7 @@
             
             <div class="method-source-code" id="included-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/config.rb, line 182</span>
+<span class="ruby-comment"># File lib/fluent/config.rb, line 236</span>
 <span class="ruby-keyword">def</span> <span class="ruby-keyword">self</span>.<span class="ruby-identifier">included</span>(<span class="ruby-identifier">mod</span>)
   <span class="ruby-identifier">mod</span>.<span class="ruby-identifier">extend</span>(<span class="ruby-constant">ClassMethods</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -341,7 +343,7 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/config.rb, line 186</span>
+<span class="ruby-comment"># File lib/fluent/config.rb, line 240</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">config_defaults</span>.<span class="ruby-identifier">each_pair</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">name</span>,<span class="ruby-identifier">defval</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">varname</span> = <span class="ruby-value">:&quot;@#{name}&quot;</span>
@@ -383,7 +385,7 @@
             
             <div class="method-source-code" id="configure-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/config.rb, line 193</span>
+<span class="ruby-comment"># File lib/fluent/config.rb, line 247</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
   <span class="ruby-keyword">self</span>.<span class="ruby-identifier">class</span>.<span class="ruby-identifier">config_params</span>.<span class="ruby-identifier">each_pair</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">name</span>,(<span class="ruby-identifier">block</span>,<span class="ruby-identifier">opts</span>)<span class="ruby-operator">|</span>
     <span class="ruby-identifier">varname</span> = <span class="ruby-value">:&quot;@#{name}&quot;</span>

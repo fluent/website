@@ -6,13 +6,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Configuration &mdash; fluentd v0.10.0 documentation</title>
+    <title>Configuration &mdash; fluentd v0.10.3 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '#',
-        VERSION:     '0.10.0',
+        VERSION:     '0.10.3',
         COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -20,7 +20,7 @@
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="fluentd v0.10.0 documentation" href="index.html" />
+    <link rel="top" title="fluentd v0.10.3 documentation" href="index.html" />
     <link rel="next" title="Plugins" href="plugin.html" />
     <link rel="prev" title="Installation" href="install.html" /> 
   </head>
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="install.html" title="Installation"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">fluentd v0.10.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluentd v0.10.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -49,6 +49,7 @@
 <li><a class="reference external" href="#source-directive">&lt;source&gt; directive</a></li>
 <li><a class="reference external" href="#match-directive">&lt;match&gt; directive</a></li>
 <li><a class="reference external" href="#match-pattern">match pattern</a></li>
+<li><a class="reference external" href="#include">include</a></li>
 </ul>
 </li>
 </ul>
@@ -96,6 +97,7 @@
 <li><a class="reference internal" href="#source-directive" id="id2">&lt;source&gt; directive</a></li>
 <li><a class="reference internal" href="#match-directive" id="id3">&lt;match&gt; directive</a></li>
 <li><a class="reference internal" href="#match-pattern" id="id4">match pattern</a></li>
+<li><a class="reference internal" href="#include" id="id5">include</a></li>
 </ul>
 </li>
 </ul>
@@ -134,7 +136,10 @@ $ edit /etc/fluent/fluent.conf</pre>
   type file
   format /var/log/fluent/myapp_hourly
   time_slice_format %Y%m%d%H
-&lt;/match&gt;</pre>
+&lt;/match&gt;
+
+# Include config files in ./config.d directory
+include config.d/*.conf</pre>
 </div>
 <div class="section" id="source-directive">
 <h3>&lt;source&gt; directive<a class="headerlink" href="#source-directive" title="Permalink to this headline">¶</a></h3>
@@ -165,6 +170,24 @@ $ edit /etc/fluent/fluent.conf</pre>
 </li>
 </ul>
 </div>
+<div class="section" id="include">
+<h3>include<a class="headerlink" href="#include" title="Permalink to this headline">¶</a></h3>
+<p>You can divide a config file into multiple files with &#8216;include&#8217; directive.</p>
+<p>It supports regular file path, glob pattern and http URL:</p>
+<div class="highlight-python"><pre># absolute path
+include /path/to/config.conf
+
+# if it is relative path, it use the dirname of this file
+# to expand the path
+include extra.conf
+
+# you can use glob match pattern
+include config.d/*.conf
+
+# also http
+include http://example.com/fluent.conf</pre>
+</div>
+</div>
 </div>
 </div>
 
@@ -186,7 +209,7 @@ $ edit /etc/fluent/fluent.conf</pre>
         <li class="right" >
           <a href="install.html" title="Installation"
              >previous</a> |</li>
-        <li><a href="index.html">fluentd v0.10.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluentd v0.10.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

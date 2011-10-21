@@ -198,7 +198,7 @@ Run ``fluentd`` with ``-vv`` option to show debug messages::
 
     $ fluentd -vv
 
-**stdout** and **copy** output plugins are useful for debugging. **stdout** output plugin dumps matched events to the console. It can be used as following.
+**stdout** and **copy** output plugins are useful for debugging. **stdout** output plugin dumps matched events to the console. It can be used as following::
 
     # You want to debug this plugin
     <source>
@@ -212,11 +212,11 @@ Run ``fluentd`` with ``-vv`` option to show debug messages::
 
 **copy** output plugin copies matched events to multiple output plugins. You can use it with the stdout plugin::
 
-    # Use tcp input plugin and fluent-cat command to feed events:
-    #  $ echo '{"event":"message"}' | fluent-cat test.tag
     <source>
       type tcp
     </source>
+    # Use tcp input plugin and fluent-cat command to feed events:
+    #  $ echo '{"event":"message"}' | fluent-cat test.tag
 
     <match test.tag>
       type copy
@@ -231,4 +231,22 @@ Run ``fluentd`` with ``-vv`` option to show debug messages::
         type your_custom_output_plugin
       </store>
     </match>
+
+
+Writing test cases
+------------------------------------
+
+Fluent provides unit test frameworks for plugins:
+
+  Fluent::Test::InputTestDriver
+    Test driver for input plugins.
+
+  Fluent::Test::BufferedOutputTestDriver
+    Test driver for buffered output plugins.
+
+  Fluent::Test::OutputTestDriver
+    Test driver for non-buffered output plugins.
+
+See fluent's source code for details.
+
 

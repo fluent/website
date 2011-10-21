@@ -51,6 +51,10 @@ Overview of the configuration file will be like as following::
       time_slice_format %Y%m%d%H
     </match>
 
+    # Include config files in ./config.d directory
+    include config.d/*.conf
+
+
 <source> directive
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -86,7 +90,29 @@ You can use following match patterns:
   * You can use it with ``*`` and ``**`` patterns, like ``a.{b,c}.*`` or ``a.{b,c.**}``
 
 
+include
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+You can divide a config file into multiple files with 'include' directive.
+
+It supports regular file path, glob pattern and http URL::
+
+    # absolute path
+    include /path/to/config.conf
+
+    # if it is relative path, it use the dirname of this file
+    # to expand the path
+    include extra.conf
+
+    # you can use glob match pattern
+    include config.d/*.conf
+
+    # also http
+    include http://example.com/fluent.conf
+
+
 .. Configuration
+
 .. ========================
 .. 
 .. Shut down

@@ -6,13 +6,13 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Writing plugins &mdash; fluentd v0.10.0 documentation</title>
+    <title>Writing plugins &mdash; fluentd v0.10.3 documentation</title>
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '#',
-        VERSION:     '0.10.0',
+        VERSION:     '0.10.3',
         COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
@@ -20,7 +20,7 @@
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="fluentd v0.10.0 documentation" href="index.html" />
+    <link rel="top" title="fluentd v0.10.3 documentation" href="index.html" />
     <link rel="next" title="Examples" href="example.html" />
     <link rel="prev" title="Plugins" href="plugin.html" /> 
   </head>
@@ -37,7 +37,7 @@
         <li class="right" >
           <a href="plugin.html" title="Plugins"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">fluentd v0.10.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluentd v0.10.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -52,6 +52,7 @@
 <li><a class="reference external" href="#non-buffered-output-plugins">Non-buffered output plugins</a></li>
 <li><a class="reference external" href="#buffer-plugins">Buffer plugins</a></li>
 <li><a class="reference external" href="#debugging-plugins">Debugging plugins</a></li>
+<li><a class="reference external" href="#writing-test-cases">Writing test cases</a></li>
 </ul>
 </li>
 </ul>
@@ -92,13 +93,14 @@
 <span id="devel"></span><h1>Writing plugins<a class="headerlink" href="#writing-plugins" title="Permalink to this headline">¶</a></h1>
 <div class="contents local topic" id="contents">
 <ul class="simple">
-<li><a class="reference internal" href="#installing-custom-plugins" id="id3">Installing custom plugins</a></li>
-<li><a class="reference internal" href="#input-plugins" id="id4">Input plugins</a></li>
-<li><a class="reference internal" href="#buffered-output-plugins" id="id5">Buffered output plugins</a></li>
-<li><a class="reference internal" href="#time-sliced-output-plugins" id="id6">Time sliced output plugins</a></li>
-<li><a class="reference internal" href="#non-buffered-output-plugins" id="id7">Non-buffered output plugins</a></li>
-<li><a class="reference internal" href="#buffer-plugins" id="id8">Buffer plugins</a></li>
-<li><a class="reference internal" href="#debugging-plugins" id="id9">Debugging plugins</a></li>
+<li><a class="reference internal" href="#installing-custom-plugins" id="id1">Installing custom plugins</a></li>
+<li><a class="reference internal" href="#input-plugins" id="id2">Input plugins</a></li>
+<li><a class="reference internal" href="#buffered-output-plugins" id="id3">Buffered output plugins</a></li>
+<li><a class="reference internal" href="#time-sliced-output-plugins" id="id4">Time sliced output plugins</a></li>
+<li><a class="reference internal" href="#non-buffered-output-plugins" id="id5">Non-buffered output plugins</a></li>
+<li><a class="reference internal" href="#buffer-plugins" id="id6">Buffer plugins</a></li>
+<li><a class="reference internal" href="#debugging-plugins" id="id7">Debugging plugins</a></li>
+<li><a class="reference internal" href="#writing-test-cases" id="id8">Writing test cases</a></li>
 </ul>
 </div>
 <div class="section" id="installing-custom-plugins">
@@ -268,25 +270,23 @@
 <p>Run <tt class="docutils literal"><span class="pre">fluentd</span></tt> with <tt class="docutils literal"><span class="pre">-vv</span></tt> option to show debug messages:</p>
 <div class="highlight-python"><pre>$ fluentd -vv</pre>
 </div>
-<p><strong>stdout</strong> and <strong>copy</strong> output plugins are useful for debugging. <strong>stdout</strong> output plugin dumps matched events to the console. It can be used as following.</p>
-<blockquote>
-<p># You want to debug this plugin
-&lt;source&gt;</p>
-<blockquote>
-type your_custom_input_plugin</blockquote>
-<p>&lt;/source&gt;</p>
-<p># Dump all events to stdout
-&lt;match <a href="#id1"><span class="problematic" id="id2">**</span></a>&gt;</p>
-<blockquote>
-type stdout</blockquote>
-<p>&lt;/match&gt;</p>
-</blockquote>
-<p><strong>copy</strong> output plugin copies matched events to multiple output plugins. You can use it with the stdout plugin:</p>
-<div class="highlight-python"><pre># Use tcp input plugin and fluent-cat command to feed events:
-#  $ echo '{"event":"message"}' | fluent-cat test.tag
+<p><strong>stdout</strong> and <strong>copy</strong> output plugins are useful for debugging. <strong>stdout</strong> output plugin dumps matched events to the console. It can be used as following:</p>
+<div class="highlight-python"><pre># You want to debug this plugin
 &lt;source&gt;
+  type your_custom_input_plugin
+&lt;/source&gt;
+
+# Dump all events to stdout
+&lt;match **&gt;
+  type stdout
+&lt;/match&gt;</pre>
+</div>
+<p><strong>copy</strong> output plugin copies matched events to multiple output plugins. You can use it with the stdout plugin:</p>
+<div class="highlight-python"><pre>&lt;source&gt;
   type tcp
 &lt;/source&gt;
+# Use tcp input plugin and fluent-cat command to feed events:
+#  $ echo '{"event":"message"}' | fluent-cat test.tag
 
 &lt;match test.tag&gt;
   type copy
@@ -302,6 +302,21 @@ type stdout</blockquote>
   &lt;/store&gt;
 &lt;/match&gt;</pre>
 </div>
+</div>
+<div class="section" id="writing-test-cases">
+<h2>Writing test cases<a class="headerlink" href="#writing-test-cases" title="Permalink to this headline">¶</a></h2>
+<p>Fluent provides unit test frameworks for plugins:</p>
+<blockquote>
+<dl class="docutils">
+<dt>Fluent::Test::InputTestDriver</dt>
+<dd>Test driver for input plugins.</dd>
+<dt>Fluent::Test::BufferedOutputTestDriver</dt>
+<dd>Test driver for buffered output plugins.</dd>
+<dt>Fluent::Test::OutputTestDriver</dt>
+<dd>Test driver for non-buffered output plugins.</dd>
+</dl>
+</blockquote>
+<p>See fluent&#8217;s source code for details.</p>
 </div>
 </div>
 
@@ -323,7 +338,7 @@ type stdout</blockquote>
         <li class="right" >
           <a href="plugin.html" title="Plugins"
              >previous</a> |</li>
-        <li><a href="index.html">fluentd v0.10.0 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluentd v0.10.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">

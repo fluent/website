@@ -136,6 +136,8 @@
         
           <li><a href="../Fluent/Config/Element.html">Fluent::Config::Element</a></li>
         
+          <li><a href="../Fluent/Config/Parser.html">Fluent::Config::Parser</a></li>
+        
           <li><a href="../Fluent/ConfigError.html">Fluent::ConfigError</a></li>
         
           <li><a href="../Fluent/ConfigParseError.html">Fluent::ConfigParseError</a></li>
@@ -425,7 +427,7 @@
 <pre>
 <span class="ruby-comment"># File lib/fluent/plugin/buf_memory.rb, line 55</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">msgpack_each</span>(&amp;<span class="ruby-identifier">block</span>)
-  <span class="ruby-identifier">u</span> = <span class="ruby-constant">MessagePack</span><span class="ruby-operator">::</span><span class="ruby-constant">Unpacker</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">io</span>)
+  <span class="ruby-identifier">u</span> = <span class="ruby-constant">MessagePack</span><span class="ruby-operator">::</span><span class="ruby-constant">Unpacker</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-identifier">u</span>.<span class="ruby-identifier">feed_each</span>(<span class="ruby-ivar">@data</span>, &amp;<span class="ruby-identifier">block</span>)
 <span class="ruby-keyword">end</span></pre>
             </div><!-- msgpack_each-source -->
