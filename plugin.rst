@@ -153,7 +153,8 @@ time_format
 tcp
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**tcp** input plugin listens MessagePack stream on a TCP socket. This is used by ``fluent-cat`` command or other language bindings.
+**tcp** input plugin listens MessagePack stream or encoded JSON stream on a TCP socket.
+The MessagePack stream is used by ``fluent-cat`` command or other language bindings.
 
 Protocol format::
 
@@ -164,8 +165,11 @@ Protocol format::
       [tag, time, record]
       or
       [tag, [[time,record], [time,record], ...]]
+      (Note that later format is only supported by MessagePack Stream.)
 
     example:
+      ["myapp.access", 1308466941, {"a"=>1}]
+      or
       ["myapp.access", [1308466941, {"a"=>1}], [1308466942, {"b"=>2}]]
 
 **configuration**::
