@@ -142,11 +142,11 @@
 <span class="k">end</span>
 </pre></div>
 </div>
-<p>To submit events, use <tt class="docutils literal"><span class="pre">Fluent::Engine.emit(tag,</span> <span class="pre">event)</span></tt> method, where <tt class="docutils literal"><span class="pre">tag</span></tt> is the String and <tt class="docutils literal"><span class="pre">event</span></tt> is a <tt class="docutils literal"><span class="pre">Fluent::Event</span></tt> object.</p>
+<p>To submit events, use <tt class="docutils literal"><span class="pre">Fluent::Engine.emit(tag,</span> <span class="pre">time,</span> <span class="pre">record)</span></tt> method, where <tt class="docutils literal"><span class="pre">tag</span></tt> is the String, <tt class="docutils literal"><span class="pre">time</span></tt> is the UNIX time integer and <tt class="docutils literal"><span class="pre">record</span></tt> is a Hash object.</p>
 <div class="highlight-ruby"><div class="highlight"><pre><span class="n">tag</span> <span class="o">=</span> <span class="s2">&quot;myapp.access&quot;</span>
 <span class="n">time</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">now</span><span class="o">.</span><span class="n">to_i</span>
 <span class="n">record</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;message&quot;</span><span class="o">=&gt;</span><span class="s2">&quot;body&quot;</span><span class="p">}</span>
-<span class="no">Fluent</span><span class="o">::</span><span class="no">Engine</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="no">Fluent</span><span class="o">::</span><span class="no">Event</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="n">record</span><span class="p">))</span>
+<span class="no">Fluent</span><span class="o">::</span><span class="no">Engine</span><span class="o">.</span><span class="n">emit</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">record</span><span class="p">)</span>
 </pre></div>
 </div>
 <p>RDoc of the Engine class is available from <a class="reference external" href="http://fluentd.org/rdoc/Fluent/Engine.html">Fluent RDoc</a>.</p>
@@ -176,28 +176,38 @@
   <span class="k">end</span>
 
   <span class="c1"># This method is called when shutting down.</span>
-  <span class="c1"># Shutdown the thread and Close sockets or files here.</span>
+  <span class="c1"># Shutdown the thread and close sockets or files here.</span>
   <span class="k">def</span> <span class="nf">shutdown</span>
     <span class="k">super</span>
     <span class="o">.</span><span class="n">.</span><span class="o">.</span>
   <span class="k">end</span>
 
   <span class="c1"># This method is called when an event is reached.</span>
-  <span class="c1"># Convert event and tag to a raw string.</span>
-  <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">event</span><span class="p">)</span>
-    <span class="o">[</span><span class="n">tag</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">time</span><span class="p">,</span> <span class="n">event</span><span class="o">.</span><span class="n">record</span><span class="o">].</span><span class="n">to_json</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
+  <span class="c1"># Convert event to a raw string.</span>
+  <span class="k">def</span> <span class="nf">format</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">record</span><span class="p">)</span>
+    <span class="o">[</span><span class="n">tag</span><span class="p">,</span> <span class="n">time</span><span class="p">,</span> <span class="n">record</span><span class="o">].</span><span class="n">to_json</span> <span class="o">+</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span>
   <span class="k">end</span>
 
-  <span class="c1"># This method is called every flush interval. rite the buffer chunk</span>
+  <span class="c1">## optionally, you can use to_msgpack to serialize the object.</span>
+  <span class="c1">#def format(tag, time, record)</span>
+  <span class="c1">#  [tag, time, record].to_msgpack</span>
+  <span class="c1">#end</span>
+
+  <span class="c1"># This method is called every flush interval. write the buffer chunk</span>
   <span class="c1"># to files or databases here.</span>
   <span class="c1"># &#39;chunk&#39; is a buffer chunk that includes multiple formatted</span>
   <span class="c1"># events. You can use &#39;data = chunk.read&#39; to get all events and</span>
   <span class="c1"># &#39;chunk.open {|io| ... }&#39; to get IO object.</span>
   <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
-    <span class="n">objs</span> <span class="o">=</span> <span class="n">chunk</span><span class="o">.</span><span class="n">read</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">map</span> <span class="p">{</span><span class="o">|</span><span class="n">raw</span><span class="o">|</span>
-      <span class="no">JSON</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">raw</span><span class="p">)</span>
-    <span class="p">}</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">chunk</span><span class="o">.</span><span class="n">read</span>
+    <span class="nb">print</span> <span class="n">data</span>
   <span class="k">end</span>
+
+  <span class="c1">## optionally, you can use chunk.msgpack_each to deserialize objects.</span>
+  <span class="c1">#def write(chunk)</span>
+  <span class="c1">#  chunk.msgpack_each {|(tag,time,record)|</span>
+  <span class="c1">#  }</span>
+  <span class="c1">#end</span>
 <span class="k">end</span>
 </pre></div>
 </div>
@@ -208,7 +218,7 @@
 <p>Note that it uses file buffer by default. Thus <tt class="docutils literal"><span class="pre">buffer_path</span></tt> option is required.</p>
 <p>To implement time sliced output plugin, Extend <strong>Fluent::TimeSlicedOutput</strong> class and implement following methods.</p>
 <div class="highlight-ruby"><div class="highlight"><pre><span class="k">class</span> <span class="nc">SomeOutput</span> <span class="o">&lt;</span> <span class="no">Fluent</span><span class="o">::</span><span class="no">TimeSlicedOutput</span>
-  <span class="c1"># configure(conf), start(), shutdown() and format(tag, event) are</span>
+  <span class="c1"># configure(conf), start(), shutdown() and format(tag, time, record) are</span>
   <span class="c1"># same as BufferedOutput.</span>
   <span class="o">.</span><span class="n">.</span><span class="o">.</span>
 
@@ -250,12 +260,12 @@
 
   <span class="c1"># This method is called when an event is reached.</span>
   <span class="c1"># &#39;es&#39; is a Fluent::EventStream object that includes multiple events.</span>
-  <span class="c1"># You can use &#39;es.each {|event| ... }&#39; to retrieve events.</span>
+  <span class="c1"># You can use &#39;es.each {|time,record| ... }&#39; to retrieve events.</span>
   <span class="c1"># &#39;chain&#39; is an object that manages transaction. Call &#39;chain.next&#39; at</span>
   <span class="c1"># appropriate point and rollback if it raises exception.</span>
   <span class="k">def</span> <span class="nf">emit</span><span class="p">(</span><span class="n">tag</span><span class="p">,</span> <span class="n">es</span><span class="p">,</span> <span class="n">chain</span><span class="p">)</span>
     <span class="n">chain</span><span class="o">.</span><span class="n">next</span>
-    <span class="n">es</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span><span class="o">|</span><span class="n">event</span><span class="o">|</span>
+    <span class="n">es</span><span class="o">.</span><span class="n">each</span> <span class="p">{</span><span class="o">|</span><span class="n">time</span><span class="p">,</span><span class="n">record</span><span class="o">|</span>
       <span class="vg">$stderr</span><span class="o">.</span><span class="n">puts</span> <span class="s2">&quot;OK!&quot;</span>
     <span class="p">}</span>
   <span class="k">end</span>
@@ -274,14 +284,14 @@
 <div class="highlight-ruby"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyTailInput</span> <span class="o">&lt;</span> <span class="no">Fluent</span><span class="o">::</span><span class="no">TailInput</span>
   <span class="no">Fluent</span><span class="o">::</span><span class="no">Plugin</span><span class="o">.</span><span class="n">register_input</span><span class="p">(</span><span class="s1">&#39;mytail&#39;</span><span class="p">,</span> <span class="nb">self</span><span class="p">)</span>
 
-  <span class="c1"># override configure_parser(conf) method.</span>
-  <span class="c1"># you can get config parameters in this method.</span>
+  <span class="c1"># Override &#39;configure_parser(conf)&#39; method.</span>
+  <span class="c1"># You can get config parameters in this method.</span>
   <span class="k">def</span> <span class="nf">configure_parser</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
     <span class="vi">@time_format</span> <span class="o">=</span> <span class="n">conf</span><span class="o">[</span><span class="s1">&#39;time_format&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;%Y-%M-%d %H:%M:%S&#39;</span>
   <span class="k">end</span>
 
-  <span class="c1"># override parse_line(line) method that returns time and record.</span>
-  <span class="c1"># this example method assumes following log format:</span>
+  <span class="c1"># Override &#39;parse_line(line)&#39; method that returns time and record.</span>
+  <span class="c1"># This example method assumes following log format:</span>
   <span class="c1">#   %Y-%m-%d %H:%M:%S\tkey1\tvalue1\tkey2\tvalue2...</span>
   <span class="c1">#   %Y-%m-%d %H:%M:%S\tkey1\tvalue1\tkey2\tvalue2...</span>
   <span class="c1">#   ...</span>

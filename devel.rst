@@ -50,14 +50,14 @@ Extend **Fluent::Input** class and implement following methods.
       end
     end
 
-To submit events, use ``Fluent::Engine.emit(tag, event)`` method, where ``tag`` is the String and ``event`` is a ``Fluent::Event`` object.
+To submit events, use ``Fluent::Engine.emit(tag, time, record)`` method, where ``tag`` is the String, ``time`` is the UNIX time integer and ``record`` is a Hash object.
 
 .. code-block:: ruby
 
     tag = "myapp.access"
     time = Time.now.to_i
     record = {"message"=>"body"}
-    Fluent::Engine.emit(tag, Fluent::Event.new(time, record))
+    Fluent::Engine.emit(tag, time, record)
 
 RDoc of the Engine class is available from `Fluent RDoc <http://fluentd.org/rdoc/Fluent/Engine.html>`_.
 
@@ -91,28 +91,38 @@ Extend **Fluent::BufferedOutput** class and implement following methods.
       end
 
       # This method is called when shutting down.
-      # Shutdown the thread and Close sockets or files here.
+      # Shutdown the thread and close sockets or files here.
       def shutdown
         super
         ...
       end
 
       # This method is called when an event is reached.
-      # Convert event and tag to a raw string.
-      def format(tag, event)
-        [tag, event.time, event.record].to_json + "\n"
+      # Convert event to a raw string.
+      def format(tag, time, record)
+        [tag, time, record].to_json + "\n"
       end
 
-      # This method is called every flush interval. rite the buffer chunk
+      ## optionally, you can use to_msgpack to serialize the object.
+      #def format(tag, time, record)
+      #  [tag, time, record].to_msgpack
+      #end
+
+      # This method is called every flush interval. write the buffer chunk
       # to files or databases here.
       # 'chunk' is a buffer chunk that includes multiple formatted
       # events. You can use 'data = chunk.read' to get all events and
       # 'chunk.open {|io| ... }' to get IO object.
       def write(chunk)
-        objs = chunk.read.split("\n").map {|raw|
-          JSON.load(raw)
-        }
+        data = chunk.read
+        print data
       end
+
+      ## optionally, you can use chunk.msgpack_each to deserialize objects.
+      #def write(chunk)
+      #  chunk.msgpack_each {|(tag,time,record)|
+      #  }
+      #end
     end
 
 
@@ -128,7 +138,7 @@ To implement time sliced output plugin, Extend **Fluent::TimeSlicedOutput** clas
 .. code-block:: ruby
 
     class SomeOutput < Fluent::TimeSlicedOutput
-      # configure(conf), start(), shutdown() and format(tag, event) are
+      # configure(conf), start(), shutdown() and format(tag, time, record) are
       # same as BufferedOutput.
       ...
 
@@ -173,12 +183,12 @@ Extend **Fluent::Output** class and implement following methods.
     
       # This method is called when an event is reached.
       # 'es' is a Fluent::EventStream object that includes multiple events.
-      # You can use 'es.each {|event| ... }' to retrieve events.
+      # You can use 'es.each {|time,record| ... }' to retrieve events.
       # 'chain' is an object that manages transaction. Call 'chain.next' at
       # appropriate point and rollback if it raises exception.
       def emit(tag, es, chain)
         chain.next
-        es.each {|event|
+        es.each {|time,record|
           $stderr.puts "OK!"
         }
       end
@@ -203,14 +213,14 @@ Put following file to **/etc/fluent/plugin/in_mytail.rb**.
     class MyTailInput < Fluent::TailInput
       Fluent::Plugin.register_input('mytail', self)
     
-      # override configure_parser(conf) method.
-      # you can get config parameters in this method.
+      # Override 'configure_parser(conf)' method.
+      # You can get config parameters in this method.
       def configure_parser(conf)
         @time_format = conf['time_format'] || '%Y-%M-%d %H:%M:%S'
       end
     
-      # override parse_line(line) method that returns time and record.
-      # this example method assumes following log format:
+      # Override 'parse_line(line)' method that returns time and record.
+      # This example method assumes following log format:
       #   %Y-%m-%d %H:%M:%S\tkey1\tvalue1\tkey2\tvalue2...
       #   %Y-%m-%d %H:%M:%S\tkey1\tvalue1\tkey2\tvalue2...
       #   ...
