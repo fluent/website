@@ -191,6 +191,52 @@ Buffer plugins
 TODO
 
 
+Custom parser for Tail input plugin
+------------------------------------
+
+You can customize text parser of Tail input plugin by extending **Fluent::TailInput** class.
+
+Put following file into **/etcfluent/plugin/in_mytail.rb**.
+
+.. code-block:: ruby
+
+    class MyTailInput < Fluent::TailInput
+      Fluent::Plugin.register_input('mytail', self)
+    
+      # override configure_parser(conf) method.
+      # you can get config parameters in this method.
+      def configure_parser(conf)
+        @time_format = conf['time_format'] || '%Y-%M-%d'
+        @time_key = conf['time_key'] || 'time'
+      end
+    
+      # override parse_line(line) method that returns time and record.
+      # this example method assumes following log format:
+      #   %Y-%m-%d %H:%%M:%S\tkey1\tvalue1\tkey2\tvalue2...
+      #   %Y-%m-%d %H:%%M:%S\tkey1\tvalue1\tkey2\tvalue2...
+      #   ...
+      def parse_line(line)
+        elements = line.split("\t")
+        
+        time = elements.shift
+        time = Time.strptime(time, @time_format).to_i
+        
+        # [k1, v1, k2, v2, ...] -> {k1=>v1, k2=>v2, ...}
+        record = Hash[*elements]
+        
+        return time, record
+      end
+    end
+
+Use following configuration file::
+
+    <source>
+      type mytail
+      path /path/to/myformat_file
+      tag myapp.mytail
+    </source>
+
+
 Debugging plugins
 ------------------------------------
 

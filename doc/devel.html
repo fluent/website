@@ -51,6 +51,7 @@
 <li><a class="reference external" href="#time-sliced-output-plugins">Time sliced output plugins</a></li>
 <li><a class="reference external" href="#non-buffered-output-plugins">Non-buffered output plugins</a></li>
 <li><a class="reference external" href="#buffer-plugins">Buffer plugins</a></li>
+<li><a class="reference external" href="#custom-parser-for-tail-input-plugin">Custom parser for Tail input plugin</a></li>
 <li><a class="reference external" href="#debugging-plugins">Debugging plugins</a></li>
 <li><a class="reference external" href="#writing-test-cases">Writing test cases</a></li>
 </ul>
@@ -99,8 +100,9 @@
 <li><a class="reference internal" href="#time-sliced-output-plugins" id="id4">Time sliced output plugins</a></li>
 <li><a class="reference internal" href="#non-buffered-output-plugins" id="id5">Non-buffered output plugins</a></li>
 <li><a class="reference internal" href="#buffer-plugins" id="id6">Buffer plugins</a></li>
-<li><a class="reference internal" href="#debugging-plugins" id="id7">Debugging plugins</a></li>
-<li><a class="reference internal" href="#writing-test-cases" id="id8">Writing test cases</a></li>
+<li><a class="reference internal" href="#custom-parser-for-tail-input-plugin" id="id7">Custom parser for Tail input plugin</a></li>
+<li><a class="reference internal" href="#debugging-plugins" id="id8">Debugging plugins</a></li>
+<li><a class="reference internal" href="#writing-test-cases" id="id9">Writing test cases</a></li>
 </ul>
 </div>
 <div class="section" id="installing-custom-plugins">
@@ -264,6 +266,47 @@
 <div class="section" id="buffer-plugins">
 <h2>Buffer plugins<a class="headerlink" href="#buffer-plugins" title="Permalink to this headline">¶</a></h2>
 <p>TODO</p>
+</div>
+<div class="section" id="custom-parser-for-tail-input-plugin">
+<h2>Custom parser for Tail input plugin<a class="headerlink" href="#custom-parser-for-tail-input-plugin" title="Permalink to this headline">¶</a></h2>
+<p>You can customize text parser of Tail input plugin by extending <strong>Fluent::TailInput</strong> class.</p>
+<p>Put following file into <strong>/etcfluent/plugin/in_mytail.rb</strong>.</p>
+<div class="highlight-ruby"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyTailInput</span> <span class="o">&lt;</span> <span class="no">Fluent</span><span class="o">::</span><span class="no">TailInput</span>
+  <span class="no">Fluent</span><span class="o">::</span><span class="no">Plugin</span><span class="o">.</span><span class="n">register_input</span><span class="p">(</span><span class="s1">&#39;mytail&#39;</span><span class="p">,</span> <span class="nb">self</span><span class="p">)</span>
+
+  <span class="c1"># override configure_parser(conf) method.</span>
+  <span class="c1"># you can get config parameters in this method.</span>
+  <span class="k">def</span> <span class="nf">configure_parser</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+    <span class="vi">@time_format</span> <span class="o">=</span> <span class="n">conf</span><span class="o">[</span><span class="s1">&#39;time_format&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;%Y-%M-%d&#39;</span>
+    <span class="vi">@time_key</span> <span class="o">=</span> <span class="n">conf</span><span class="o">[</span><span class="s1">&#39;time_key&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;time&#39;</span>
+  <span class="k">end</span>
+
+  <span class="c1"># override parse_line(line) method that returns time and record.</span>
+  <span class="c1"># this example method assumes following log format:</span>
+  <span class="c1">#   %Y-%m-%d %H:%%M:%S\tkey1\tvalue1\tkey2\tvalue2...</span>
+  <span class="c1">#   %Y-%m-%d %H:%%M:%S\tkey1\tvalue1\tkey2\tvalue2...</span>
+  <span class="c1">#   ...</span>
+  <span class="k">def</span> <span class="nf">parse_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+    <span class="n">elements</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">time</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="n">shift</span>
+    <span class="n">time</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="vi">@time_format</span><span class="p">)</span><span class="o">.</span><span class="n">to_i</span>
+
+    <span class="c1"># [k1, v1, k2, v2, ...] -&gt; {k1=&gt;v1, k2=&gt;v2, ...}</span>
+    <span class="n">record</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">[*</span><span class="n">elements</span><span class="o">]</span>
+
+    <span class="k">return</span> <span class="n">time</span><span class="p">,</span> <span class="n">record</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</pre></div>
+</div>
+<p>Use following configuration file:</p>
+<div class="highlight-python"><pre>&lt;source&gt;
+  type mytail
+  path /path/to/myformat_file
+  tag myapp.mytail
+&lt;/source&gt;</pre>
+</div>
 </div>
 <div class="section" id="debugging-plugins">
 <h2>Debugging plugins<a class="headerlink" href="#debugging-plugins" title="Permalink to this headline">¶</a></h2>
