@@ -277,13 +277,13 @@
   <span class="c1"># override configure_parser(conf) method.</span>
   <span class="c1"># you can get config parameters in this method.</span>
   <span class="k">def</span> <span class="nf">configure_parser</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
-    <span class="vi">@time_format</span> <span class="o">=</span> <span class="n">conf</span><span class="o">[</span><span class="s1">&#39;time_format&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;%Y-%M-%d %H:%%M:%S&#39;</span>
+    <span class="vi">@time_format</span> <span class="o">=</span> <span class="n">conf</span><span class="o">[</span><span class="s1">&#39;time_format&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;%Y-%M-%d %H:%M:%S&#39;</span>
   <span class="k">end</span>
 
   <span class="c1"># override parse_line(line) method that returns time and record.</span>
   <span class="c1"># this example method assumes following log format:</span>
-  <span class="c1">#   %Y-%m-%d %H:%%M:%S\tkey1\tvalue1\tkey2\tvalue2...</span>
-  <span class="c1">#   %Y-%m-%d %H:%%M:%S\tkey1\tvalue1\tkey2\tvalue2...</span>
+  <span class="c1">#   %Y-%m-%d %H:%M:%S\tkey1\tvalue1\tkey2\tvalue2...</span>
+  <span class="c1">#   %Y-%m-%d %H:%M:%S\tkey1\tvalue1\tkey2\tvalue2...</span>
   <span class="c1">#   ...</span>
   <span class="k">def</span> <span class="nf">parse_line</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
     <span class="n">elements</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span>
@@ -292,7 +292,10 @@
     <span class="n">time</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">strptime</span><span class="p">(</span><span class="n">time</span><span class="p">,</span> <span class="vi">@time_format</span><span class="p">)</span><span class="o">.</span><span class="n">to_i</span>
 
     <span class="c1"># [k1, v1, k2, v2, ...] -&gt; {k1=&gt;v1, k2=&gt;v2, ...}</span>
-    <span class="n">record</span> <span class="o">=</span> <span class="no">Hash</span><span class="o">[*</span><span class="n">elements</span><span class="o">]</span>
+    <span class="n">record</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">while</span> <span class="p">(</span><span class="n">k</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="n">shift</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="p">(</span><span class="n">v</span> <span class="o">=</span> <span class="n">elements</span><span class="o">.</span><span class="n">shift</span><span class="p">)</span>
+      <span class="n">record</span><span class="o">[</span><span class="n">k</span><span class="o">]</span> <span class="o">=</span> <span class="n">v</span>
+    <span class="k">end</span>
 
     <span class="k">return</span> <span class="n">time</span><span class="p">,</span> <span class="n">record</span>
   <span class="k">end</span>

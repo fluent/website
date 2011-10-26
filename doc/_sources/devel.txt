@@ -206,13 +206,13 @@ Put following file to **/etc/fluent/plugin/in_mytail.rb**.
       # override configure_parser(conf) method.
       # you can get config parameters in this method.
       def configure_parser(conf)
-        @time_format = conf['time_format'] || '%Y-%M-%d %H:%%M:%S'
+        @time_format = conf['time_format'] || '%Y-%M-%d %H:%M:%S'
       end
     
       # override parse_line(line) method that returns time and record.
       # this example method assumes following log format:
-      #   %Y-%m-%d %H:%%M:%S\tkey1\tvalue1\tkey2\tvalue2...
-      #   %Y-%m-%d %H:%%M:%S\tkey1\tvalue1\tkey2\tvalue2...
+      #   %Y-%m-%d %H:%M:%S\tkey1\tvalue1\tkey2\tvalue2...
+      #   %Y-%m-%d %H:%M:%S\tkey1\tvalue1\tkey2\tvalue2...
       #   ...
       def parse_line(line)
         elements = line.split("\t")
@@ -221,7 +221,10 @@ Put following file to **/etc/fluent/plugin/in_mytail.rb**.
         time = Time.strptime(time, @time_format).to_i
         
         # [k1, v1, k2, v2, ...] -> {k1=>v1, k2=>v2, ...}
-        record = Hash[*elements]
+        record = {}
+        while (k = elements.shift) && (v = elements.shift)
+          record[k] = v
+        end
         
         return time, record
       end
