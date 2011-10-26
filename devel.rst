@@ -196,7 +196,7 @@ Custom parser for Tail input plugin
 
 You can customize text parser of Tail input plugin by extending **Fluent::TailInput** class.
 
-Put following file into **/etcfluent/plugin/in_mytail.rb**.
+Put following file to **/etc/fluent/plugin/in_mytail.rb**.
 
 .. code-block:: ruby
 
@@ -206,8 +206,7 @@ Put following file into **/etcfluent/plugin/in_mytail.rb**.
       # override configure_parser(conf) method.
       # you can get config parameters in this method.
       def configure_parser(conf)
-        @time_format = conf['time_format'] || '%Y-%M-%d'
-        @time_key = conf['time_key'] || 'time'
+        @time_format = conf['time_format'] || '%Y-%M-%d %H:%%M:%S'
       end
     
       # override parse_line(line) method that returns time and record.

@@ -270,15 +270,14 @@
 <div class="section" id="custom-parser-for-tail-input-plugin">
 <h2>Custom parser for Tail input plugin<a class="headerlink" href="#custom-parser-for-tail-input-plugin" title="Permalink to this headline">¶</a></h2>
 <p>You can customize text parser of Tail input plugin by extending <strong>Fluent::TailInput</strong> class.</p>
-<p>Put following file into <strong>/etcfluent/plugin/in_mytail.rb</strong>.</p>
+<p>Put following file to <strong>/etc/fluent/plugin/in_mytail.rb</strong>.</p>
 <div class="highlight-ruby"><div class="highlight"><pre><span class="k">class</span> <span class="nc">MyTailInput</span> <span class="o">&lt;</span> <span class="no">Fluent</span><span class="o">::</span><span class="no">TailInput</span>
   <span class="no">Fluent</span><span class="o">::</span><span class="no">Plugin</span><span class="o">.</span><span class="n">register_input</span><span class="p">(</span><span class="s1">&#39;mytail&#39;</span><span class="p">,</span> <span class="nb">self</span><span class="p">)</span>
 
   <span class="c1"># override configure_parser(conf) method.</span>
   <span class="c1"># you can get config parameters in this method.</span>
   <span class="k">def</span> <span class="nf">configure_parser</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
-    <span class="vi">@time_format</span> <span class="o">=</span> <span class="n">conf</span><span class="o">[</span><span class="s1">&#39;time_format&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;%Y-%M-%d&#39;</span>
-    <span class="vi">@time_key</span> <span class="o">=</span> <span class="n">conf</span><span class="o">[</span><span class="s1">&#39;time_key&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;time&#39;</span>
+    <span class="vi">@time_format</span> <span class="o">=</span> <span class="n">conf</span><span class="o">[</span><span class="s1">&#39;time_format&#39;</span><span class="o">]</span> <span class="o">||</span> <span class="s1">&#39;%Y-%M-%d %H:%%M:%S&#39;</span>
   <span class="k">end</span>
 
   <span class="c1"># override parse_line(line) method that returns time and record.</span>
