@@ -2,11 +2,12 @@
 <metadata>
   <groupId>org.fluentd</groupId>
   <artifactId>fluent-logger</artifactId>
-  <version>0.1.0</version>
   <versioning>
+    <release>0.2.0</release>
     <versions>
       <version>0.1.0</version>
+      <version>0.2.0</version>
     </versions>
-    <lastUpdated>20111017123110</lastUpdated>
+    <lastUpdated>20111030080412</lastUpdated>
   </versioning>
 </metadata>
