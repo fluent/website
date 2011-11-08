@@ -150,12 +150,27 @@ time_format
 ..    *.*                @127.0.0.1:5140
 
 
-tcp
+forward
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**tcp** input plugin listens MessagePack stream on a TCP socket. This is used by ``fluent-cat`` command or other language bindings.
+**forward** input plugin listens event stream on a TCP socket. This is used to receive event logs from other fluentd, ``fluent-cat`` command or client libraries.
 
-Protocol format::
+**configuration**::
+
+    <source>
+      type forward
+      port 24224
+      bind 0.0.0.0
+    </source>
+
+port
+  port to listen on. Default is 24224.
+
+bind
+  bind address to listen on. Default is 0.0.0.0 (all addresses).
+
+
+This plugin uses MessagePack for the protocol::
 
     stream:
       message...
@@ -168,37 +183,23 @@ Protocol format::
     example:
       ["myapp.access", [1308466941, {"a"=>1}], [1308466942, {"b"=>2}]]
 
-**configuration**::
 
-    <source>
-      type tcp
-      port 24224
-      bind 0.0.0.0
-    </source>
-
-port
-  port to listen on. Default is 24224.
-
-bind
-  bind address to listen on. Default is 0.0.0.0 (all addresses).
-
-
-unix
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-**unix** input plugin listens MessagePack stream on a UNIX socket. This is used by ``fluent-cat`` command or other language bindings.
-
-The format is same as ``tcp``.
-
-**configuration**::
-
-    <source>
-      type unix
-      path /var/run/fluent.sock
-    </source>
-
-path
-  Path of the socket. Default is $install_prefix/var/run/fluent.sock.
+.. unix
+.. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. 
+.. **unix** input plugin listens MessagePack stream on a UNIX socket.
+.. 
+.. The format is same as ``tcp``.
+.. 
+.. **configuration**::
+.. 
+..     <source>
+..       type unix
+..       path /var/run/fluent.sock
+..     </source>
+.. 
+.. path
+..   Path of the socket. Default is $install_prefix/var/run/fluent.sock.
 
 
 .. _output_plugin:
@@ -266,7 +267,7 @@ file
     </match>
 
 path (required)
-  Path of the file. Actual path becomes path + time + ".log". See also ``time_slice_format`` option descried below.
+  Path of the file. Actual path becomes path + time + ".log". See also ``time_slice_format`` parameter descried below.
 
 time_slice_format
   Format of the time in the file path. Following characters are replaced with values:
@@ -300,48 +301,96 @@ compress
 Note that this output plugin uses file buffer by default.
 
 
-tcp
+forward
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**file** buffered output plugin forwards events to another fluent server.
+**forward** buffered output plugin forwards events to other fluent servers.
+
+This plugin supports load-balancing and automatic fail-over (a.k.a. active-active backup). If you want replication, use ``copy`` plugin described below.
+
+It detects fault of a server using "φ accural failure detector" algorithm. You can customize parameter of the algorithm.
+
+When a fault server recovers, the plugin makes it available automatically after several seconds.
+
 
 **configuration**::
 
     <match pattern>
-      type tcp
-      host 192.168.1.3
-      port 24224
+      type forward
       send_timeout 60s
-      <secondary>
+      recover_wait 10s
+      heartbeat_interval 1s
+      phi_threshold 8
+      hard_timeout 60s
+
+      <server>
+        name myserver1
+        host 192.168.1.3
+        port 24224
+        weight 60
+      </server>
+      <server>
+        name myserver2
         host 192.168.1.4
         port 24224
+        weight 60
+      </server>
+      ...
+
+      <secondary>
+        type file
+        path /var/log/fluent/forward-failed
       </secondary>
     </match>
 
+<server> (required at least one)
+  Description of a server.
+
+name
+  Name of the server. This parameter is used in error messages.
+
 host (required)
-  IP address or host name to send events. This parameters is required.
+  IP address or host name of the server. This parameters is required.
 
 port
-  Port number of the host to send. Default is 24224.
+  Port number of the host. Default is 24224.
+
+weight
+  Weight of load balancing. For example, weight of a server is 20 and weight of the other server is 30, events are sent in 2:3 raito. Default is 60.
+
+send_timeout
+  Timeout time to send event logs. Default is 60 seconds.
+
+recover_wait
+  Wait time before accepting recovery of a fault server. Default is 10 seconds.
+
+heartbeat_interval
+  Interval of heartbeat packer. Default is 1 second.
+
+phi_threshold
+  Threshold parameter to detect fault of a server. Default is 8.
+
+hard_timeout
+  Hard timeout to detect failure of a server. Default is same as the ``send_timeout`` parameter.
 
 <secondary>
-  Backup destination whch is used when the primary destination is failed.
+  Backup destination which is used when all servers are not available. This parameter is optional.
 
 
-unix
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-**unix** buffered output plugin forwards events to another fluent process on the same host.
-
-**configuration**::
-
-    <match pattern>
-      type unix
-      path /var/run/fluent.sock
-    </match>
-
-path (required)
-  Path to the UNIX domain socket. This parameters is required.
+.. unix
+.. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+.. 
+.. **unix** buffered output plugin forwards events to another fluent process on the same host.
+.. 
+.. **configuration**::
+.. 
+..     <match pattern>
+..       type unix
+..       path /var/run/fluent.sock
+..     </match>
+.. 
+.. path (required)
+..   Path to the UNIX domain socket. This parameters is required.
 
 
 Non-buffered output plugins
