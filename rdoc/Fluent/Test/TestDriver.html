@@ -154,11 +154,33 @@
         
           <li><a href="../../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
+          <li><a href="../../Fluent/ExecFilterOutput.html">Fluent::ExecFilterOutput</a></li>
+        
+          <li><a href="../../Fluent/ExecInput.html">Fluent::ExecInput</a></li>
+        
+          <li><a href="../../Fluent/ExecOutput.html">Fluent::ExecOutput</a></li>
+        
           <li><a href="../../Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
         
           <li><a href="../../Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
         
           <li><a href="../../Fluent/FileOutput.html">Fluent::FileOutput</a></li>
+        
+          <li><a href="../../Fluent/ForwardInput.html">Fluent::ForwardInput</a></li>
+        
+          <li><a href="../../Fluent/ForwardInput/Handler.html">Fluent::ForwardInput::Handler</a></li>
+        
+          <li><a href="../../Fluent/ForwardInput/HeartbeatRequestHandler.html">Fluent::ForwardInput::HeartbeatRequestHandler</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput.html">Fluent::ForwardOutput</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput/FailureDetector.html">Fluent::ForwardOutput::FailureDetector</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput/HeartbeatHandler.html">Fluent::ForwardOutput::HeartbeatHandler</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput/HeartbeatRequestTimer.html">Fluent::ForwardOutput::HeartbeatRequestTimer</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput/Node.html">Fluent::ForwardOutput::Node</a></li>
         
           <li><a href="../../Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
         
@@ -361,7 +383,8 @@
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">klass</span>, &amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Class</span>)
     <span class="ruby-keyword">if</span> <span class="ruby-identifier">block</span>
-      <span class="ruby-identifier">klass</span> = <span class="ruby-constant">Class</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">klass</span>, &amp;<span class="ruby-identifier">block</span>)
+      <span class="ruby-identifier">klass</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">dup</span>
+      <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">module_eval</span>(&amp;<span class="ruby-identifier">block</span>)
     <span class="ruby-keyword">end</span>
     <span class="ruby-ivar">@instance</span> = <span class="ruby-identifier">klass</span>.<span class="ruby-identifier">new</span>
   <span class="ruby-keyword">else</span>
@@ -404,7 +427,7 @@
             
             <div class="method-source-code" id="configure-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/test/base.rb, line 39</span>
+<span class="ruby-comment"># File lib/fluent/test/base.rb, line 40</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">str</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">str</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">Config</span>)
     <span class="ruby-ivar">@config</span> = <span class="ruby-ivar">@str</span>
@@ -443,7 +466,7 @@
             
             <div class="method-source-code" id="run-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/test/base.rb, line 49</span>
+<span class="ruby-comment"># File lib/fluent/test/base.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>(&amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-ivar">@instance</span>.<span class="ruby-identifier">start</span>
   <span class="ruby-keyword">begin</span>

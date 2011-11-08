@@ -144,11 +144,33 @@
         
           <li><a href="../../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
+          <li><a href="../../Fluent/ExecFilterOutput.html">Fluent::ExecFilterOutput</a></li>
+        
+          <li><a href="../../Fluent/ExecInput.html">Fluent::ExecInput</a></li>
+        
+          <li><a href="../../Fluent/ExecOutput.html">Fluent::ExecOutput</a></li>
+        
           <li><a href="../../Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
         
           <li><a href="../../Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
         
           <li><a href="../../Fluent/FileOutput.html">Fluent::FileOutput</a></li>
+        
+          <li><a href="../../Fluent/ForwardInput.html">Fluent::ForwardInput</a></li>
+        
+          <li><a href="../../Fluent/ForwardInput/Handler.html">Fluent::ForwardInput::Handler</a></li>
+        
+          <li><a href="../../Fluent/ForwardInput/HeartbeatRequestHandler.html">Fluent::ForwardInput::HeartbeatRequestHandler</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput.html">Fluent::ForwardOutput</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput/FailureDetector.html">Fluent::ForwardOutput::FailureDetector</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput/HeartbeatHandler.html">Fluent::ForwardOutput::HeartbeatHandler</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput/HeartbeatRequestTimer.html">Fluent::ForwardOutput::HeartbeatRequestTimer</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput/Node.html">Fluent::ForwardOutput::Node</a></li>
         
           <li><a href="../../Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
         
@@ -310,7 +332,7 @@
             
             <div class="method-source-code" id="emit-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/engine.rb, line 180</span>
+<span class="ruby-comment"># File lib/fluent/engine.rb, line 184</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">emit</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>)
   <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">on_trace</span> { <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">trace</span> <span class="ruby-string">&quot;no pattern matched&quot;</span>, <span class="ruby-value">:tag=</span><span class="ruby-operator">&gt;</span><span class="ruby-identifier">tag</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -343,7 +365,7 @@
             
             <div class="method-source-code" id="match-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/engine.rb, line 190</span>
+<span class="ruby-comment"># File lib/fluent/engine.rb, line 194</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">match</span>(<span class="ruby-identifier">tag</span>)
   <span class="ruby-keyword">false</span>
 <span class="ruby-keyword">end</span></pre>
@@ -376,7 +398,7 @@
             
             <div class="method-source-code" id="shutdown-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/engine.rb, line 187</span>
+<span class="ruby-comment"># File lib/fluent/engine.rb, line 191</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">shutdown</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- shutdown-source -->
@@ -408,7 +430,7 @@
             
             <div class="method-source-code" id="start-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/engine.rb, line 184</span>
+<span class="ruby-comment"># File lib/fluent/engine.rb, line 188</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- start-source -->

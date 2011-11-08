@@ -74,11 +74,33 @@
     
     <li class="class"><a href="Fluent/EventStream.html">Fluent::EventStream</a></li>
     
+    <li class="class"><a href="Fluent/ExecFilterOutput.html">Fluent::ExecFilterOutput</a></li>
+    
+    <li class="class"><a href="Fluent/ExecInput.html">Fluent::ExecInput</a></li>
+    
+    <li class="class"><a href="Fluent/ExecOutput.html">Fluent::ExecOutput</a></li>
+    
     <li class="class"><a href="Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
     
     <li class="class"><a href="Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
     
     <li class="class"><a href="Fluent/FileOutput.html">Fluent::FileOutput</a></li>
+    
+    <li class="class"><a href="Fluent/ForwardInput.html">Fluent::ForwardInput</a></li>
+    
+    <li class="class"><a href="Fluent/ForwardInput/Handler.html">Fluent::ForwardInput::Handler</a></li>
+    
+    <li class="class"><a href="Fluent/ForwardInput/HeartbeatRequestHandler.html">Fluent::ForwardInput::HeartbeatRequestHandler</a></li>
+    
+    <li class="class"><a href="Fluent/ForwardOutput.html">Fluent::ForwardOutput</a></li>
+    
+    <li class="class"><a href="Fluent/ForwardOutput/FailureDetector.html">Fluent::ForwardOutput::FailureDetector</a></li>
+    
+    <li class="class"><a href="Fluent/ForwardOutput/HeartbeatHandler.html">Fluent::ForwardOutput::HeartbeatHandler</a></li>
+    
+    <li class="class"><a href="Fluent/ForwardOutput/HeartbeatRequestTimer.html">Fluent::ForwardOutput::HeartbeatRequestTimer</a></li>
+    
+    <li class="class"><a href="Fluent/ForwardOutput/Node.html">Fluent::ForwardOutput::Node</a></li>
     
     <li class="class"><a href="Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
     
@@ -203,119 +225,143 @@
     
       <li><a href="Fluent/Configurable.html#method-c-included">::included &mdash; Fluent::Configurable</a></li>
     
-      <li><a href="Fluent/TestOutput.html#method-c-new">::new &mdash; Fluent::TestOutput</a></li>
+      <li><a href="Fluent/ExecFilterOutput.html#method-c-new">::new &mdash; Fluent::ExecFilterOutput</a></li>
     
-      <li><a href="Fluent/Match.html#method-c-new">::new &mdash; Fluent::Match</a></li>
+      <li><a href="Fluent/ForwardInput/HeartbeatRequestHandler.html#method-c-new">::new &mdash; Fluent::ForwardInput::HeartbeatRequestHandler</a></li>
     
-      <li><a href="Fluent/MessagePackEventStream.html#method-c-new">::new &mdash; Fluent::MessagePackEventStream</a></li>
+      <li><a href="Fluent/HttpInput.html#method-c-new">::new &mdash; Fluent::HttpInput</a></li>
     
-      <li><a href="Fluent/RoundRobinOutput.html#method-c-new">::new &mdash; Fluent::RoundRobinOutput</a></li>
+      <li><a href="Fluent/HttpInput/KeepaliveManager.html#method-c-new">::new &mdash; Fluent::HttpInput::KeepaliveManager</a></li>
     
-      <li><a href="Fluent/FileOutput.html#method-c-new">::new &mdash; Fluent::FileOutput</a></li>
+      <li><a href="Fluent/BasicBuffer.html#method-c-new">::new &mdash; Fluent::BasicBuffer</a></li>
     
-      <li><a href="Fluent/Config/Parser.html#method-c-new">::new &mdash; Fluent::Config::Parser</a></li>
-    
-      <li><a href="Fluent/StreamInput.html#method-c-new">::new &mdash; Fluent::StreamInput</a></li>
-    
-      <li><a href="Fluent/Config.html#method-c-new">::new &mdash; Fluent::Config</a></li>
-    
-      <li><a href="Fluent/ZFileBufferChunk.html#method-c-new">::new &mdash; Fluent::ZFileBufferChunk</a></li>
+      <li><a href="Fluent/MemoryBufferChunk.html#method-c-new">::new &mdash; Fluent::MemoryBufferChunk</a></li>
     
       <li><a href="Fluent/HttpInput/KeepaliveManager/TimerValue.html#method-c-new">::new &mdash; Fluent::HttpInput::KeepaliveManager::TimerValue</a></li>
     
-      <li><a href="Fluent/OrMatchPattern.html#method-c-new">::new &mdash; Fluent::OrMatchPattern</a></li>
+      <li><a href="Fluent/HttpInput/Handler.html#method-c-new">::new &mdash; Fluent::HttpInput::Handler</a></li>
     
-      <li><a href="Fluent/Input.html#method-c-new">::new &mdash; Fluent::Input</a></li>
+      <li><a href="Fluent/FileBuffer.html#method-c-new">::new &mdash; Fluent::FileBuffer</a></li>
     
-      <li><a href="Fluent/Test/TestOutputChain.html#method-c-new">::new &mdash; Fluent::Test::TestOutputChain</a></li>
+      <li><a href="Fluent/StreamInput.html#method-c-new">::new &mdash; Fluent::StreamInput</a></li>
+    
+      <li><a href="Fluent/StreamInput/Handler.html#method-c-new">::new &mdash; Fluent::StreamInput::Handler</a></li>
+    
+      <li><a href="Fluent/TcpInput.html#method-c-new">::new &mdash; Fluent::TcpInput</a></li>
     
       <li><a href="Fluent/FileBufferChunk.html#method-c-new">::new &mdash; Fluent::FileBufferChunk</a></li>
     
-      <li><a href="Fluent/PluginClass.html#method-c-new">::new &mdash; Fluent::PluginClass</a></li>
+      <li><a href="Fluent/Configurable.html#method-c-new">::new &mdash; Fluent::Configurable</a></li>
+    
+      <li><a href="Fluent/SyslogInput.html#method-c-new">::new &mdash; Fluent::SyslogInput</a></li>
+    
+      <li><a href="Writer.html#method-c-new">::new &mdash; Writer</a></li>
     
       <li><a href="Fluent/Buffer.html#method-c-new">::new &mdash; Fluent::Buffer</a></li>
     
-      <li><a href="Fluent/HttpInput/KeepaliveManager.html#method-c-new">::new &mdash; Fluent::HttpInput::KeepaliveManager</a></li>
+      <li><a href="Fluent/ForwardInput/Handler.html#method-c-new">::new &mdash; Fluent::ForwardInput::Handler</a></li>
+    
+      <li><a href="Fluent/TextParser.html#method-c-new">::new &mdash; Fluent::TextParser</a></li>
+    
+      <li><a href="Fluent/MemoryBuffer.html#method-c-new">::new &mdash; Fluent::MemoryBuffer</a></li>
+    
+      <li><a href="Fluent/SyslogInput/UdpHandler.html#method-c-new">::new &mdash; Fluent::SyslogInput::UdpHandler</a></li>
+    
+      <li><a href="Writer/TimerThread.html#method-c-new">::new &mdash; Writer::TimerThread</a></li>
+    
+      <li><a href="Fluent/Config.html#method-c-new">::new &mdash; Fluent::Config</a></li>
     
       <li><a href="Fluent/TimeSlicedOutput.html#method-c-new">::new &mdash; Fluent::TimeSlicedOutput</a></li>
     
       <li><a href="Fluent/TailInput.html#method-c-new">::new &mdash; Fluent::TailInput</a></li>
     
-      <li><a href="Fluent/NullOutput.html#method-c-new">::new &mdash; Fluent::NullOutput</a></li>
+      <li><a href="Fluent/Config/Element.html#method-c-new">::new &mdash; Fluent::Config::Element</a></li>
     
-      <li><a href="Fluent/TcpOutput.html#method-c-new">::new &mdash; Fluent::TcpOutput</a></li>
-    
-      <li><a href="Fluent/Test/TestDriver.html#method-c-new">::new &mdash; Fluent::Test::TestDriver</a></li>
-    
-      <li><a href="Fluent/TimeFormatter.html#method-c-new">::new &mdash; Fluent::TimeFormatter</a></li>
-    
-      <li><a href="Fluent/Test/BufferedOutputTestDriver.html#method-c-new">::new &mdash; Fluent::Test::BufferedOutputTestDriver</a></li>
-    
-      <li><a href="Fluent/BasicBuffer.html#method-c-new">::new &mdash; Fluent::BasicBuffer</a></li>
-    
-      <li><a href="Fluent/GlobMatchPattern.html#method-c-new">::new &mdash; Fluent::GlobMatchPattern</a></li>
-    
-      <li><a href="Fluent/Log.html#method-c-new">::new &mdash; Fluent::Log</a></li>
-    
-      <li><a href="Fluent/FileBuffer.html#method-c-new">::new &mdash; Fluent::FileBuffer</a></li>
-    
-      <li><a href="Fluent/MultiEventStream.html#method-c-new">::new &mdash; Fluent::MultiEventStream</a></li>
-    
-      <li><a href="Fluent/Output.html#method-c-new">::new &mdash; Fluent::Output</a></li>
-    
-      <li><a href="Fluent/OutputThread.html#method-c-new">::new &mdash; Fluent::OutputThread</a></li>
+      <li><a href="Fluent/MessagePackEventStream.html#method-c-new">::new &mdash; Fluent::MessagePackEventStream</a></li>
     
       <li><a href="Fluent/TailInput/Handler.html#method-c-new">::new &mdash; Fluent::TailInput::Handler</a></li>
     
-      <li><a href="Fluent/SyslogInput.html#method-c-new">::new &mdash; Fluent::SyslogInput</a></li>
-    
-      <li><a href="Fluent/MemoryBufferChunk.html#method-c-new">::new &mdash; Fluent::MemoryBufferChunk</a></li>
-    
       <li><a href="Fluent/CopyOutput.html#method-c-new">::new &mdash; Fluent::CopyOutput</a></li>
-    
-      <li><a href="Fluent/StreamOutput.html#method-c-new">::new &mdash; Fluent::StreamOutput</a></li>
-    
-      <li><a href="Fluent/OneEventStream.html#method-c-new">::new &mdash; Fluent::OneEventStream</a></li>
-    
-      <li><a href="Fluent/BufferChunk.html#method-c-new">::new &mdash; Fluent::BufferChunk</a></li>
-    
-      <li><a href="Writer.html#method-c-new">::new &mdash; Writer</a></li>
-    
-      <li><a href="Fluent/EngineClass.html#method-c-new">::new &mdash; Fluent::EngineClass</a></li>
-    
-      <li><a href="Fluent/SyslogInput/UdpHandler.html#method-c-new">::new &mdash; Fluent::SyslogInput::UdpHandler</a></li>
-    
-      <li><a href="Fluent/TextParser.html#method-c-new">::new &mdash; Fluent::TextParser</a></li>
-    
-      <li><a href="Fluent/Configurable.html#method-c-new">::new &mdash; Fluent::Configurable</a></li>
-    
-      <li><a href="Fluent/Test/InputTestDriver.html#method-c-new">::new &mdash; Fluent::Test::InputTestDriver</a></li>
-    
-      <li><a href="Fluent/StreamInput/Handler.html#method-c-new">::new &mdash; Fluent::StreamInput::Handler</a></li>
-    
-      <li><a href="Fluent/ZFileBuffer.html#method-c-new">::new &mdash; Fluent::ZFileBuffer</a></li>
-    
-      <li><a href="Fluent/HttpInput.html#method-c-new">::new &mdash; Fluent::HttpInput</a></li>
-    
-      <li><a href="Fluent/StreamOutput/ReformatWriter.html#method-c-new">::new &mdash; Fluent::StreamOutput::ReformatWriter</a></li>
-    
-      <li><a href="Fluent/Test/OutputTestDriver.html#method-c-new">::new &mdash; Fluent::Test::OutputTestDriver</a></li>
-    
-      <li><a href="Fluent/ArrayEventStream.html#method-c-new">::new &mdash; Fluent::ArrayEventStream</a></li>
-    
-      <li><a href="Fluent/HttpInput/Handler.html#method-c-new">::new &mdash; Fluent::HttpInput::Handler</a></li>
-    
-      <li><a href="Fluent/MemoryBuffer.html#method-c-new">::new &mdash; Fluent::MemoryBuffer</a></li>
     
       <li><a href="Fluent/BufferedOutput.html#method-c-new">::new &mdash; Fluent::BufferedOutput</a></li>
     
-      <li><a href="Fluent/UnixOutput.html#method-c-new">::new &mdash; Fluent::UnixOutput</a></li>
+      <li><a href="Fluent/ExecOutput.html#method-c-new">::new &mdash; Fluent::ExecOutput</a></li>
+    
+      <li><a href="Fluent/BufferChunk.html#method-c-new">::new &mdash; Fluent::BufferChunk</a></li>
+    
+      <li><a href="Fluent/OutputThread.html#method-c-new">::new &mdash; Fluent::OutputThread</a></li>
+    
+      <li><a href="Fluent/FileOutput.html#method-c-new">::new &mdash; Fluent::FileOutput</a></li>
+    
+      <li><a href="Fluent/Config/Parser.html#method-c-new">::new &mdash; Fluent::Config::Parser</a></li>
+    
+      <li><a href="Fluent/Test/BufferedOutputTestDriver.html#method-c-new">::new &mdash; Fluent::Test::BufferedOutputTestDriver</a></li>
+    
+      <li><a href="Fluent/Output.html#method-c-new">::new &mdash; Fluent::Output</a></li>
+    
+      <li><a href="Fluent/EngineClass.html#method-c-new">::new &mdash; Fluent::EngineClass</a></li>
+    
+      <li><a href="Fluent/Test/OutputTestDriver.html#method-c-new">::new &mdash; Fluent::Test::OutputTestDriver</a></li>
+    
+      <li><a href="Fluent/Test/TestOutputChain.html#method-c-new">::new &mdash; Fluent::Test::TestOutputChain</a></li>
+    
+      <li><a href="Fluent/ForwardOutput.html#method-c-new">::new &mdash; Fluent::ForwardOutput</a></li>
     
       <li><a href="Fluent/OutputChain.html#method-c-new">::new &mdash; Fluent::OutputChain</a></li>
     
-      <li><a href="Fluent/Config/Element.html#method-c-new">::new &mdash; Fluent::Config::Element</a></li>
+      <li><a href="Fluent/ForwardInput.html#method-c-new">::new &mdash; Fluent::ForwardInput</a></li>
     
-      <li><a href="Writer/TimerThread.html#method-c-new">::new &mdash; Writer::TimerThread</a></li>
+      <li><a href="Fluent/TimeFormatter.html#method-c-new">::new &mdash; Fluent::TimeFormatter</a></li>
+    
+      <li><a href="Fluent/ForwardOutput/HeartbeatRequestTimer.html#method-c-new">::new &mdash; Fluent::ForwardOutput::HeartbeatRequestTimer</a></li>
+    
+      <li><a href="Fluent/OrMatchPattern.html#method-c-new">::new &mdash; Fluent::OrMatchPattern</a></li>
+    
+      <li><a href="Fluent/ForwardOutput/HeartbeatHandler.html#method-c-new">::new &mdash; Fluent::ForwardOutput::HeartbeatHandler</a></li>
+    
+      <li><a href="Fluent/GlobMatchPattern.html#method-c-new">::new &mdash; Fluent::GlobMatchPattern</a></li>
+    
+      <li><a href="Fluent/Test/InputTestDriver.html#method-c-new">::new &mdash; Fluent::Test::InputTestDriver</a></li>
+    
+      <li><a href="Fluent/ZFileBufferChunk.html#method-c-new">::new &mdash; Fluent::ZFileBufferChunk</a></li>
+    
+      <li><a href="Fluent/Test/TestDriver.html#method-c-new">::new &mdash; Fluent::Test::TestDriver</a></li>
+    
+      <li><a href="Fluent/ForwardOutput/Node.html#method-c-new">::new &mdash; Fluent::ForwardOutput::Node</a></li>
+    
+      <li><a href="Fluent/PluginClass.html#method-c-new">::new &mdash; Fluent::PluginClass</a></li>
+    
+      <li><a href="Fluent/ForwardOutput/FailureDetector.html#method-c-new">::new &mdash; Fluent::ForwardOutput::FailureDetector</a></li>
+    
+      <li><a href="Fluent/Match.html#method-c-new">::new &mdash; Fluent::Match</a></li>
+    
+      <li><a href="Fluent/NullOutput.html#method-c-new">::new &mdash; Fluent::NullOutput</a></li>
+    
+      <li><a href="Fluent/ExecInput.html#method-c-new">::new &mdash; Fluent::ExecInput</a></li>
+    
+      <li><a href="Fluent/OneEventStream.html#method-c-new">::new &mdash; Fluent::OneEventStream</a></li>
+    
+      <li><a href="Fluent/TestOutput.html#method-c-new">::new &mdash; Fluent::TestOutput</a></li>
+    
+      <li><a href="Fluent/RoundRobinOutput.html#method-c-new">::new &mdash; Fluent::RoundRobinOutput</a></li>
+    
+      <li><a href="Fluent/ArrayEventStream.html#method-c-new">::new &mdash; Fluent::ArrayEventStream</a></li>
+    
+      <li><a href="Fluent/StreamOutput.html#method-c-new">::new &mdash; Fluent::StreamOutput</a></li>
+    
+      <li><a href="Fluent/StreamOutput/ReformatWriter.html#method-c-new">::new &mdash; Fluent::StreamOutput::ReformatWriter</a></li>
+    
+      <li><a href="Fluent/Log.html#method-c-new">::new &mdash; Fluent::Log</a></li>
+    
+      <li><a href="Fluent/MultiEventStream.html#method-c-new">::new &mdash; Fluent::MultiEventStream</a></li>
+    
+      <li><a href="Fluent/TcpOutput.html#method-c-new">::new &mdash; Fluent::TcpOutput</a></li>
+    
+      <li><a href="Fluent/Input.html#method-c-new">::new &mdash; Fluent::Input</a></li>
+    
+      <li><a href="Fluent/UnixOutput.html#method-c-new">::new &mdash; Fluent::UnixOutput</a></li>
+    
+      <li><a href="Fluent/ZFileBuffer.html#method-c-new">::new &mdash; Fluent::ZFileBuffer</a></li>
     
       <li><a href="Fluent/Config/Parser.html#method-c-parse">::parse &mdash; Fluent::Config::Parser</a></li>
     
@@ -335,11 +381,11 @@
     
       <li><a href="Fluent/Config/Element.html#method-i-2B">#+ &mdash; Fluent::Config::Element</a></li>
     
-      <li><a href="Fluent/FileBufferChunk.html#method-i-3C-3C">#<< &mdash; Fluent::FileBufferChunk</a></li>
+      <li><a href="Fluent/MemoryBufferChunk.html#method-i-3C-3C">#<< &mdash; Fluent::MemoryBufferChunk</a></li>
     
       <li><a href="Fluent/ZFileBufferChunk.html#method-i-3C-3C">#<< &mdash; Fluent::ZFileBufferChunk</a></li>
     
-      <li><a href="Fluent/MemoryBufferChunk.html#method-i-3C-3C">#<< &mdash; Fluent::MemoryBufferChunk</a></li>
+      <li><a href="Fluent/FileBufferChunk.html#method-i-3C-3C">#<< &mdash; Fluent::FileBufferChunk</a></li>
     
       <li><a href="Fluent/Log.html#method-i-DEBUG">#DEBUG &mdash; Fluent::Log</a></li>
     
@@ -355,29 +401,35 @@
     
       <li><a href="Fluent/Config/Element.html#method-i-5B-5D">#[] &mdash; Fluent::Config::Element</a></li>
     
-      <li><a href="Fluent/MultiEventStream.html#method-i-add">#add &mdash; Fluent::MultiEventStream</a></li>
+      <li><a href="Fluent/ForwardOutput/FailureDetector.html#method-i-add">#add &mdash; Fluent::ForwardOutput::FailureDetector</a></li>
     
       <li><a href="Fluent/HttpInput/KeepaliveManager.html#method-i-add">#add &mdash; Fluent::HttpInput::KeepaliveManager</a></li>
     
+      <li><a href="Fluent/MultiEventStream.html#method-i-add">#add &mdash; Fluent::MultiEventStream</a></li>
+    
       <li><a href="Fluent/Config/Element.html#method-i-add_element">#add_element &mdash; Fluent::Config::Element</a></li>
     
-      <li><a href="Fluent/MemoryBuffer.html#method-i-before_shutdown">#before_shutdown &mdash; Fluent::MemoryBuffer</a></li>
+      <li><a href="Fluent/ForwardOutput/Node.html#method-i-available-3F">#available? &mdash; Fluent::ForwardOutput::Node</a></li>
     
       <li><a href="Fluent/Buffer.html#method-i-before_shutdown">#before_shutdown &mdash; Fluent::Buffer</a></li>
+    
+      <li><a href="Fluent/MemoryBuffer.html#method-i-before_shutdown">#before_shutdown &mdash; Fluent::MemoryBuffer</a></li>
     
       <li><a href="Fluent/BufferedOutput.html#method-i-before_shutdown">#before_shutdown &mdash; Fluent::BufferedOutput</a></li>
     
       <li><a href="Fluent/Config/Element.html#method-i-check_not_fetched">#check_not_fetched &mdash; Fluent::Config::Element</a></li>
     
+      <li><a href="Fluent/ForwardOutput/FailureDetector.html#method-i-clear">#clear &mdash; Fluent::ForwardOutput::FailureDetector</a></li>
+    
       <li><a href="Fluent/BasicBuffer.html#method-i-clear-21">#clear! &mdash; Fluent::BasicBuffer</a></li>
     
       <li><a href="Fluent/MemoryBufferChunk.html#method-i-close">#close &mdash; Fluent::MemoryBufferChunk</a></li>
     
-      <li><a href="Fluent/ZFileBufferChunk.html#method-i-close">#close &mdash; Fluent::ZFileBufferChunk</a></li>
+      <li><a href="Fluent/FileBufferChunk.html#method-i-close">#close &mdash; Fluent::FileBufferChunk</a></li>
     
       <li><a href="Writer.html#method-i-close">#close &mdash; Writer</a></li>
     
-      <li><a href="Fluent/FileBufferChunk.html#method-i-close">#close &mdash; Fluent::FileBufferChunk</a></li>
+      <li><a href="Fluent/ZFileBufferChunk.html#method-i-close">#close &mdash; Fluent::ZFileBufferChunk</a></li>
     
       <li><a href="Fluent/ZFileBufferChunk.html#method-i-close_write">#close_write &mdash; Fluent::ZFileBufferChunk</a></li>
     
@@ -391,61 +443,69 @@
     
       <li><a href="Fluent/Configurable/ClassMethods.html#method-i-config_set_default">#config_set_default &mdash; Fluent::Configurable::ClassMethods</a></li>
     
-      <li><a href="Fluent/SyslogInput.html#method-i-configure">#configure &mdash; Fluent::SyslogInput</a></li>
+      <li><a href="Fluent/TestOutput.html#method-i-configure">#configure &mdash; Fluent::TestOutput</a></li>
     
-      <li><a href="Fluent/TcpInput.html#method-i-configure">#configure &mdash; Fluent::TcpInput</a></li>
-    
-      <li><a href="Fluent/FileOutput.html#method-i-configure">#configure &mdash; Fluent::FileOutput</a></li>
-    
-      <li><a href="Fluent/Buffer.html#method-i-configure">#configure &mdash; Fluent::Buffer</a></li>
-    
-      <li><a href="Fluent/UnixOutput.html#method-i-configure">#configure &mdash; Fluent::UnixOutput</a></li>
-    
-      <li><a href="Fluent/Configurable.html#method-i-configure">#configure &mdash; Fluent::Configurable</a></li>
-    
-      <li><a href="Fluent/Output.html#method-i-configure">#configure &mdash; Fluent::Output</a></li>
-    
-      <li><a href="Fluent/EngineClass.html#method-i-configure">#configure &mdash; Fluent::EngineClass</a></li>
-    
-      <li><a href="Fluent/TcpOutput.html#method-i-configure">#configure &mdash; Fluent::TcpOutput</a></li>
-    
-      <li><a href="Fluent/MemoryBuffer.html#method-i-configure">#configure &mdash; Fluent::MemoryBuffer</a></li>
-    
-      <li><a href="Fluent/NullOutput.html#method-i-configure">#configure &mdash; Fluent::NullOutput</a></li>
-    
-      <li><a href="Fluent/BufferedOutput.html#method-i-configure">#configure &mdash; Fluent::BufferedOutput</a></li>
-    
-      <li><a href="Fluent/TextParser.html#method-i-configure">#configure &mdash; Fluent::TextParser</a></li>
-    
-      <li><a href="Fluent/RoundRobinOutput.html#method-i-configure">#configure &mdash; Fluent::RoundRobinOutput</a></li>
-    
-      <li><a href="Fluent/TailInput.html#method-i-configure">#configure &mdash; Fluent::TailInput</a></li>
-    
-      <li><a href="Fluent/StreamOutput.html#method-i-configure">#configure &mdash; Fluent::StreamOutput</a></li>
+      <li><a href="Fluent/FileBuffer.html#method-i-configure">#configure &mdash; Fluent::FileBuffer</a></li>
     
       <li><a href="Fluent/Test/TestDriver.html#method-i-configure">#configure &mdash; Fluent::Test::TestDriver</a></li>
     
       <li><a href="Fluent/UnixInput.html#method-i-configure">#configure &mdash; Fluent::UnixInput</a></li>
     
+      <li><a href="Fluent/NullOutput.html#method-i-configure">#configure &mdash; Fluent::NullOutput</a></li>
+    
+      <li><a href="Fluent/Configurable.html#method-i-configure">#configure &mdash; Fluent::Configurable</a></li>
+    
       <li><a href="Fluent/BasicBuffer.html#method-i-configure">#configure &mdash; Fluent::BasicBuffer</a></li>
     
-      <li><a href="Fluent/CopyOutput.html#method-i-configure">#configure &mdash; Fluent::CopyOutput</a></li>
+      <li><a href="Fluent/TextParser.html#method-i-configure">#configure &mdash; Fluent::TextParser</a></li>
     
-      <li><a href="Fluent/OutputThread.html#method-i-configure">#configure &mdash; Fluent::OutputThread</a></li>
+      <li><a href="Fluent/SyslogInput.html#method-i-configure">#configure &mdash; Fluent::SyslogInput</a></li>
     
-      <li><a href="Fluent/FileBuffer.html#method-i-configure">#configure &mdash; Fluent::FileBuffer</a></li>
+      <li><a href="Fluent/ForwardOutput.html#method-i-configure">#configure &mdash; Fluent::ForwardOutput</a></li>
     
-      <li><a href="Fluent/SetTimeKeyMixin.html#method-i-configure">#configure &mdash; Fluent::SetTimeKeyMixin</a></li>
-    
-      <li><a href="Fluent/SetTagKeyMixin.html#method-i-configure">#configure &mdash; Fluent::SetTagKeyMixin</a></li>
+      <li><a href="Fluent/RoundRobinOutput.html#method-i-configure">#configure &mdash; Fluent::RoundRobinOutput</a></li>
     
       <li><a href="Fluent/HttpInput.html#method-i-configure">#configure &mdash; Fluent::HttpInput</a></li>
     
+      <li><a href="Fluent/SetTimeKeyMixin.html#method-i-configure">#configure &mdash; Fluent::SetTimeKeyMixin</a></li>
+    
+      <li><a href="Fluent/FileOutput.html#method-i-configure">#configure &mdash; Fluent::FileOutput</a></li>
+    
+      <li><a href="Fluent/MemoryBuffer.html#method-i-configure">#configure &mdash; Fluent::MemoryBuffer</a></li>
+    
+      <li><a href="Fluent/Output.html#method-i-configure">#configure &mdash; Fluent::Output</a></li>
+    
+      <li><a href="Fluent/StreamOutput.html#method-i-configure">#configure &mdash; Fluent::StreamOutput</a></li>
+    
+      <li><a href="Fluent/ForwardInput.html#method-i-configure">#configure &mdash; Fluent::ForwardInput</a></li>
+    
+      <li><a href="Fluent/ExecFilterOutput.html#method-i-configure">#configure &mdash; Fluent::ExecFilterOutput</a></li>
+    
+      <li><a href="Fluent/SetTagKeyMixin.html#method-i-configure">#configure &mdash; Fluent::SetTagKeyMixin</a></li>
+    
+      <li><a href="Fluent/OutputThread.html#method-i-configure">#configure &mdash; Fluent::OutputThread</a></li>
+    
       <li><a href="Fluent/TimeSlicedOutput.html#method-i-configure">#configure &mdash; Fluent::TimeSlicedOutput</a></li>
     
-      <li><a href="Fluent/TestOutput.html#method-i-configure">#configure &mdash; Fluent::TestOutput</a></li>
+      <li><a href="Fluent/ExecOutput.html#method-i-configure">#configure &mdash; Fluent::ExecOutput</a></li>
+    
+      <li><a href="Fluent/Buffer.html#method-i-configure">#configure &mdash; Fluent::Buffer</a></li>
+    
+      <li><a href="Fluent/TcpOutput.html#method-i-configure">#configure &mdash; Fluent::TcpOutput</a></li>
+    
+      <li><a href="Fluent/BufferedOutput.html#method-i-configure">#configure &mdash; Fluent::BufferedOutput</a></li>
     
       <li><a href="Fluent/Input.html#method-i-configure">#configure &mdash; Fluent::Input</a></li>
+    
+      <li><a href="Fluent/CopyOutput.html#method-i-configure">#configure &mdash; Fluent::CopyOutput</a></li>
+    
+      <li><a href="Fluent/UnixOutput.html#method-i-configure">#configure &mdash; Fluent::UnixOutput</a></li>
+    
+      <li><a href="Fluent/ExecInput.html#method-i-configure">#configure &mdash; Fluent::ExecInput</a></li>
+    
+      <li><a href="Fluent/EngineClass.html#method-i-configure">#configure &mdash; Fluent::EngineClass</a></li>
+    
+      <li><a href="Fluent/TailInput.html#method-i-configure">#configure &mdash; Fluent::TailInput</a></li>
     
       <li><a href="Fluent/TailInput.html#method-i-configure_parser">#configure_parser &mdash; Fluent::TailInput</a></li>
     
@@ -461,51 +521,59 @@
     
       <li><a href="Fluent/HttpInput/KeepaliveManager.html#method-i-delete">#delete &mdash; Fluent::HttpInput::KeepaliveManager</a></li>
     
-      <li><a href="Fluent/MessagePackEventStream.html#method-i-each">#each &mdash; Fluent::MessagePackEventStream</a></li>
-    
-      <li><a href="Fluent/MultiEventStream.html#method-i-each">#each &mdash; Fluent::MultiEventStream</a></li>
-    
       <li><a href="Fluent/OneEventStream.html#method-i-each">#each &mdash; Fluent::OneEventStream</a></li>
+    
+      <li><a href="Fluent/MessagePackEventStream.html#method-i-each">#each &mdash; Fluent::MessagePackEventStream</a></li>
     
       <li><a href="Fluent/ArrayEventStream.html#method-i-each">#each &mdash; Fluent::ArrayEventStream</a></li>
     
+      <li><a href="Fluent/MultiEventStream.html#method-i-each">#each &mdash; Fluent::MultiEventStream</a></li>
+    
+      <li><a href="Fluent/NullOutput.html#method-i-emit">#emit &mdash; Fluent::NullOutput</a></li>
+    
       <li><a href="Fluent/Test/OutputTestDriver.html#method-i-emit">#emit &mdash; Fluent::Test::OutputTestDriver</a></li>
     
-      <li><a href="Fluent/TimeSlicedOutput.html#method-i-emit">#emit &mdash; Fluent::TimeSlicedOutput</a></li>
+      <li><a href="Fluent/EngineClass.html#method-i-emit">#emit &mdash; Fluent::EngineClass</a></li>
     
       <li><a href="Fluent/BufferedOutput.html#method-i-emit">#emit &mdash; Fluent::BufferedOutput</a></li>
     
       <li><a href="Fluent/CopyOutput.html#method-i-emit">#emit &mdash; Fluent::CopyOutput</a></li>
     
-      <li><a href="Fluent/BasicBuffer.html#method-i-emit">#emit &mdash; Fluent::BasicBuffer</a></li>
-    
-      <li><a href="Fluent/TestOutput.html#method-i-emit">#emit &mdash; Fluent::TestOutput</a></li>
-    
-      <li><a href="Fluent/NullOutput.html#method-i-emit">#emit &mdash; Fluent::NullOutput</a></li>
-    
-      <li><a href="Fluent/StdoutOutput.html#method-i-emit">#emit &mdash; Fluent::StdoutOutput</a></li>
-    
-      <li><a href="Fluent/Match.html#method-i-emit">#emit &mdash; Fluent::Match</a></li>
+      <li><a href="Fluent/Test/BufferedOutputTestDriver.html#method-i-emit">#emit &mdash; Fluent::Test::BufferedOutputTestDriver</a></li>
     
       <li><a href="Fluent/EngineClass/NoMatchMatch.html#method-i-emit">#emit &mdash; Fluent::EngineClass::NoMatchMatch</a></li>
     
+      <li><a href="Fluent/TestOutput.html#method-i-emit">#emit &mdash; Fluent::TestOutput</a></li>
+    
+      <li><a href="Fluent/Match.html#method-i-emit">#emit &mdash; Fluent::Match</a></li>
+    
+      <li><a href="Fluent/ForwardOutput.html#method-i-emit">#emit &mdash; Fluent::ForwardOutput</a></li>
+    
+      <li><a href="Fluent/TimeSlicedOutput.html#method-i-emit">#emit &mdash; Fluent::TimeSlicedOutput</a></li>
+    
+      <li><a href="Fluent/BasicBuffer.html#method-i-emit">#emit &mdash; Fluent::BasicBuffer</a></li>
+    
+      <li><a href="Fluent/ExecFilterOutput.html#method-i-emit">#emit &mdash; Fluent::ExecFilterOutput</a></li>
+    
       <li><a href="Fluent/RoundRobinOutput.html#method-i-emit">#emit &mdash; Fluent::RoundRobinOutput</a></li>
     
-      <li><a href="Fluent/Test/BufferedOutputTestDriver.html#method-i-emit">#emit &mdash; Fluent::Test::BufferedOutputTestDriver</a></li>
-    
-      <li><a href="Fluent/EngineClass.html#method-i-emit">#emit &mdash; Fluent::EngineClass</a></li>
+      <li><a href="Fluent/StdoutOutput.html#method-i-emit">#emit &mdash; Fluent::StdoutOutput</a></li>
     
       <li><a href="Fluent/EngineClass.html#method-i-emit_array">#emit_array &mdash; Fluent::EngineClass</a></li>
     
       <li><a href="Fluent/EngineClass.html#method-i-emit_stream">#emit_stream &mdash; Fluent::EngineClass</a></li>
     
+      <li><a href="Fluent/Test/InputTestDriver.html#method-i-emits">#emits &mdash; Fluent::Test::InputTestDriver</a></li>
+    
+      <li><a href="Fluent/TestOutput.html#method-i-emits">#emits &mdash; Fluent::TestOutput</a></li>
+    
       <li><a href="Fluent/FileBufferChunk.html#method-i-empty-3F">#empty? &mdash; Fluent::FileBufferChunk</a></li>
+    
+      <li><a href="Fluent/BufferChunk.html#method-i-empty-3F">#empty? &mdash; Fluent::BufferChunk</a></li>
     
       <li><a href="Fluent/MultiEventStream.html#method-i-empty-3F">#empty? &mdash; Fluent::MultiEventStream</a></li>
     
       <li><a href="Fluent/ArrayEventStream.html#method-i-empty-3F">#empty? &mdash; Fluent::ArrayEventStream</a></li>
-    
-      <li><a href="Fluent/BufferChunk.html#method-i-empty-3F">#empty? &mdash; Fluent::BufferChunk</a></li>
     
       <li><a href="Fluent/Log.html#method-i-enable_color">#enable_color &mdash; Fluent::Log</a></li>
     
@@ -539,9 +607,9 @@
     
       <li><a href="Fluent/RecordFilterMixin.html#method-i-filter_record">#filter_record &mdash; Fluent::RecordFilterMixin</a></li>
     
-      <li><a href="Fluent/SetTagKeyMixin.html#method-i-filter_record">#filter_record &mdash; Fluent::SetTagKeyMixin</a></li>
-    
       <li><a href="Fluent/SetTimeKeyMixin.html#method-i-filter_record">#filter_record &mdash; Fluent::SetTimeKeyMixin</a></li>
+    
+      <li><a href="Fluent/SetTagKeyMixin.html#method-i-filter_record">#filter_record &mdash; Fluent::SetTagKeyMixin</a></li>
     
       <li><a href="Fluent/EngineClass.html#method-i-flush-21">#flush! &mdash; Fluent::EngineClass</a></li>
     
@@ -549,19 +617,23 @@
     
       <li><a href="Fluent/StreamOutput.html#method-i-flush_secondary">#flush_secondary &mdash; Fluent::StreamOutput</a></li>
     
-      <li><a href="Fluent/FileOutput.html#method-i-format">#format &mdash; Fluent::FileOutput</a></li>
-    
       <li><a href="Fluent/TimeFormatter.html#method-i-format">#format &mdash; Fluent::TimeFormatter</a></li>
+    
+      <li><a href="Fluent/ExecOutput.html#method-i-format">#format &mdash; Fluent::ExecOutput</a></li>
+    
+      <li><a href="Fluent/FileOutput.html#method-i-format">#format &mdash; Fluent::FileOutput</a></li>
     
       <li><a href="Fluent/TimeFormatter.html#method-i-format_nocache">#format_nocache &mdash; Fluent::TimeFormatter</a></li>
     
       <li><a href="Fluent/BufferedOutput.html#method-i-format_stream">#format_stream &mdash; Fluent::BufferedOutput</a></li>
     
-      <li><a href="Fluent/StreamOutput.html#method-i-format_stream">#format_stream &mdash; Fluent::StreamOutput</a></li>
-    
       <li><a href="Fluent/RecordFilterMixin.html#method-i-format_stream">#format_stream &mdash; Fluent::RecordFilterMixin</a></li>
     
+      <li><a href="Fluent/StreamOutput.html#method-i-format_stream">#format_stream &mdash; Fluent::StreamOutput</a></li>
+    
       <li><a href="Fluent/Config/Element.html#method-i-has_key-3F">#has_key? &mdash; Fluent::Config::Element</a></li>
+    
+      <li><a href="Fluent/ForwardOutput/Node.html#method-i-heartbeat">#heartbeat &mdash; Fluent::ForwardOutput::Node</a></li>
     
       <li><a href="Fluent/Log.html#method-i-info">#info &mdash; Fluent::Log</a></li>
     
@@ -571,49 +643,51 @@
     
       <li><a href="Fluent/BasicBuffer.html#method-i-keys">#keys &mdash; Fluent::BasicBuffer</a></li>
     
-      <li><a href="Fluent/TcpInput.html#method-i-listen">#listen &mdash; Fluent::TcpInput</a></li>
-    
       <li><a href="Fluent/UnixInput.html#method-i-listen">#listen &mdash; Fluent::UnixInput</a></li>
     
-      <li><a href="Fluent/PluginClass.html#method-i-load_plugin_dir">#load_plugin_dir &mdash; Fluent::PluginClass</a></li>
+      <li><a href="Fluent/ForwardInput.html#method-i-listen">#listen &mdash; Fluent::ForwardInput</a></li>
     
       <li><a href="Fluent/EngineClass.html#method-i-load_plugin_dir">#load_plugin_dir &mdash; Fluent::EngineClass</a></li>
     
+      <li><a href="Fluent/PluginClass.html#method-i-load_plugin_dir">#load_plugin_dir &mdash; Fluent::PluginClass</a></li>
+    
       <li><a href="Fluent/PluginClass.html#method-i-load_plugins">#load_plugins &mdash; Fluent::PluginClass</a></li>
+    
+      <li><a href="Fluent/EngineClass.html#method-i-match">#match &mdash; Fluent::EngineClass</a></li>
+    
+      <li><a href="Fluent/GlobMatchPattern.html#method-i-match">#match &mdash; Fluent::GlobMatchPattern</a></li>
     
       <li><a href="Fluent/OrMatchPattern.html#method-i-match">#match &mdash; Fluent::OrMatchPattern</a></li>
     
       <li><a href="Fluent/Match.html#method-i-match">#match &mdash; Fluent::Match</a></li>
     
-      <li><a href="Fluent/GlobMatchPattern.html#method-i-match">#match &mdash; Fluent::GlobMatchPattern</a></li>
-    
       <li><a href="Fluent/EngineClass/NoMatchMatch.html#method-i-match">#match &mdash; Fluent::EngineClass::NoMatchMatch</a></li>
     
       <li><a href="Fluent/EngineClass.html#method-i-match-3F">#match? &mdash; Fluent::EngineClass</a></li>
     
-      <li><a href="Fluent/BufferChunk.html#method-i-msgpack_each">#msgpack_each &mdash; Fluent::BufferChunk</a></li>
-    
       <li><a href="Fluent/MemoryBufferChunk.html#method-i-msgpack_each">#msgpack_each &mdash; Fluent::MemoryBufferChunk</a></li>
+    
+      <li><a href="Fluent/BufferChunk.html#method-i-msgpack_each">#msgpack_each &mdash; Fluent::BufferChunk</a></li>
     
       <li><a href="Fluent/FileBufferChunk.html#method-i-mv">#mv &mdash; Fluent::FileBufferChunk</a></li>
     
       <li><a href="Fluent/PluginClass.html#method-i-new_buffer">#new_buffer &mdash; Fluent::PluginClass</a></li>
     
-      <li><a href="Fluent/FileBuffer.html#method-i-new_chunk">#new_chunk &mdash; Fluent::FileBuffer</a></li>
+      <li><a href="Fluent/ZFileBuffer.html#method-i-new_chunk">#new_chunk &mdash; Fluent::ZFileBuffer</a></li>
     
       <li><a href="Fluent/MemoryBuffer.html#method-i-new_chunk">#new_chunk &mdash; Fluent::MemoryBuffer</a></li>
     
-      <li><a href="Fluent/ZFileBuffer.html#method-i-new_chunk">#new_chunk &mdash; Fluent::ZFileBuffer</a></li>
+      <li><a href="Fluent/FileBuffer.html#method-i-new_chunk">#new_chunk &mdash; Fluent::FileBuffer</a></li>
     
       <li><a href="Fluent/PluginClass.html#method-i-new_input">#new_input &mdash; Fluent::PluginClass</a></li>
     
       <li><a href="Fluent/PluginClass.html#method-i-new_output">#new_output &mdash; Fluent::PluginClass</a></li>
     
-      <li><a href="Fluent/NullOutputChain.html#method-i-next">#next &mdash; Fluent::NullOutputChain</a></li>
-    
       <li><a href="Fluent/OutputChain.html#method-i-next">#next &mdash; Fluent::OutputChain</a></li>
     
       <li><a href="Fluent/Test/TestOutputChain.html#method-i-next">#next &mdash; Fluent::Test::TestOutputChain</a></li>
+    
+      <li><a href="Fluent/NullOutputChain.html#method-i-next">#next &mdash; Fluent::NullOutputChain</a></li>
     
       <li><a href="Fluent/RoundRobinOutput.html#method-i-next_output">#next_output &mdash; Fluent::RoundRobinOutput</a></li>
     
@@ -627,9 +701,13 @@
     
       <li><a href="Fluent/HttpInput/Handler.html#method-i-on_close">#on_close &mdash; Fluent::HttpInput::Handler</a></li>
     
-      <li><a href="Fluent/StreamInput/Handler.html#method-i-on_connect">#on_connect &mdash; Fluent::StreamInput::Handler</a></li>
+      <li><a href="Fluent/ForwardInput/Handler.html#method-i-on_close">#on_close &mdash; Fluent::ForwardInput::Handler</a></li>
     
       <li><a href="Fluent/HttpInput/Handler.html#method-i-on_connect">#on_connect &mdash; Fluent::HttpInput::Handler</a></li>
+    
+      <li><a href="Fluent/ForwardInput/Handler.html#method-i-on_connect">#on_connect &mdash; Fluent::ForwardInput::Handler</a></li>
+    
+      <li><a href="Fluent/StreamInput/Handler.html#method-i-on_connect">#on_connect &mdash; Fluent::StreamInput::Handler</a></li>
     
       <li><a href="Fluent/Log.html#method-i-on_debug">#on_debug &mdash; Fluent::Log</a></li>
     
@@ -639,7 +717,11 @@
     
       <li><a href="Fluent/HttpInput/Handler.html#method-i-on_headers_complete">#on_headers_complete &mdash; Fluent::HttpInput::Handler</a></li>
     
+      <li><a href="Fluent/ForwardInput.html#method-i-on_heartbeat_request">#on_heartbeat_request &mdash; Fluent::ForwardInput</a></li>
+    
       <li><a href="Fluent/Log.html#method-i-on_info">#on_info &mdash; Fluent::Log</a></li>
+    
+      <li><a href="Fluent/ForwardInput.html#method-i-on_message">#on_message &mdash; Fluent::ForwardInput</a></li>
     
       <li><a href="Fluent/StreamInput.html#method-i-on_message">#on_message &mdash; Fluent::StreamInput</a></li>
     
@@ -647,15 +729,27 @@
     
       <li><a href="Fluent/HttpInput/Handler.html#method-i-on_message_complete">#on_message_complete &mdash; Fluent::HttpInput::Handler</a></li>
     
-      <li><a href="Fluent/HttpInput/Handler.html#method-i-on_read">#on_read &mdash; Fluent::HttpInput::Handler</a></li>
+      <li><a href="Fluent/ForwardInput/Handler.html#method-i-on_read">#on_read &mdash; Fluent::ForwardInput::Handler</a></li>
     
       <li><a href="Fluent/StreamInput/Handler.html#method-i-on_read">#on_read &mdash; Fluent::StreamInput::Handler</a></li>
+    
+      <li><a href="Fluent/HttpInput/Handler.html#method-i-on_read">#on_read &mdash; Fluent::HttpInput::Handler</a></li>
+    
+      <li><a href="Fluent/ForwardInput/Handler.html#method-i-on_read_json">#on_read_json &mdash; Fluent::ForwardInput::Handler</a></li>
     
       <li><a href="Fluent/StreamInput/Handler.html#method-i-on_read_json">#on_read_json &mdash; Fluent::StreamInput::Handler</a></li>
     
       <li><a href="Fluent/StreamInput/Handler.html#method-i-on_read_msgpack">#on_read_msgpack &mdash; Fluent::StreamInput::Handler</a></li>
     
+      <li><a href="Fluent/ForwardInput/Handler.html#method-i-on_read_msgpack">#on_read_msgpack &mdash; Fluent::ForwardInput::Handler</a></li>
+    
+      <li><a href="Fluent/ForwardOutput/HeartbeatHandler.html#method-i-on_readable">#on_readable &mdash; Fluent::ForwardOutput::HeartbeatHandler</a></li>
+    
+      <li><a href="Fluent/ForwardInput/HeartbeatRequestHandler.html#method-i-on_readable">#on_readable &mdash; Fluent::ForwardInput::HeartbeatRequestHandler</a></li>
+    
       <li><a href="Fluent/HttpInput.html#method-i-on_request">#on_request &mdash; Fluent::HttpInput</a></li>
+    
+      <li><a href="Fluent/ForwardOutput/HeartbeatRequestTimer.html#method-i-on_timer">#on_timer &mdash; Fluent::ForwardOutput::HeartbeatRequestTimer</a></li>
     
       <li><a href="Fluent/HttpInput/KeepaliveManager.html#method-i-on_timer">#on_timer &mdash; Fluent::HttpInput::KeepaliveManager</a></li>
     
@@ -677,6 +771,8 @@
     
       <li><a href="Fluent/TailInput.html#method-i-parse_line">#parse_line &mdash; Fluent::TailInput</a></li>
     
+      <li><a href="Fluent/ForwardOutput/FailureDetector.html#method-i-phi">#phi &mdash; Fluent::ForwardOutput::FailureDetector</a></li>
+    
       <li><a href="Fluent/BasicBuffer.html#method-i-pop">#pop &mdash; Fluent::BasicBuffer</a></li>
     
       <li><a href="Fluent/Config/Parser.html#method-i-process_include">#process_include &mdash; Fluent::Config::Parser</a></li>
@@ -693,9 +789,9 @@
     
       <li><a href="Fluent/BasicBuffer.html#method-i-queue_size">#queue_size &mdash; Fluent::BasicBuffer</a></li>
     
-      <li><a href="Fluent/FileBufferChunk.html#method-i-read">#read &mdash; Fluent::FileBufferChunk</a></li>
-    
       <li><a href="Fluent/MemoryBufferChunk.html#method-i-read">#read &mdash; Fluent::MemoryBufferChunk</a></li>
+    
+      <li><a href="Fluent/FileBufferChunk.html#method-i-read">#read &mdash; Fluent::FileBufferChunk</a></li>
     
       <li><a href="Fluent/EngineClass.html#method-i-read_config">#read_config &mdash; Fluent::EngineClass</a></li>
     
@@ -717,37 +813,49 @@
     
       <li><a href="Fluent/PluginClass.html#method-i-register_output">#register_output &mdash; Fluent::PluginClass</a></li>
     
-      <li><a href="Fluent/EventStream.html#method-i-repeatable-3F">#repeatable? &mdash; Fluent::EventStream</a></li>
+      <li><a href="Fluent/MultiEventStream.html#method-i-repeatable-3F">#repeatable? &mdash; Fluent::MultiEventStream</a></li>
     
       <li><a href="Fluent/ArrayEventStream.html#method-i-repeatable-3F">#repeatable? &mdash; Fluent::ArrayEventStream</a></li>
     
-      <li><a href="Fluent/MessagePackEventStream.html#method-i-repeatable-3F">#repeatable? &mdash; Fluent::MessagePackEventStream</a></li>
-    
-      <li><a href="Fluent/MultiEventStream.html#method-i-repeatable-3F">#repeatable? &mdash; Fluent::MultiEventStream</a></li>
-    
       <li><a href="Fluent/OneEventStream.html#method-i-repeatable-3F">#repeatable? &mdash; Fluent::OneEventStream</a></li>
     
-      <li><a href="Fluent/MemoryBuffer.html#method-i-resume">#resume &mdash; Fluent::MemoryBuffer</a></li>
+      <li><a href="Fluent/MessagePackEventStream.html#method-i-repeatable-3F">#repeatable? &mdash; Fluent::MessagePackEventStream</a></li>
+    
+      <li><a href="Fluent/EventStream.html#method-i-repeatable-3F">#repeatable? &mdash; Fluent::EventStream</a></li>
     
       <li><a href="Fluent/FileBuffer.html#method-i-resume">#resume &mdash; Fluent::FileBuffer</a></li>
     
+      <li><a href="Fluent/MemoryBuffer.html#method-i-resume">#resume &mdash; Fluent::MemoryBuffer</a></li>
+    
       <li><a href="Fluent/ZFileBuffer.html#method-i-resume_queue">#resume_queue &mdash; Fluent::ZFileBuffer</a></li>
     
-      <li><a href="Fluent/Test/InputTestDriver.html#method-i-run">#run &mdash; Fluent::Test::InputTestDriver</a></li>
+      <li><a href="Fluent/HttpInput.html#method-i-run">#run &mdash; Fluent::HttpInput</a></li>
     
-      <li><a href="Fluent/StreamInput.html#method-i-run">#run &mdash; Fluent::StreamInput</a></li>
-    
-      <li><a href="Fluent/Test/BufferedOutputTestDriver.html#method-i-run">#run &mdash; Fluent::Test::BufferedOutputTestDriver</a></li>
-    
-      <li><a href="Writer/TimerThread.html#method-i-run">#run &mdash; Writer::TimerThread</a></li>
-    
-      <li><a href="Fluent/TailInput.html#method-i-run">#run &mdash; Fluent::TailInput</a></li>
+      <li><a href="Fluent/ForwardOutput.html#method-i-run">#run &mdash; Fluent::ForwardOutput</a></li>
     
       <li><a href="Fluent/EngineClass.html#method-i-run">#run &mdash; Fluent::EngineClass</a></li>
     
       <li><a href="Fluent/Test/TestDriver.html#method-i-run">#run &mdash; Fluent::Test::TestDriver</a></li>
     
-      <li><a href="Fluent/HttpInput.html#method-i-run">#run &mdash; Fluent::HttpInput</a></li>
+      <li><a href="Fluent/ExecFilterOutput.html#method-i-run">#run &mdash; Fluent::ExecFilterOutput</a></li>
+    
+      <li><a href="Fluent/ForwardInput.html#method-i-run">#run &mdash; Fluent::ForwardInput</a></li>
+    
+      <li><a href="Fluent/Test/InputTestDriver.html#method-i-run">#run &mdash; Fluent::Test::InputTestDriver</a></li>
+    
+      <li><a href="Fluent/ExecInput.html#method-i-run">#run &mdash; Fluent::ExecInput</a></li>
+    
+      <li><a href="Fluent/Test/BufferedOutputTestDriver.html#method-i-run">#run &mdash; Fluent::Test::BufferedOutputTestDriver</a></li>
+    
+      <li><a href="Writer/TimerThread.html#method-i-run">#run &mdash; Writer::TimerThread</a></li>
+    
+      <li><a href="Fluent/StreamInput.html#method-i-run">#run &mdash; Fluent::StreamInput</a></li>
+    
+      <li><a href="Fluent/TailInput.html#method-i-run">#run &mdash; Fluent::TailInput</a></li>
+    
+      <li><a href="Fluent/ExecInput.html#method-i-run_periodic">#run_periodic &mdash; Fluent::ExecInput</a></li>
+    
+      <li><a href="Fluent/ForwardOutput/FailureDetector.html#method-i-sample_size">#sample_size &mdash; Fluent::ForwardOutput::FailureDetector</a></li>
     
       <li><a href="Fluent/FileOutput.html#method-i-secondary_init">#secondary_init &mdash; Fluent::FileOutput</a></li>
     
@@ -759,95 +867,115 @@
     
       <li><a href="Fluent/HttpInput/Handler.html#method-i-send_response_nobody">#send_response_nobody &mdash; Fluent::HttpInput::Handler</a></li>
     
-      <li><a href="Fluent/HttpInput.html#method-i-shutdown">#shutdown &mdash; Fluent::HttpInput</a></li>
+      <li><a href="Fluent/CopyOutput.html#method-i-shutdown">#shutdown &mdash; Fluent::CopyOutput</a></li>
     
-      <li><a href="Fluent/Output.html#method-i-shutdown">#shutdown &mdash; Fluent::Output</a></li>
-    
-      <li><a href="Fluent/Match.html#method-i-shutdown">#shutdown &mdash; Fluent::Match</a></li>
+      <li><a href="Fluent/ExecFilterOutput.html#method-i-shutdown">#shutdown &mdash; Fluent::ExecFilterOutput</a></li>
     
       <li><a href="Fluent/StreamInput.html#method-i-shutdown">#shutdown &mdash; Fluent::StreamInput</a></li>
     
-      <li><a href="Writer/TimerThread.html#method-i-shutdown">#shutdown &mdash; Writer::TimerThread</a></li>
-    
-      <li><a href="Fluent/TestOutput.html#method-i-shutdown">#shutdown &mdash; Fluent::TestOutput</a></li>
-    
-      <li><a href="Fluent/Input.html#method-i-shutdown">#shutdown &mdash; Fluent::Input</a></li>
-    
-      <li><a href="Fluent/BasicBuffer.html#method-i-shutdown">#shutdown &mdash; Fluent::BasicBuffer</a></li>
-    
-      <li><a href="Fluent/RoundRobinOutput.html#method-i-shutdown">#shutdown &mdash; Fluent::RoundRobinOutput</a></li>
-    
       <li><a href="Fluent/OutputThread.html#method-i-shutdown">#shutdown &mdash; Fluent::OutputThread</a></li>
-    
-      <li><a href="Fluent/EngineClass/NoMatchMatch.html#method-i-shutdown">#shutdown &mdash; Fluent::EngineClass::NoMatchMatch</a></li>
-    
-      <li><a href="Fluent/TailInput.html#method-i-shutdown">#shutdown &mdash; Fluent::TailInput</a></li>
-    
-      <li><a href="Fluent/BufferedOutput.html#method-i-shutdown">#shutdown &mdash; Fluent::BufferedOutput</a></li>
-    
-      <li><a href="Fluent/CopyOutput.html#method-i-shutdown">#shutdown &mdash; Fluent::CopyOutput</a></li>
-    
-      <li><a href="Writer.html#method-i-shutdown">#shutdown &mdash; Writer</a></li>
-    
-      <li><a href="Fluent/NullOutput.html#method-i-shutdown">#shutdown &mdash; Fluent::NullOutput</a></li>
     
       <li><a href="Fluent/Buffer.html#method-i-shutdown">#shutdown &mdash; Fluent::Buffer</a></li>
     
-      <li><a href="Fluent/MemoryBufferChunk.html#method-i-size">#size &mdash; Fluent::MemoryBufferChunk</a></li>
+      <li><a href="Fluent/TailInput.html#method-i-shutdown">#shutdown &mdash; Fluent::TailInput</a></li>
+    
+      <li><a href="Fluent/ForwardInput.html#method-i-shutdown">#shutdown &mdash; Fluent::ForwardInput</a></li>
+    
+      <li><a href="Fluent/Output.html#method-i-shutdown">#shutdown &mdash; Fluent::Output</a></li>
+    
+      <li><a href="Fluent/RoundRobinOutput.html#method-i-shutdown">#shutdown &mdash; Fluent::RoundRobinOutput</a></li>
+    
+      <li><a href="Fluent/HttpInput.html#method-i-shutdown">#shutdown &mdash; Fluent::HttpInput</a></li>
+    
+      <li><a href="Fluent/BasicBuffer.html#method-i-shutdown">#shutdown &mdash; Fluent::BasicBuffer</a></li>
+    
+      <li><a href="Fluent/Input.html#method-i-shutdown">#shutdown &mdash; Fluent::Input</a></li>
+    
+      <li><a href="Fluent/EngineClass/NoMatchMatch.html#method-i-shutdown">#shutdown &mdash; Fluent::EngineClass::NoMatchMatch</a></li>
+    
+      <li><a href="Fluent/NullOutput.html#method-i-shutdown">#shutdown &mdash; Fluent::NullOutput</a></li>
+    
+      <li><a href="Fluent/BufferedOutput.html#method-i-shutdown">#shutdown &mdash; Fluent::BufferedOutput</a></li>
+    
+      <li><a href="Fluent/TestOutput.html#method-i-shutdown">#shutdown &mdash; Fluent::TestOutput</a></li>
+    
+      <li><a href="Fluent/Match.html#method-i-shutdown">#shutdown &mdash; Fluent::Match</a></li>
+    
+      <li><a href="Writer.html#method-i-shutdown">#shutdown &mdash; Writer</a></li>
+    
+      <li><a href="Fluent/ExecInput.html#method-i-shutdown">#shutdown &mdash; Fluent::ExecInput</a></li>
+    
+      <li><a href="Fluent/ForwardOutput.html#method-i-shutdown">#shutdown &mdash; Fluent::ForwardOutput</a></li>
+    
+      <li><a href="Writer/TimerThread.html#method-i-shutdown">#shutdown &mdash; Writer::TimerThread</a></li>
     
       <li><a href="Fluent/FileBufferChunk.html#method-i-size">#size &mdash; Fluent::FileBufferChunk</a></li>
     
-      <li><a href="Fluent/HttpInput.html#method-i-start">#start &mdash; Fluent::HttpInput</a></li>
+      <li><a href="Fluent/MemoryBufferChunk.html#method-i-size">#size &mdash; Fluent::MemoryBufferChunk</a></li>
+    
+      <li><a href="Writer.html#method-i-start">#start &mdash; Writer</a></li>
+    
+      <li><a href="Fluent/SyslogInput.html#method-i-start">#start &mdash; Fluent::SyslogInput</a></li>
+    
+      <li><a href="Fluent/EngineClass/NoMatchMatch.html#method-i-start">#start &mdash; Fluent::EngineClass::NoMatchMatch</a></li>
+    
+      <li><a href="Fluent/TestOutput.html#method-i-start">#start &mdash; Fluent::TestOutput</a></li>
+    
+      <li><a href="Fluent/ForwardOutput.html#method-i-start">#start &mdash; Fluent::ForwardOutput</a></li>
+    
+      <li><a href="Writer/TimerThread.html#method-i-start">#start &mdash; Writer::TimerThread</a></li>
+    
+      <li><a href="Fluent/CopyOutput.html#method-i-start">#start &mdash; Fluent::CopyOutput</a></li>
+    
+      <li><a href="Fluent/ExecInput.html#method-i-start">#start &mdash; Fluent::ExecInput</a></li>
+    
+      <li><a href="Fluent/Input.html#method-i-start">#start &mdash; Fluent::Input</a></li>
+    
+      <li><a href="Fluent/Match.html#method-i-start">#start &mdash; Fluent::Match</a></li>
+    
+      <li><a href="Fluent/ForwardInput.html#method-i-start">#start &mdash; Fluent::ForwardInput</a></li>
+    
+      <li><a href="Fluent/BasicBuffer.html#method-i-start">#start &mdash; Fluent::BasicBuffer</a></li>
+    
+      <li><a href="Fluent/BufferedOutput.html#method-i-start">#start &mdash; Fluent::BufferedOutput</a></li>
+    
+      <li><a href="Fluent/Output.html#method-i-start">#start &mdash; Fluent::Output</a></li>
     
       <li><a href="Fluent/TailInput.html#method-i-start">#start &mdash; Fluent::TailInput</a></li>
     
       <li><a href="Fluent/RoundRobinOutput.html#method-i-start">#start &mdash; Fluent::RoundRobinOutput</a></li>
     
-      <li><a href="Fluent/NullOutput.html#method-i-start">#start &mdash; Fluent::NullOutput</a></li>
-    
       <li><a href="Fluent/StreamInput.html#method-i-start">#start &mdash; Fluent::StreamInput</a></li>
     
-      <li><a href="Fluent/Match.html#method-i-start">#start &mdash; Fluent::Match</a></li>
-    
-      <li><a href="Fluent/Output.html#method-i-start">#start &mdash; Fluent::Output</a></li>
-    
-      <li><a href="Fluent/TestOutput.html#method-i-start">#start &mdash; Fluent::TestOutput</a></li>
-    
-      <li><a href="Fluent/OutputThread.html#method-i-start">#start &mdash; Fluent::OutputThread</a></li>
-    
-      <li><a href="Fluent/CopyOutput.html#method-i-start">#start &mdash; Fluent::CopyOutput</a></li>
-    
-      <li><a href="Fluent/Input.html#method-i-start">#start &mdash; Fluent::Input</a></li>
-    
-      <li><a href="Fluent/EngineClass/NoMatchMatch.html#method-i-start">#start &mdash; Fluent::EngineClass::NoMatchMatch</a></li>
-    
-      <li><a href="Fluent/FileBuffer.html#method-i-start">#start &mdash; Fluent::FileBuffer</a></li>
-    
-      <li><a href="Writer/TimerThread.html#method-i-start">#start &mdash; Writer::TimerThread</a></li>
-    
-      <li><a href="Writer.html#method-i-start">#start &mdash; Writer</a></li>
+      <li><a href="Fluent/ExecFilterOutput.html#method-i-start">#start &mdash; Fluent::ExecFilterOutput</a></li>
     
       <li><a href="Fluent/Buffer.html#method-i-start">#start &mdash; Fluent::Buffer</a></li>
     
-      <li><a href="Fluent/BufferedOutput.html#method-i-start">#start &mdash; Fluent::BufferedOutput</a></li>
+      <li><a href="Fluent/NullOutput.html#method-i-start">#start &mdash; Fluent::NullOutput</a></li>
     
-      <li><a href="Fluent/BasicBuffer.html#method-i-start">#start &mdash; Fluent::BasicBuffer</a></li>
+      <li><a href="Fluent/OutputThread.html#method-i-start">#start &mdash; Fluent::OutputThread</a></li>
     
-      <li><a href="Fluent/SyslogInput.html#method-i-start">#start &mdash; Fluent::SyslogInput</a></li>
+      <li><a href="Fluent/FileBuffer.html#method-i-start">#start &mdash; Fluent::FileBuffer</a></li>
+    
+      <li><a href="Fluent/HttpInput.html#method-i-start">#start &mdash; Fluent::HttpInput</a></li>
     
       <li><a href="Fluent/HttpInput/Handler.html#method-i-step_idle">#step_idle &mdash; Fluent::HttpInput::Handler</a></li>
     
       <li><a href="Fluent/EngineClass.html#method-i-stop">#stop &mdash; Fluent::EngineClass</a></li>
     
-      <li><a href="Fluent/OutputThread.html#method-i-submit_flush">#submit_flush &mdash; Fluent::OutputThread</a></li>
-    
       <li><a href="Fluent/BufferedOutput.html#method-i-submit_flush">#submit_flush &mdash; Fluent::BufferedOutput</a></li>
+    
+      <li><a href="Fluent/OutputThread.html#method-i-submit_flush">#submit_flush &mdash; Fluent::OutputThread</a></li>
     
       <li><a href="Fluent/Test.html#method-i-test-3F">#test? &mdash; Fluent::Test</a></li>
     
-      <li><a href="Fluent/MessagePackEventStream.html#method-i-to_msgpack_stream">#to_msgpack_stream &mdash; Fluent::MessagePackEventStream</a></li>
+      <li><a href="Fluent/ForwardOutput/Node.html#method-i-tick">#tick &mdash; Fluent::ForwardOutput::Node</a></li>
+    
+      <li><a href="Fluent/ForwardOutput/Node.html#method-i-to_msgpack">#to_msgpack &mdash; Fluent::ForwardOutput::Node</a></li>
     
       <li><a href="Fluent/EventStream.html#method-i-to_msgpack_stream">#to_msgpack_stream &mdash; Fluent::EventStream</a></li>
+    
+      <li><a href="Fluent/MessagePackEventStream.html#method-i-to_msgpack_stream">#to_msgpack_stream &mdash; Fluent::MessagePackEventStream</a></li>
     
       <li><a href="Fluent/Config/Element.html#method-i-to_s">#to_s &mdash; Fluent::Config::Element</a></li>
     
@@ -855,9 +983,9 @@
     
       <li><a href="Fluent/Log.html#method-i-trace_backtrace">#trace_backtrace &mdash; Fluent::Log</a></li>
     
-      <li><a href="Fluent/BufferedOutput.html#method-i-try_flush">#try_flush &mdash; Fluent::BufferedOutput</a></li>
-    
       <li><a href="Fluent/TimeSlicedOutput.html#method-i-try_flush">#try_flush &mdash; Fluent::TimeSlicedOutput</a></li>
+    
+      <li><a href="Fluent/BufferedOutput.html#method-i-try_flush">#try_flush &mdash; Fluent::BufferedOutput</a></li>
     
       <li><a href="Fluent/TextParser.html#method-i-use_template">#use_template &mdash; Fluent::TextParser</a></li>
     
@@ -867,11 +995,15 @@
     
       <li><a href="Writer.html#method-i-write">#write &mdash; Writer</a></li>
     
-      <li><a href="Fluent/StreamOutput.html#method-i-write">#write &mdash; Fluent::StreamOutput</a></li>
+      <li><a href="Fluent/StreamOutput/ReformatWriter.html#method-i-write">#write &mdash; Fluent::StreamOutput::ReformatWriter</a></li>
+    
+      <li><a href="Fluent/ForwardOutput.html#method-i-write">#write &mdash; Fluent::ForwardOutput</a></li>
     
       <li><a href="Fluent/FileOutput.html#method-i-write">#write &mdash; Fluent::FileOutput</a></li>
     
-      <li><a href="Fluent/StreamOutput/ReformatWriter.html#method-i-write">#write &mdash; Fluent::StreamOutput::ReformatWriter</a></li>
+      <li><a href="Fluent/StreamOutput.html#method-i-write">#write &mdash; Fluent::StreamOutput</a></li>
+    
+      <li><a href="Fluent/ExecOutput.html#method-i-write">#write &mdash; Fluent::ExecOutput</a></li>
     
       <li><a href="Fluent/BufferedOutput.html#method-i-write_abort">#write_abort &mdash; Fluent::BufferedOutput</a></li>
     

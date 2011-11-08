@@ -50,7 +50,7 @@
       <div id="parent-class-section" class="section">
         <h3 class="section-header">Parent</h3>
         
-        <p class="link"><a href="StreamInput.html">Fluent::StreamInput</a></p>
+        <p class="link"><a href="ForwardInput.html">Fluent::ForwardInput</a></p>
         
       </div>
       
@@ -65,9 +65,7 @@
         <h3 class="section-header">Methods</h3>
         <ul class="link-list">
           
-          <li><a href="#method-i-configure">#configure</a></li>
-          
-          <li><a href="#method-i-listen">#listen</a></li>
+          <li><a href="#method-c-new">::new</a></li>
           
         </ul>
       </div>
@@ -140,11 +138,33 @@
         
           <li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
+          <li><a href="../Fluent/ExecFilterOutput.html">Fluent::ExecFilterOutput</a></li>
+        
+          <li><a href="../Fluent/ExecInput.html">Fluent::ExecInput</a></li>
+        
+          <li><a href="../Fluent/ExecOutput.html">Fluent::ExecOutput</a></li>
+        
           <li><a href="../Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
         
           <li><a href="../Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
         
           <li><a href="../Fluent/FileOutput.html">Fluent::FileOutput</a></li>
+        
+          <li><a href="../Fluent/ForwardInput.html">Fluent::ForwardInput</a></li>
+        
+          <li><a href="../Fluent/ForwardInput/Handler.html">Fluent::ForwardInput::Handler</a></li>
+        
+          <li><a href="../Fluent/ForwardInput/HeartbeatRequestHandler.html">Fluent::ForwardInput::HeartbeatRequestHandler</a></li>
+        
+          <li><a href="../Fluent/ForwardOutput.html">Fluent::ForwardOutput</a></li>
+        
+          <li><a href="../Fluent/ForwardOutput/FailureDetector.html">Fluent::ForwardOutput::FailureDetector</a></li>
+        
+          <li><a href="../Fluent/ForwardOutput/HeartbeatHandler.html">Fluent::ForwardOutput::HeartbeatHandler</a></li>
+        
+          <li><a href="../Fluent/ForwardOutput/HeartbeatRequestTimer.html">Fluent::ForwardOutput::HeartbeatRequestTimer</a></li>
+        
+          <li><a href="../Fluent/ForwardOutput/Node.html">Fluent::ForwardOutput::Node</a></li>
         
           <li><a href="../Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
         
@@ -267,6 +287,28 @@
 
     <div id="description" class="description">
       
+<pre>obsolete
+ForwardInput is backward compatible with TcpInput</pre>
+
+<p>class <a href="TcpInput.html">TcpInput</a> &lt; <a
+href="StreamInput.html">StreamInput</a></p>
+
+<pre>Plugin.register_input('tcp', self)
+
+config_param :port, :integer, :default =&gt; DEFAULT_LISTEN_PORT
+config_param :bind, :string, :default =&gt; '0.0.0.0'
+
+def configure(conf)
+  super
+end
+
+def listen
+  $log.debug &quot;listening fluent socket on #{@bind}:#{@port}&quot;
+  Coolio::TCPServer.new(@bind, @port, Handler, method(:on_message))
+end</pre>
+
+<p>end</p>
+
     </div><!-- description -->
 
     
@@ -283,49 +325,16 @@
 
       <!-- Methods -->
       
-      <div id="public-instance-method-details" class="method-section section">
-        <h3 class="section-header">Public Instance Methods</h3>
+      <div id="public-class-method-details" class="method-section section">
+        <h3 class="section-header">Public Class Methods</h3>
 
       
-        <div id="configure-method" class="method-detail ">
-          <a name="method-i-configure"></a>
+        <div id="new-method" class="method-detail ">
+          <a name="method-c-new"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">configure</span><span
-              class="method-args">(conf)</span>
-            <span class="method-click-advice">click to toggle source</span>
-          </div>
-          
-
-          <div class="method-description">
-            
-            
-            
-
-            
-            <div class="method-source-code" id="configure-source">
-<pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 155</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
-  <span class="ruby-keyword">super</span>
-<span class="ruby-keyword">end</span></pre>
-            </div><!-- configure-source -->
-            
-          </div>
-
-          
-
-          
-        </div><!-- configure-method -->
-
-      
-        <div id="listen-method" class="method-detail ">
-          <a name="method-i-listen"></a>
-
-          
-          <div class="method-heading">
-            <span class="method-name">listen</span><span
+            <span class="method-name">new</span><span
               class="method-args">()</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
@@ -337,24 +346,25 @@
             
 
             
-            <div class="method-source-code" id="listen-source">
+            <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 159</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">listen</span>
-  <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">debug</span> <span class="ruby-node">&quot;listening fluent socket on #{@bind}:#{@port}&quot;</span>
-  <span class="ruby-constant">Coolio</span><span class="ruby-operator">::</span><span class="ruby-constant">TCPServer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@bind</span>, <span class="ruby-ivar">@port</span>, <span class="ruby-constant">Handler</span>, <span class="ruby-identifier">method</span>(<span class="ruby-value">:on_message</span>))
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 170</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-comment">## TODO</span>
+  <span class="ruby-comment">#$log.warn &quot;'tcp' input is obsoleted and will be removed. Use 'forward' instead.&quot;</span>
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- listen-source -->
+            </div><!-- new-source -->
             
           </div>
 
           
 
           
-        </div><!-- listen-method -->
+        </div><!-- new-method -->
 
       
-      </div><!-- public-instance-method-details -->
+      </div><!-- public-class-method-details -->
     
     </div><!-- 5Buntitled-5D -->
   

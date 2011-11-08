@@ -140,11 +140,33 @@
         
           <li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
+          <li><a href="../Fluent/ExecFilterOutput.html">Fluent::ExecFilterOutput</a></li>
+        
+          <li><a href="../Fluent/ExecInput.html">Fluent::ExecInput</a></li>
+        
+          <li><a href="../Fluent/ExecOutput.html">Fluent::ExecOutput</a></li>
+        
           <li><a href="../Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
         
           <li><a href="../Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
         
           <li><a href="../Fluent/FileOutput.html">Fluent::FileOutput</a></li>
+        
+          <li><a href="../Fluent/ForwardInput.html">Fluent::ForwardInput</a></li>
+        
+          <li><a href="../Fluent/ForwardInput/Handler.html">Fluent::ForwardInput::Handler</a></li>
+        
+          <li><a href="../Fluent/ForwardInput/HeartbeatRequestHandler.html">Fluent::ForwardInput::HeartbeatRequestHandler</a></li>
+        
+          <li><a href="../Fluent/ForwardOutput.html">Fluent::ForwardOutput</a></li>
+        
+          <li><a href="../Fluent/ForwardOutput/FailureDetector.html">Fluent::ForwardOutput::FailureDetector</a></li>
+        
+          <li><a href="../Fluent/ForwardOutput/HeartbeatHandler.html">Fluent::ForwardOutput::HeartbeatHandler</a></li>
+        
+          <li><a href="../Fluent/ForwardOutput/HeartbeatRequestTimer.html">Fluent::ForwardOutput::HeartbeatRequestTimer</a></li>
+        
+          <li><a href="../Fluent/ForwardOutput/Node.html">Fluent::ForwardOutput::Node</a></li>
         
           <li><a href="../Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
         
@@ -267,6 +289,8 @@
 
     <div id="description" class="description">
       
+<p>obsolete</p>
+
     </div><!-- description -->
 
     
@@ -306,9 +330,11 @@
             
             <div class="method-source-code" id="configure-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 171</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 184</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
   <span class="ruby-keyword">super</span>
+  <span class="ruby-comment">## TODO</span>
+  <span class="ruby-comment">#$log.warn &quot;'unix' input is obsoleted and will be removed. Use 'forward' instead.&quot;</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- configure-source -->
             
@@ -339,7 +365,7 @@
             
             <div class="method-source-code" id="listen-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 175</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 190</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">listen</span>
   <span class="ruby-keyword">if</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">exist?</span>(<span class="ruby-ivar">@path</span>)
     <span class="ruby-constant">File</span>.<span class="ruby-identifier">unlink</span>(<span class="ruby-ivar">@path</span>)

@@ -148,11 +148,33 @@
         
           <li><a href="../../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
+          <li><a href="../../Fluent/ExecFilterOutput.html">Fluent::ExecFilterOutput</a></li>
+        
+          <li><a href="../../Fluent/ExecInput.html">Fluent::ExecInput</a></li>
+        
+          <li><a href="../../Fluent/ExecOutput.html">Fluent::ExecOutput</a></li>
+        
           <li><a href="../../Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
         
           <li><a href="../../Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
         
           <li><a href="../../Fluent/FileOutput.html">Fluent::FileOutput</a></li>
+        
+          <li><a href="../../Fluent/ForwardInput.html">Fluent::ForwardInput</a></li>
+        
+          <li><a href="../../Fluent/ForwardInput/Handler.html">Fluent::ForwardInput::Handler</a></li>
+        
+          <li><a href="../../Fluent/ForwardInput/HeartbeatRequestHandler.html">Fluent::ForwardInput::HeartbeatRequestHandler</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput.html">Fluent::ForwardOutput</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput/FailureDetector.html">Fluent::ForwardOutput::FailureDetector</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput/HeartbeatHandler.html">Fluent::ForwardOutput::HeartbeatHandler</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput/HeartbeatRequestTimer.html">Fluent::ForwardOutput::HeartbeatRequestTimer</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput/Node.html">Fluent::ForwardOutput::Node</a></li>
         
           <li><a href="../../Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
         
@@ -314,7 +336,7 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 104</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 105</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">on_message</span>)
   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">io</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">io</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">TCPSocket</span>)
@@ -359,7 +381,7 @@
             
             <div class="method-source-code" id="on_close-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 142</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 143</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_close</span>
   <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">trace</span> { <span class="ruby-node">&quot;closed fluent socket object_id=#{self.object_id}&quot;</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -392,7 +414,7 @@
             
             <div class="method-source-code" id="on_connect-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 114</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_connect</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- on_connect-source -->
@@ -424,7 +446,7 @@
             
             <div class="method-source-code" id="on_read-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 117</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 118</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_read</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-identifier">first</span> = <span class="ruby-identifier">data</span>[<span class="ruby-value">0</span>]
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-string">'{'</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-string">'['</span>
@@ -470,7 +492,7 @@
             
             <div class="method-source-code" id="on_read_json-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 134</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 135</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_read_json</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-ivar">@y</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">data</span>
 <span class="ruby-keyword">end</span></pre>
@@ -503,7 +525,7 @@
             
             <div class="method-source-code" id="on_read_msgpack-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 138</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 139</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_read_msgpack</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-ivar">@u</span>.<span class="ruby-identifier">feed_each</span>(<span class="ruby-identifier">data</span>, &amp;<span class="ruby-ivar">@on_message</span>)
 <span class="ruby-keyword">end</span></pre>

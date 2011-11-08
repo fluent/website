@@ -67,6 +67,8 @@
           
           <li><a href="#method-c-new">::new</a></li>
           
+          <li><a href="#method-i-emits">#emits</a></li>
+          
           <li><a href="#method-i-events">#events</a></li>
           
           <li><a href="#method-i-expect_emit">#expect_emit</a></li>
@@ -148,11 +150,33 @@
         
           <li><a href="../../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
+          <li><a href="../../Fluent/ExecFilterOutput.html">Fluent::ExecFilterOutput</a></li>
+        
+          <li><a href="../../Fluent/ExecInput.html">Fluent::ExecInput</a></li>
+        
+          <li><a href="../../Fluent/ExecOutput.html">Fluent::ExecOutput</a></li>
+        
           <li><a href="../../Fluent/FileBuffer.html">Fluent::FileBuffer</a></li>
         
           <li><a href="../../Fluent/FileBufferChunk.html">Fluent::FileBufferChunk</a></li>
         
           <li><a href="../../Fluent/FileOutput.html">Fluent::FileOutput</a></li>
+        
+          <li><a href="../../Fluent/ForwardInput.html">Fluent::ForwardInput</a></li>
+        
+          <li><a href="../../Fluent/ForwardInput/Handler.html">Fluent::ForwardInput::Handler</a></li>
+        
+          <li><a href="../../Fluent/ForwardInput/HeartbeatRequestHandler.html">Fluent::ForwardInput::HeartbeatRequestHandler</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput.html">Fluent::ForwardOutput</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput/FailureDetector.html">Fluent::ForwardOutput::FailureDetector</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput/HeartbeatHandler.html">Fluent::ForwardOutput::HeartbeatHandler</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput/HeartbeatRequestTimer.html">Fluent::ForwardOutput::HeartbeatRequestTimer</a></li>
+        
+          <li><a href="../../Fluent/ForwardOutput/Node.html">Fluent::ForwardOutput::Node</a></li>
         
           <li><a href="../../Fluent/GlobMatchPattern.html">Fluent::GlobMatchPattern</a></li>
         
@@ -293,11 +317,11 @@
         <h3 class="section-header">Attributes</h3>
 
         
-        <div id="emits-attribute-method" class="method-detail">
-          <a name="emits"></a>
+        <div id="emit_streams-attribute-method" class="method-detail">
+          <a name="emit_streams"></a>
           
           <div class="method-heading attribute-method-heading">
-            <span class="method-name">emits</span><span
+            <span class="method-name">emit_streams</span><span
               class="attribute-access-type">[R]</span>
           </div>
 
@@ -339,7 +363,7 @@
 <span class="ruby-comment"># File lib/fluent/test/input_test.rb, line 23</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">klass</span>, &amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">klass</span>, &amp;<span class="ruby-identifier">block</span>)
-  <span class="ruby-ivar">@emits</span> = []
+  <span class="ruby-ivar">@emit_streams</span> = []
   <span class="ruby-ivar">@expects</span> = <span class="ruby-keyword">nil</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
@@ -356,6 +380,45 @@
     
       <div id="public-instance-method-details" class="method-section section">
         <h3 class="section-header">Public Instance Methods</h3>
+
+      
+        <div id="emits-method" class="method-detail ">
+          <a name="method-i-emits"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">emits</span><span
+              class="method-args">()</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="emits-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/test/input_test.rb, line 40</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">emits</span>
+  <span class="ruby-identifier">all</span> = []
+  <span class="ruby-ivar">@emit_streams</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">tag</span>,<span class="ruby-identifier">events</span><span class="ruby-operator">|</span>
+    <span class="ruby-identifier">events</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">time</span>,<span class="ruby-identifier">record</span><span class="ruby-operator">|</span>
+      <span class="ruby-identifier">all</span> <span class="ruby-operator">&lt;&lt;</span> [<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">time</span>, <span class="ruby-identifier">record</span>]
+    }
+  }
+  <span class="ruby-identifier">all</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- emits-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- emits-method -->
 
       
         <div id="events-method" class="method-detail ">
@@ -377,10 +440,10 @@
             
             <div class="method-source-code" id="events-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/test/input_test.rb, line 40</span>
+<span class="ruby-comment"># File lib/fluent/test/input_test.rb, line 50</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">events</span>
   <span class="ruby-identifier">all</span> = []
-  <span class="ruby-ivar">@emits</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">tag</span>,<span class="ruby-identifier">events</span><span class="ruby-operator">|</span>
+  <span class="ruby-ivar">@emit_streams</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">tag</span>,<span class="ruby-identifier">events</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">all</span>.<span class="ruby-identifier">concat</span> <span class="ruby-identifier">events</span>
   }
   <span class="ruby-identifier">all</span>
@@ -481,10 +544,10 @@
             
             <div class="method-source-code" id="records-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/test/input_test.rb, line 48</span>
+<span class="ruby-comment"># File lib/fluent/test/input_test.rb, line 58</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">records</span>
   <span class="ruby-identifier">all</span> = []
-  <span class="ruby-ivar">@emits</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">tag</span>,<span class="ruby-identifier">events</span><span class="ruby-operator">|</span>
+  <span class="ruby-ivar">@emit_streams</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">tag</span>,<span class="ruby-identifier">events</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">events</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">time</span>,<span class="ruby-identifier">record</span><span class="ruby-operator">|</span>
       <span class="ruby-identifier">all</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">record</span>
     }
@@ -520,7 +583,7 @@
             
             <div class="method-source-code" id="run-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/test/input_test.rb, line 58</span>
+<span class="ruby-comment"># File lib/fluent/test/input_test.rb, line 68</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>(&amp;<span class="ruby-identifier">block</span>)
   <span class="ruby-identifier">m</span> = <span class="ruby-identifier">method</span>(<span class="ruby-value">:emit_stream</span>)
   <span class="ruby-keyword">super</span> {
@@ -532,7 +595,7 @@
 
     <span class="ruby-keyword">if</span> <span class="ruby-ivar">@expects</span>
       <span class="ruby-identifier">i</span> = <span class="ruby-value">0</span>
-      <span class="ruby-ivar">@emits</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">tag</span>,<span class="ruby-identifier">events</span><span class="ruby-operator">|</span>
+      <span class="ruby-ivar">@emit_streams</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">tag</span>,<span class="ruby-identifier">events</span><span class="ruby-operator">|</span>
         <span class="ruby-identifier">events</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">time</span>,<span class="ruby-identifier">record</span><span class="ruby-operator">|</span>
           <span class="ruby-identifier">assert_equal</span>(<span class="ruby-ivar">@expects</span>[<span class="ruby-identifier">i</span>], [<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">time</span>, <span class="ruby-identifier">record</span>])
           <span class="ruby-identifier">i</span> <span class="ruby-operator">+=</span> <span class="ruby-value">1</span>

@@ -20,8 +20,7 @@
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="fluentd v0.10.3 documentation" href="index.html" />
-    <link rel="prev" title="Writing plugins" href="devel.html" /> 
+    <link rel="top" title="fluentd v0.10.3 documentation" href="index.html" /> 
   </head>
   <body>
     <div class="related">
@@ -30,26 +29,11 @@
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
-        <li class="right" >
-          <a href="devel.html" title="Writing plugins"
-             accesskey="P">previous</a> |</li>
         <li><a href="index.html">fluentd v0.10.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference external" href="#">Examples</a><ul>
-<li><a class="reference external" href="#reliable-log-forwarding-active-backup">Reliable log forwarding (active-backup)</a></li>
-<li><a class="reference external" href="#reliable-log-forwarding-active-active">Reliable log forwarding (active-active)</a></li>
-</ul>
-</li>
-</ul>
-
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="devel.html"
-                                  title="previous chapter">Writing plugins</a></p>
             <h3>This Page</h3>
             <ul class="this-page-menu">
               <li><a href="_sources/example.txt"
@@ -78,93 +62,90 @@
             
   <div class="section" id="examples">
 <span id="example"></span><h1>Examples<a class="headerlink" href="#examples" title="Permalink to this headline">¶</a></h1>
-<div class="contents local topic" id="contents">
-<ul class="simple">
-<li><a class="reference internal" href="#reliable-log-forwarding-active-backup" id="id1">Reliable log forwarding (active-backup)</a></li>
-<li><a class="reference internal" href="#reliable-log-forwarding-active-active" id="id2">Reliable log forwarding (active-active)</a></li>
-</ul>
-</div>
-<div class="section" id="reliable-log-forwarding-active-backup">
-<h2>Reliable log forwarding (active-backup)<a class="headerlink" href="#reliable-log-forwarding-active-backup" title="Permalink to this headline">¶</a></h2>
-<p>This example assumes following network:</p>
-<div class="highlight-python"><pre>                   active log server
-                   +--------+
-                +--&gt; fluent | 192.168.0.1
-front server    |  +--------+
-+--------+      |
-| fluent -------+
-+--------+      |  backup log server
-                |  +--------+
-                +--&gt; fluent | 192.168.0.2
-                   +--------+</pre>
-</div>
-<p>On the front servers, use following configuration:</p>
-<div class="highlight-python"><pre>&lt;match PATTERN&gt;
-  type tcp
-  host 192.168.0.1
-  port 24224
-
-  # use file buffer to buffer events on disks.
-  buffer_type file
-  buffer_path /var/log/fluent/buffer/myforward
-
-  # use longer flush_interval to reduce CPU usage.
-  # this is trade-off of latency.
-  flush_interval 60s
-
-  # use secondary host
-  &lt;secondary&gt;
-    host 192.168.0.2
-    port 24224
-  &lt;/secondary&gt;
-&lt;/match&gt;</pre>
-</div>
-<p>On the log servers, add <tt class="docutils literal"><span class="pre">tcp</span></tt> input not exists:</p>
-<div class="highlight-python"><pre>&lt;source&gt;
-  type tcp
-  port 24224
-&lt;/source&gt;</pre>
-</div>
-</div>
-<div class="section" id="reliable-log-forwarding-active-active">
-<h2>Reliable log forwarding (active-active)<a class="headerlink" href="#reliable-log-forwarding-active-active" title="Permalink to this headline">¶</a></h2>
-<p>You can use active-active formation by using following configuration on the front servers:</p>
-<div class="highlight-python"><pre>&lt;match PATTERN&gt;
-  # use 'roundrobin' output plugin
-  type roundrobin
-
-  &lt;store&gt;
-    type tcp
-    host 192.168.0.1
-    port 24224
-
-    buffer_type file
-    buffer_path /var/log/fluent/buffer/myforward-1
-    flush_interval 60s
-
-    &lt;secondary&gt;
-      host 192.168.0.2
-      port 24224
-    &lt;/secondary&gt;
-  &lt;/store&gt;
-
-  &lt;store&gt;
-    type tcp
-    host 192.168.0.2
-    port 24224
-
-    buffer_type file
-    buffer_path /var/log/fluent/buffer/myforward-2
-    flush_interval 60s
-
-    &lt;secondary&gt;
-      host 192.168.0.1
-      port 24224
-    &lt;/secondary&gt;
-  &lt;/store&gt;
-&lt;/match&gt;</pre>
-</div>
-</div>
+<p>..Reliable log forwarding (active-backup)
+..&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;
+..
+..This example assumes following network::
+..
+..                       active log server
+..                       +&#8212;&#8212;&#8211;+
+..                    +&#8211;&gt; fluent | 192.168.0.1
+..    front server    |  +&#8212;&#8212;&#8211;+
+..    +&#8212;&#8212;&#8211;+      |
+..    | fluent &#8212;&#8212;-+
+..    +&#8212;&#8212;&#8211;+      |  backup log server
+..                    |  +&#8212;&#8212;&#8211;+
+..                    +&#8211;&gt; fluent | 192.168.0.2
+..                       +&#8212;&#8212;&#8211;+
+..
+..On the front servers, use following configuration::
+..
+..    &lt;match PATTERN&gt;
+..      type tcp
+..      host 192.168.0.1
+..      port 24224
+..
+..      # use file buffer to buffer events on disks.
+..      buffer_type file
+..      buffer_path /var/log/fluent/buffer/myforward
+..
+..      # use longer flush_interval to reduce CPU usage.
+..      # this is trade-off of latency.
+..      flush_interval 60s
+..
+..      # use secondary host
+..      &lt;secondary&gt;
+..        host 192.168.0.2
+..        port 24224
+..      &lt;/secondary&gt;
+..    &lt;/match&gt;
+..
+..On the log servers, add <tt class="docutils literal"><span class="pre">tcp</span></tt> input not exists::
+..
+..    &lt;source&gt;
+..      type tcp
+..      port 24224
+..    &lt;/source&gt;
+..
+..Reliable log forwarding (active-active)
+..&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;
+..
+..You can use active-active formation by using following configuration on the front servers::
+..
+..    &lt;match PATTERN&gt;
+..      # use &#8216;roundrobin&#8217; output plugin
+..      type roundrobin
+..
+..      &lt;store&gt;
+..        type tcp
+..        host 192.168.0.1
+..        port 24224
+..
+..        buffer_type file
+..        buffer_path /var/log/fluent/buffer/myforward-1
+..        flush_interval 60s
+..
+..        &lt;secondary&gt;
+..          host 192.168.0.2
+..          port 24224
+..        &lt;/secondary&gt;
+..      &lt;/store&gt;
+..
+..      &lt;store&gt;
+..        type tcp
+..        host 192.168.0.2
+..        port 24224
+..
+..        buffer_type file
+..        buffer_path /var/log/fluent/buffer/myforward-2
+..        flush_interval 60s
+..
+..        &lt;secondary&gt;
+..          host 192.168.0.1
+..          port 24224
+..        &lt;/secondary&gt;
+..      &lt;/store&gt;
+..    &lt;/match&gt;</p>
 </div>
 
 
@@ -179,9 +160,6 @@ front server    |  +--------+
         <li class="right" style="margin-right: 10px">
           <a href="genindex.html" title="General Index"
              >index</a></li>
-        <li class="right" >
-          <a href="devel.html" title="Writing plugins"
-             >previous</a> |</li>
         <li><a href="index.html">fluentd v0.10.3 documentation</a> &raquo;</li> 
       </ul>
     </div>
