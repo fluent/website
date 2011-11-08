@@ -202,6 +202,44 @@ This plugin uses MessagePack for the protocol::
 ..   Path of the socket. Default is $install_prefix/var/run/fluent.sock.
 
 
+exec
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**exec** input plugin executes external program to receive or pull event logs. This reads TSV (tab separated values) from the stdout of the program.
+
+You can run the program periodically or parmanently. To run periodically, use ``run_interval`` parameter.
+
+
+**configuration**::
+
+  <source>
+    type exec
+    keys k1,k2,k3
+    tag_key k1
+    time_key k2
+    time_format %Y-%m-%d %H:%M:%S
+    run_interval 10s
+  </source>
+
+keys (required)
+  Column names of the output TSV.
+
+tag (required if ``tag_key`` is not specified)
+  tag of the output events.
+
+tag_key
+  Name of the key to use event tag instead of the value in event record. If this parameter is not specified, it uses the ``tag`` parameter.
+
+time_key
+  Name of the key to use event time instead of the value in event record. If this parameter is not specified, it uses current time.
+
+time_format
+  Format of the event time used when the ``time_key`` parameter is specified. Default is UNIX time (integer).
+
+run_interval
+  Runs the program periodically in the specified interval.
+
+
 .. _output_plugin:
 
 Buffered output plugins
@@ -391,6 +429,78 @@ hard_timeout
 .. 
 .. path (required)
 ..   Path to the UNIX domain socket. This parameters is required.
+
+
+exec
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**exec** buffered output plugin executs external program to output events.
+
+It passed a path of TSV (tab separated values) file that includes event logs to the last argument of specified command.
+
+**configuration**::
+
+  <match pattern>
+    type exec
+    command cmd arg arg
+    keys k1,k2,k3
+    tag_key k1
+    time_key k2
+    time_format %Y-%m-%d %H:%M:%S
+  </match>
+
+command (required)
+  A command to execute. The exec plugin passes a path of TSV file to the last argument.
+
+keys (required)
+  Comma-separated keys to use in the TSV file.
+
+tag_key
+  Name of the key to use event tag instead of the value in event record.
+
+time_key
+  Name of the key to use event time instead of the value in event record.
+
+time_format
+  Format of the event time used when the ``time_key`` parameter is specified. Default is UNIX time (integer).
+
+
+exec_filter
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+**exec** buffered output plugin executs external program to output events.
+
+It passed a path of TSV (tab separated values) file that includes event logs to the last argument of specified command.
+
+**configuration**::
+
+  <match pattern>
+    type exec_filter
+    command cmd arg arg
+    in_keys k1,k2,k3
+    out_keys k1,k2,k3
+    tag_key k1
+    time_key k2
+    time_format %Y-%m-%d %H:%M:%S
+  </match>
+
+command (required)
+  A command to execute. The exec plugin passes a path of TSV file to the last argument.
+
+in_keys (required)
+  Comma-separated keys to use in the input TSV of the program.
+
+out_keys (required)
+  Comma-separated keys to use in the output TSV of the program.
+
+tag_key
+  Name of the key to use event tag instead of the value in event record.
+
+time_key
+  Name of the key to use event time instead of the value in event record.
+
+time_format
+  Format of the event time used when the ``time_key`` parameter is specified. Default is UNIX time (integer).
 
 
 Non-buffered output plugins
