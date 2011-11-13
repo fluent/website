@@ -76,7 +76,7 @@ Next step: :ref:`install/confirm`
 Install from Latest Repository
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-To install the latest development version from the `source repository <https://github.com/eluent/fluentd>`_, prepare `Ruby <http://www.ruby-lang.org/>`_ >= 1.9.2 and run following commands::
+To install the latest development version from the `source repository <https://github.com/fluent/fluentd>`_, prepare `Ruby <http://www.ruby-lang.org/>`_ >= 1.9.2 and run following commands::
 
     $ git clone https://github.com/fluent/fluentd.git
     $ cd fluentd
