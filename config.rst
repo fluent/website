@@ -3,14 +3,14 @@
 Configuration File
 ========================
 
-The configuration file allows the user to control the input and output behavior of Fluentd. This document describes the format of the file.
+The configuration file is required for Fluentd to operate properly. It allows the user to control the input and output behavior of Fluentd. This document describes the format of the file.
 
 The configuration file is located at $install_prefix/etc/fluent/fluent.conf. If the file does not exist, the user must create it using the following commands::
 
     $ sudo fluentd --setup /etc/fluent
     $ edit /etc/fluent/fluent.conf
 
-The configuration file must specify **<source>** directives and **<match>** directives.
+The configuration file must include both **<source>** directives and **<match>** directives.
 
 .. contents::
    :backlinks: none
@@ -19,10 +19,11 @@ The configuration file must specify **<source>** directives and **<match>** dire
 <source> Directive
 ------------------
 
-**<source>** specifies the accepted input sources for events. Common examples include ``http`` and ``tcp``.
+The **<source>** directives specify Fluentd's accepted input sources by enabling input plugins. Common examples include ``http`` and ``tcp``. 
 
-<source> directive must have ``type`` parameter that specifies name of the input plugin.
+Each **<source>** directive must include a ``type`` parameter which specifies the name of the enabled input plugin.
 
+Examples::
 
     # Receive events from 24224/tcp
     # This is used by log forwarding and fluent-cat command
@@ -37,8 +38,7 @@ The configuration file must specify **<source>** directives and **<match>** dire
       port 9880
     </source>
 
-
-Next step: :ref:`input_plugin`
+For further information regarding Fluentd's input sources, please refer to :ref:`input_plugin`.
 
 
 <match> Directive
@@ -64,7 +64,7 @@ Next step: :ref:`input_plugin`
 Next step: :ref:`output_plugin`
 
 Match Pattern
-------------------
+^^^^^^^^^^^^^
 
 You can use following match patterns:
 
