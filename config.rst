@@ -3,21 +3,21 @@
 Configuration
 ========================
 
-You can control the flow of event stream using the configuration file.  It describes the format of the file.
+The configuration file allows the user to control the input and output behavior of Fluentd. This document describes the format of the file.
 
 .. contents::
    :backlinks: none
    :local:
 
-Configuration file
-------------------------------------
+Configuration File
+------------------
 
-Configuration file is stored on $install_prefix/etc/fluent/fluent.conf. If it not exist, create it using following command::
+The configuration file is located at $install_prefix/etc/fluent/fluent.conf. If the file does not exist, the user must create it using the following commands::
 
     $ sudo fluentd --setup /etc/fluent
     $ edit /etc/fluent/fluent.conf
 
-Configuration file consists of **<source>** directives and **<match>** directives.
+The configuration file consists of **<source>** directives and **<match>** directives.
 
 **<source>** describes an entrance of events, like ``http`` or ``tcp``.
 
