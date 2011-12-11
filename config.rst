@@ -1,29 +1,28 @@
 .. _config:
 
-Configuration
+Configuration File
 ========================
 
 The configuration file allows the user to control the input and output behavior of Fluentd. This document describes the format of the file.
-
-.. contents::
-   :backlinks: none
-   :local:
-
-Configuration File
-------------------
 
 The configuration file is located at $install_prefix/etc/fluent/fluent.conf. If the file does not exist, the user must create it using the following commands::
 
     $ sudo fluentd --setup /etc/fluent
     $ edit /etc/fluent/fluent.conf
 
-The configuration file consists of **<source>** directives and **<match>** directives.
+The configuration file must specify **<source>** directives and **<match>** directives.
 
-**<source>** describes an entrance of events, like ``http`` or ``tcp``.
+.. contents::
+   :backlinks: none
+   :local:
 
-**<match>** describes the match pattern of events and an exit of the matched events, like ``myapp.accesslog.**`` to ``file``.
+<source> Directive
+------------------
 
-Overview of the configuration file will be like as following::
+**<source>** specifies the accepted input sources for events. Common examples include ``http`` and ``tcp``.
+
+<source> directive must have ``type`` parameter that specifies name of the input plugin.
+
 
     # Receive events from 24224/tcp
     # This is used by log forwarding and fluent-cat command
@@ -37,8 +36,19 @@ Overview of the configuration file will be like as following::
       type http
       port 9880
     </source>
-    
-    # Match events tagged with "myapp.access" and
+
+
+Next step: :ref:`input_plugin`
+
+
+<match> Directive
+------------------
+
+**<match>** specifies the match pattern of events and an exit for the matched events. For example, the user can send all matches to the pattern ``myapp.accesslog.**`` to ``file`` in a specified directory.
+
+<match> directive must have match pattern and ``type`` parameter that specifies name of the output plugin.
+
+# Match events tagged with "myapp.access" and
     # store them to /var/log/fluent/access.%Y-%m-%d
     <match myapp.access>
       type file
@@ -51,27 +61,10 @@ Overview of the configuration file will be like as following::
       time_slice_format %Y%m%d%H
     </match>
 
-    # Include config files in ./config.d directory
-    include config.d/*.conf
-
-
-<source> directive
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-<source> directive must have ``type`` parameter that specifies name of the input plugin.
-
-Next step: :ref:`input_plugin`
-
-
-<match> directive
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-<match> directive must have match pattern and ``type`` parameter that specifies name of the output plugin.
-
 Next step: :ref:`output_plugin`
 
-match pattern
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Match Pattern
+------------------
 
 You can use following match patterns:
 
@@ -90,10 +83,14 @@ You can use following match patterns:
   * You can use it with ``*`` and ``**`` patterns, like ``a.{b,c}.*`` or ``a.{b,c.**}``
 
 
-include
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Include
+------------------
 
 You can divide a config file into multiple files with 'include' directive.
+
+
+    # Include config files in ./config.d directory
+    include config.d/*.conf
 
 It supports regular file path, glob pattern and http URL::
 
