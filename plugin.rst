@@ -601,7 +601,7 @@ It uses memory to store buffer chunks. Buffered events which can't be written so
 
   <match pattern>
     buffer_type memory
-  </match pattern>
+  </match>
 
 
 file
@@ -615,7 +615,7 @@ It uses file to store buffer chunks.
   <match pattern>
     buffer_type file
     buffer_path /var/log/fluent/myapp.*.buffer
-  </match pattern>
+  </match>
 
 buffer_path (required)
   Path to store buffer chunks. '*' is replaced with random characters.
