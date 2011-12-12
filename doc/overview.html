@@ -45,10 +45,12 @@
             <h3><a href="index.html">Table Of Contents</a></h3>
             <ul>
 <li><a class="reference external" href="#">Overview</a><ul>
+<li><a class="reference external" href="#purpose">Purpose</a></li>
 <li><a class="reference external" href="#easy-installation">Easy Installation</a></li>
 <li><a class="reference external" href="#small-footprint">Small Footprint</a></li>
+<li><a class="reference external" href="#semi-structured-data-logging">Semi-Structured Data Logging</a></li>
 <li><a class="reference external" href="#flexible-plugin-mechanism">Flexible Plugin Mechanism</a></li>
-<li><a class="reference external" href="#reliabile-buffering">Reliabile Buffering</a></li>
+<li><a class="reference external" href="#reliable-buffering">Reliable Buffering</a></li>
 <li><a class="reference external" href="#log-forwarding">Log Forwarding</a></li>
 </ul>
 </li>
@@ -88,81 +90,93 @@
             
   <div class="section" id="overview">
 <span id="id1"></span><h1>Overview<a class="headerlink" href="#overview" title="Permalink to this headline">¶</a></h1>
-<p>Many web/mobile applications generate huge amount of <strong>event logs</strong> (c,f. login, logout, purchase, follow, etc). To analyze these event logs could be really valuable for improving the service. However, the challenge is collecting these logs seasily and reliably.</p>
-<p><strong>Fluent</strong> is an event collector daemon for solving that problem by having:</p>
+<p><strong>Fluentd</strong> is an event collector daemon for web and mobile applications.</p>
+<div class="section" id="purpose">
+<h2>Purpose<a class="headerlink" href="#purpose" title="Permalink to this headline">¶</a></h2>
+<p>Modern web and mobile applications generate a very large number of <strong>event logs</strong> (ex: login, logout, purchase, follow, etc). By analyzing these event logs, these services can be improved greatly. However, collecting these logs in a simple and reliable manner remains a challenge.</p>
+<p>Fluentd solves this problem by providing the user with the following features:</p>
 <ul class="simple">
 <li>Easy Installation</li>
 <li>Small Footprint</li>
+<li>Semi-Structured Data Logging</li>
 <li>Flexible Plugin Mechanism</li>
 <li>Reliable Buffering</li>
 <li>Log Forwarding</li>
 </ul>
+</div>
 <div class="section" id="easy-installation">
 <h2>Easy Installation<a class="headerlink" href="#easy-installation" title="Permalink to this headline">¶</a></h2>
-<p><strong>Fluent</strong> is packaged as Ruby gem. You can install it by just one command.</p>
+<p><strong>Fluentd</strong> is packaged as a Ruby gem. It can be installed with a single command.</p>
 </div>
 <div class="section" id="small-footprint">
 <h2>Small Footprint<a class="headerlink" href="#small-footprint" title="Permalink to this headline">¶</a></h2>
-<p>The core part of Fluent consists of only about 2,000 lines of Ruby, because of its simple architecture. Fluent collects events from various <strong>input</strong> sources and write them to <strong>output</strong> sinks.</p>
-<p>The examples of input is: HTTP, Syslog, Apache Log, etc. And the examples of output is: Files, Mails, RDBMS databases, NoSQL storages.</p>
-<p>This figure shows the basic idea of <strong>input</strong> and <strong>output</strong>:</p>
+<p>Due to its simple architecture, Fluentd’s core consists of just 3,000 lines of Ruby. Fluentd collects events from various <strong>input</strong> sources and writes them to <strong>output</strong> sinks.</p>
+<ul class="simple">
+<li>Input Examples: HTTP, Syslog, Apache Log</li>
+<li>Output Examples: Files, Mails, RDBMS databases, NoSQL storages</li>
+</ul>
+<p>The figure below shows the basic idea of <strong>input</strong> and <strong>output</strong>:</p>
 <div class="highlight-python"><pre>    Input                          Output
 +--------------------------------------------+
 |                                            |
-|  Web apps  ---+                 +--&gt; file  |
+|  Web Apps  ---+                 +--&gt; File  |
 |               |                 |          |
 |               +--&gt;           ---+          |
-|  /var/log  ------&gt;  fluentd  ------&gt; mail  |
+|  /var/log  ------&gt;  Fluentd  ------&gt; Mail  |
 |               +--&gt;           ---+          |
 |               |                 |          |
-|  apache    ---+                 +--&gt; S3    |
+|  Apache    ---+                 +--&gt; S3    |
 |                                            |
 +--------------------------------------------+</pre>
 </div>
-<p>An collected event consists of <em>tag</em>, <em>time</em> and <em>record</em>. Tag is a string separated with &#8216;.&#8217; (e.g. myapp.access). It is used to categorize events. Time is a UNIX time when the event occurs. Record is a JSON object.</p>
+</div>
+<div class="section" id="semi-structured-data-logging">
+<h2>Semi-Structured Data Logging<a class="headerlink" href="#semi-structured-data-logging" title="Permalink to this headline">¶</a></h2>
+<p>A collected event log consists of three entities: <em>tag</em>, <em>time</em> and <em>record</em>. Tag is a string separated by &#8216;.&#8217; (e.g. myapp.access), and is used to categorize events. Time is the UNIX time when the event occurs. Record is a JSON object.</p>
 </div>
 <div class="section" id="flexible-plugin-mechanism">
 <h2>Flexible Plugin Mechanism<a class="headerlink" href="#flexible-plugin-mechanism" title="Permalink to this headline">¶</a></h2>
-<p>The input and output can also be written in Ruby, and publishable by Ruby gems. You can search the available plugins by the following command:</p>
+<p>Fluentd’s inputs sources and output destinations can be extended by writing appropriate Ruby plugins; they can then be published via Ruby gems. The list of available plugins can be seen with the following command:</p>
 <div class="highlight-python"><pre>$ gem search -rd fluent-plugin</pre>
 </div>
 </div>
-<div class="section" id="reliabile-buffering">
-<h2>Reliabile Buffering<a class="headerlink" href="#reliabile-buffering" title="Permalink to this headline">¶</a></h2>
-<p>Sometimes writing the collected events to output fails by unexpected causes like network failure. That means the loss of the events. To prevent this problem, Fluent provides reliable buffering strategy. Fluent has a buffer, consisted of a queue of chunks, to temporarily store the collected events:</p>
-<div class="highlight-python"><pre>queue
+<div class="section" id="reliable-buffering">
+<h2>Reliable Buffering<a class="headerlink" href="#reliable-buffering" title="Permalink to this headline">¶</a></h2>
+<p>In traditional systems, event logs can be lost when an unexpected output write failure (ex: network failure) occurs. Fluentd has been designed to combat this issue, and is equipped with a reliable buffering strategy.  Fluentd’s buffer, a queue of chunks containing the event logs, temporarily stores the collected events:</p>
+<div class="highlight-python"><pre>Queue
 +---------+
 |         |
-|  chunk &lt;-- write events to the top chunk
+|  Chunk &lt;-- Write events to the top chunk
 |         |  (never block)
-|  chunk  |
+|  Chunk  |
 |         |
-|  chunk  |
+|  Chunk  |
 |         |
-|  chunk --&gt; wirte out the bottom chunk
+|  Chunk --&gt; Write out the bottom chunk
 |         |  (transactional)
 +---------+</pre>
 </div>
-<p>When a event is reached to a fluentd, it is appended to a top buffer chunk. This operation never blocks even if next server is down.</p>
-<p>When size of the the top chunk exceeds limit or timer is expired, new empty chunk is pushed. And another thread get the bottom chunk and forward it to the next server (or send to a storage server). If it succeeded, the chunk is removed. Otherwise the thread leaves the chunk in the queue and retries to send it later.</p>
-<p>The implementation of the buffer is pluggable. Default plugin named &#8216;memory&#8217; stores chunks in memory. It is fast but not persistent. Another plugin named &#8216;file&#8217; stores chunks in file.</p>
+<p>When Fluentd receives an event from its input source, the event log is appended to the top chunk in the buffer. This operation for temporary storage is never blocked, even if the next server is down.</p>
+<p>A new empty chunk is pushed onto the top of the queue when either (1) the size of the top chunk reaches its limit, or (2) the timer expires.</p>
+<p>A separate thread writes the bottom chunk out to either the next server or the storage server. If this write operation is successful, the chunk is removed from the queue. Otherwise, the thread leaves the chunk in the queue and will try again later.</p>
+<p>Fluentd’s buffer implementation is pluggable. The default plugin, &#8216;Memory&#8217;, stores the chunks in memory. It is fast but not persistent. Another plugin, &#8216;File&#8217;, stores the chunks in file.</p>
 </div>
 <div class="section" id="log-forwarding">
 <h2>Log Forwarding<a class="headerlink" href="#log-forwarding" title="Permalink to this headline">¶</a></h2>
-<p>To analyze the event logs later, these are usually collected into one place. Fluent supports the log transfer functinality, to collect logs from various nodes, to the central server.:</p>
-<div class="highlight-python"><pre>Web server
+<p>Fluentd supports both single-node and multi-node configurations. In multi-node configuration, Fluentd supports log forwarding in order to collect the event logs into one location for analysis. Application servers will forward the local logs of their Fluentd instances to the Fluentd instance of a central server:</p>
+<div class="highlight-python"><pre>Web Server
 +---------+
-| fluentd -------+
+| Fluentd -------+
 +---------+      |
                  |
-Proxy server     |
+Proxy Server     |
 +---------+      +--&gt; +---------+
-| fluentd ----------&gt; | fluentd |
+| Fluentd ----------&gt; | Fluentd |
 +---------+      +--&gt; +---------+
                  |
-Database server  |
+Database Server  |
 +---------+      |
-| fluentd -------+
+| Fluentd -------+
 +---------+</pre>
 </div>
 <p>Next step: <a class="reference external" href="install.html#install"><em>Installation</em></a></p>
