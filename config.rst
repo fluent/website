@@ -48,7 +48,9 @@ For further information regarding Fluentd's input sources, please refer to :ref:
 
 <match> directive must have match pattern and ``type`` parameter that specifies name of the output plugin.
 
-# Match events tagged with "myapp.access" and
+Examples::
+
+    # Match events tagged with "myapp.access" and
     # store them to /var/log/fluent/access.%Y-%m-%d
     <match myapp.access>
       type file
@@ -86,8 +88,7 @@ You can use following match patterns:
 Include
 ------------------
 
-You can divide a config file into multiple files with 'include' directive.
-
+You can divide a config file into multiple files with 'include' directive::
 
     # Include config files in ./config.d directory
     include config.d/*.conf

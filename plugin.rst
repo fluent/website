@@ -273,8 +273,8 @@ All buffered output plugins supports following parameters described above::
 
     <match pattern>
       buffer_type memory
-      buffer_chunk_limit 16m
-      buffer_queue_limit 64
+      buffer_chunk_limit 256m
+      buffer_queue_limit 128
       flush_interval 60s
       retry_limit 17
       retry_wait 1s
@@ -346,7 +346,7 @@ forward
 
 This plugin supports load-balancing and automatic fail-over (a.k.a. active-active backup). If you want replication, use ``copy`` plugin described below.
 
-It detects fault of a server using "φ accural failure detector" algorithm. You can customize parameter of the algorithm.
+It detects fault of a server using "φ accrual failure detector" algorithm. You can customize parameter of the algorithm.
 
 When a fault server recovers, the plugin makes it available automatically after several seconds.
 
