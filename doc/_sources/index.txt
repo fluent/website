@@ -17,6 +17,11 @@ Welcome to Fluent's documentation!
 
 ..   example
 
+Screencasts
+==================
+
+`Building a Massive Event-Log Collector with Fluent on Heroku with Splunk <http://www.bigdata.sg/videos/fluentd/>`_
+
 Plugins
 ==================
 
