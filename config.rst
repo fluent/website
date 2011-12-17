@@ -95,24 +95,24 @@ The following match patterns are available to the user:
 Include
 ------------------
 
-You can divide a config file into multiple files with 'include' directive::
+**<source>** and **<match>** directives in separate configuration files can be imported using the **include** directive::
 
     # Include config files in ./config.d directory
     include config.d/*.conf
 
-It supports regular file path, glob pattern and http URL::
+The **include** directive supports regular file path, glob pattern, and http URL conventions::
 
     # absolute path
     include /path/to/config.conf
 
-    # if it is relative path, it use the dirname of this file
-    # to expand the path
+    # if using a relative path, the directive will use 
+    # the dirname of this file to expand the path
     include extra.conf
 
-    # you can use glob match pattern
+    # glob match pattern
     include config.d/*.conf
 
-    # also http
+    # http
     include http://example.com/fluent.conf
 
 
