@@ -12,7 +12,7 @@ The configuration file is located at $install_prefix/etc/fluent/fluent.conf. If 
 
 The configuration file must include the following:
 
-1. **<source>** directives which determine the input sources
+1. **<source>** directives which determine the input sources.
 2. **<match>** directives which determine the output destinations.
 
 This document describes the format of the file.
@@ -43,7 +43,7 @@ Examples::
       port 9880
     </source>
 
-The user can expand Fluentd's input sources beyond the standard set by writing their own plugins. For further information regarding Fluentd's input sources, please refer to :ref:`input_plugin`.
+The user can expand Fluentd's input sources beyond those provided initially by writing their own plugins. For further information regarding Fluentd's input sources, please refer to :ref:`input_plugin`.
 
 
 <match> Directive
@@ -85,7 +85,7 @@ The following match patterns are available to the user:
 
   * For example, pattern ``a.**`` matches ``a``, ``a.b`` and ``a.b.c``
 
-* ``{X,Y,Z}`` matches X, Y, or Z, where X, Y , and Z are match patterns.
+* ``{X,Y,Z}`` matches X, Y, or Z, where X, Y, and Z are match patterns.
 
   * For example, pattern ``{a,b}`` matches ``a`` and ``b``, but does not match ``c``
 
@@ -95,7 +95,7 @@ The following match patterns are available to the user:
 Include
 ------------------
 
-**<source>** and **<match>** directives in separate configuration files can be imported using the **include** directive::
+Directives in separate configuration files can be imported using the **include** directive::
 
     # Include config files in ./config.d directory
     include config.d/*.conf
