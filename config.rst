@@ -3,14 +3,19 @@
 Configuration File
 ========================
 
-The configuration file is required for Fluentd to operate properly. It allows the user to control the input and output behavior of Fluentd. This document describes the format of the file.
+The configuration file allows the user to control the input and output behavior of Fluentd by (1) selecting input and output plugins and (2) specifying the plugin parameters. The file is required for Fluentd to operate properly.
 
 The configuration file is located at $install_prefix/etc/fluent/fluent.conf. If the file does not exist, the user must create it using the following commands::
 
     $ sudo fluentd --setup /etc/fluent
     $ edit /etc/fluent/fluent.conf
 
-The configuration file must include both **<source>** directives and **<match>** directives.
+The configuration file must include the following:
+
+1. **<source>** directives which determine the input sources
+2. **<match>** directives which determine the output destinations.
+
+This document describes the format of the file.
 
 .. contents::
    :backlinks: none
@@ -19,9 +24,9 @@ The configuration file must include both **<source>** directives and **<match>**
 <source> Directive
 ------------------
 
-The **<source>** directives specify Fluentd's accepted input sources by enabling input plugins. Common examples include ``http`` and ``tcp``. 
+Fluentd's input sources are enabled by selecting and configuring the desired input plugins using **<source>** directives. Fluentd's standard input plugins include ``http`` and ``tcp``. 
 
-Each **<source>** directive must include a ``type`` parameter which specifies the name of the enabled input plugin.
+Each **<source>** directive must include a ``type`` parameter. The ``type`` parameter specifies the chosen input plugin. 
 
 Examples::
 
@@ -38,15 +43,17 @@ Examples::
       port 9880
     </source>
 
-For further information regarding Fluentd's input sources, please refer to :ref:`input_plugin`.
+The user can expand Fluentd's input sources beyond the standard set by writing their own plugins. For further information regarding Fluentd's input sources, please refer to :ref:`input_plugin`.
 
 
 <match> Directive
 ------------------
 
-**<match>** specifies the match pattern of events and an exit for the matched events. For example, the user can send all matches to the pattern ``myapp.accesslog.**`` to ``file`` in a specified directory.
+Fluentd's output destinations are enabled by selecting and configuring the desired output plugins using **<match>** directives. Fluentd's standard output plugins include ``file`` and ``memory``. 
 
-<match> directive must have match pattern and ``type`` parameter that specifies name of the output plugin.
+Each **<match>** directive must include a match pattern and a ``type`` parameter. Match patterns are used to filter the events. Only the events that fit the match pattern will be sent to the output destination. The ``type`` parameter specifies the chosen output plugin. 
+
+For example, the user can send all matches to the pattern ``myapp.accesslog.**`` to ``file`` in a specified directory.
 
 Examples::
 
@@ -63,7 +70,7 @@ Examples::
       time_slice_format %Y%m%d%H
     </match>
 
-Next step: :ref:`output_plugin`
+The user can expand Fluentd's input sources beyond those provided initially by writing their own plugins. For further information regarding Fluentd's output destinations, please refer to :ref:`output_plugin`
 
 Match Pattern
 ^^^^^^^^^^^^^
