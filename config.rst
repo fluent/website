@@ -49,7 +49,7 @@ The user can expand Fluentd's input sources beyond those provided initially by w
 <match> Directive
 ------------------
 
-Fluentd's output destinations are enabled by selecting and configuring the desired output plugins using **<match>** directives. Fluentd's standard output plugins include ``file`` and ``memory``. 
+Fluentd's output destinations are enabled by selecting and configuring the desired output plugins using **<match>** directives. Fluentd's standard output plugins include ``file`` and ``forward``. 
 
 Each **<match>** directive must include a match pattern and a ``type`` parameter. Match patterns are used to filter the events. Only the events that fit the match pattern will be sent to the output destination. The ``type`` parameter specifies the chosen output plugin. 
 
