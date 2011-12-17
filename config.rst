@@ -75,21 +75,21 @@ The user can expand Fluentd's input sources beyond those provided initially by w
 Match Pattern
 ^^^^^^^^^^^^^
 
-You can use following match patterns:
+The following match patterns are available to the user:
 
-* ``*`` matches a tag element.
+* ``*`` matches a single tag element.
 
-  * For example, pattern ``a.*`` matches ``a.b``, but not matches ``a`` or ``a.b.c``
+  * For example, pattern ``a.*`` matches ``a.b``, but does not match ``a`` or ``a.b.c``
 
 * ``**`` matches zero or more tag elements.
 
   * For example, pattern ``a.**`` matches ``a``, ``a.b`` and ``a.b.c``
 
-* ``{X,Y,Z}`` matches X, Y or Z, where X,Y,Z are patterns.
+* ``{X,Y,Z}`` matches X, Y, or Z, where X, Y , and Z are match patterns.
 
-  * For example, pattern ``{a,b}`` matches ``a`` and ``b``, but not matches ``c``
+  * For example, pattern ``{a,b}`` matches ``a`` and ``b``, but does not match ``c``
 
-  * You can use it with ``*`` and ``**`` patterns, like ``a.{b,c}.*`` or ``a.{b,c.**}``
+  * This can be used in combination with the ``*`` or ``**`` patterns. Examples include ``a.{b,c}.*`` and ``a.{b,c.**}``
 
 
 Include
