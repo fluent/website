@@ -24,7 +24,7 @@ This document describes the format of the file.
 <source> Directive
 ------------------
 
-Fluentd's input sources are enabled by selecting and configuring the desired input plugins using **<source>** directives. Fluentd's standard input plugins include ``http`` and ``tcp``. 
+Fluentd's input sources are enabled by selecting and configuring the desired input plugins using **<source>** directives. Fluentd's standard input plugins include ``http`` and ``forward``. 
 
 Each **<source>** directive must include a ``type`` parameter. The ``type`` parameter specifies the chosen input plugin. 
 
@@ -33,7 +33,7 @@ Examples::
     # Receive events from 24224/tcp
     # This is used by log forwarding and fluent-cat command
     <source>
-      type tcp
+      type forward
       port 24224
     </source>
     
@@ -148,4 +148,6 @@ The **include** directive supports regular file path, glob pattern, and http URL
 .. `cronolog <http://cronolog.org/>`_ is used for logging error messages. Install it using ``apt-get install cronolog``.
 .. 
 .. TODO
+
+Next step: :ref:`plugin`
 
