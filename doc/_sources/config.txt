@@ -3,14 +3,19 @@
 Configuration File
 ========================
 
-The configuration file is required for Fluentd to operate properly. It allows the user to control the input and output behavior of Fluentd. This document describes the format of the file.
+The configuration file allows the user to control the input and output behavior of Fluentd by (1) selecting input and output plugins and (2) specifying the plugin parameters. The file is required for Fluentd to operate properly.
 
 The configuration file is located at $install_prefix/etc/fluent/fluent.conf. If the file does not exist, the user must create it using the following commands::
 
     $ sudo fluentd --setup /etc/fluent
     $ edit /etc/fluent/fluent.conf
 
-The configuration file must include both **<source>** directives and **<match>** directives.
+The configuration file must include the following:
+
+1. **<source>** directives which determine the input sources.
+2. **<match>** directives which determine the output destinations.
+
+This document describes the format of the file.
 
 .. contents::
    :backlinks: none
@@ -19,16 +24,16 @@ The configuration file must include both **<source>** directives and **<match>**
 <source> Directive
 ------------------
 
-The **<source>** directives specify Fluentd's accepted input sources by enabling input plugins. Common examples include ``http`` and ``tcp``. 
+Fluentd's input sources are enabled by selecting and configuring the desired input plugins using **<source>** directives. Fluentd's standard input plugins include ``http`` and ``forward``. 
 
-Each **<source>** directive must include a ``type`` parameter which specifies the name of the enabled input plugin.
+Each **<source>** directive must include a ``type`` parameter. The ``type`` parameter specifies the chosen input plugin. 
 
 Examples::
 
     # Receive events from 24224/tcp
     # This is used by log forwarding and fluent-cat command
     <source>
-      type tcp
+      type forward
       port 24224
     </source>
     
@@ -38,15 +43,17 @@ Examples::
       port 9880
     </source>
 
-For further information regarding Fluentd's input sources, please refer to :ref:`input_plugin`.
+The user can expand Fluentd's input sources beyond those provided initially by writing their own plugins. For further information regarding Fluentd's input sources, please refer to :ref:`input_plugin`.
 
 
 <match> Directive
 ------------------
 
-**<match>** specifies the match pattern of events and an exit for the matched events. For example, the user can send all matches to the pattern ``myapp.accesslog.**`` to ``file`` in a specified directory.
+Fluentd's output destinations are enabled by selecting and configuring the desired output plugins using **<match>** directives. Fluentd's standard output plugins include ``file`` and ``forward``. 
 
-<match> directive must have match pattern and ``type`` parameter that specifies name of the output plugin.
+Each **<match>** directive must include a match pattern and a ``type`` parameter. Match patterns are used to filter the events. Only the events that fit the match pattern will be sent to the output destination. The ``type`` parameter specifies the chosen output plugin. 
+
+For example, the user can send all matches to the pattern ``myapp.accesslog.**`` to ``file`` in a specified directory.
 
 Examples::
 
@@ -63,49 +70,49 @@ Examples::
       time_slice_format %Y%m%d%H
     </match>
 
-Next step: :ref:`output_plugin`
+The user can expand Fluentd's input sources beyond those provided initially by writing their own plugins. For further information regarding Fluentd's output destinations, please refer to :ref:`output_plugin`
 
 Match Pattern
 ^^^^^^^^^^^^^
 
-You can use following match patterns:
+The following match patterns are available to the user:
 
-* ``*`` matches a tag element.
+* ``*`` matches a single tag element.
 
-  * For example, pattern ``a.*`` matches ``a.b``, but not matches ``a`` or ``a.b.c``
+  * For example, pattern ``a.*`` matches ``a.b``, but does not match ``a`` or ``a.b.c``
 
 * ``**`` matches zero or more tag elements.
 
   * For example, pattern ``a.**`` matches ``a``, ``a.b`` and ``a.b.c``
 
-* ``{X,Y,Z}`` matches X, Y or Z, where X,Y,Z are patterns.
+* ``{X,Y,Z}`` matches X, Y, or Z, where X, Y, and Z are match patterns.
 
-  * For example, pattern ``{a,b}`` matches ``a`` and ``b``, but not matches ``c``
+  * For example, pattern ``{a,b}`` matches ``a`` and ``b``, but does not match ``c``
 
-  * You can use it with ``*`` and ``**`` patterns, like ``a.{b,c}.*`` or ``a.{b,c.**}``
+  * This can be used in combination with the ``*`` or ``**`` patterns. Examples include ``a.{b,c}.*`` and ``a.{b,c.**}``
 
 
 Include
 ------------------
 
-You can divide a config file into multiple files with 'include' directive::
+Directives in separate configuration files can be imported using the **include** directive::
 
     # Include config files in ./config.d directory
     include config.d/*.conf
 
-It supports regular file path, glob pattern and http URL::
+The **include** directive supports regular file path, glob pattern, and http URL conventions::
 
     # absolute path
     include /path/to/config.conf
 
-    # if it is relative path, it use the dirname of this file
-    # to expand the path
+    # if using a relative path, the directive will use 
+    # the dirname of this file to expand the path
     include extra.conf
 
-    # you can use glob match pattern
+    # glob match pattern
     include config.d/*.conf
 
-    # also http
+    # http
     include http://example.com/fluent.conf
 
 
@@ -141,4 +148,6 @@ It supports regular file path, glob pattern and http URL::
 .. `cronolog <http://cronolog.org/>`_ is used for logging error messages. Install it using ``apt-get install cronolog``.
 .. 
 .. TODO
+
+Next step: :ref:`plugin`
 
