@@ -639,11 +639,11 @@ buffer_path (required)
 Searching plugins
 ------------------------------------
 
-You can use following command to search plugins released on RubyGems::
+You can find plugins released on RubyGems at the `Fluent plugins <http://fluentd.org/plugin/>`_ page.
+
+You can also use following command to search plugins::
 
    $ fluent-gem search -rd fluent-plugin
-
-You can also find plugins at the `Fluent plugins <http://fluentd.org/plugin/>`_ page.
 
 Type following command to install it::
 
