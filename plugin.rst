@@ -3,26 +3,38 @@
 Plugins
 ========================
 
+Plugins extend Fluentd's functionality. 
+
+The user can use the standard plugins packaged with Fluentd, or can write their own plugins. For further information on writing additional plugins, please refer to :ref:`devel`.
+
+For Fluentd to function properly, the user must enable at least one input plugin and at least one output plugin using the configuration file. For further information on the configuration file, please refer to :ref:`config`.
+
 .. contents::
    :backlinks: none
    :local:
 
-Type of plugins
+Types of plugins
 ------------------------------------
 
-There are 3 types of plugins:
+Fluentd has 3 types of plugins:
 
   Input plugin
-    Provides an entrance of events. It usually creates a thread and listen socket. Or pull data from data sources periodically.
+    Defines an input source of events. 
+    
+    An input plugin typically creates a thread and a listen socket. It can also be written to periodically pull data from data sources. Please note that Fluentd does not restrict the user from creating input plugins with alternative implementations. 
 
   Output plugin
-    Provides an exit of events. Output plugins are usually *buffered* that accumulates events in the buffer and write out to file or network. Buffers are provided by buffer plugins.
-    Some output plugins are fully customized plugin that doesn't use buffer plugins.
+    Defines an output destination for events. 
+    
+    An output plugin is typically *buffered*. A buffered output plugin instructs Fluentd to accumulate event logs in a buffer before writing chunks of data out to a file or network. The buffer's behavior is defined by a separate buffer plugin. Different buffer plugins can be chosen for each output plugin. 
+    
+    Some output plugins are fully customized and do not use buffers.
 
   Buffer plugin
-    Provides a buffer implementation. Buffer plugin manages performance and reliability.
+    Defines the implementation of a buffer. 
+    
+    The user should choose the appropriate buffer plugin for the desired combination of performance and reliability.
 
-You can add your own plugin. See :ref:`devel`.
 
 
 .. _input_plugin:
