@@ -45,7 +45,7 @@ Input plugins
 http
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**http** input plugin listens HTTP clients. The URL is a tag of events and event body is included on the POST parameter.
+The **http** input plugin allows Fluentd to listen to HTTP clients. The URL becomes the *tag* of the Fluentd event log, and the POSTed body element becomes the *record* of the Fluentd event log.
 
 +------------+------------------------------------------------------------------+----------------------------+
 | Parameter  | Description                                                      | Required?                  |
@@ -76,16 +76,16 @@ http
     </source>
 
 port
-  port to listen on. Default is 9880.
+  The port to listen on. The default value is 9880.
 
 bind
-  bind address to listen on. Default is 0.0.0.0 (all addresses).
+  The bind address to listen on. The default value is 0.0.0.0 (all addresses).
 
 body_size_limit
-  limit of the body size. Default is 32MB.
+  The limit of the body size. The default value is 32MB.
 
 keepalive_timeout
-  timeout of keep-alived connection. Default is 10 seconds.
+  The timeout limit for keeping the connection alive. The default value is 10 seconds.
 
 
 tail
