@@ -89,13 +89,13 @@ body_size_limit
 
 keepalive_timeout
   The timeout limit for keeping the connection alive. 
-  Default Value is 10 seconds.
+  Default Value = 10 seconds
 
 
 tail
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-
-**tail** input plugin reads events from the tail of text files, like ``tail -f`` command.
+..I think an example would help.
+The **tail** input plugin allows Fluentd to read events from the tail of text files. Its read behavior is analogous to the ``tail -f`` command.
 
 **configuration**::
 
