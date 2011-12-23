@@ -76,16 +76,20 @@ The **http** input plugin allows Fluentd to listen to HTTP clients. The URL beco
     </source>
 
 port
-  The port to listen on. The default value is 9880.
+  The port to listen on. 
+  Default Value = 9880
 
 bind
-  The bind address to listen on. The default value is 0.0.0.0 (all addresses).
+  The bind address to listen on. 
+  Default Value = 0.0.0.0 (all addresses)
 
 body_size_limit
-  The limit of the body size. The default value is 32MB.
+  The limit of the body size. 
+  Default Value = 32MB.
 
 keepalive_timeout
-  The timeout limit for keeping the connection alive. The default value is 10 seconds.
+  The timeout limit for keeping the connection alive. 
+  Default Value is 10 seconds.
 
 
 tail
