@@ -217,18 +217,23 @@ json={"event":"body"}</pre>
 </div>
 <dl class="docutils">
 <dt>port</dt>
-<dd>The port to listen on. The default value is 9880.</dd>
+<dd>The port to listen on.
+Default Value = 9880</dd>
 <dt>bind</dt>
-<dd>The bind address to listen on. The default value is 0.0.0.0 (all addresses).</dd>
+<dd>The bind address to listen on.
+Default Value = 0.0.0.0 (all addresses)</dd>
 <dt>body_size_limit</dt>
-<dd>The limit of the body size. The default value is 32MB.</dd>
+<dd>The limit of the body size.
+Default Value = 32MB.</dd>
 <dt>keepalive_timeout</dt>
-<dd>The timeout limit for keeping the connection alive. The default value is 10 seconds.</dd>
+<dd>The timeout limit for keeping the connection alive.
+Default Value = 10 seconds</dd>
 </dl>
 </div>
 <div class="section" id="tail">
 <h3>tail<a class="headerlink" href="#tail" title="Permalink to this headline">¶</a></h3>
-<p><strong>tail</strong> input plugin reads events from the tail of text files, like <tt class="docutils literal"><span class="pre">tail</span> <span class="pre">-f</span></tt> command.</p>
+<p>..I think an example would help.
+The <strong>tail</strong> input plugin allows Fluentd to read events from the tail of text files. Its read behavior is analogous to the <tt class="docutils literal"><span class="pre">tail</span> <span class="pre">-f</span></tt> command.</p>
 <p><strong>configuration</strong>:</p>
 <div class="highlight-python"><pre>&lt;source&gt;
   type tail
