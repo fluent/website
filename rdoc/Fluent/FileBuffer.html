@@ -75,6 +75,8 @@
           
           <li><a href="#method-i-enqueue">#enqueue</a></li>
           
+          <li><a href="#method-i-make_path">#make_path</a></li>
+          
           <li><a href="#method-i-new_chunk">#new_chunk</a></li>
           
           <li><a href="#method-i-resume">#resume</a></li>
@@ -146,6 +148,24 @@
         
           <li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
         
+          <li><a href="../Fluent/DetachMultiProcessMixin.html">Fluent::DetachMultiProcessMixin</a></li>
+        
+          <li><a href="../Fluent/DetachProcessImpl.html">Fluent::DetachProcessImpl</a></li>
+        
+          <li><a href="../Fluent/DetachProcessImpl/FinishWait.html">Fluent::DetachProcessImpl::FinishWait</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager.html">Fluent::DetachProcessManager</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager/Broker.html">Fluent::DetachProcessManager::Broker</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager/DelayedForwarder.html">Fluent::DetachProcessManager::DelayedForwarder</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager/Forwarder.html">Fluent::DetachProcessManager::Forwarder</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager/MultiForwarder.html">Fluent::DetachProcessManager::MultiForwarder</a></li>
+        
+          <li><a href="../Fluent/DetachProcessMixin.html">Fluent::DetachProcessMixin</a></li>
+        
           <li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
         
           <li><a href="../Fluent/EngineClass/NoMatchMatch.html">Fluent::EngineClass::NoMatchMatch</a></li>
@@ -153,6 +173,8 @@
           <li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
           <li><a href="../Fluent/ExecFilterOutput.html">Fluent::ExecFilterOutput</a></li>
+        
+          <li><a href="../Fluent/ExecFilterOutput/ChildProcess.html">Fluent::ExecFilterOutput::ChildProcess</a></li>
         
           <li><a href="../Fluent/ExecInput.html">Fluent::ExecInput</a></li>
         
@@ -214,6 +236,10 @@
         
           <li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
         
+          <li><a href="../Fluent/ObjectBufferedOutput.html">Fluent::ObjectBufferedOutput</a></li>
+        
+          <li><a href="../Fluent/ObjectBufferedOutput/BufferedEventStreamMixin.html">Fluent::ObjectBufferedOutput::BufferedEventStreamMixin</a></li>
+        
           <li><a href="../Fluent/OneEventStream.html">Fluent::OneEventStream</a></li>
         
           <li><a href="../Fluent/OrMatchPattern.html">Fluent::OrMatchPattern</a></li>
@@ -244,6 +270,10 @@
         
           <li><a href="../Fluent/StreamOutput/ReformatWriter.html">Fluent::StreamOutput::ReformatWriter</a></li>
         
+          <li><a href="../Fluent/Supervisor.html">Fluent::Supervisor</a></li>
+        
+          <li><a href="../Fluent/Supervisor/LoggerInitializer.html">Fluent::Supervisor::LoggerInitializer</a></li>
+        
           <li><a href="../Fluent/SyslogInput.html">Fluent::SyslogInput</a></li>
         
           <li><a href="../Fluent/SyslogInput/UdpHandler.html">Fluent::SyslogInput::UdpHandler</a></li>
@@ -251,6 +281,12 @@
           <li><a href="../Fluent/TailInput.html">Fluent::TailInput</a></li>
         
           <li><a href="../Fluent/TailInput/Handler.html">Fluent::TailInput::Handler</a></li>
+        
+          <li><a href="../Fluent/TailInput/NullPositionEntry.html">Fluent::TailInput::NullPositionEntry</a></li>
+        
+          <li><a href="../Fluent/TailInput/PositionEntry.html">Fluent::TailInput::PositionEntry</a></li>
+        
+          <li><a href="../Fluent/TailInput/PositionFile.html">Fluent::TailInput::PositionFile</a></li>
         
           <li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
         
@@ -267,6 +303,8 @@
           <li><a href="../Fluent/Test/TestDriver.html">Fluent::Test::TestDriver</a></li>
         
           <li><a href="../Fluent/Test/TestOutputChain.html">Fluent::Test::TestOutputChain</a></li>
+        
+          <li><a href="../Fluent/Test/TimeSlicedOutputTestDriver.html">Fluent::Test::TimeSlicedOutputTestDriver</a></li>
         
           <li><a href="../Fluent/TestOutput.html">Fluent::TestOutput</a></li>
         
@@ -353,7 +391,7 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 77</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 78</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-identifier">require</span> <span class="ruby-string">'uri'</span>
   <span class="ruby-keyword">super</span>
@@ -393,7 +431,7 @@
             
             <div class="method-source-code" id="configure-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 84</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 85</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
   <span class="ruby-keyword">super</span>
 
@@ -441,10 +479,9 @@
 
   <span class="ruby-identifier">m</span> = <span class="ruby-constant">PATH_MATCH</span>.<span class="ruby-identifier">match</span>(<span class="ruby-identifier">mp</span>)
   <span class="ruby-identifier">encoded_key</span> = <span class="ruby-identifier">m</span> <span class="ruby-operator">?</span> <span class="ruby-identifier">m</span>[<span class="ruby-value">1</span>] <span class="ruby-operator">:</span> <span class="ruby-string">&quot;&quot;</span>
-  <span class="ruby-identifier">tsuffix</span> = <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-value">16</span>)
+  <span class="ruby-identifier">npath</span> = <span class="ruby-identifier">make_path</span>(<span class="ruby-identifier">encoded_key</span>, <span class="ruby-string">&quot;q&quot;</span>)
 
-  <span class="ruby-identifier">path</span> = <span class="ruby-node">&quot;#{@buffer_path_prefix}#{encoded_key}.q#{tsuffix}#{@buffer_path_suffix}&quot;</span>
-  <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">mv</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">mv</span>(<span class="ruby-identifier">npath</span>)
 <span class="ruby-keyword">end</span></pre>
             </div><!-- enqueue-source -->
             
@@ -475,11 +512,10 @@
             
             <div class="method-source-code" id="new_chunk-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 103</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 104</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">new_chunk</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">tsuffix</span> = <span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>.<span class="ruby-identifier">to_s</span>(<span class="ruby-value">16</span>)
   <span class="ruby-identifier">encoded_key</span> = <span class="ruby-identifier">encode_key</span>(<span class="ruby-identifier">key</span>)
-  <span class="ruby-identifier">path</span> = <span class="ruby-node">&quot;#{@buffer_path_prefix}#{encoded_key}.b#{tsuffix}#{@buffer_path_suffix}&quot;</span>
+  <span class="ruby-identifier">path</span> = <span class="ruby-identifier">make_path</span>(<span class="ruby-identifier">encoded_key</span>, <span class="ruby-string">&quot;b&quot;</span>)
   <span class="ruby-constant">FileBufferChunk</span>.<span class="ruby-identifier">new</span>(<span class="ruby-identifier">key</span>, <span class="ruby-identifier">path</span>)
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new_chunk-source -->
@@ -577,7 +613,7 @@
             
             <div class="method-source-code" id="start-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 96</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 97</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">start</span>
   <span class="ruby-constant">FileUtils</span>.<span class="ruby-identifier">mkdir_p</span> <span class="ruby-constant">File</span>.<span class="ruby-identifier">dirname</span>(<span class="ruby-ivar">@buffer_path_prefix</span><span class="ruby-operator">+</span><span class="ruby-string">&quot;path&quot;</span>)
   <span class="ruby-keyword">super</span>
@@ -617,9 +653,9 @@
             
             <div class="method-source-code" id="decode_key-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 164</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 163</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">decode_key</span>(<span class="ruby-identifier">encoded_key</span>)
-              <span class="ruby-constant">URI</span>.<span class="ruby-identifier">decode</span>(<span class="ruby-identifier">encoded_key</span>, <span class="ruby-regexp">/[^-_.a-zA-Z0-9]/</span>)
+  <span class="ruby-constant">URI</span>.<span class="ruby-identifier">unescape</span>(<span class="ruby-identifier">encoded_key</span>)
 <span class="ruby-keyword">end</span></pre>
             </div><!-- decode_key-source -->
             
@@ -650,9 +686,9 @@
             
             <div class="method-source-code" id="encode_key-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 160</span>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 159</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">encode_key</span>(<span class="ruby-identifier">key</span>)
-              <span class="ruby-constant">URI</span>.<span class="ruby-identifier">encode</span>(<span class="ruby-identifier">key</span>, <span class="ruby-regexp">/[^-_.a-zA-Z0-9]/</span>)
+  <span class="ruby-constant">URI</span>.<span class="ruby-identifier">escape</span>(<span class="ruby-identifier">key</span>, <span class="ruby-regexp">/[^-_.a-zA-Z0-9]/</span>)
 <span class="ruby-keyword">end</span></pre>
             </div><!-- encode_key-source -->
             
@@ -662,6 +698,41 @@
 
           
         </div><!-- encode_key-method -->
+
+      
+        <div id="make_path-method" class="method-detail ">
+          <a name="method-i-make_path"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">make_path</span><span
+              class="method-args">(encoded_key, bq)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="make_path-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/plugin/buf_file.rb, line 167</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">make_path</span>(<span class="ruby-identifier">encoded_key</span>, <span class="ruby-identifier">bq</span>)
+  <span class="ruby-identifier">now</span> = <span class="ruby-constant">Time</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">utc</span>
+  <span class="ruby-identifier">tsuffix</span> = ((<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span>*<span class="ruby-value">1000</span>*<span class="ruby-value">1000</span><span class="ruby-operator">+</span><span class="ruby-identifier">now</span>.<span class="ruby-identifier">usec</span>) <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-value">12</span> <span class="ruby-operator">|</span> <span class="ruby-identifier">rand</span>(<span class="ruby-value">0xfff</span>)).<span class="ruby-identifier">to_s</span>(<span class="ruby-value">16</span>)
+  <span class="ruby-node">&quot;#{@buffer_path_prefix}#{encoded_key}.#{bq}#{tsuffix}#{@buffer_path_suffix}&quot;</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- make_path-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- make_path-method -->
 
       
       </div><!-- protected-instance-method-details -->

@@ -71,7 +71,7 @@
           
           <li><a href="#method-i-emit">#emit</a></li>
           
-          <li><a href="#method-i-try_flush">#try_flush</a></li>
+          <li><a href="#method-i-enqueue_buffer">#enqueue_buffer</a></li>
           
         </ul>
       </div>
@@ -138,6 +138,24 @@
         
           <li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
         
+          <li><a href="../Fluent/DetachMultiProcessMixin.html">Fluent::DetachMultiProcessMixin</a></li>
+        
+          <li><a href="../Fluent/DetachProcessImpl.html">Fluent::DetachProcessImpl</a></li>
+        
+          <li><a href="../Fluent/DetachProcessImpl/FinishWait.html">Fluent::DetachProcessImpl::FinishWait</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager.html">Fluent::DetachProcessManager</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager/Broker.html">Fluent::DetachProcessManager::Broker</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager/DelayedForwarder.html">Fluent::DetachProcessManager::DelayedForwarder</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager/Forwarder.html">Fluent::DetachProcessManager::Forwarder</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager/MultiForwarder.html">Fluent::DetachProcessManager::MultiForwarder</a></li>
+        
+          <li><a href="../Fluent/DetachProcessMixin.html">Fluent::DetachProcessMixin</a></li>
+        
           <li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
         
           <li><a href="../Fluent/EngineClass/NoMatchMatch.html">Fluent::EngineClass::NoMatchMatch</a></li>
@@ -145,6 +163,8 @@
           <li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
           <li><a href="../Fluent/ExecFilterOutput.html">Fluent::ExecFilterOutput</a></li>
+        
+          <li><a href="../Fluent/ExecFilterOutput/ChildProcess.html">Fluent::ExecFilterOutput::ChildProcess</a></li>
         
           <li><a href="../Fluent/ExecInput.html">Fluent::ExecInput</a></li>
         
@@ -206,6 +226,10 @@
         
           <li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
         
+          <li><a href="../Fluent/ObjectBufferedOutput.html">Fluent::ObjectBufferedOutput</a></li>
+        
+          <li><a href="../Fluent/ObjectBufferedOutput/BufferedEventStreamMixin.html">Fluent::ObjectBufferedOutput::BufferedEventStreamMixin</a></li>
+        
           <li><a href="../Fluent/OneEventStream.html">Fluent::OneEventStream</a></li>
         
           <li><a href="../Fluent/OrMatchPattern.html">Fluent::OrMatchPattern</a></li>
@@ -236,6 +260,10 @@
         
           <li><a href="../Fluent/StreamOutput/ReformatWriter.html">Fluent::StreamOutput::ReformatWriter</a></li>
         
+          <li><a href="../Fluent/Supervisor.html">Fluent::Supervisor</a></li>
+        
+          <li><a href="../Fluent/Supervisor/LoggerInitializer.html">Fluent::Supervisor::LoggerInitializer</a></li>
+        
           <li><a href="../Fluent/SyslogInput.html">Fluent::SyslogInput</a></li>
         
           <li><a href="../Fluent/SyslogInput/UdpHandler.html">Fluent::SyslogInput::UdpHandler</a></li>
@@ -243,6 +271,12 @@
           <li><a href="../Fluent/TailInput.html">Fluent::TailInput</a></li>
         
           <li><a href="../Fluent/TailInput/Handler.html">Fluent::TailInput::Handler</a></li>
+        
+          <li><a href="../Fluent/TailInput/NullPositionEntry.html">Fluent::TailInput::NullPositionEntry</a></li>
+        
+          <li><a href="../Fluent/TailInput/PositionEntry.html">Fluent::TailInput::PositionEntry</a></li>
+        
+          <li><a href="../Fluent/TailInput/PositionFile.html">Fluent::TailInput::PositionFile</a></li>
         
           <li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
         
@@ -259,6 +293,8 @@
           <li><a href="../Fluent/Test/TestDriver.html">Fluent::Test::TestDriver</a></li>
         
           <li><a href="../Fluent/Test/TestOutputChain.html">Fluent::Test::TestOutputChain</a></li>
+        
+          <li><a href="../Fluent/Test/TimeSlicedOutputTestDriver.html">Fluent::Test::TimeSlicedOutputTestDriver</a></li>
         
           <li><a href="../Fluent/TestOutput.html">Fluent::TestOutput</a></li>
         
@@ -356,12 +392,11 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 366</span>
+<span class="ruby-comment"># File lib/fluent/output.rb, line 436</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
   <span class="ruby-keyword">super</span>
   <span class="ruby-ivar">@localtime</span> = <span class="ruby-keyword">true</span>
   <span class="ruby-comment">#@ignore_old = false   # TODO</span>
-  <span class="ruby-comment"># TODO @flush_interval = 60  # overwrite default flush_interval</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -398,7 +433,7 @@
             
             <div class="method-source-code" id="configure-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 379</span>
+<span class="ruby-comment"># File lib/fluent/output.rb, line 448</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
   <span class="ruby-keyword">super</span>
 
@@ -407,14 +442,6 @@
     <span class="ruby-ivar">@localtime</span> = <span class="ruby-keyword">false</span>
   <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">conf</span>[<span class="ruby-string">'localtime'</span>]
     <span class="ruby-ivar">@localtime</span> = <span class="ruby-keyword">true</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">time_slice_format</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'time_slice_format'</span>]
-    <span class="ruby-ivar">@time_slice_format</span> = <span class="ruby-identifier">time_slice_format</span>
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">time_slice_wait</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'time_slice_wait'</span>]
-    <span class="ruby-ivar">@time_slice_wait</span> = <span class="ruby-constant">Config</span>.<span class="ruby-identifier">time_value</span>(<span class="ruby-identifier">time_slice_wait</span>)
   <span class="ruby-keyword">end</span>
 
   <span class="ruby-keyword">if</span> <span class="ruby-ivar">@localtime</span>
@@ -460,7 +487,7 @@
             
             <div class="method-source-code" id="emit-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 412</span>
+<span class="ruby-comment"># File lib/fluent/output.rb, line 473</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">emit</span>(<span class="ruby-identifier">tag</span>, <span class="ruby-identifier">es</span>, <span class="ruby-identifier">chain</span>)
   <span class="ruby-identifier">es</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">time</span>,<span class="ruby-identifier">record</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">tc</span> = <span class="ruby-identifier">time</span> <span class="ruby-operator">/</span> <span class="ruby-ivar">@time_slice_cache_interval</span>
@@ -487,12 +514,12 @@
         </div><!-- emit-method -->
 
       
-        <div id="try_flush-method" class="method-detail ">
-          <a name="method-i-try_flush"></a>
+        <div id="enqueue_buffer-method" class="method-detail ">
+          <a name="method-i-enqueue_buffer"></a>
 
           
           <div class="method-heading">
-            <span class="method-name">try_flush</span><span
+            <span class="method-name">enqueue_buffer</span><span
               class="method-args">()</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
@@ -504,28 +531,25 @@
             
 
             
-            <div class="method-source-code" id="try_flush-source">
+            <div class="method-source-code" id="enqueue_buffer-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/output.rb, line 429</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">try_flush</span>
+<span class="ruby-comment"># File lib/fluent/output.rb, line 490</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">enqueue_buffer</span>
   <span class="ruby-identifier">nowslice</span> = <span class="ruby-ivar">@time_slicer</span>.<span class="ruby-identifier">call</span>(<span class="ruby-constant">Engine</span>.<span class="ruby-identifier">now</span>.<span class="ruby-identifier">to_i</span> <span class="ruby-operator">-</span> <span class="ruby-ivar">@time_slice_wait</span>)
-  <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
-    <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
-      <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">nowslice</span>
-        <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">key</span>)
-      <span class="ruby-keyword">end</span>
-    }
-  <span class="ruby-keyword">end</span>
-  <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">pop</span>(<span class="ruby-keyword">self</span>)
+  <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">keys</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">key</span><span class="ruby-operator">|</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">key</span> <span class="ruby-operator">&lt;</span> <span class="ruby-identifier">nowslice</span>
+      <span class="ruby-ivar">@buffer</span>.<span class="ruby-identifier">push</span>(<span class="ruby-identifier">key</span>)
+    <span class="ruby-keyword">end</span>
+  }
 <span class="ruby-keyword">end</span></pre>
-            </div><!-- try_flush-source -->
+            </div><!-- enqueue_buffer-source -->
             
           </div>
 
           
 
           
-        </div><!-- try_flush-method -->
+        </div><!-- enqueue_buffer-method -->
 
       
       </div><!-- public-instance-method-details -->

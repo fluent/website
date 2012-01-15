@@ -142,6 +142,24 @@
         
           <li><a href="../../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
         
+          <li><a href="../../Fluent/DetachMultiProcessMixin.html">Fluent::DetachMultiProcessMixin</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessImpl.html">Fluent::DetachProcessImpl</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessImpl/FinishWait.html">Fluent::DetachProcessImpl::FinishWait</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessManager.html">Fluent::DetachProcessManager</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessManager/Broker.html">Fluent::DetachProcessManager::Broker</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessManager/DelayedForwarder.html">Fluent::DetachProcessManager::DelayedForwarder</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessManager/Forwarder.html">Fluent::DetachProcessManager::Forwarder</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessManager/MultiForwarder.html">Fluent::DetachProcessManager::MultiForwarder</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessMixin.html">Fluent::DetachProcessMixin</a></li>
+        
           <li><a href="../../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
         
           <li><a href="../../Fluent/EngineClass/NoMatchMatch.html">Fluent::EngineClass::NoMatchMatch</a></li>
@@ -149,6 +167,8 @@
           <li><a href="../../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
           <li><a href="../../Fluent/ExecFilterOutput.html">Fluent::ExecFilterOutput</a></li>
+        
+          <li><a href="../../Fluent/ExecFilterOutput/ChildProcess.html">Fluent::ExecFilterOutput::ChildProcess</a></li>
         
           <li><a href="../../Fluent/ExecInput.html">Fluent::ExecInput</a></li>
         
@@ -210,6 +230,10 @@
         
           <li><a href="../../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
         
+          <li><a href="../../Fluent/ObjectBufferedOutput.html">Fluent::ObjectBufferedOutput</a></li>
+        
+          <li><a href="../../Fluent/ObjectBufferedOutput/BufferedEventStreamMixin.html">Fluent::ObjectBufferedOutput::BufferedEventStreamMixin</a></li>
+        
           <li><a href="../../Fluent/OneEventStream.html">Fluent::OneEventStream</a></li>
         
           <li><a href="../../Fluent/OrMatchPattern.html">Fluent::OrMatchPattern</a></li>
@@ -240,6 +264,10 @@
         
           <li><a href="../../Fluent/StreamOutput/ReformatWriter.html">Fluent::StreamOutput::ReformatWriter</a></li>
         
+          <li><a href="../../Fluent/Supervisor.html">Fluent::Supervisor</a></li>
+        
+          <li><a href="../../Fluent/Supervisor/LoggerInitializer.html">Fluent::Supervisor::LoggerInitializer</a></li>
+        
           <li><a href="../../Fluent/SyslogInput.html">Fluent::SyslogInput</a></li>
         
           <li><a href="../../Fluent/SyslogInput/UdpHandler.html">Fluent::SyslogInput::UdpHandler</a></li>
@@ -247,6 +275,12 @@
           <li><a href="../../Fluent/TailInput.html">Fluent::TailInput</a></li>
         
           <li><a href="../../Fluent/TailInput/Handler.html">Fluent::TailInput::Handler</a></li>
+        
+          <li><a href="../../Fluent/TailInput/NullPositionEntry.html">Fluent::TailInput::NullPositionEntry</a></li>
+        
+          <li><a href="../../Fluent/TailInput/PositionEntry.html">Fluent::TailInput::PositionEntry</a></li>
+        
+          <li><a href="../../Fluent/TailInput/PositionFile.html">Fluent::TailInput::PositionFile</a></li>
         
           <li><a href="../../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
         
@@ -263,6 +297,8 @@
           <li><a href="../../Fluent/Test/TestDriver.html">Fluent::Test::TestDriver</a></li>
         
           <li><a href="../../Fluent/Test/TestOutputChain.html">Fluent::Test::TestOutputChain</a></li>
+        
+          <li><a href="../../Fluent/Test/TimeSlicedOutputTestDriver.html">Fluent::Test::TimeSlicedOutputTestDriver</a></li>
         
           <li><a href="../../Fluent/TestOutput.html">Fluent::TestOutput</a></li>
         
@@ -336,7 +372,7 @@
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 105</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 106</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">io</span>, <span class="ruby-identifier">on_message</span>)
   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">io</span>)
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">io</span>.<span class="ruby-identifier">is_a?</span>(<span class="ruby-constant">TCPSocket</span>)
@@ -381,7 +417,7 @@
             
             <div class="method-source-code" id="on_close-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 143</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 144</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_close</span>
   <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">trace</span> { <span class="ruby-node">&quot;closed fluent socket object_id=#{self.object_id}&quot;</span> }
 <span class="ruby-keyword">end</span></pre>
@@ -414,7 +450,7 @@
             
             <div class="method-source-code" id="on_connect-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 115</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 116</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_connect</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- on_connect-source -->
@@ -446,7 +482,7 @@
             
             <div class="method-source-code" id="on_read-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 118</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 119</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_read</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-identifier">first</span> = <span class="ruby-identifier">data</span>[<span class="ruby-value">0</span>]
   <span class="ruby-keyword">if</span> <span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-string">'{'</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">first</span> <span class="ruby-operator">==</span> <span class="ruby-string">'['</span>
@@ -492,7 +528,7 @@
             
             <div class="method-source-code" id="on_read_json-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 135</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 136</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_read_json</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-ivar">@y</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">data</span>
 <span class="ruby-keyword">end</span></pre>
@@ -525,7 +561,7 @@
             
             <div class="method-source-code" id="on_read_msgpack-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 139</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_stream.rb, line 140</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_read_msgpack</span>(<span class="ruby-identifier">data</span>)
   <span class="ruby-ivar">@u</span>.<span class="ruby-identifier">feed_each</span>(<span class="ruby-identifier">data</span>, &amp;<span class="ruby-ivar">@on_message</span>)
 <span class="ruby-keyword">end</span></pre>

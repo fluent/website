@@ -158,6 +158,24 @@
         
           <li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
         
+          <li><a href="../Fluent/DetachMultiProcessMixin.html">Fluent::DetachMultiProcessMixin</a></li>
+        
+          <li><a href="../Fluent/DetachProcessImpl.html">Fluent::DetachProcessImpl</a></li>
+        
+          <li><a href="../Fluent/DetachProcessImpl/FinishWait.html">Fluent::DetachProcessImpl::FinishWait</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager.html">Fluent::DetachProcessManager</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager/Broker.html">Fluent::DetachProcessManager::Broker</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager/DelayedForwarder.html">Fluent::DetachProcessManager::DelayedForwarder</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager/Forwarder.html">Fluent::DetachProcessManager::Forwarder</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager/MultiForwarder.html">Fluent::DetachProcessManager::MultiForwarder</a></li>
+        
+          <li><a href="../Fluent/DetachProcessMixin.html">Fluent::DetachProcessMixin</a></li>
+        
           <li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
         
           <li><a href="../Fluent/EngineClass/NoMatchMatch.html">Fluent::EngineClass::NoMatchMatch</a></li>
@@ -165,6 +183,8 @@
           <li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
           <li><a href="../Fluent/ExecFilterOutput.html">Fluent::ExecFilterOutput</a></li>
+        
+          <li><a href="../Fluent/ExecFilterOutput/ChildProcess.html">Fluent::ExecFilterOutput::ChildProcess</a></li>
         
           <li><a href="../Fluent/ExecInput.html">Fluent::ExecInput</a></li>
         
@@ -226,6 +246,10 @@
         
           <li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
         
+          <li><a href="../Fluent/ObjectBufferedOutput.html">Fluent::ObjectBufferedOutput</a></li>
+        
+          <li><a href="../Fluent/ObjectBufferedOutput/BufferedEventStreamMixin.html">Fluent::ObjectBufferedOutput::BufferedEventStreamMixin</a></li>
+        
           <li><a href="../Fluent/OneEventStream.html">Fluent::OneEventStream</a></li>
         
           <li><a href="../Fluent/OrMatchPattern.html">Fluent::OrMatchPattern</a></li>
@@ -256,6 +280,10 @@
         
           <li><a href="../Fluent/StreamOutput/ReformatWriter.html">Fluent::StreamOutput::ReformatWriter</a></li>
         
+          <li><a href="../Fluent/Supervisor.html">Fluent::Supervisor</a></li>
+        
+          <li><a href="../Fluent/Supervisor/LoggerInitializer.html">Fluent::Supervisor::LoggerInitializer</a></li>
+        
           <li><a href="../Fluent/SyslogInput.html">Fluent::SyslogInput</a></li>
         
           <li><a href="../Fluent/SyslogInput/UdpHandler.html">Fluent::SyslogInput::UdpHandler</a></li>
@@ -263,6 +291,12 @@
           <li><a href="../Fluent/TailInput.html">Fluent::TailInput</a></li>
         
           <li><a href="../Fluent/TailInput/Handler.html">Fluent::TailInput::Handler</a></li>
+        
+          <li><a href="../Fluent/TailInput/NullPositionEntry.html">Fluent::TailInput::NullPositionEntry</a></li>
+        
+          <li><a href="../Fluent/TailInput/PositionEntry.html">Fluent::TailInput::PositionEntry</a></li>
+        
+          <li><a href="../Fluent/TailInput/PositionFile.html">Fluent::TailInput::PositionFile</a></li>
         
           <li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
         
@@ -279,6 +313,8 @@
           <li><a href="../Fluent/Test/TestDriver.html">Fluent::Test::TestDriver</a></li>
         
           <li><a href="../Fluent/Test/TestOutputChain.html">Fluent::Test::TestOutputChain</a></li>
+        
+          <li><a href="../Fluent/Test/TimeSlicedOutputTestDriver.html">Fluent::Test::TimeSlicedOutputTestDriver</a></li>
         
           <li><a href="../Fluent/TestOutput.html">Fluent::TestOutput</a></li>
         
@@ -426,7 +462,7 @@
             
             <div class="method-source-code" id="listen-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_forward.rb, line 59</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_forward.rb, line 61</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">listen</span>
   <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">info</span> <span class="ruby-node">&quot;listening fluent socket on #{@bind}:#{@port}&quot;</span>
   <span class="ruby-constant">Coolio</span><span class="ruby-operator">::</span><span class="ruby-constant">TCPServer</span>.<span class="ruby-identifier">new</span>(<span class="ruby-ivar">@bind</span>, <span class="ruby-ivar">@port</span>, <span class="ruby-constant">Handler</span>, <span class="ruby-identifier">method</span>(<span class="ruby-value">:on_message</span>))
@@ -469,7 +505,7 @@ Coolio::UNIXServer.new(@path, Handler, method(:on_message))</pre>
             
             <div class="method-source-code" id="run-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_forward.rb, line 74</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_forward.rb, line 76</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">run</span>
   <span class="ruby-ivar">@loop</span>.<span class="ruby-identifier">run</span>
 <span class="ruby-keyword">rescue</span>
@@ -507,10 +543,12 @@ Coolio::UNIXServer.new(@path, Handler, method(:on_message))</pre>
 <pre>
 <span class="ruby-comment"># File lib/fluent/plugin/in_forward.rb, line 52</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">shutdown</span>
-  <span class="ruby-ivar">@lsock</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-ivar">@loop</span>.<span class="ruby-identifier">watchers</span>.<span class="ruby-identifier">each</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">w</span><span class="ruby-operator">|</span> <span class="ruby-identifier">w</span>.<span class="ruby-identifier">detach</span> }
   <span class="ruby-ivar">@loop</span>.<span class="ruby-identifier">stop</span>
-  <span class="ruby-ivar">@thread</span>.<span class="ruby-identifier">join</span>
   <span class="ruby-ivar">@usock</span>.<span class="ruby-identifier">close</span>
+  <span class="ruby-constant">TCPSocket</span>.<span class="ruby-identifier">open</span>(<span class="ruby-string">'127.0.0.1'</span>, <span class="ruby-ivar">@port</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">sock</span><span class="ruby-operator">|</span> }  <span class="ruby-comment"># FIXME @thread.join blocks without this line</span>
+  <span class="ruby-ivar">@thread</span>.<span class="ruby-identifier">join</span>
+  <span class="ruby-ivar">@lsock</span>.<span class="ruby-identifier">close</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- shutdown-source -->
             
@@ -591,9 +629,9 @@ Coolio::UNIXServer.new(@path, Handler, method(:on_message))</pre>
             
             <div class="method-source-code" id="on_heartbeat_request-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_forward.rb, line 191</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_forward.rb, line 193</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_heartbeat_request</span>(<span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>, <span class="ruby-identifier">msg</span>)
-  <span class="ruby-identifier">$log</span>.<span class="ruby-identifier">trace</span> <span class="ruby-node">&quot;heartbeat request from #{host}:#{port}&quot;</span>
+  <span class="ruby-comment">#$log.trace &quot;heartbeat request from #{host}:#{port}&quot;</span>
   <span class="ruby-ivar">@usock</span>.<span class="ruby-identifier">send</span> <span class="ruby-string">&quot;&quot;</span>, <span class="ruby-value">0</span>, <span class="ruby-identifier">host</span>, <span class="ruby-identifier">port</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- on_heartbeat_request-source -->
@@ -652,7 +690,7 @@ Coolio::UNIXServer.new(@path, Handler, method(:on_message))</pre>
             
             <div class="method-source-code" id="on_message-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_forward.rb, line 102</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_forward.rb, line 104</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">on_message</span>(<span class="ruby-identifier">msg</span>)
   <span class="ruby-comment"># TODO format error</span>
   <span class="ruby-identifier">tag</span> = <span class="ruby-identifier">msg</span>[<span class="ruby-value">0</span>].<span class="ruby-identifier">to_s</span>

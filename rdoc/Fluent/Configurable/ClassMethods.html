@@ -130,6 +130,24 @@
         
           <li><a href="../../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
         
+          <li><a href="../../Fluent/DetachMultiProcessMixin.html">Fluent::DetachMultiProcessMixin</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessImpl.html">Fluent::DetachProcessImpl</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessImpl/FinishWait.html">Fluent::DetachProcessImpl::FinishWait</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessManager.html">Fluent::DetachProcessManager</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessManager/Broker.html">Fluent::DetachProcessManager::Broker</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessManager/DelayedForwarder.html">Fluent::DetachProcessManager::DelayedForwarder</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessManager/Forwarder.html">Fluent::DetachProcessManager::Forwarder</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessManager/MultiForwarder.html">Fluent::DetachProcessManager::MultiForwarder</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessMixin.html">Fluent::DetachProcessMixin</a></li>
+        
           <li><a href="../../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
         
           <li><a href="../../Fluent/EngineClass/NoMatchMatch.html">Fluent::EngineClass::NoMatchMatch</a></li>
@@ -137,6 +155,8 @@
           <li><a href="../../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
           <li><a href="../../Fluent/ExecFilterOutput.html">Fluent::ExecFilterOutput</a></li>
+        
+          <li><a href="../../Fluent/ExecFilterOutput/ChildProcess.html">Fluent::ExecFilterOutput::ChildProcess</a></li>
         
           <li><a href="../../Fluent/ExecInput.html">Fluent::ExecInput</a></li>
         
@@ -198,6 +218,10 @@
         
           <li><a href="../../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
         
+          <li><a href="../../Fluent/ObjectBufferedOutput.html">Fluent::ObjectBufferedOutput</a></li>
+        
+          <li><a href="../../Fluent/ObjectBufferedOutput/BufferedEventStreamMixin.html">Fluent::ObjectBufferedOutput::BufferedEventStreamMixin</a></li>
+        
           <li><a href="../../Fluent/OneEventStream.html">Fluent::OneEventStream</a></li>
         
           <li><a href="../../Fluent/OrMatchPattern.html">Fluent::OrMatchPattern</a></li>
@@ -228,6 +252,10 @@
         
           <li><a href="../../Fluent/StreamOutput/ReformatWriter.html">Fluent::StreamOutput::ReformatWriter</a></li>
         
+          <li><a href="../../Fluent/Supervisor.html">Fluent::Supervisor</a></li>
+        
+          <li><a href="../../Fluent/Supervisor/LoggerInitializer.html">Fluent::Supervisor::LoggerInitializer</a></li>
+        
           <li><a href="../../Fluent/SyslogInput.html">Fluent::SyslogInput</a></li>
         
           <li><a href="../../Fluent/SyslogInput/UdpHandler.html">Fluent::SyslogInput::UdpHandler</a></li>
@@ -235,6 +263,12 @@
           <li><a href="../../Fluent/TailInput.html">Fluent::TailInput</a></li>
         
           <li><a href="../../Fluent/TailInput/Handler.html">Fluent::TailInput::Handler</a></li>
+        
+          <li><a href="../../Fluent/TailInput/NullPositionEntry.html">Fluent::TailInput::NullPositionEntry</a></li>
+        
+          <li><a href="../../Fluent/TailInput/PositionEntry.html">Fluent::TailInput::PositionEntry</a></li>
+        
+          <li><a href="../../Fluent/TailInput/PositionFile.html">Fluent::TailInput::PositionFile</a></li>
         
           <li><a href="../../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
         
@@ -251,6 +285,8 @@
           <li><a href="../../Fluent/Test/TestDriver.html">Fluent::Test::TestDriver</a></li>
         
           <li><a href="../../Fluent/Test/TestOutputChain.html">Fluent::Test::TestOutputChain</a></li>
+        
+          <li><a href="../../Fluent/Test/TimeSlicedOutputTestDriver.html">Fluent::Test::TimeSlicedOutputTestDriver</a></li>
         
           <li><a href="../../Fluent/TestOutput.html">Fluent::TestOutput</a></li>
         
@@ -324,7 +360,7 @@
             
             <div class="method-source-code" id="config_defaults-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/config.rb, line 321</span>
+<span class="ruby-comment"># File lib/fluent/config.rb, line 323</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">config_defaults</span>
   <span class="ruby-identifier">singleton_value</span>(<span class="ruby-value">:_config_defaults</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -382,6 +418,8 @@
         <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span> <span class="ruby-identifier">val</span> }
       <span class="ruby-keyword">when</span> <span class="ruby-value">:integer</span>
         <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_i</span> }
+      <span class="ruby-keyword">when</span> <span class="ruby-value">:float</span>
+        <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span> <span class="ruby-identifier">val</span>.<span class="ruby-identifier">to_f</span> }
       <span class="ruby-keyword">when</span> <span class="ruby-value">:size</span>
         <span class="ruby-constant">Proc</span>.<span class="ruby-identifier">new</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">val</span><span class="ruby-operator">|</span> <span class="ruby-constant">Config</span>.<span class="ruby-identifier">size_value</span>(<span class="ruby-identifier">val</span>) }
       <span class="ruby-keyword">when</span> <span class="ruby-value">:bool</span>
@@ -431,7 +469,7 @@
             
             <div class="method-source-code" id="config_params-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/config.rb, line 317</span>
+<span class="ruby-comment"># File lib/fluent/config.rb, line 319</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">config_params</span>
   <span class="ruby-identifier">singleton_value</span>(<span class="ruby-value">:_config_params</span>)
 <span class="ruby-keyword">end</span></pre>
@@ -464,7 +502,7 @@
             
             <div class="method-source-code" id="config_set_default-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/config.rb, line 307</span>
+<span class="ruby-comment"># File lib/fluent/config.rb, line 309</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">config_set_default</span>(<span class="ruby-identifier">name</span>, <span class="ruby-identifier">defval</span>)
   <span class="ruby-identifier">name</span> = <span class="ruby-identifier">name</span>.<span class="ruby-identifier">to_sym</span>
 

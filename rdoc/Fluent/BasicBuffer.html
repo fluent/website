@@ -73,6 +73,8 @@
           
           <li><a href="#method-i-emit">#emit</a></li>
           
+          <li><a href="#method-i-enable_parallel">#enable_parallel</a></li>
+          
           <li><a href="#method-i-keys">#keys</a></li>
           
           <li><a href="#method-i-pop">#pop</a></li>
@@ -164,6 +166,24 @@
         
           <li><a href="../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
         
+          <li><a href="../Fluent/DetachMultiProcessMixin.html">Fluent::DetachMultiProcessMixin</a></li>
+        
+          <li><a href="../Fluent/DetachProcessImpl.html">Fluent::DetachProcessImpl</a></li>
+        
+          <li><a href="../Fluent/DetachProcessImpl/FinishWait.html">Fluent::DetachProcessImpl::FinishWait</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager.html">Fluent::DetachProcessManager</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager/Broker.html">Fluent::DetachProcessManager::Broker</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager/DelayedForwarder.html">Fluent::DetachProcessManager::DelayedForwarder</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager/Forwarder.html">Fluent::DetachProcessManager::Forwarder</a></li>
+        
+          <li><a href="../Fluent/DetachProcessManager/MultiForwarder.html">Fluent::DetachProcessManager::MultiForwarder</a></li>
+        
+          <li><a href="../Fluent/DetachProcessMixin.html">Fluent::DetachProcessMixin</a></li>
+        
           <li><a href="../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
         
           <li><a href="../Fluent/EngineClass/NoMatchMatch.html">Fluent::EngineClass::NoMatchMatch</a></li>
@@ -171,6 +191,8 @@
           <li><a href="../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
           <li><a href="../Fluent/ExecFilterOutput.html">Fluent::ExecFilterOutput</a></li>
+        
+          <li><a href="../Fluent/ExecFilterOutput/ChildProcess.html">Fluent::ExecFilterOutput::ChildProcess</a></li>
         
           <li><a href="../Fluent/ExecInput.html">Fluent::ExecInput</a></li>
         
@@ -232,6 +254,10 @@
         
           <li><a href="../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
         
+          <li><a href="../Fluent/ObjectBufferedOutput.html">Fluent::ObjectBufferedOutput</a></li>
+        
+          <li><a href="../Fluent/ObjectBufferedOutput/BufferedEventStreamMixin.html">Fluent::ObjectBufferedOutput::BufferedEventStreamMixin</a></li>
+        
           <li><a href="../Fluent/OneEventStream.html">Fluent::OneEventStream</a></li>
         
           <li><a href="../Fluent/OrMatchPattern.html">Fluent::OrMatchPattern</a></li>
@@ -262,6 +288,10 @@
         
           <li><a href="../Fluent/StreamOutput/ReformatWriter.html">Fluent::StreamOutput::ReformatWriter</a></li>
         
+          <li><a href="../Fluent/Supervisor.html">Fluent::Supervisor</a></li>
+        
+          <li><a href="../Fluent/Supervisor/LoggerInitializer.html">Fluent::Supervisor::LoggerInitializer</a></li>
+        
           <li><a href="../Fluent/SyslogInput.html">Fluent::SyslogInput</a></li>
         
           <li><a href="../Fluent/SyslogInput/UdpHandler.html">Fluent::SyslogInput::UdpHandler</a></li>
@@ -269,6 +299,12 @@
           <li><a href="../Fluent/TailInput.html">Fluent::TailInput</a></li>
         
           <li><a href="../Fluent/TailInput/Handler.html">Fluent::TailInput::Handler</a></li>
+        
+          <li><a href="../Fluent/TailInput/NullPositionEntry.html">Fluent::TailInput::NullPositionEntry</a></li>
+        
+          <li><a href="../Fluent/TailInput/PositionEntry.html">Fluent::TailInput::PositionEntry</a></li>
+        
+          <li><a href="../Fluent/TailInput/PositionFile.html">Fluent::TailInput::PositionFile</a></li>
         
           <li><a href="../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
         
@@ -285,6 +321,8 @@
           <li><a href="../Fluent/Test/TestDriver.html">Fluent::Test::TestDriver</a></li>
         
           <li><a href="../Fluent/Test/TestOutputChain.html">Fluent::Test::TestOutputChain</a></li>
+        
+          <li><a href="../Fluent/Test/TimeSlicedOutputTestDriver.html">Fluent::Test::TimeSlicedOutputTestDriver</a></li>
         
           <li><a href="../Fluent/TestOutput.html">Fluent::TestOutput</a></li>
         
@@ -332,47 +370,6 @@
       
 
       
-      <!-- Attributes -->
-      <div id="attribute-method-details" class="method-section section">
-        <h3 class="section-header">Attributes</h3>
-
-        
-        <div id="chunk_limit-attribute-method" class="method-detail">
-          <a name="chunk_limit"></a>
-          
-          <a name="chunk_limit="></a>
-          
-          <div class="method-heading attribute-method-heading">
-            <span class="method-name">chunk_limit</span><span
-              class="attribute-access-type">[RW]</span>
-          </div>
-
-          <div class="method-description">
-          
-          
-          
-          </div>
-        </div>
-        
-        <div id="queue_limit-attribute-method" class="method-detail">
-          <a name="queue_limit"></a>
-          
-          <a name="queue_limit="></a>
-          
-          <div class="method-heading attribute-method-heading">
-            <span class="method-name">queue_limit</span><span
-              class="attribute-access-type">[RW]</span>
-          </div>
-
-          <div class="method-description">
-          
-          
-          
-          </div>
-        </div>
-        
-      </div><!-- attribute-method-details -->
-      
 
       <!-- Methods -->
       
@@ -401,10 +398,8 @@
 <pre>
 <span class="ruby-comment"># File lib/fluent/buffer.rb, line 115</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>
-  <span class="ruby-keyword">super</span>()
-  <span class="ruby-ivar">@chunk_limit</span> = <span class="ruby-value">16</span>*<span class="ruby-value">1024</span>*<span class="ruby-value">1024</span>  <span class="ruby-comment"># TODO default</span>
-  <span class="ruby-ivar">@queue_limit</span> = <span class="ruby-value">64</span> <span class="ruby-comment"># TODO default</span>
-  <span class="ruby-ivar">@parallel</span> = <span class="ruby-keyword">false</span>
+  <span class="ruby-keyword">super</span>
+  <span class="ruby-ivar">@parallel_pop</span> = <span class="ruby-keyword">true</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- new-source -->
             
@@ -441,7 +436,7 @@
             
             <div class="method-source-code" id="clear-21-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/buffer.rb, line 264</span>
+<span class="ruby-comment"># File lib/fluent/buffer.rb, line 265</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">clear!</span>
   <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">delete_if</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">chunk</span><span class="ruby-operator">|</span>
     <span class="ruby-identifier">chunk</span>.<span class="ruby-identifier">purge</span>
@@ -477,17 +472,9 @@
             
             <div class="method-source-code" id="configure-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/buffer.rb, line 124</span>
+<span class="ruby-comment"># File lib/fluent/buffer.rb, line 132</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">configure</span>(<span class="ruby-identifier">conf</span>)
   <span class="ruby-keyword">super</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">chunk_limit</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'buffer_chunk_limit'</span>]
-    <span class="ruby-ivar">@chunk_limit</span> = <span class="ruby-constant">Config</span>.<span class="ruby-identifier">size_value</span>(<span class="ruby-identifier">chunk_limit</span>)
-  <span class="ruby-keyword">end</span>
-
-  <span class="ruby-keyword">if</span> <span class="ruby-identifier">queue_limit</span> = <span class="ruby-identifier">conf</span>[<span class="ruby-string">'buffer_queue_limit'</span>]
-    <span class="ruby-ivar">@queue_limit</span> = <span class="ruby-identifier">queue_limit</span>.<span class="ruby-identifier">to_i</span>
-  <span class="ruby-keyword">end</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- configure-source -->
             
@@ -525,16 +512,17 @@
   <span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">top</span> = (<span class="ruby-ivar">@map</span>[<span class="ruby-identifier">key</span>] <span class="ruby-operator">||=</span> <span class="ruby-identifier">new_chunk</span>(<span class="ruby-identifier">key</span>))  <span class="ruby-comment"># TODO generate unique chunk id</span>
 
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">top</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-ivar">@chunk_limit</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-identifier">top</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">+</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">&lt;=</span> <span class="ruby-ivar">@buffer_chunk_limit</span>
       <span class="ruby-identifier">chain</span>.<span class="ruby-identifier">next</span>
       <span class="ruby-identifier">top</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">data</span>
       <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span>
 
-    <span class="ruby-keyword">elsif</span> <span class="ruby-identifier">data</span>.<span class="ruby-identifier">bytesize</span> <span class="ruby-operator">&gt;</span> <span class="ruby-ivar">@chunk_limit</span>
-      <span class="ruby-comment"># TODO</span>
-      <span class="ruby-identifier">raise</span> <span class="ruby-constant">BufferError</span>, <span class="ruby-string">&quot;received data too large&quot;</span>
+    <span class="ruby-comment">## FIXME</span>
+    <span class="ruby-comment">#elsif data.bytesize &gt; @buffer_chunk_limit</span>
+    <span class="ruby-comment">#  # TODO</span>
+    <span class="ruby-comment">#  raise BufferError, &quot;received data too large&quot;</span>
 
-    <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@queue_limit</span>
+    <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&gt;=</span> <span class="ruby-ivar">@buffer_queue_limit</span>
       <span class="ruby-comment"># TODO</span>
       <span class="ruby-identifier">raise</span> <span class="ruby-constant">BufferError</span>, <span class="ruby-string">&quot;queue size exceeds limit&quot;</span>
     <span class="ruby-keyword">end</span>
@@ -570,6 +558,39 @@
         </div><!-- emit-method -->
 
       
+        <div id="enable_parallel-method" class="method-detail ">
+          <a name="method-i-enable_parallel"></a>
+
+          
+          <div class="method-heading">
+            <span class="method-name">enable_parallel</span><span
+              class="method-args">(b=true)</span>
+            <span class="method-click-advice">click to toggle source</span>
+          </div>
+          
+
+          <div class="method-description">
+            
+            
+            
+
+            
+            <div class="method-source-code" id="enable_parallel-source">
+<pre>
+<span class="ruby-comment"># File lib/fluent/buffer.rb, line 120</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">enable_parallel</span>(<span class="ruby-identifier">b</span>=<span class="ruby-keyword">true</span>)
+  <span class="ruby-ivar">@parallel_pop</span> = <span class="ruby-identifier">b</span>
+<span class="ruby-keyword">end</span></pre>
+            </div><!-- enable_parallel-source -->
+            
+          </div>
+
+          
+
+          
+        </div><!-- enable_parallel-method -->
+
+      
         <div id="keys-method" class="method-detail ">
           <a name="method-i-keys"></a>
 
@@ -589,7 +610,7 @@
             
             <div class="method-source-code" id="keys-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/buffer.rb, line 196</span>
+<span class="ruby-comment"># File lib/fluent/buffer.rb, line 197</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">keys</span>
   <span class="ruby-ivar">@map</span>.<span class="ruby-identifier">keys</span>
 <span class="ruby-keyword">end</span></pre>
@@ -622,11 +643,11 @@
             
             <div class="method-source-code" id="pop-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/buffer.rb, line 230</span>
+<span class="ruby-comment"># File lib/fluent/buffer.rb, line 231</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">pop</span>(<span class="ruby-identifier">out</span>)
   <span class="ruby-identifier">chunk</span> = <span class="ruby-keyword">nil</span>
   <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@parallel</span>
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@parallel_pop</span>
       <span class="ruby-identifier">chunk</span> = <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">find</span> {<span class="ruby-operator">|</span><span class="ruby-identifier">c</span><span class="ruby-operator">|</span> <span class="ruby-identifier">c</span>.<span class="ruby-identifier">try_mon_enter</span> }
       <span class="ruby-keyword">return</span> <span class="ruby-keyword">false</span> <span class="ruby-keyword">unless</span> <span class="ruby-identifier">chunk</span>
     <span class="ruby-keyword">else</span>
@@ -681,7 +702,7 @@
             
             <div class="method-source-code" id="push-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/buffer.rb, line 213</span>
+<span class="ruby-comment"># File lib/fluent/buffer.rb, line 214</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">push</span>(<span class="ruby-identifier">key</span>)
   <span class="ruby-identifier">synchronize</span> <span class="ruby-keyword">do</span>
     <span class="ruby-identifier">top</span> = <span class="ruby-ivar">@map</span>[<span class="ruby-identifier">key</span>]
@@ -727,7 +748,7 @@
             
             <div class="method-source-code" id="queue_size-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/buffer.rb, line 200</span>
+<span class="ruby-comment"># File lib/fluent/buffer.rb, line 201</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">queue_size</span>
   <span class="ruby-ivar">@queue</span>.<span class="ruby-identifier">size</span>
 <span class="ruby-keyword">end</span></pre>
@@ -836,7 +857,7 @@
             
             <div class="method-source-code" id="write_chunk-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/buffer.rb, line 260</span>
+<span class="ruby-comment"># File lib/fluent/buffer.rb, line 261</span>
 <span class="ruby-keyword">def</span> <span class="ruby-identifier">write_chunk</span>(<span class="ruby-identifier">chunk</span>, <span class="ruby-identifier">out</span>)
   <span class="ruby-identifier">out</span>.<span class="ruby-identifier">write</span>(<span class="ruby-identifier">chunk</span>)
 <span class="ruby-keyword">end</span></pre>

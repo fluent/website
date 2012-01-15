@@ -134,6 +134,24 @@
         
           <li><a href="../../Fluent/CopyOutput.html">Fluent::CopyOutput</a></li>
         
+          <li><a href="../../Fluent/DetachMultiProcessMixin.html">Fluent::DetachMultiProcessMixin</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessImpl.html">Fluent::DetachProcessImpl</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessImpl/FinishWait.html">Fluent::DetachProcessImpl::FinishWait</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessManager.html">Fluent::DetachProcessManager</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessManager/Broker.html">Fluent::DetachProcessManager::Broker</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessManager/DelayedForwarder.html">Fluent::DetachProcessManager::DelayedForwarder</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessManager/Forwarder.html">Fluent::DetachProcessManager::Forwarder</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessManager/MultiForwarder.html">Fluent::DetachProcessManager::MultiForwarder</a></li>
+        
+          <li><a href="../../Fluent/DetachProcessMixin.html">Fluent::DetachProcessMixin</a></li>
+        
           <li><a href="../../Fluent/EngineClass.html">Fluent::EngineClass</a></li>
         
           <li><a href="../../Fluent/EngineClass/NoMatchMatch.html">Fluent::EngineClass::NoMatchMatch</a></li>
@@ -141,6 +159,8 @@
           <li><a href="../../Fluent/EventStream.html">Fluent::EventStream</a></li>
         
           <li><a href="../../Fluent/ExecFilterOutput.html">Fluent::ExecFilterOutput</a></li>
+        
+          <li><a href="../../Fluent/ExecFilterOutput/ChildProcess.html">Fluent::ExecFilterOutput::ChildProcess</a></li>
         
           <li><a href="../../Fluent/ExecInput.html">Fluent::ExecInput</a></li>
         
@@ -202,6 +222,10 @@
         
           <li><a href="../../Fluent/NullOutputChain.html">Fluent::NullOutputChain</a></li>
         
+          <li><a href="../../Fluent/ObjectBufferedOutput.html">Fluent::ObjectBufferedOutput</a></li>
+        
+          <li><a href="../../Fluent/ObjectBufferedOutput/BufferedEventStreamMixin.html">Fluent::ObjectBufferedOutput::BufferedEventStreamMixin</a></li>
+        
           <li><a href="../../Fluent/OneEventStream.html">Fluent::OneEventStream</a></li>
         
           <li><a href="../../Fluent/OrMatchPattern.html">Fluent::OrMatchPattern</a></li>
@@ -232,6 +256,10 @@
         
           <li><a href="../../Fluent/StreamOutput/ReformatWriter.html">Fluent::StreamOutput::ReformatWriter</a></li>
         
+          <li><a href="../../Fluent/Supervisor.html">Fluent::Supervisor</a></li>
+        
+          <li><a href="../../Fluent/Supervisor/LoggerInitializer.html">Fluent::Supervisor::LoggerInitializer</a></li>
+        
           <li><a href="../../Fluent/SyslogInput.html">Fluent::SyslogInput</a></li>
         
           <li><a href="../../Fluent/SyslogInput/UdpHandler.html">Fluent::SyslogInput::UdpHandler</a></li>
@@ -239,6 +267,12 @@
           <li><a href="../../Fluent/TailInput.html">Fluent::TailInput</a></li>
         
           <li><a href="../../Fluent/TailInput/Handler.html">Fluent::TailInput::Handler</a></li>
+        
+          <li><a href="../../Fluent/TailInput/NullPositionEntry.html">Fluent::TailInput::NullPositionEntry</a></li>
+        
+          <li><a href="../../Fluent/TailInput/PositionEntry.html">Fluent::TailInput::PositionEntry</a></li>
+        
+          <li><a href="../../Fluent/TailInput/PositionFile.html">Fluent::TailInput::PositionFile</a></li>
         
           <li><a href="../../Fluent/TcpInput.html">Fluent::TcpInput</a></li>
         
@@ -255,6 +289,8 @@
           <li><a href="../../Fluent/Test/TestDriver.html">Fluent::Test::TestDriver</a></li>
         
           <li><a href="../../Fluent/Test/TestOutputChain.html">Fluent::Test::TestOutputChain</a></li>
+        
+          <li><a href="../../Fluent/Test/TimeSlicedOutputTestDriver.html">Fluent::Test::TimeSlicedOutputTestDriver</a></li>
         
           <li><a href="../../Fluent/TestOutput.html">Fluent::TestOutput</a></li>
         
@@ -289,9 +325,6 @@
 
     <div id="description" class="description">
       
-<p>seek to the end of file first. logs never duplicate but may be lost if
-fluent is down.</p>
-
     </div><!-- description -->
 
     
@@ -318,7 +351,7 @@ fluent is down.</p>
           
           <div class="method-heading">
             <span class="method-name">new</span><span
-              class="method-args">(path, callback)</span>
+              class="method-args">(path, pe, callback)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -331,9 +364,25 @@ fluent is down.</p>
             
             <div class="method-source-code" id="new-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 96</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">callback</span>)
-  <span class="ruby-ivar">@pos</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">stat</span>(<span class="ruby-identifier">path</span>).<span class="ruby-identifier">size</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 111</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">initialize</span>(<span class="ruby-identifier">path</span>, <span class="ruby-identifier">pe</span>, <span class="ruby-identifier">callback</span>)
+  <span class="ruby-identifier">stat</span> = <span class="ruby-constant">File</span>.<span class="ruby-identifier">lstat</span>(<span class="ruby-identifier">path</span>)
+  <span class="ruby-ivar">@pe</span> = <span class="ruby-identifier">pe</span>
+  <span class="ruby-ivar">@inode</span> = <span class="ruby-identifier">stat</span>.<span class="ruby-identifier">ino</span>
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@inode</span> <span class="ruby-operator">==</span> <span class="ruby-ivar">@pe</span>.<span class="ruby-identifier">read_inode</span>
+    <span class="ruby-comment"># seek to the saved position</span>
+    <span class="ruby-ivar">@pos</span> = <span class="ruby-ivar">@pe</span>.<span class="ruby-identifier">read_pos</span>
+  <span class="ruby-keyword">elsif</span> <span class="ruby-ivar">@pe</span>.<span class="ruby-identifier">persistent?</span>
+    <span class="ruby-comment"># read from the head of the file if</span>
+    <span class="ruby-comment"># persistent pos file is enable</span>
+    <span class="ruby-ivar">@pos</span> = <span class="ruby-value">0</span>
+    <span class="ruby-ivar">@pe</span>.<span class="ruby-identifier">update</span>(<span class="ruby-ivar">@inode</span>, <span class="ruby-ivar">@pos</span>)
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-comment"># seek to the end of file first.</span>
+    <span class="ruby-comment"># logs never duplicate but may be lost if fluent is down.</span>
+    <span class="ruby-ivar">@pos</span> = <span class="ruby-identifier">stat</span>.<span class="ruby-identifier">size</span>
+    <span class="ruby-ivar">@pe</span>.<span class="ruby-identifier">update</span>(<span class="ruby-ivar">@inode</span>, <span class="ruby-ivar">@pos</span>)
+  <span class="ruby-keyword">end</span>
   <span class="ruby-ivar">@buffer</span> = <span class="ruby-string">''</span>
   <span class="ruby-ivar">@callback</span> = <span class="ruby-identifier">callback</span>
   <span class="ruby-keyword">super</span>(<span class="ruby-identifier">path</span>)
@@ -360,7 +409,7 @@ fluent is down.</p>
           
           <div class="method-heading">
             <span class="method-name">on_change</span><span
-              class="method-args">()</span>
+              class="method-args">(prev, cur)</span>
             <span class="method-click-advice">click to toggle source</span>
           </div>
           
@@ -373,12 +422,16 @@ fluent is down.</p>
             
             <div class="method-source-code" id="on_change-source">
 <pre>
-<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 103</span>
-<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_change</span>
+<span class="ruby-comment"># File lib/fluent/plugin/in_tail.rb, line 134</span>
+<span class="ruby-keyword">def</span> <span class="ruby-identifier">on_change</span>(<span class="ruby-identifier">prev</span>, <span class="ruby-identifier">cur</span>)
   <span class="ruby-identifier">lines</span> = []
+  <span class="ruby-identifier">inode</span> = <span class="ruby-keyword">nil</span>
 
   <span class="ruby-constant">File</span>.<span class="ruby-identifier">open</span>(<span class="ruby-identifier">path</span>) {<span class="ruby-operator">|</span><span class="ruby-identifier">f</span><span class="ruby-operator">|</span>
-    <span class="ruby-keyword">if</span> <span class="ruby-identifier">f</span>.<span class="ruby-identifier">lstat</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@pos</span>
+    <span class="ruby-identifier">stat</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">lstat</span>
+    <span class="ruby-identifier">inode</span> = <span class="ruby-identifier">stat</span>.<span class="ruby-identifier">ino</span>
+
+    <span class="ruby-keyword">if</span> <span class="ruby-ivar">@inode</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">inode</span> <span class="ruby-operator">||</span> <span class="ruby-identifier">stat</span>.<span class="ruby-identifier">size</span> <span class="ruby-operator">&lt;</span> <span class="ruby-ivar">@pos</span>
       <span class="ruby-comment"># moved or deleted</span>
       <span class="ruby-ivar">@pos</span> = <span class="ruby-value">0</span>
     <span class="ruby-keyword">else</span>
@@ -387,13 +440,13 @@ fluent is down.</p>
 
     <span class="ruby-identifier">line</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">gets</span>
     <span class="ruby-keyword">unless</span> <span class="ruby-identifier">line</span>
-      <span class="ruby-keyword">return</span>
+      <span class="ruby-keyword">break</span>
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-ivar">@buffer</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-identifier">line</span>
     <span class="ruby-keyword">unless</span> <span class="ruby-identifier">line</span>[<span class="ruby-identifier">line</span>.<span class="ruby-identifier">length</span><span class="ruby-operator">-</span><span class="ruby-value">1</span>] <span class="ruby-operator">==</span> <span class="ruby-value">\n\</span>
       <span class="ruby-ivar">@pos</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">pos</span>
-      <span class="ruby-keyword">return</span>
+      <span class="ruby-keyword">break</span>
     <span class="ruby-keyword">end</span>
 
     <span class="ruby-identifier">lines</span> <span class="ruby-operator">&lt;&lt;</span> <span class="ruby-ivar">@buffer</span>
@@ -410,11 +463,19 @@ fluent is down.</p>
     <span class="ruby-ivar">@pos</span> = <span class="ruby-identifier">f</span>.<span class="ruby-identifier">pos</span>
   }
 
-  <span class="ruby-ivar">@callback</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">lines</span>)
+  <span class="ruby-keyword">if</span> <span class="ruby-ivar">@inode</span> <span class="ruby-operator">!=</span> <span class="ruby-identifier">inode</span>
+    <span class="ruby-ivar">@pe</span>.<span class="ruby-identifier">update</span>(<span class="ruby-identifier">inode</span>, <span class="ruby-ivar">@pos</span>)
+    <span class="ruby-ivar">@inode</span> = <span class="ruby-identifier">inode</span>
+  <span class="ruby-keyword">else</span>
+    <span class="ruby-ivar">@pe</span>.<span class="ruby-identifier">update_pos</span>(<span class="ruby-ivar">@pos</span>)
+  <span class="ruby-keyword">end</span>
+
+  <span class="ruby-ivar">@callback</span>.<span class="ruby-identifier">call</span>(<span class="ruby-identifier">lines</span>) <span class="ruby-keyword">unless</span> <span class="ruby-identifier">lines</span>.<span class="ruby-identifier">empty?</span>
 
 <span class="ruby-keyword">rescue</span> <span class="ruby-constant">Errno</span><span class="ruby-operator">::</span><span class="ruby-constant">ENOENT</span>
   <span class="ruby-comment"># moved or deleted</span>
   <span class="ruby-ivar">@pos</span> = <span class="ruby-value">0</span>
+<span class="ruby-comment"># TODO rescue</span>
 <span class="ruby-keyword">end</span></pre>
             </div><!-- on_change-source -->
             
