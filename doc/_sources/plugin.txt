@@ -593,7 +593,7 @@ This output plugin is for debugging.
 null
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**roundrobin** output plugin just throw away events.
+**null** output plugin just throw away events.
 
 **configuration**::
 

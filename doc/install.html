@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -11,14 +12,15 @@
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '#',
+        URL_ROOT:    '',
         VERSION:     '0.10.8',
-        COLLAPSE_MODINDEX: false,
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="fluentd v0.10.8 documentation" href="index.html" />
     <link rel="next" title="Configuration File" href="config.html" />
@@ -42,46 +44,46 @@
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference external" href="#">Installation</a><ul>
-<li><a class="reference external" href="#id1">Installation</a><ul>
-<li><a class="reference external" href="#install-from-binary-package">Install from Binary Package</a></li>
-<li><a class="reference external" href="#install-from-rubygems">Install from RubyGems</a></li>
-<li><a class="reference external" href="#install-from-tar-gz">Install from .tar.gz</a></li>
-<li><a class="reference external" href="#install-from-latest-git-repository">Install from Latest Git Repository</a></li>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Installation</a><ul>
+<li><a class="reference internal" href="#id1">Installation</a><ul>
+<li><a class="reference internal" href="#install-from-binary-package">Install from Binary Package</a></li>
+<li><a class="reference internal" href="#install-from-rubygems">Install from RubyGems</a></li>
+<li><a class="reference internal" href="#install-from-tar-gz">Install from .tar.gz</a></li>
+<li><a class="reference internal" href="#install-from-latest-git-repository">Install from Latest Git Repository</a></li>
 </ul>
 </li>
-<li><a class="reference external" href="#confirm-installation">Confirm Installation</a></li>
-<li><a class="reference external" href="#update">Update</a></li>
+<li><a class="reference internal" href="#confirm-installation">Confirm Installation</a></li>
+<li><a class="reference internal" href="#update">Update</a></li>
 </ul>
 </li>
 </ul>
 
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="overview.html"
-                                  title="previous chapter">Overview</a></p>
-            <h4>Next topic</h4>
-            <p class="topless"><a href="config.html"
-                                  title="next chapter">Configuration File</a></p>
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-              <li><a href="_sources/install.txt"
-                     rel="nofollow">Show Source</a></li>
-            </ul>
-          <div id="searchbox" style="display: none">
-            <h3>Quick search</h3>
-              <form class="search" action="search.html" method="get">
-                <input type="text" name="q" size="18" />
-                <input type="submit" value="Go" />
-                <input type="hidden" name="check_keywords" value="yes" />
-                <input type="hidden" name="area" value="default" />
-              </form>
-              <p class="searchtip" style="font-size: 90%">
-              Enter search terms or a module, class or function name.
-              </p>
-          </div>
-          <script type="text/javascript">$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="overview.html"
+                        title="previous chapter">Overview</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="config.html"
+                        title="next chapter">Configuration File</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/install.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -211,8 +213,8 @@ $ echo '{"json":"message"}' | fluent-cat debug.test</pre>
 <p>Once Fluentd is installed, the following command will update it to the latest version:</p>
 <div class="highlight-python"><pre>$ sudo fluent-gem install fluentd</pre>
 </div>
-<p>Next step: <a class="reference external" href="config.html#config"><em>Configuration File</em></a></p>
-<p>Next step: <a class="reference external" href="devel.html#devel"><em>Writing plugins</em></a></p>
+<p>Next step: <a class="reference internal" href="config.html#config"><em>Configuration File</em></a></p>
+<p>Next step: <a class="reference internal" href="devel.html#devel"><em>Writing plugins</em></a></p>
 </div>
 </div>
 
@@ -238,8 +240,8 @@ $ echo '{"json":"message"}' | fluent-cat debug.test</pre>
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2011, Sadayuki Furuhashi.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+        &copy; Copyright 2011, Sadayuki Furuhashi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
     </div>
   </body>
 </html>
