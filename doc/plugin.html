@@ -430,7 +430,7 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 </div>
 <div class="section" id="id1">
 <h3>forward<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
-<p><strong>forward</strong> buffered output plugin forwards events to other fluent servers.</p>
+<p><strong>forward</strong> buffered output plugin forwards events to other fluentd servers.</p>
 <p>This plugin supports load-balancing and automatic fail-over (a.k.a. active-active backup). If you want replication, use <tt class="docutils literal"><span class="pre">copy</span></tt> plugin described below.</p>
 <p>It detects fault of a server using &#8220;φ accrual failure detector&#8221; algorithm. You can customize parameter of the algorithm.</p>
 <p>When a fault server recovers, the plugin makes it available automatically after several seconds.</p>
@@ -623,7 +623,7 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 <div class="section" id="memory">
 <h3>memory<a class="headerlink" href="#memory" title="Permalink to this headline">¶</a></h3>
 <p><strong>memory</strong> buffer plugin provides fast buffer implementation.
-It uses memory to store buffer chunks. Buffered events which can&#8217;t be written soon are deleted when fluent is shut down.</p>
+It uses memory to store buffer chunks. Buffered events which can&#8217;t be written soon are deleted when fluentd is shut down.</p>
 <p><strong>configuration</strong>:</p>
 <div class="highlight-python"><pre>&lt;match pattern&gt;
   buffer_type memory
@@ -649,7 +649,7 @@ This parameter is required.</dd>
 </div>
 <div class="section" id="searching-plugins">
 <span id="search-plugin"></span><h2>Searching plugins<a class="headerlink" href="#searching-plugins" title="Permalink to this headline">¶</a></h2>
-<p>You can find plugins released on RubyGems at the <a class="reference external" href="http://fluentd.org/plugin/">Fluent plugins</a> page.</p>
+<p>You can find plugins released on RubyGems at the <a class="reference external" href="http://fluentd.org/plugin/">Fluentd plugins</a> page.</p>
 <p>You can also use following command to search plugins:</p>
 <div class="highlight-python"><pre>$ fluent-gem search -rd fluent-plugin</pre>
 </div>

@@ -162,7 +162,7 @@ time_format
 .. 
 .. To transfer logs from syslogd to fluent, add following line to /etc/syslog.conf or /etc/rsyslog.conf::
 .. 
-..    # match pattern    fluent host:port
+..    # match pattern    fluentd host:port
 ..    *.*                @127.0.0.1:5140
 
 
@@ -358,7 +358,7 @@ Note that this output plugin uses file buffer by default.
 forward
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**forward** buffered output plugin forwards events to other fluent servers.
+**forward** buffered output plugin forwards events to other fluentd servers.
 
 This plugin supports load-balancing and automatic fail-over (a.k.a. active-active backup). If you want replication, use ``copy`` plugin described below.
 
@@ -434,7 +434,7 @@ hard_timeout
 .. unix
 .. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 .. 
-.. **unix** buffered output plugin forwards events to another fluent process on the same host.
+.. **unix** buffered output plugin forwards events to another fluentd process on the same host.
 .. 
 .. **configuration**::
 .. 
@@ -611,7 +611,7 @@ memory
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 **memory** buffer plugin provides fast buffer implementation.
-It uses memory to store buffer chunks. Buffered events which can't be written soon are deleted when fluent is shut down.
+It uses memory to store buffer chunks. Buffered events which can't be written soon are deleted when fluentd is shut down.
 
 **configuration**::
 
@@ -643,7 +643,7 @@ buffer_path (required)
 Searching plugins
 ------------------------------------
 
-You can find plugins released on RubyGems at the `Fluent plugins <http://fluentd.org/plugin/>`_ page.
+You can find plugins released on RubyGems at the `Fluentd plugins <http://fluentd.org/plugin/>`_ page.
 
 You can also use following command to search plugins::
 

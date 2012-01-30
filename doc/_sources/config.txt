@@ -131,7 +131,7 @@ The **include** directive supports regular file path, glob pattern, and http URL
 .. 
 .. Put the file on ``$install_prefix/etc/init/fluent``::
 .. 
-..     description "Fluent event collector"
+..     description "Fluentd event collector"
 ..     author "Sadayuki Furuhashi"
 ..     
 ..     start on (net-device-up and local-filesystems and runlevel [2345])

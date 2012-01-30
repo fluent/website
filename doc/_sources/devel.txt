@@ -59,7 +59,7 @@ To submit events, use ``Fluent::Engine.emit(tag, time, record)`` method, where `
     record = {"message"=>"body"}
     Fluent::Engine.emit(tag, time, record)
 
-RDoc of the Engine class is available from `Fluent RDoc <http://fluentd.org/rdoc/Fluent/Engine.html>`_.
+RDoc of the Engine class is available from `Fluentd RDoc <http://fluentd.org/rdoc/Fluent/Engine.html>`_.
 
 
 Buffered output plugins
@@ -294,7 +294,7 @@ Run ``fluentd`` with ``-vv`` option to show debug messages::
 Writing test cases
 ------------------------------------
 
-Fluent provides unit test frameworks for plugins:
+Fluentd provides unit test frameworks for plugins:
 
   Fluent::Test::InputTestDriver
     Test driver for input plugins.
@@ -305,6 +305,6 @@ Fluent provides unit test frameworks for plugins:
   Fluent::Test::OutputTestDriver
     Test driver for non-buffered output plugins.
 
-See fluent's source code for details.
+See fluentd's source code for details.
 
 

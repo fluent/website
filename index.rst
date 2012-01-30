@@ -3,8 +3,8 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to Fluent's documentation!
-==================================
+Welcome to Fluentd's documentation!
+===================================
 
 .. toctree::
    :maxdepth: 2
@@ -20,7 +20,7 @@ Welcome to Fluent's documentation!
 Plugins
 ==================
 
-`Fluent plugins <http://fluentd.org/plugin/>`_
+`Fluentd plugins <http://fluentd.org/plugin/>`_
 
 Powered By
 =================
@@ -30,12 +30,12 @@ Powered By
 Screencasts
 ==================
 
-`Building a Massive Event-Log Collector with Fluent on Heroku with Splunk <http://www.bigdata.sg/videos/fluentd/>`_
+`Building a Massive Event-Log Collector with Fluentd on Heroku with Splunk <http://www.bigdata.sg/videos/fluentd/>`_
 
 RDoc
 ==================
 
-`Fluent RDoc <http://fluentd.org/rdoc/>`_
+`Fluentd RDoc <http://fluentd.org/rdoc/>`_
 
 Indices and tables
 ==================
