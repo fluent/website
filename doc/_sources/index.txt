@@ -22,6 +22,11 @@ Plugins
 
 `Fluentd plugins <http://fluentd.org/plugin/>`_
 
+Discussion
+=================
+
+`Fluentd Google Group <http://groups.google.com/group/fluentd>`_
+
 Powered By
 =================
 
