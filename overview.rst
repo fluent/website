@@ -3,7 +3,7 @@
 Overview
 ========================
 
-**Fluentd** is an event collector daemon for web and mobile applications. 
+**Fluentd** is a log collector daemon, which treats logs as JSON stream. So far, the largest user collects logs from 100+ servers, 650 GB daily, with 70,000 msgs/sec at peak time.
 
 Purpose
 -------
