@@ -22,20 +22,20 @@ In most cases, installing from the binary package is recommended.
 Install from Binary Package
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-Treasure Data Inc. provides the stable distribution of Fluentd, called td-agent. Td-agent consists of the following components:
+Treasure Data Inc. provides the stable distribution of Fluentd, called td-agent. If you don't want to install Ruby interpreter (> 1.9.2) by yourself and don't want to manage Fluentd + plugins versions, using td-agent is the recommended way.
 
-* Ruby interpreter
+td-agent consists of the following components:
+
+* Ruby interpreter, dedicated to Fluentd
 * Fluentd
 * Several plugins with stable & compatible versions
 
-Td-agent is actively maintained and is used in production environments. For details on installing td-agent, please refer to the following documents:
+td-agent is actively maintained and is used within production environments. For details on installing td-agent, please refer to the following documents:
 
 * `Installing td-agent for Debian and Ubuntu <http://help.treasure-data.com/kb/installing-td-agent-daemon/installing-td-agent-for-debian-and-ubuntu>`_
 * `Installing td-agent for Redhat and CentOS <http://help.treasure-data.com/kb/installing-td-agent-daemon/installing-td-agent-for-redhat-and-centos>`_
 
 Please note that if Fluentd is installed via td-agent, the server command will be 'td-agent' instead of 'fluentd'. The config file is located at '/etc/td-agent/td-agent.conf'.
-
-
 
 Install from RubyGems
 ^^^^^^^^^^^^^^^^^^^^^
