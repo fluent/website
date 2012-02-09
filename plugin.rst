@@ -486,7 +486,7 @@ exec_filter
 
 **exec** buffered output plugin executs external program to output events.
 
-It passed a path of TSV (tab separated values) file that includes event logs to the last argument of specified command.
+It writes TSV (tab separated values) to the stdin of the program and reads TSV from the stdout.
 
 **configuration**::
 
@@ -494,7 +494,7 @@ It passed a path of TSV (tab separated values) file that includes event logs to 
     type exec_filter
     command cmd arg arg
     in_keys k1,k2,k3
-    out_keys k1,k2,k3
+    out_keys k1,k2,k3,k4
     tag_key k1
     time_key k2
     time_format %Y-%m-%d %H:%M:%S
