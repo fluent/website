@@ -1,5 +1,4 @@
 
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -12,15 +11,14 @@
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '',
+        URL_ROOT:    '#',
         VERSION:     '0.10.8',
-        COLLAPSE_INDEX: false,
+        COLLAPSE_MODINDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
-    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="fluentd v0.10.8 documentation" href="index.html" />
     <link rel="next" title="Plugins" href="plugin.html" />
@@ -44,43 +42,43 @@
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-  <h3><a href="index.html">Table Of Contents</a></h3>
-  <ul>
-<li><a class="reference internal" href="#">Configuration File</a><ul>
-<li><a class="reference internal" href="#source-directive">&lt;source&gt; Directive</a></li>
-<li><a class="reference internal" href="#match-directive">&lt;match&gt; Directive</a><ul>
-<li><a class="reference internal" href="#match-pattern">Match Pattern</a></li>
+            <h3><a href="index.html">Table Of Contents</a></h3>
+            <ul>
+<li><a class="reference external" href="#">Configuration File</a><ul>
+<li><a class="reference external" href="#source-directive">&lt;source&gt; Directive</a></li>
+<li><a class="reference external" href="#match-directive">&lt;match&gt; Directive</a><ul>
+<li><a class="reference external" href="#match-pattern">Match Pattern</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#include">Include</a></li>
+<li><a class="reference external" href="#include">Include</a></li>
 </ul>
 </li>
 </ul>
 
-  <h4>Previous topic</h4>
-  <p class="topless"><a href="install.html"
-                        title="previous chapter">Installation</a></p>
-  <h4>Next topic</h4>
-  <p class="topless"><a href="plugin.html"
-                        title="next chapter">Plugins</a></p>
-  <h3>This Page</h3>
-  <ul class="this-page-menu">
-    <li><a href="_sources/config.txt"
-           rel="nofollow">Show Source</a></li>
-  </ul>
-<div id="searchbox" style="display: none">
-  <h3>Quick search</h3>
-    <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
-      <input type="submit" value="Go" />
-      <input type="hidden" name="check_keywords" value="yes" />
-      <input type="hidden" name="area" value="default" />
-    </form>
-    <p class="searchtip" style="font-size: 90%">
-    Enter search terms or a module, class or function name.
-    </p>
-</div>
-<script type="text/javascript">$('#searchbox').show(0);</script>
+            <h4>Previous topic</h4>
+            <p class="topless"><a href="install.html"
+                                  title="previous chapter">Installation</a></p>
+            <h4>Next topic</h4>
+            <p class="topless"><a href="plugin.html"
+                                  title="next chapter">Plugins</a></p>
+            <h3>This Page</h3>
+            <ul class="this-page-menu">
+              <li><a href="_sources/config.txt"
+                     rel="nofollow">Show Source</a></li>
+            </ul>
+          <div id="searchbox" style="display: none">
+            <h3>Quick search</h3>
+              <form class="search" action="search.html" method="get">
+                <input type="text" name="q" size="18" />
+                <input type="submit" value="Go" />
+                <input type="hidden" name="check_keywords" value="yes" />
+                <input type="hidden" name="area" value="default" />
+              </form>
+              <p class="searchtip" style="font-size: 90%">
+              Enter search terms or a module, class or function name.
+              </p>
+          </div>
+          <script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -130,7 +128,7 @@ $ edit /etc/fluent/fluent.conf</pre>
   port 9880
 &lt;/source&gt;</pre>
 </div>
-<p>The user can expand Fluentd&#8217;s input sources beyond those provided initially by writing their own plugins. For further information regarding Fluentd&#8217;s input sources, please refer to <a class="reference internal" href="plugin.html#input-plugin"><em>Input plugins</em></a>.</p>
+<p>The user can expand Fluentd&#8217;s input sources beyond those provided initially by writing their own plugins. For further information regarding Fluentd&#8217;s input sources, please refer to <a class="reference external" href="plugin.html#input-plugin"><em>Input plugins</em></a>.</p>
 </div>
 <div class="section" id="match-directive">
 <h2>&lt;match&gt; Directive<a class="headerlink" href="#match-directive" title="Permalink to this headline">¶</a></h2>
@@ -151,7 +149,7 @@ $ edit /etc/fluent/fluent.conf</pre>
   time_slice_format %Y%m%d%H
 &lt;/match&gt;</pre>
 </div>
-<p>The user can expand Fluentd&#8217;s input sources beyond those provided initially by writing their own plugins. For further information regarding Fluentd&#8217;s output destinations, please refer to <a class="reference internal" href="plugin.html#output-plugin"><em>Buffered output plugins</em></a></p>
+<p>The user can expand Fluentd&#8217;s input sources beyond those provided initially by writing their own plugins. For further information regarding Fluentd&#8217;s output destinations, please refer to <a class="reference external" href="plugin.html#output-plugin"><em>Buffered output plugins</em></a></p>
 <div class="section" id="match-pattern">
 <h3>Match Pattern<a class="headerlink" href="#match-pattern" title="Permalink to this headline">¶</a></h3>
 <p>The following match patterns are available to the user:</p>
@@ -192,7 +190,7 @@ include config.d/*.conf
 # http
 include http://example.com/fluent.conf</pre>
 </div>
-<p>Next step: <a class="reference internal" href="plugin.html#plugin"><em>Plugins</em></a></p>
+<p>Next step: <a class="reference external" href="plugin.html#plugin"><em>Plugins</em></a></p>
 </div>
 </div>
 
@@ -218,8 +216,8 @@ include http://example.com/fluent.conf</pre>
       </ul>
     </div>
     <div class="footer">
-        &copy; Copyright 2011, Sadayuki Furuhashi.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
+      &copy; Copyright 2011, Sadayuki Furuhashi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
     </div>
   </body>
 </html>
