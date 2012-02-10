@@ -230,12 +230,16 @@ You can run the program periodically or parmanently. To run periodically, use ``
 
   <source>
     type exec
+    command cmd arg arg
     keys k1,k2,k3
     tag_key k1
     time_key k2
     time_format %Y-%m-%d %H:%M:%S
     run_interval 10s
   </source>
+
+command (required)
+  The command to execute. 
 
 keys (required)
   Column names of the output TSV.
@@ -244,10 +248,10 @@ tag (required if ``tag_key`` is not specified)
   tag of the output events.
 
 tag_key
-  Name of the key to use event tag instead of the value in event record. If this parameter is not specified, it uses the ``tag`` parameter.
+  Name of the key to use as the event tag instead of the value in the event record. If this parameter is not specified, it uses the ``tag`` parameter.
 
 time_key
-  Name of the key to use event time instead of the value in event record. If this parameter is not specified, it uses current time.
+  Name of the key to use as the event time instead of the value in the event record. If this parameter is not specified, it uses the current time.
 
 time_format
   Format of the event time used when the ``time_key`` parameter is specified. Default is UNIX time (integer).
@@ -450,9 +454,9 @@ hard_timeout
 exec
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**exec** buffered output plugin executs external program to output events.
+The **exec** buffered output plugin passes events to an external program as a tab-separated value (TSV) file. 
 
-It passed a path of TSV (tab separated values) file that includes event logs to the last argument of specified command.
+The command is passed the location of a TSV file containing incoming events as its last argument.
 
 **configuration**::
 
@@ -466,27 +470,27 @@ It passed a path of TSV (tab separated values) file that includes event logs to 
   </match>
 
 command (required)
-  A command to execute. The exec plugin passes a path of TSV file to the last argument.
+  A command to execute. The exec plugin passes the path of a TSV file as the last argument.
 
 keys (required)
   Comma-separated keys to use in the TSV file.
 
 tag_key
-  Name of the key to use event tag instead of the value in event record.
+  Name of the key to use as the event tag instead of the value in the event record.
 
 time_key
-  Name of the key to use event time instead of the value in event record.
+  Name of the key to use as the event time instead of the value in the event record.
 
 time_format
-  Format of the event time used when the ``time_key`` parameter is specified. Default is UNIX time (integer).
+  Format for event time used when the ``time_key`` parameter is specified. Default is UNIX time (integer).
 
 
 exec_filter
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**exec** buffered output plugin executs external program to output events.
+**exec_filter** buffered output plugin executes an external program, using events as input and reading new events from the program output.
 
-It writes TSV (tab separated values) to the stdin of the program and reads TSV from the stdout.
+It passes tab-separated values (TSV) to stdin and reads TSV from stdout.
 
 **configuration**::
 
@@ -504,16 +508,16 @@ command (required)
   A command to execute. The exec plugin passes a path of TSV file to the last argument.
 
 in_keys (required)
-  Comma-separated keys to use in the input TSV of the program.
+  Comma-separated keys to use from the incoming event for the TSV input to the command.
 
 out_keys (required)
-  Comma-separated keys to use in the output TSV of the program.
+  Comma-separated keys to use in processing the TSV output from the program.
 
 tag_key
-  Name of the key to use event tag instead of the value in event record.
+  Name of the key to use as the event tag instead of the value in the event record.
 
 time_key
-  Name of the key to use event time instead of the value in event record.
+  Name of the key to use as the event time instead of the value in the event record.
 
 time_format
   Format of the event time used when the ``time_key`` parameter is specified. Default is UNIX time (integer).
