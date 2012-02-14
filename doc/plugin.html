@@ -1,4 +1,5 @@
 
+
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -11,14 +12,15 @@
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
-        URL_ROOT:    '#',
+        URL_ROOT:    '',
         VERSION:     '0.10.8',
-        COLLAPSE_MODINDEX: false,
+        COLLAPSE_INDEX: false,
         FILE_SUFFIX: '.html',
         HAS_SOURCE:  true
       };
     </script>
     <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="fluentd v0.10.8 documentation" href="index.html" />
     <link rel="next" title="Writing plugins" href="devel.html" />
@@ -42,65 +44,65 @@
     </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
-            <h3><a href="index.html">Table Of Contents</a></h3>
-            <ul>
-<li><a class="reference external" href="#">Plugins</a><ul>
-<li><a class="reference external" href="#types-of-plugins">Types of plugins</a></li>
-<li><a class="reference external" href="#input-plugins">Input plugins</a><ul>
-<li><a class="reference external" href="#http">http</a></li>
-<li><a class="reference external" href="#tail">tail</a></li>
-<li><a class="reference external" href="#forward">forward</a></li>
-<li><a class="reference external" href="#exec">exec</a></li>
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Plugins</a><ul>
+<li><a class="reference internal" href="#types-of-plugins">Types of plugins</a></li>
+<li><a class="reference internal" href="#input-plugins">Input plugins</a><ul>
+<li><a class="reference internal" href="#http">http</a></li>
+<li><a class="reference internal" href="#tail">tail</a></li>
+<li><a class="reference internal" href="#forward">forward</a></li>
+<li><a class="reference internal" href="#exec">exec</a></li>
 </ul>
 </li>
-<li><a class="reference external" href="#buffered-output-plugins">Buffered output plugins</a><ul>
-<li><a class="reference external" href="#file">file</a></li>
-<li><a class="reference external" href="#id1">forward</a></li>
-<li><a class="reference external" href="#id2">exec</a></li>
-<li><a class="reference external" href="#exec-filter">exec_filter</a></li>
+<li><a class="reference internal" href="#buffered-output-plugins">Buffered output plugins</a><ul>
+<li><a class="reference internal" href="#file">file</a></li>
+<li><a class="reference internal" href="#id1">forward</a></li>
+<li><a class="reference internal" href="#id2">exec</a></li>
+<li><a class="reference internal" href="#exec-filter">exec_filter</a></li>
 </ul>
 </li>
-<li><a class="reference external" href="#non-buffered-output-plugins">Non-buffered output plugins</a><ul>
-<li><a class="reference external" href="#copy">copy</a></li>
-<li><a class="reference external" href="#roundrobin">roundrobin</a></li>
-<li><a class="reference external" href="#stdout">stdout</a></li>
-<li><a class="reference external" href="#null">null</a></li>
+<li><a class="reference internal" href="#non-buffered-output-plugins">Non-buffered output plugins</a><ul>
+<li><a class="reference internal" href="#copy">copy</a></li>
+<li><a class="reference internal" href="#roundrobin">roundrobin</a></li>
+<li><a class="reference internal" href="#stdout">stdout</a></li>
+<li><a class="reference internal" href="#null">null</a></li>
 </ul>
 </li>
-<li><a class="reference external" href="#buffer-plugins">Buffer plugins</a><ul>
-<li><a class="reference external" href="#memory">memory</a></li>
-<li><a class="reference external" href="#id3">file</a></li>
+<li><a class="reference internal" href="#buffer-plugins">Buffer plugins</a><ul>
+<li><a class="reference internal" href="#memory">memory</a></li>
+<li><a class="reference internal" href="#id3">file</a></li>
 </ul>
 </li>
-<li><a class="reference external" href="#searching-plugins">Searching plugins</a></li>
+<li><a class="reference internal" href="#searching-plugins">Searching plugins</a></li>
 </ul>
 </li>
 </ul>
 
-            <h4>Previous topic</h4>
-            <p class="topless"><a href="config.html"
-                                  title="previous chapter">Configuration File</a></p>
-            <h4>Next topic</h4>
-            <p class="topless"><a href="devel.html"
-                                  title="next chapter">Writing plugins</a></p>
-            <h3>This Page</h3>
-            <ul class="this-page-menu">
-              <li><a href="_sources/plugin.txt"
-                     rel="nofollow">Show Source</a></li>
-            </ul>
-          <div id="searchbox" style="display: none">
-            <h3>Quick search</h3>
-              <form class="search" action="search.html" method="get">
-                <input type="text" name="q" size="18" />
-                <input type="submit" value="Go" />
-                <input type="hidden" name="check_keywords" value="yes" />
-                <input type="hidden" name="area" value="default" />
-              </form>
-              <p class="searchtip" style="font-size: 90%">
-              Enter search terms or a module, class or function name.
-              </p>
-          </div>
-          <script type="text/javascript">$('#searchbox').show(0);</script>
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="config.html"
+                        title="previous chapter">Configuration File</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="devel.html"
+                        title="next chapter">Writing plugins</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/plugin.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" size="18" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
         </div>
       </div>
 
@@ -112,8 +114,8 @@
   <div class="section" id="plugins">
 <span id="plugin"></span><h1>Plugins<a class="headerlink" href="#plugins" title="Permalink to this headline">¶</a></h1>
 <p>Plugins extend Fluentd&#8217;s functionality.</p>
-<p>The user can use the standard plugins packaged with Fluentd, or can write their own plugins. For further information on writing additional plugins, please refer to <a class="reference external" href="devel.html#devel"><em>Writing plugins</em></a>.</p>
-<p>For Fluentd to function properly, the user must enable at least one input plugin and at least one output plugin using the configuration file. For further information on the configuration file, please refer to <a class="reference external" href="config.html#config"><em>Configuration File</em></a>.</p>
+<p>The user can use the standard plugins packaged with Fluentd, or can write their own plugins. For further information on writing additional plugins, please refer to <a class="reference internal" href="devel.html#devel"><em>Writing plugins</em></a>.</p>
+<p>For Fluentd to function properly, the user must enable at least one input plugin and at least one output plugin using the configuration file. For further information on the configuration file, please refer to <a class="reference internal" href="config.html#config"><em>Configuration File</em></a>.</p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
 <li><a class="reference internal" href="#types-of-plugins" id="id4">Types of plugins</a></li>
@@ -307,6 +309,7 @@ example:
 <p><strong>configuration</strong>:</p>
 <div class="highlight-python"><pre>&lt;source&gt;
   type exec
+  command cmd arg arg
   keys k1,k2,k3
   tag_key k1
   time_key k2
@@ -315,14 +318,16 @@ example:
 &lt;/source&gt;</pre>
 </div>
 <dl class="docutils">
+<dt>command (required)</dt>
+<dd>The command to execute.</dd>
 <dt>keys (required)</dt>
 <dd>Column names of the output TSV.</dd>
 <dt>tag (required if <tt class="docutils literal"><span class="pre">tag_key</span></tt> is not specified)</dt>
 <dd>tag of the output events.</dd>
 <dt>tag_key</dt>
-<dd>Name of the key to use event tag instead of the value in event record. If this parameter is not specified, it uses the <tt class="docutils literal"><span class="pre">tag</span></tt> parameter.</dd>
+<dd>Name of the key to use as the event tag instead of the value in the event record. If this parameter is not specified, it uses the <tt class="docutils literal"><span class="pre">tag</span></tt> parameter.</dd>
 <dt>time_key</dt>
-<dd>Name of the key to use event time instead of the value in event record. If this parameter is not specified, it uses current time.</dd>
+<dd>Name of the key to use as the event time instead of the value in the event record. If this parameter is not specified, it uses the current time.</dd>
 <dt>time_format</dt>
 <dd>Format of the event time used when the <tt class="docutils literal"><span class="pre">time_key</span></tt> parameter is specified. Default is UNIX time (integer).</dd>
 <dt>run_interval</dt>
@@ -367,7 +372,7 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 <p>Suffixes &#8220;k&#8221; (KB), &#8220;m&#8221; (MB), &#8220;g&#8221; (GB) can be used for <em>buffer_chunk_limit</em>.</p>
 <div class="section" id="file">
 <h3>file<a class="headerlink" href="#file" title="Permalink to this headline">¶</a></h3>
-<p><strong>file</strong> buffered output plugin writes events to files.</p>
+<p><strong>file</strong> buffered output plugin writes events to files. By default, it writes into the file in daily basis (almost at 00:10). Before that, no files are created. If you want to output the logs hourly or minutely, please modify &#8216;time_slice_format&#8217; value.</p>
 <p><strong>configuration</strong>:</p>
 <div class="highlight-python"><pre>&lt;match pattern&gt;
   type file
@@ -381,7 +386,7 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 </div>
 <dl class="docutils">
 <dt>path (required)</dt>
-<dd>Path of the file. Actual path becomes path + time + &#8220;.log&#8221;. See also <tt class="docutils literal"><span class="pre">time_slice_format</span></tt> parameter descried below.</dd>
+<dd>Path of the file. Actual path becomes path + time + &#8221;.log&#8221;. See also <tt class="docutils literal"><span class="pre">time_slice_format</span></tt> parameter descried below.</dd>
 <dt>time_slice_format</dt>
 <dd><dl class="first docutils">
 <dt>Format of the time in the file path. Following characters are replaced with values:</dt>
@@ -488,8 +493,8 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 </div>
 <div class="section" id="id2">
 <h3>exec<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
-<p><strong>exec</strong> buffered output plugin executs external program to output events.</p>
-<p>It passed a path of TSV (tab separated values) file that includes event logs to the last argument of specified command.</p>
+<p>The <strong>exec</strong> buffered output plugin passes events to an external program as a tab-separated value (TSV) file.</p>
+<p>The command is passed the location of a TSV file containing incoming events as its last argument.</p>
 <p><strong>configuration</strong>:</p>
 <div class="highlight-python"><pre>&lt;match pattern&gt;
   type exec
@@ -502,21 +507,21 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 </div>
 <dl class="docutils">
 <dt>command (required)</dt>
-<dd>A command to execute. The exec plugin passes a path of TSV file to the last argument.</dd>
+<dd>A command to execute. The exec plugin passes the path of a TSV file as the last argument.</dd>
 <dt>keys (required)</dt>
 <dd>Comma-separated keys to use in the TSV file.</dd>
 <dt>tag_key</dt>
-<dd>Name of the key to use event tag instead of the value in event record.</dd>
+<dd>Name of the key to use as the event tag instead of the value in the event record.</dd>
 <dt>time_key</dt>
-<dd>Name of the key to use event time instead of the value in event record.</dd>
+<dd>Name of the key to use as the event time instead of the value in the event record.</dd>
 <dt>time_format</dt>
-<dd>Format of the event time used when the <tt class="docutils literal"><span class="pre">time_key</span></tt> parameter is specified. Default is UNIX time (integer).</dd>
+<dd>Format for event time used when the <tt class="docutils literal"><span class="pre">time_key</span></tt> parameter is specified. Default is UNIX time (integer).</dd>
 </dl>
 </div>
 <div class="section" id="exec-filter">
 <h3>exec_filter<a class="headerlink" href="#exec-filter" title="Permalink to this headline">¶</a></h3>
-<p><strong>exec</strong> buffered output plugin executs external program to output events.</p>
-<p>It writes TSV (tab separated values) to the stdin of the program and reads TSV from the stdout.</p>
+<p><strong>exec_filter</strong> buffered output plugin executes an external program, using events as input and reading new events from the program output.</p>
+<p>It passes tab-separated values (TSV) to stdin and reads TSV from stdout.</p>
 <p><strong>configuration</strong>:</p>
 <div class="highlight-python"><pre>&lt;match pattern&gt;
   type exec_filter
@@ -532,13 +537,13 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 <dt>command (required)</dt>
 <dd>A command to execute. The exec plugin passes a path of TSV file to the last argument.</dd>
 <dt>in_keys (required)</dt>
-<dd>Comma-separated keys to use in the input TSV of the program.</dd>
+<dd>Comma-separated keys to use from the incoming event for the TSV input to the command.</dd>
 <dt>out_keys (required)</dt>
-<dd>Comma-separated keys to use in the output TSV of the program.</dd>
+<dd>Comma-separated keys to use in processing the TSV output from the program.</dd>
 <dt>tag_key</dt>
-<dd>Name of the key to use event tag instead of the value in event record.</dd>
+<dd>Name of the key to use as the event tag instead of the value in the event record.</dd>
 <dt>time_key</dt>
-<dd>Name of the key to use event time instead of the value in event record.</dd>
+<dd>Name of the key to use as the event time instead of the value in the event record.</dd>
 <dt>time_format</dt>
 <dd>Format of the event time used when the <tt class="docutils literal"><span class="pre">time_key</span></tt> parameter is specified. Default is UNIX time (integer).</dd>
 </dl>
@@ -654,7 +659,7 @@ This parameter is required.</dd>
 <p>Type following command to install it:</p>
 <div class="highlight-python"><pre>$ sudo fluent-gem install fluent-plugin-scribe</pre>
 </div>
-<p>Next step: <a class="reference external" href="devel.html#devel"><em>Writing plugins</em></a></p>
+<p>Next step: <a class="reference internal" href="devel.html#devel"><em>Writing plugins</em></a></p>
 </div>
 </div>
 
@@ -680,8 +685,8 @@ This parameter is required.</dd>
       </ul>
     </div>
     <div class="footer">
-      &copy; Copyright 2011, Sadayuki Furuhashi.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 0.6.5.
+        &copy; Copyright 2011, Sadayuki Furuhashi.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
     </div>
   </body>
 </html>

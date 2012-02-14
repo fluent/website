@@ -310,7 +310,7 @@ Suffixes "k" (KB), "m" (MB), "g" (GB) can be used for *buffer_chunk_limit*.
 file
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**file** buffered output plugin writes events to files.
+**file** buffered output plugin writes events to files. By default, it writes into the file in daily basis (almost at 00:10). Before that, no files are created. If you want to output the logs hourly or minutely, please modify 'time_slice_format' value.
 
 **configuration**::
 
