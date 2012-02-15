@@ -45,13 +45,19 @@ Examples::
 
 The user can expand Fluentd's input sources beyond those provided initially by writing their own plugins. For further information regarding Fluentd's input sources, please refer to :ref:`input_plugin`.
 
+Sources submit events into the Fluentd's routing engine. An event consists of three entities: **tag**, **time** and **record**. Tag is a string separated by '.' (e.g. myapp.access), and is used to Fluentd's internal routing engine. Time is the UNIX time when the event occurs. Record is a JSON object. In the above example, the forward plugin submits the following event::
+
+    tag: myapp.access
+    time: (current time)
+    record: {"event":"data"}
+
 
 <match> Directive
 ------------------
 
 Fluentd's output destinations are enabled by selecting and configuring the desired output plugins using **<match>** directives. Fluentd's standard output plugins include ``file`` and ``forward``. 
 
-Each **<match>** directive must include a match pattern and a ``type`` parameter. Match patterns are used to filter the events. Only the events that fit the match pattern will be sent to the output destination. The ``type`` parameter specifies the chosen output plugin. 
+Each **<match>** directive must include a match pattern and a ``type`` parameter. Match patterns are used to filter the events. Only the events whose **tag** matches the pattern will be sent to the output destination. The ``type`` parameter specifies the chosen output plugin.
 
 For example, the user can send all matches to the pattern ``myapp.accesslog.**`` to ``file`` in a specified directory.
 
