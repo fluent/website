@@ -278,7 +278,7 @@ The structure of the buffer is a queue of chunks like following::
     |         |
     |  chunk  |
     |         |
-    |  chunk --> wirte out the bottom chunk
+    |  chunk --> write out the bottom chunk
     |         |
     +---------+
 

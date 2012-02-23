@@ -305,15 +305,15 @@ table td, table th {
     padding: 0.2em 0.5em 0.2em 0.5em;
 }
 
-div.admonition, div.warning {
+div.admonition {
     font-size: 0.9em;
     margin: 1em 0 1em 0;
-    border: 3px solid #82A08E;
+    border: 3px solid #cccccc;
     background-color: #f7f7f7;
     padding: 0;
 }
 
-div.admonition p, div.warning p {
+div.admonition p {
     margin: 0.5em 1em 0.5em 1em;
     padding: 0;
 }
@@ -322,24 +322,45 @@ div.admonition pre, div.warning pre {
     margin: 0.4em 1em 0.4em 1em;
 }
 
-div.admonition p.admonition-title,
-div.warning p.admonition-title {
+div.admonition p.admonition-title {
     margin: 0;
     padding: 0.1em 0 0.1em 0.5em;
     color: white;
-    border-bottom: 3px solid #82A0BE;
+    border-bottom: 3px solid #cccccc;
     font-weight: bold;
-    background-color: #00646E;
+    background-color: #165e83;
 }
 
-div.warning {
-    background-color: #F0D296;
-    border: 3px solid #F06E5A;
+div.danger    { border: 3px solid #f0908d; background-color: #f0cfa0; }
+div.error     { border: 3px solid #f0908d; background-color: #ede4cd; }
+div.warning   { border: 3px solid #f8b862; background-color: #f0cfa0; }
+div.caution   { border: 3px solid #f8b862; background-color: #ede4cd; }
+div.attention { border: 3px solid #f8b862; background-color: #f3f3f3; }
+div.important { border: 3px solid #f0cfa0; background-color: #ede4cd; }
+div.note      { border: 3px solid #f0cfa0; background-color: #f3f3f3; }
+div.hint      { border: 3px solid #bed2c3; background-color: #f3f3f3; }
+div.tip       { border: 3px solid #bed2c3; background-color: #f3f3f3; }
+
+div.danger p.admonition-title, div.error p.admonition-title {
+    background-color: #b7282e;
+    border-bottom: 3px solid #f0908d;
 }
 
-div.warning p.admonition-title {
-    background-color: #336699;
-    border-bottom: 3px solid #F06E5A;
+div.caution p.admonition-title,
+div.warning p.admonition-title,
+div.attention p.admonition-title {
+    background-color: #f19072;
+    border-bottom: 3px solid #f8b862;
+}
+
+div.note p.admonition-title, div.important p.admonition-title {
+    background-color: #f8b862;
+    border-bottom: 3px solid #f0cfa0;
+}
+
+div.hint p.admonition-title, div.tip p.admonition-title {
+    background-color: #7ebea5;
+    border-bottom: 3px solid #bed2c3;
 }
 
 div.admonition ul, div.admonition ol,
