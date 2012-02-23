@@ -283,7 +283,7 @@ The structure of the buffer is a queue of chunks like following::
     +---------+
 
 When chunk size exceeds limit (*buffer_chunk_limit*) or specified time elapsed (*flush_interval*), new empty chunk is pushed.
-The bottom chunk is wirtten out immediately when new chunk is pushed.
+The bottom chunk is written out immediately when new chunk is pushed.
 
 If it failed to write, the chunk is left in the queue and retried to write after seconds (*retry_wait*).
 If the retry count is exceeds limit (*retry_limit*), the chunk is trashed. The wait time before retrying increases twice and twice (1.0sec, 2.0sec, 4.0sec, ...).

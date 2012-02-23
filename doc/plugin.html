@@ -353,7 +353,7 @@ example:
 +---------+</pre>
 </div>
 <p>When chunk size exceeds limit (<em>buffer_chunk_limit</em>) or specified time elapsed (<em>flush_interval</em>), new empty chunk is pushed.
-The bottom chunk is wirtten out immediately when new chunk is pushed.</p>
+The bottom chunk is written out immediately when new chunk is pushed.</p>
 <p>If it failed to write, the chunk is left in the queue and retried to write after seconds (<em>retry_wait</em>).
 If the retry count is exceeds limit (<em>retry_limit</em>), the chunk is trashed. The wait time before retrying increases twice and twice (1.0sec, 2.0sec, 4.0sec, ...).
 If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new events are rejected.</p>
