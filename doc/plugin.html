@@ -275,7 +275,7 @@ See <a class="reference external" href="http://www.ruby-doc.org/core-1.9/classes
 </div>
 <div class="section" id="forward">
 <h3>forward<a class="headerlink" href="#forward" title="Permalink to this headline">¶</a></h3>
-<p><strong>forward</strong> input plugin listens event stream on a TCP socket. This is used to receive event logs from other fluentd, <tt class="docutils literal"><span class="pre">fluent-cat</span></tt> command or client libraries.</p>
+<p><strong>forward</strong> input plugin listens TCP socket to receive event stream, and also listens UDP socket to receive heartbeat message. This is used to receive event logs from other fluentd, <tt class="docutils literal"><span class="pre">fluent-cat</span></tt> command or client libraries.</p>
 <p><strong>configuration</strong>:</p>
 <div class="highlight-python"><pre>&lt;source&gt;
   type forward
@@ -285,7 +285,7 @@ See <a class="reference external" href="http://www.ruby-doc.org/core-1.9/classes
 </div>
 <dl class="docutils">
 <dt>port</dt>
-<dd>port to listen on. Default is 24224.</dd>
+<dd>port to listen on (both TCP and UDP). Default is 24224.</dd>
 <dt>bind</dt>
 <dd>bind address to listen on. Default is 0.0.0.0 (all addresses).</dd>
 </dl>
@@ -474,7 +474,7 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 <dt>host (required)</dt>
 <dd>IP address or host name of the server. This parameters is required.</dd>
 <dt>port</dt>
-<dd>Port number of the host. Default is 24224.</dd>
+<dd>Port number of the host. Default is 24224. Note that both TCP packets (event stream) and UDP packets (heartbeat message) are sent to this port.</dd>
 <dt>weight</dt>
 <dd>Weight of load balancing. For example, weight of a server is 20 and weight of the other server is 30, events are sent in 2:3 raito. Default is 60.</dd>
 <dt>send_timeout</dt>

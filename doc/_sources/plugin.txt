@@ -169,7 +169,7 @@ time_format
 forward
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
-**forward** input plugin listens event stream on a TCP socket. This is used to receive event logs from other fluentd, ``fluent-cat`` command or client libraries.
+**forward** input plugin listens TCP socket to receive event stream, and also listens UDP socket to receive heartbeat message. This is used to receive event logs from other fluentd, ``fluent-cat`` command or client libraries.
 
 **configuration**::
 
@@ -180,7 +180,7 @@ forward
     </source>
 
 port
-  port to listen on. Default is 24224.
+  port to listen on (both TCP and UDP). Default is 24224.
 
 bind
   bind address to listen on. Default is 0.0.0.0 (all addresses).
@@ -411,7 +411,7 @@ host (required)
   IP address or host name of the server. This parameters is required.
 
 port
-  Port number of the host. Default is 24224.
+  Port number of the host. Default is 24224. Note that both TCP packets (event stream) and UDP packets (heartbeat message) are sent to this port.
 
 weight
   Weight of load balancing. For example, weight of a server is 20 and weight of the other server is 30, events are sent in 2:3 raito. Default is 60.
