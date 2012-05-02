@@ -223,7 +223,7 @@ exec
 
 **exec** input plugin executes external program to receive or pull event logs. This reads TSV (tab separated values) from the stdout of the program.
 
-You can run the program periodically or parmanently. To run periodically, use ``run_interval`` parameter.
+You can run the program periodically or permanently. To run periodically, use ``run_interval`` parameter.
 
 
 **configuration**::

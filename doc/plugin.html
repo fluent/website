@@ -3,13 +3,16 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
+
 <html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Plugins &mdash; fluentd v0.10.8 documentation</title>
+    <title>Plugins &mdash; fluentd 0.10.8 documentation</title>
+    
     <link rel="stylesheet" href="_static/bizstyle.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    
     <script type="text/javascript">
       var DOCUMENTATION_OPTIONS = {
         URL_ROOT:    '',
@@ -22,7 +25,7 @@
     <script type="text/javascript" src="_static/jquery.js"></script>
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
-    <link rel="top" title="fluentd v0.10.8 documentation" href="index.html" />
+    <link rel="top" title="fluentd 0.10.8 documentation" href="index.html" />
     <link rel="next" title="Writing plugins" href="devel.html" />
     <link rel="prev" title="Configuration File" href="config.html" /> 
   </head>
@@ -39,7 +42,7 @@
         <li class="right" >
           <a href="config.html" title="Configuration File"
              accesskey="P">previous</a> |</li>
-        <li><a href="index.html">fluentd v0.10.8 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluentd 0.10.8 documentation</a> &raquo;</li> 
       </ul>
     </div>
       <div class="sphinxsidebar">
@@ -93,7 +96,7 @@
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
-      <input type="text" name="q" size="18" />
+      <input type="text" name="q" />
       <input type="submit" value="Go" />
       <input type="hidden" name="check_keywords" value="yes" />
       <input type="hidden" name="area" value="default" />
@@ -152,7 +155,7 @@
 <h2>Types of plugins<a class="headerlink" href="#types-of-plugins" title="Permalink to this headline">¶</a></h2>
 <p>Fluentd has 3 types of plugins:</p>
 <blockquote>
-<dl class="docutils">
+<div><dl class="docutils">
 <dt>Input plugin</dt>
 <dd><p class="first">Defines an input source of events.</p>
 <p class="last">An input plugin typically creates a thread and a listen socket. It can also be written to periodically pull data from data sources. Please note that Fluentd does not restrict the user from creating input plugins with alternative implementations.</p>
@@ -167,7 +170,7 @@
 <p class="last">The user should choose the appropriate buffer plugin for the desired combination of performance and reliability.</p>
 </dd>
 </dl>
-</blockquote>
+</div></blockquote>
 </div>
 <div class="section" id="input-plugins">
 <span id="input-plugin"></span><h2>Input plugins<a class="headerlink" href="#input-plugins" title="Permalink to this headline">¶</a></h2>
@@ -181,21 +184,21 @@
 <col width="26%" />
 </colgroup>
 <thead valign="bottom">
-<tr><th class="head">Parameter</th>
+<tr class="row-odd"><th class="head">Parameter</th>
 <th class="head">Description</th>
 <th class="head">Required?</th>
 </tr>
 </thead>
 <tbody valign="top">
-<tr><td>json</td>
+<tr class="row-even"><td>json</td>
 <td>body of the event in JSON format</td>
 <td>either &#8216;msgpack&#8217; or &#8216;json&#8217;</td>
 </tr>
-<tr><td>msgpack</td>
+<tr class="row-odd"><td>msgpack</td>
 <td>body of the event in <a class="reference external" href="http://msgpack.org/">MessagePack</a> format</td>
 <td>either &#8216;msgpack&#8217; or &#8216;json&#8217;</td>
 </tr>
-<tr><td>time</td>
+<tr class="row-even"><td>time</td>
 <td>time of the event in integer (UNIX time)</td>
 <td>no</td>
 </tr>
@@ -305,7 +308,7 @@ example:
 <div class="section" id="exec">
 <h3>exec<a class="headerlink" href="#exec" title="Permalink to this headline">¶</a></h3>
 <p><strong>exec</strong> input plugin executes external program to receive or pull event logs. This reads TSV (tab separated values) from the stdout of the program.</p>
-<p>You can run the program periodically or parmanently. To run periodically, use <tt class="docutils literal"><span class="pre">run_interval</span></tt> parameter.</p>
+<p>You can run the program periodically or permanently. To run periodically, use <tt class="docutils literal"><span class="pre">run_interval</span></tt> parameter.</p>
 <p><strong>configuration</strong>:</p>
 <div class="highlight-python"><pre>&lt;source&gt;
   type exec
@@ -396,22 +399,22 @@ If the length of the queue exceeds limit (<em>buffer_queue_limit</em>), new even
 <col width="89%" />
 </colgroup>
 <tbody valign="top">
-<tr><td>%Y</td>
+<tr class="row-odd"><td>%Y</td>
 <td>Year with century</td>
 </tr>
-<tr><td>%m</td>
+<tr class="row-even"><td>%m</td>
 <td>Month of the year (01..12)</td>
 </tr>
-<tr><td>%d</td>
+<tr class="row-odd"><td>%d</td>
 <td>Day of the month (01..31)</td>
 </tr>
-<tr><td>%H</td>
+<tr class="row-even"><td>%H</td>
 <td>Hour of the day, 24-hour clock (00..23)</td>
 </tr>
-<tr><td>%M</td>
+<tr class="row-odd"><td>%M</td>
 <td>Minute of the hour (00..59)</td>
 </tr>
-<tr><td>%S</td>
+<tr class="row-even"><td>%S</td>
 <td>Second of the minute (00..60)</td>
 </tr>
 </tbody>
@@ -681,12 +684,12 @@ This parameter is required.</dd>
         <li class="right" >
           <a href="config.html" title="Configuration File"
              >previous</a> |</li>
-        <li><a href="index.html">fluentd v0.10.8 documentation</a> &raquo;</li> 
+        <li><a href="index.html">fluentd 0.10.8 documentation</a> &raquo;</li> 
       </ul>
     </div>
     <div class="footer">
         &copy; Copyright 2011, Sadayuki Furuhashi.
-      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.0.5.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
     </div>
   </body>
 </html>
