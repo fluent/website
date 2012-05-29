@@ -1,42 +1,47 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Fluentd</title>
-	<link media="all" rel="stylesheet" type="text/css" href="css/all.css" />
-	<script type="text/javascript" src="js/responsed.js" ></script>
-	<script type="text/javascript" src="js/all-mobile.js" ></script>
-	<!--[if lt IE 9]><script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js" ></script><![endif]-->
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="description" content="Fluentd is a JSON-based, lightweight log collector daemon. It receives records from your applications or other software and writes them to RDBMS, NoSQL (e.g. MongoDB, Redis), flat files, or even other instances of Fluentd." />
+  <title>Fluentd: Log Everything in JSON</title>
+  <link media="all" rel="stylesheet" type="text/css" href="css/all.css" />
+  <script type="text/javascript" src="js/responsed.js" ></script>
+  <script type="text/javascript" src="js/all-mobile.js" ></script>
+  <!--[if lt IE 9]><script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js" ></script><![endif]-->
+  <!-- start Mixpanel -->
+  <script type="text/javascript">(function(d,c){var a,b,g,e;a=d.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===d.location.protocol?"https:":"http:")+'//api.mixpanel.com/site_media/js/api/mixpanel.2.js';b=d.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b);c._i=[];c.init=function(a,d,f){var b=c;"undefined"!==typeof f?b=c[f]=[]:f="mixpanel";g="disable track track_pageview track_links track_forms register register_once unregister identify name_tag set_config".split(" ");for(e=0;e<g.length;e++)(function(a){b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,0)))}})(g[e]);c._i.push([a,d,f])};window.mixpanel=c})(document,[]);mixpanel.init("fcc682ea19e6d9f21250083a377de6f4");mixpanel.track("ViewTop");
+  </script>
+  <!-- end Mixpanel -->
 </head>
 <body>
-	<a href="http://github.com/fluent/fluentd" class="btn-github">Fork me on GitHub</a>
-	<div id="wrapper">
-		<header id="header">
-			<h1 class="logo"><a href="#">Fluentd</a></h1>
+  <a href="http://github.com/fluent/fluentd" class="btn-github">Fork me on GitHub</a>
+  <div id="wrapper">
+    <header id="header">
+      <h1 class="logo"><a href="#">Fluentd</a></h1>
       <div class="top-holder">
         <a href="http://fluentd.org/doc">Documentation</a>
-			</div>
-		</header>
-		<div id="main">
-			<div class="main-holder">
-				<img src="images/txt-type.png" width="436" height="280" alt="image description" class="txt-type" />
-				<section class="text-holder">
-					<h2>Log everything in <span>JSON</span></h2>
+      </div>
+    </header>
+    <div id="main">
+      <div class="main-holder">
+        <img src="images/txt-type.png" width="436" height="280" alt="image description" class="txt-type" />
+        <section class="text-holder">
+          <h2>Log everything in <span>JSON</span></h2>
           <a href="http://fluentd.org/doc/install.html" class="btn-look">Get Started</a>
-				</section>
-			</div>
-			<div class="text-box">
-				<p>Fluentd is a JSON-based, lightweight logging daemon for real-time analysis. It receives events from your application or other logging software and writes them to RDBMS, NoSQL, flat files, or even other instances of Fluentd.</p>
-			</div>
-			<div class="link-holder">
-				<div class="box">
-					<span class="btn-install">Install Fluentd</span>
-				</div>
-        <a href="http://rubygems.org/gems/fluentd" class="btn">Gem install fluentd</a>
-				<a href="http://help.treasure-data.com/kb/installing-td-agent-daemon/installing-td-agent-for-debian-and-ubuntu" class="btn">Debian package (.deb)</a>
-				<a href="http://help.treasure-data.com/kb/installing-td-agent-daemon/installing-td-agent-for-redhat-and-centos" class="btn">RPM package (.rpm)</a>
-			</div>
-		</div>
-	</div>
+        </section>
+      </div>
+      <div class="text-box">
+        <p>Fluentd is a JSON-based, lightweight log collector daemon. It receives records from your applications or other software and writes them to RDBMS, NoSQL (e.g. MongoDB, Redis), flat files, or even other instances of Fluentd.</p>
+      </div>
+      <div class="link-holder">
+        <div class="box">
+          <span class="btn-install">Install Fluentd</span>
+        </div>
+        <a href="http://help.treasure-data.com/kb/installing-td-agent-daemon/installing-td-agent-for-redhat-and-centos" class="btn">RPM package (.rpm)</a>
+        <a href="http://help.treasure-data.com/kb/installing-td-agent-daemon/installing-td-agent-for-debian-and-ubuntu" class="btn">Debian package (.deb)</a>
+        <a href="http://rubygems.org/gems/fluentd" class="btn">gem install fluentd</a>
+      </div>
+    </div>
+  </div>
 </body>
 </html>
