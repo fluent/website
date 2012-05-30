@@ -14,8 +14,24 @@
   <script type="text/javascript">(function(d,c){var a,b,g,e;a=d.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===d.location.protocol?"https:":"http:")+'//api.mixpanel.com/site_media/js/api/mixpanel.2.js';b=d.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b);c._i=[];c.init=function(a,d,f){var b=c;"undefined"!==typeof f?b=c[f]=[]:f="mixpanel";g="disable track track_pageview track_links track_forms register register_once unregister identify name_tag set_config".split(" ");for(e=0;e<g.length;e++)(function(a){b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,0)))}})(g[e]);c._i.push([a,d,f])};window.mixpanel=c})(document,[]);mixpanel.init("fcc682ea19e6d9f21250083a377de6f4");mixpanel.track("ViewTop");
   </script>
   <!-- end Mixpanel -->
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  <meta property="fb:admins"      content="588883490,100000237607356,741094668" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Fluentd: Log Everything in JSON" />
+  <meta property="og:description" content="Fluentd is a JSON-based, lightweight log collector daemon. It receives records from your applications or other software and writes them to RDBMS, NoSQL (e.g. MongoDB, Redis), flat files, or even other instances of Fluentd." />
+  <meta property="og:url"         content="http://fluentd.org/" />
+  <meta property="og:image"       content="http://fluentd.org/logos/fluentd.png" />
 </head>
 <body>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ja_JP/all.js#xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
   <a href="http://github.com/fluent/fluentd" class="btn-github">Fork me on GitHub</a>
   <div id="wrapper">
     <header id="header">
@@ -48,6 +64,15 @@
       </div>
     </div>
     <footer id="footer">
+     <span class="social-buttons">
+       <div class="fb-like" data-href="http://fluentd.org/" data-send="false" data-layout="button_count" data-width="110" data-show-faces="false"></div>
+       <a href="https://twitter.com/share" class="twitter-share-button" data-lang="en">Tweet</a>
+       <iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=fluent&repo=fluentd&type=watch&count=true"
+           allowtransparency="true" frameborder="0" scrolling="0" width="110px" height="20px"></iframe>
+       <iframe src="http://markdotto.github.com/github-buttons/github-btn.html?user=fluent&repo=fluentd&type=fork&count=true"
+           allowtransparency="true" frameborder="0" scrolling="0" width="95px" height="20px"></iframe>
+     </span>
+
       <span class="copy">The Fluentd Project is sponsored by <img src="images/td-square-icon.png" width="20px"/> <a href="http://treasure-data.com">Treasure Data, Inc.</a></span>
     </footer>
   </div>
