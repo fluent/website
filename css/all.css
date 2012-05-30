@@ -201,7 +201,7 @@ select{
 }
 .link-holder{
 	background: url(../images/sep01.png) repeat-x;
-	padding:34px 0 4px 10px;
+	padding:34px 0 20px 10px;
 	overflow:hidden;
 }
 .link-holder .box{
