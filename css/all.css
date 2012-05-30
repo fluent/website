@@ -338,6 +338,14 @@ select{
 	background:none;
 }
 .bottom-nav a{color:#898e91;}
+.social-buttons{
+	float:left;
+	text-shadow: 1px 1px 1px #fff;
+	white-space:nowrap;
+}
+.social-buttons .fb-like{
+	top: -3px
+}
 .copy{
 	float:right;
 	text-shadow: 1px 1px 1px #fff;
