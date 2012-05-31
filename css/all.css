@@ -128,7 +128,7 @@ select{
 }
 .top-holder li{
 	float:left;
-	margin:0 0 0 7px;
+	margin:0 0 0 12px;
   text-decoration: underline;
 }
 .social-networks li:first-child{margin:0;}
