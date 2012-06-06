@@ -107,6 +107,13 @@ select{
 	width:169px;
 	height:60px;
 }
+
+.logo-image {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
 .logo a{
 	display:block;
 	height:100%;
@@ -251,6 +258,7 @@ select{
 	margin:0 0 52px;
 	text-align:center;
 }
+
 #main .heading h3{
 	margin:0;
 	display:inline-block;
@@ -287,7 +295,7 @@ select{
 }
 .testimonials-holder .column img{ vertical-align:top; }
 .testimonials-holder .column p {
-  line-height: 140%;
+  line-height: 150%;
   padding-top: 30px;
 }
 
@@ -298,6 +306,11 @@ select{
 	margin:0 0 22px;
 	text-shadow: 1px 1px 1px #fff;
 }
+
+.testimonial-author {
+  font-family: verdana;
+}
+
 .partners-holder{width:100%;}
 .partners{
 	border-radius: 4px 4px 0 0;
