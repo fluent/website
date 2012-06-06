@@ -336,7 +336,6 @@ select{
 	margin:-1px 0 0;
 	z-index:2;
 	padding:26px 2px 30px 4px;
-	overflow:hidden;
 	color:#898e91;
 	background:url(../images/sep01.png) repeat-x;
 }
