@@ -95,7 +95,7 @@ keepalive_timeout
 tail
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 ..I think an example would help.
-The **tail** input plugin allows Fluentd to read events from the tail of text files. Its read behavior is analogous to the ``tail -f`` command.
+The **tail** input plugin allows Fluentd to read events from the tail of text files. Its read behavior is analogous to the ``tail -F`` command.
 
 **configuration**::
 
@@ -135,6 +135,11 @@ time_format
   Format of the time field. This parameter is required only if the format includes 'time' capture and it can't be parsed automatically.
   See `Time#strptime <http://www.ruby-doc.org/core-1.9/classes/Time.html#M000326>`_.
 
+rotate_wait
+  in_tail does a bit more than "tail -F". When one is rotating a file, there is a possibility that some data might still need to be written to the
+  old file as opposed to the new one. in_tail takes care of this by keeping a reference to the old file (even after it's been rotated) for some time
+  before transitioning to the new file entirely (so that the data designated for the old file don't get lost). By default, this time interval is
+  5 seconds. The rotate_wait parameter accepts a single integer which represents the number of seconds you want to set this time interval to. 
 
 .. syslog
 .. ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
