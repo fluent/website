@@ -171,7 +171,7 @@ select{
 .main-holder h2{
 	text-shadow: 1px 1px 1px #fff;
 	color:#40494e;
-	margin:0 0 48px 3px;
+	margin:0 0 38px 3px;
 	font-size:36px;
 	line-height:38px;
 }
@@ -197,6 +197,23 @@ select{
 	-webkit-box-shadow: 1px 1px 1px #fff;
 	-moz-box-shadow: 1px 1px 1px #fff;
 	background:#da4808 url(../images/arrow01.png) 177px 50% no-repeat;
+}
+.btn-look-2{
+	display:block;
+	font:bold 18px/25px Arial, Helvetica, sans-serif;
+	border-radius: 23px;
+	-moz-border-radius: 23px;
+	-webkit-border-radius: 23px;
+	width:174px;
+	margin-top:10px;
+	padding:5px 18px 4px 10px;
+	color:#fff;
+	text-transform:uppercase;
+	text-align:center;
+	box-shadow: 1px 1px 1px #fff;
+	-webkit-box-shadow: 1px 1px 1px #fff;
+	-moz-box-shadow: 1px 1px 1px #fff;
+	background:#8cb2d8 url(../images/arrow01.png) 177px 50% no-repeat;
 }
 .text-box{
 	padding:27px 35px 18px;
