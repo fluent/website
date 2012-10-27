@@ -23,7 +23,7 @@ pid = Process.fork do
   rpipe.close
   $stdout.reopen wpipe
   begin
-    Gem::GemRunner.new.run %w[search -rd fluent-plugin]
+    Gem::GemRunner.new.run %w[search -r fluent-plugin]
   rescue Gem::SystemExitException => e
     exit e.exit_code
   end
@@ -37,8 +37,7 @@ if ecode != 0
   exit ecode
 end
 
-splits = cmdout.split(/^(\S+)\s+\(([^\)]+)\)\n/)
-splits.shift  # remove first ""
+gemlist = cmdout.scan(/fluent-plugin-[^\s]+/)
 
 Plugin = Struct.new(:name, :gemname, :version, :url, :author, :summary, :downloads)
 
@@ -47,31 +46,19 @@ plugins = []
 http = Net::HTTP.new("rubygems.org", 80)
 http.start do
 
-  until splits.empty?
-    gemname = splits.shift
-    version = splits.shift
-    meta, summary = splits.shift.split("\n\n")
-    name = gemname.sub(/^fluent-plugin-/,'')
-
-    url = nil
-    author = nil
-
-    meta.each_line {|line|
-      case line
-      when /Author: (.*)$/
-        author = $~[1]
-      when /Homepage: (.*)$/
-        url = $~[1]
-      end
-    }
-
-    summary = summary.each_line.map {|line|
-      summary.strip
-    }.join("\n")
-
+  gemlist.each do |gemname|
     res = http.get("/api/v1/gems/#{e gemname}.json")
     js = JSON.parse(res.body)
 
+    url = nil
+    author = nil
+    summary = nil
+    
+    name = js['name'].sub(/^fluent-plugin-/,'')
+    version = js['version']
+    url = js['homepage_uri'] unless js['homepage_uri'].to_s.empty?
+    author = js['authors'] unless js['authors'].to_s.empty?
+    summary = js['info'] unless js['info'] == 'This rubygem does not have a description or summary.'
     downloads = js['downloads']
 
     plugins << Plugin.new(name, gemname, version, url, author, summary, downloads)
