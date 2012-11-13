@@ -295,7 +295,7 @@ select{
 	background:url(../images/bg-heading.png) no-repeat;
 }
 .column-holder{
-	padding:0 0 72px;
+	padding:0 0 22px;
 	overflow:hidden;
 	background:url(../images/bg-testimonials-holder.png) 0 100% repeat-x;
 }
