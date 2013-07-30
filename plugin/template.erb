@@ -17,47 +17,34 @@
       };
     </script>
     <script type="text/javascript" src="../doc/_static/jquery.js"></script>
+    <script type="text/javascript" src="../doc/_static/jquery.dataTables.min.js"></script>
     <script type="text/javascript" src="../doc/_static/doctools.js"></script>
     <style type="text/css">
       div.body h2 {
-        border-bottom: none;
-        border-top: 1px dashed #336699;
-        margin-top: 1.1em;
-        padding-top: 0.9em;
-        padding-bottom: 0.1em;
+        margin-top: 0.2em;
         line-height: 1.3em;
         font-size: 140%;
+        border: none;
       }
-      div.body p {
-          margin-top: 0.6em;
-      }
-      div.body h2 a {
-        color: #336699!important;
-        text-decoration: none;
-      }
-      div.body h2 a:hover {
+      div.body a:hover {
         text-decoration: underline;
       }
-      div.body h2 .nolink {
-        color: #888888;
-      }
-      div.body .author {
-        color: #336699;
-        font-size: 90%;
-      }
-      div.body .release {
-        font-size: 68%;
-      }
-      div.body .downloads {
-        margin-left: 0.1em;
-        font-size: 68%;
-        color: #999999;
-      }
+      tr.even { background-color: #f0f0f0; } 
     </style>
+    <script>
+      $(document).ready(function() {
+        $('#plugin-table').dataTable({
+          "bPaginate": false,
+          "aaSorting": [[4, "desc"]],
+          "aoColumns": [null, null, null, null, null]
+        });
+        $('#plugin-table_filter input').attr('placeholder',
+          'search for mongo, redis, etc...').css('width', '250px');
+      });
+    </script>
   </head>
   <body>
     <div class="related">
-      <h3>Navigation</h3>
       <ul>
         <li><a href="../doc/">fluentd documentation</a> &raquo;</li> 
       </ul>
@@ -66,28 +53,29 @@
       <div class="documentwrapper">
         <div class="bodywrapper">
           <div class="body">
-            <h1>Fluentd plugins</h1>
-
-            <% plugins.each {|pl| %>
-            <h2>
-            <% if pl.url %>
-              <a href="<%= pl.url %>" title="<%= h pl.name %>">
-            <% else %>
-              <span class="nolink">
-            <% end %>
-            <%= h pl.name %><br /><span class="release"><%= h pl.gemname %> <%= h pl.version %></span> <span class="downloads">[<%= h pl.downloads %> downloads]</span>
-            <% if h pl.url %>
-              </a>
-            <% else %>
-              </span>
-            <% end %>
-            </h2>
-            <p><%= pl.summary %>
-            <% if pl.author %>
-            <span class="author">[<%= h pl.author %>]</span>
-            <% end %>
-            </p>
-            <% } %>
+            <h2>Fluent Plugins</h2>
+            <table id="plugin-table">
+              <thead>
+                <tr>
+                  <th>Plugin Name</th>
+                  <th>gem name &amp; version</th>
+                  <th>Author</th>
+                  <th>About</th>
+                  <th># of Downloads</th>
+                </tr>
+              </thead>
+              <tbody>
+              <% plugins.each { |pl| %>
+                <tr>
+                  <td><a href="<%=pl.url%>"><%=pl.name%></a></td>
+                  <td><a href="<%=pl.url%>"><%=pl.gemname+' '+pl.version%></a></td>
+                  <td><%=pl.author%></td>
+                  <td><%=pl.summary%></td>
+                  <td><%=pl.downloads%></td>
+                </tr>
+              <% } %>
+              </tbody>
+            </table>
           </div>
         </div>
       </div>
