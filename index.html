@@ -200,7 +200,7 @@
   <!-- testimonial action-->
   <script>
   $(document).ready(function(){
-    $(".logo-image").click(function(ev) {
+    $(".logo-image").hover(function(ev) {
       var src = $(this).attr('src');
       var company_name = $(this).attr('alt'); // this is exactly how not to use alt.
       var testimonial_text = $('#testimonial-' + company_name).html();
