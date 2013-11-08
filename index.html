@@ -10,6 +10,7 @@
   <link media="all" rel="stylesheet" type="text/css" href="css/all.css" />
   <script type="text/javascript" src="js/responsed.js" ></script>
   <script type="text/javascript" src="js/all-mobile.js" ></script>
+  <script type="text/javascript" src="doc/_static/jquery.js"></script>
   <!--[if lt IE 9]><script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js" ></script><![endif]-->
   <!-- start Mixpanel -->
   <script type="text/javascript">
@@ -88,40 +89,52 @@
       </div>
       <section class="testimonials-holder">
         <div class="heading">
-          <h3><span><strong>Fluentd in the Industry</strong></span></h3>
+          <h3><span><strong>Fluentd in Action</strong></span></h3>
         </div>
         <div class="column-holder">
-          <div class="column">
-            <img class="logo-image" src="images/user_logo/Slideshare.png" height="60"/>
-            <p class="testimonial-text">
-              "Slideshare uses Fluentd to stream logs and events in the cloud.
-              We were looking for a versatile yet lightweight logger in Ruby, and Fluentd fit the bill perfectly."
-            <br/>
-            <p class="testimonial-author">Sylvain Kalache</p>
-            <p class="testimonial-author">Operations Engineer</p>
-            </p>
+          <div class="column-left">
+            <img style="margin-top:60px" id="featured-logo" src="images/user_logo/nintendo.png"/>
           </div>
-          <div class="column">
-            <a href="http://media.amazonwebservices.com/AWS_Amazon_EMR_Best_Practices.pdf"><img class="logo-image" src="images/user_logo/AWS.png" height="55"/></a>
-            <p class="testimonial-text">
-"The architecture of Fluentd (Sponsored by Treasure Data) is very similar to Apache Flume or Facebook’s Scribe. Fluentd is easier to install and maintain and has better documentation and support than Flume and Scribe"
-            <br/>
-            <p class="testimonial-author">'<a style="color:#666666;" href="http://media.amazonwebservices.com/AWS_Amazon_EMR_Best_Practices.pdf">Best Practices for Amazon EMR</a>'</p>
-            <p class="testimonial-author">AWS Technical Whitepaper</p>
-            </p>
-          </div>
-          <div class="column">
-            <img class="logo-image" src="images/user_logo/GREE.png" height="60"/>
-            <p class="testimonial-text">
-"Data Science is at the core of GREE’s business, and it started from logging user events and advertisement related data. We currently deploy Fluentd for a number of our games and ad services to federate user event data, and use that data for product decisions."
-            <p class="testimonial-author">Masaki Fujimoto</p>
-            <p class="testimonial-author">Chief Technology Officer</p>
+          <div class="column-right">
+            <p id="featured-testimonial" class="testimonial-text">
+              &quot;We use Fluentd to collect massive data logs for our platforms. Having developed a system based on Fluentd, we are now effectively monitoring and analyzing our services in real-time. We are very much satisfied with its flexibility, especially how easy it is to use in tandem with other systems.&quot;
             </p>
           </div>
         </div>
-          <div style="text-align: right; padding-top: 20px;">
-            &gt;&gt; words from <a href="http://docs.fluentd.org/articles/users">more users</a>.
+        <div class="logo-container">
+            <img alt="nintendo" class="logo-image" src="images/user_logo/nintendo.png"/>
+            <img alt="slideshare" class="logo-image" src="images/user_logo/Slideshare.png"/>
+            <img alt="gree" class="logo-image" src="images/user_logo/GREE.png"/>
+            <img alt="aws" class="logo-image" src="images/user_logo/AWS.png"/>
+            <img alt="line" class="logo-image" src="images/user_logo/LINE.png"/>
+            <a style="float:right" href="http://docs.fluentd.org/articles/users">...and more!</a>
           </div>
+        </div>
+        <div style="display:none">
+          <span id="testimonial-nintendo">
+            &quot;We use Fluentd to collect massive data logs for our platforms. Having developed a system based on Fluentd, we are now effectively monitoring and analyzing our services in real-time. We are very much satisfied with its flexibility, especially how easy it is to use in tandem with other systems.&quot;
+          </span>
+          <span id="testimonial-slideshare">
+            &quot;Slideshare uses Fluentd to stream logs and events in the cloud. We were looking for a versatile yet lightweight logger in Ruby, and Fluentd fit the bill perfectly.&quot;
+            <br/>
+            <span class="testimonial-author">Sylvain Kalache, Operations Engineer</span>
+          </span>
+          <span id="testimonial-gree">
+            &quot;Data Science is at the core of GREE (TYO:3632)’s business, and it starts with logging user events and Advertisement related data. We currently deploy Fluentd for a number of our games and ad services to federate user event data, and use that data to inform our product decisions.&quot;
+            <br/>
+            <span class="testimonial-author">Masaki Fujimoto, CTO</span>
+          </span>
+          <span id="testimonial-aws">
+            &quot;The architecture of Fluentd (Sponsored by Treasure Data) is very similar to Apache Flume or Facebook’s Scribe. Fluentd is easier to install and maintain and has better documentation and support than Flume and Scribe&quot;
+            <br/>
+            <span class="testimonial-author">Satoshi Tagomori, Software Engineer</span>
+          </span>
+          <span id="testimonial-line">
+            &quot;We utilize Fluentd to collect a very large amount of logs. The logs are written into Hadoop HDFS clusters, and are also used to analyze various service statuses in realtime. We also use many plugins from rubygems.org to further enhance this mechanism.&quot;
+            <br/>
+            <span class="testimonial-author">Satoshi Tagomori, Software Engineer</span>
+          </span>
+        </div>
       </section>
     </div>
     <footer id="footer">
@@ -182,6 +195,23 @@
   if(window.attachEvent) { window.attachEvent('onload', async_load); }
   else { window.addEventListener('load', async_load, false); }
   })();
+  </script>
+
+  <!-- testimonial action-->
+  <script>
+  $(document).ready(function(){
+    $(".logo-image").click(function(ev) {
+      var src = $(this).attr('src');
+      var company_name = $(this).attr('alt'); // this is exactly how not to use alt.
+      var testimonial_text = $('#testimonial-' + company_name).html();
+      $('#featured-logo').attr('src', src);
+      $('#featured-testimonial').html(testimonial_text);
+      var box_height = $('#featured-logo').parent().css('height').replace('px', '');
+      var logo_height = $('#featured-logo').css('height').replace('px', '');
+      var margin_top = Math.floor((box_height-logo_height)/2);
+      $('#featured-logo').css('margin-top', margin_top+'px');
+    });
+  })
   </script>
 </body>
 </html>

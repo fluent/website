@@ -107,13 +107,16 @@ select{
 	width:169px;
 	height:60px;
 }
+.logo-container { background-color:#FFF; }
 
 .logo-image {
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  margin: 15px;
+  height: 55px;
 }
-
+#featured-logo {
+  margin: auto;
+  width: 260px;
+}
 .logo a{
 	display:block;
 	height:100%;
@@ -304,19 +307,32 @@ select{
 	padding:0 0 6px;
 	margin:0 0 23px;
 }
-.testimonials-holder .column{
+
+.testimonials-holder .column-left {
 	float:left;
-	width:230px;
+	width:245px;
 	padding:0 48px 0 50px;
+	height:185px;
+	background:#FFF;
+}
+.testimonials-holder .column-right {
+	float:left;
+	width:590px;
+	padding:0 0 0 50px;
 	background:url(../images/sep02.png) 2px 0 no-repeat;
 }
-.testimonials-holder .column img{ vertical-align:top; }
-.testimonials-holder .column p.testimonial-text {
-  line-height: 150%;
-  padding: 30px 0 10px 0;
+
+
+.testimonials-holder .column-right p.testimonial-text {
+  line-height: 140%;
+  font-size:22px;
+  height:185px;
 }
 
-.testimonials-holder .column:first-child{background:none;}
+.logo-image:hover {
+	-webkit-transform:rotate(-8deg);
+}
+
 #main h3{
 	font-size:2.143em;
 	line-height:1.066em;
@@ -326,6 +342,7 @@ select{
 
 .testimonial-author {
   font-family: verdana;
+  font-size:0.5em;
 }
 
 .partners-holder{width:100%;}
