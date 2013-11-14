@@ -1,0 +1,37 @@
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+  <meta name="keywords" content="fluentd, log collector, event collector, log aggregator, ruby, JSON logging" />
+  <meta name="description" content="Fluentd is an open-source tool to collect events and logs. 150+ plugins instantly enables you to store the massive data for Log Search, Big Data Analytics, and Archiving (MongoDB, S3, Hadoop)." />
+  <meta name="google-site-verification" content="y_tydIQd6TZaoY-qR9geJSDX95h10_w4CXL6NznjgdI" />
+  <meta name="msvalidate.01" content="FA8C6A3FF6ADEE726950F238947D5295" />
+  <title>Fluentd: Open Source Log Management</title>
+
+  <%= css :application %>
+  <%= js :app %>
+  <!--[if lt IE 9]><script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js" ></script><![endif]-->
+  <!-- start Mixpanel -->
+  <script type="text/javascript">
+    (function(d,c){var a,b,g,e;a=d.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"===d.location.protocol?"https:":"http:")+'//api.mixpanel.com/site_media/js/api/mixpanel.2.js';b=d.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b);c._i=[];c.init=function(a,d,f){var b=c;"undefined"!==typeof f?b=c[f]=[]:f="mixpanel";g="disable track track_pageview track_links track_forms register register_once unregister identify name_tag set_config".split(" ");for(e=0;e<g.length;e++)(function(a){b[a]=function(){b.push([a].concat(Array.prototype.slice.call(arguments,0)))}})(g[e]);c._i.push([a,d,f])};window.mixpanel=c})(document,[]);
+    mixpanel.init("fcc682ea19e6d9f21250083a377de6f4");
+    mixpanel.track("ViewTop");
+    mixpanel.track_links('div.link-holder a', 'ClickInstall', function(link) {
+        console.log(link);
+        return {
+          install_url: link.href
+        };
+    }); 
+  </script>
+  <!-- end Mixpanel -->
+  <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
+  <meta property="fb:admins"      content="588883490,100000237607356,741094668" />
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Fluentd: Log Everything in JSON" />
+  <meta property="og:description" content="Fluentd is an open-source tool to collect events and logs. 150+ plugins instantly enables you to store the massive data for Log Search, Big Data Analytics, and Archiving (MongoDB, S3, Hadoop)." />
+  <meta property="og:url"         content="http://fluentd.org/" />
+  <meta property="og:image"       content="http://fluentd.org/logos/fluentd.png" />
+</head>
+<body>
+  <%=yield%>
+</body>
+</html>
