@@ -15,7 +15,7 @@ def h(s)
 end
 
 tmpl = File.dirname(__FILE__)+"/template.erb"
-out = File.dirname(__FILE__)+"/index.html"
+out = File.dirname(__FILE__)+"/../../views/plugin.erb"
 
 rpipe, wpipe = IO.pipe
 
@@ -74,4 +74,3 @@ result = erb.result(binding)
 File.open(out, "w") {|f|
   f.write result
 }
-

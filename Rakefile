@@ -22,3 +22,8 @@ def which(command)
     find { |p| File.executable?(p) }
 end
 task :start => :server
+
+desc 'update the plugin file page'
+task :plugins do
+  require File.dirname(__FILE__) + '/scripts/plugin/update-html.rb'
+end
