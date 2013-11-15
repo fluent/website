@@ -1,10 +1,15 @@
 require 'rubygems'
 require 'sinatra'
 require 'sinatra/assetpack'
+require 'redis'
 
 configure :production do
   ENV['APP_ROOT'] ||= File.dirname(__FILE__)
 end
+
+ENV["REDISTOGO_URL"] ||= 'redis://localhost:6379' # development
+REDIS_URI = URI.parse(ENV["REDISTOGO_URL"])
+REDIS = Redis.new(:host => REDIS_URI.host, :port => REDIS_URI.port, :password => REDIS_URI.password)
 
 set :app_file, __FILE__
 set :static_cache_control, [:public, :max_age => 3600*24]
@@ -14,6 +19,7 @@ get '/' do
 end
 
 get '/plugin/' do
+  @plugin_descriptions = REDIS.get('plugin.html')
   erb :plugin, :layout => false
 end
 
