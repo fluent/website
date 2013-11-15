@@ -1,5 +1,0 @@
-deployment:
-  production:
-    branch: convert_to_sinatra
-    heroku:
-      appname: fluentd-website
