@@ -5,6 +5,7 @@ require 'json'
 require 'net/http'
 require 'cgi'
 require 'erb'
+require 'redis'
 
 def e(s)
   CGI.escape(s.to_s)
@@ -15,7 +16,6 @@ def h(s)
 end
 
 tmpl = File.dirname(__FILE__)+"/template.erb"
-out = File.dirname(__FILE__)+"/../../views/plugin.erb"
 
 rpipe, wpipe = IO.pipe
 
@@ -71,6 +71,7 @@ plugins = plugins.sort_by {|pl| -pl.downloads }
 erb = ERB.new(File.read(tmpl))
 result = erb.result(binding)
 
-File.open(out, "w") {|f|
-  f.write result
-}
+ENV["REDISTOGO_URL"] ||= 'redis://localhost:6379' # development
+REDIS_URI = URI.parse(ENV["REDISTOGO_URL"])
+REDIS = Redis.new(:host => REDIS_URI.host, :port => REDIS_URI.port, :password => REDIS_URI.password)
+REDIS.set("plugin.html", result)

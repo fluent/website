@@ -1,0 +1,95 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Fluentd plugins</title>
+    <%= css :plugin %>
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '#',
+        VERSION:     '0.10.0',
+        COLLAPSE_MODINDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <%= js :app %>
+    <style type="text/css">
+      div.body h2 {
+        margin-top: 0.2em;
+        line-height: 1.3em;
+        font-size: 140%;
+        border: none;
+      }
+      div.body a:hover {
+        text-decoration: underline;
+      }
+      tr.even { background-color: #f0f0f0; } 
+    </style>
+    <script>
+      $(document).ready(function() {
+        $('#plugin-table').dataTable({
+          "bPaginate": false,
+          "aaSorting": [[4, "desc"]],
+          "aoColumns": [null, null, null, null, null]
+        });
+        $('#plugin-table_filter input').attr('placeholder',
+          'search for mongo, redis, etc...').css('width', '250px');
+      });
+    </script>
+  </head>
+  <body>
+  <%=@plugin_descriptions%>
+
+    <!-- Google Analytics -->
+    <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-24890265-2']);
+    _gaq.push(['_setDomainName', 'fluentd.org']);
+    _gaq.push(['_setAllowLinker', true]);
+    _gaq.push(['_trackPageview']);
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+    </script>
+
+    <!-- Google Code for fluentd -->
+    <script type="text/javascript">
+    /* <![CDATA[ */
+    var google_conversion_id = 1009909590;
+    var google_conversion_language = "en";
+    var google_conversion_format = "3";
+    var google_conversion_color = "ffffff";
+    var google_conversion_label = "5gEjCPL88wIQ1v7H4QM";
+    var google_conversion_value = 0;
+    /* ]]> */
+    </script>
+    <script type="text/javascript" src="http://www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <noscript>
+    <div style="display:inline;">
+    <img height="1" width="1" style="border-style:none;" alt="" src="http://www.googleadservices.com/pagead/conversion/1009909590/?value=0&amp;label=5gEjCPL88wIQ1v7H4QM&amp;guid=ON&amp;script=0"/>
+    </div>
+    </noscript>
+
+    <!-- Pardot -->
+    <script type="text/javascript">
+    piAId = '25122';
+    piCId = '1030';
+    (function() {
+    function async_load(){
+    var s = document.createElement('script'); s.type = 'text/javascript';
+    s.src = ('https:' == document.location.protocol ? 'https://pi' : 'http://cdn') + '.pardot.com/pd.js';
+    var c = document.getElementsByTagName('script')[0]; c.parentNode.insertBefore(s, c);
+    }
+    if(window.attachEvent) { window.attachEvent('onload', async_load); }
+    else { window.addEventListener('load', async_load, false); }
+    })();
+    </script>
+  </body>
+</html>
+
