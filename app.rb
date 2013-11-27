@@ -3,6 +3,10 @@ require 'sinatra'
 require 'sinatra/assetpack'
 require 'redis'
 
+before do
+  redirect request.url.sub(/www\./, ''), 301 if request.host =~ /^www/
+end
+
 configure :production do
   ENV['APP_ROOT'] ||= File.dirname(__FILE__)
 end
