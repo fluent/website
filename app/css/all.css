@@ -187,7 +187,7 @@ select{
 .main-holder p{margin:0 0 15px;}
 .btn-look{
 	display:block;
-	font:bold 21px/28px Arial, Helvetica, sans-serif;
+	font:bold 22px/35px Arial, Helvetica, sans-serif;
 	border-radius: 23px;
 	-moz-border-radius: 23px;
 	-webkit-border-radius: 23px;
@@ -219,7 +219,7 @@ select{
 	background:#8cb2d8 url(/images/arrow01.png) 177px 50% no-repeat;
 }
 .text-box{
-	padding:27px 35px 18px;
+	padding:27px 35px 15px;
 	background: url(/images/sep01.png) repeat-x;
 	color:#4f5355;
 	text-shadow: 1px 1px 1px #fff;
@@ -275,7 +275,7 @@ select{
 }
 .testimonials-holder .heading{
 	background: url(/images/sep01.png) 0 50% repeat-x;
-	margin:0 0 52px;
+	margin:0 0 15px;
 	text-align:center;
 }
 
@@ -287,7 +287,7 @@ select{
 	padding:0 13px 0 0;
 	overflow:hidden;
 	color:#e6e6e6;
-	font: 30px/34px Georgia, Times, serif;
+	font: 18px Georgia, Times, serif;
 	background:url(/images/bg-heading.png) 100% -60px no-repeat;
 }
 *+html #main .heading h3{display:inline;}
