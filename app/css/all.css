@@ -273,36 +273,22 @@ select{
 	background: linear-gradient(top,  #0e83c8 0%,#0f84c9 1%,#0d82c7 1%,#0f84c9 2%,#2a9fe4 3%,#2ea1e4 5%,#2c9fe2 5%,#279add 15%,#2497da 23%,#2496dc 27%,#2095da 28%,#1e93d8 35%,#1b90d5 36%,#1d92d7 37%,#178cd1 46%,#1085ca 68%,#0e83c8 76%,#0e83c8 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#0e83c8', endColorstr='#0e83c8',GradientType=0 );
 }
-.testimonials-holder .heading{
-	background: url(/images/sep01.png) 0 50% repeat-x;
-	margin:0 0 15px;
-	text-align:center;
+
+.heading {
+	font-size:2.143em;
+	line-height:1.066em;
+	text-shadow: 1px 1px 1px #fff;
+	margin: 50px 0 20px 0;
+	font: 3em Georgia, Times, serif;
+	font-color: #da4808;
 }
 
-#main .heading h3{
-	margin:0;
-	display:inline-block;
-	white-space:nowrap;
-	text-shadow:none;
-	padding:0 13px 0 0;
-	overflow:hidden;
-	color:#e6e6e6;
-	font: 18px Georgia, Times, serif;
-	background:url(/images/bg-heading.png) 100% -60px no-repeat;
-}
-*+html #main .heading h3{display:inline;}
-#main .heading h3 span{
-	float:left;
-	font-weight:normal;
-	padding:11px 41px 15px;
-	background:url(/images/bg-heading.png) no-repeat;
-}
 .column-holder{
 	padding:0 0 22px;
 	overflow:hidden;
 	background:url(/images/bg-testimonials-holder.png) 0 100% repeat-x;
 }
-.testimonials-holder{
+.testimonials-holder, .hacker-blurbs-holder {
 	/*background: url(/images/sep01.png) 0 100% repeat-x;*/
 	padding:0 0 6px;
 	margin:0 0 23px;
@@ -322,6 +308,21 @@ select{
 	background:url(/images/sep02.png) 2px 0 no-repeat;
 }
 
+.hacker-blurbs-holder .description {
+	padding:27px 35px 15px;
+	color:#4f5355;
+	text-shadow: 1px 1px 1px #fff;
+	font-size:2em;
+	line-height:1.286em;
+}
+.hacker-blurbs-holder .blurb { height: 200px;}
+.hacker-blurbs-holder .blurb p {
+	width: 600px;
+	float: left;
+
+}
+.hacker-blurbs-holder .blurb img { float: right;}
+
 
 .testimonials-holder .column-right p.testimonial-text {
   line-height: 140%;
@@ -331,13 +332,6 @@ select{
 
 .logo-image:hover {
 	-webkit-transform:rotate(-8deg);
-}
-
-#main h3{
-	font-size:2.143em;
-	line-height:1.066em;
-	margin:0 0 22px;
-	text-shadow: 1px 1px 1px #fff;
 }
 
 .testimonial-author {
