@@ -110,8 +110,9 @@ select{
 .logo-container { background-color:#FFF; }
 
 .logo-image {
-  margin: 15px;
-  height: 50px;
+  margin-top: 15px;
+  margin-bottom: 25px;
+  height: 55px;
 }
 #featured-logo {
   margin: auto;
@@ -306,11 +307,11 @@ select{
 	background:url(/images/sep02.png) 2px 0 no-repeat;
 }
 .testimonials-logo {
-	background:url(/images/bg-testimonials-holder.png) 0 100% repeat-x;
+  width:20%;
   text-align:center;
 }
 .testimonials-text {
-  width: 25%;
+  width:20%;
   font-size: 12px;
   padding: 15px;
 }
