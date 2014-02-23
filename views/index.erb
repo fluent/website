@@ -44,73 +44,56 @@ fjs.parentNode.insertBefore(js, fjs);
       </section>
     </div>
     <div class="text-box">
-      <p>Fluentd is an open source data collector designed for processing high-volume data streams. 150+ plugins instantly enable you to store the data for Log Management, Big Data Analytics, and Archiving. <a href="http://docs.fluentd.org/articles/architecture">Read More!</a>
+      <p>Fluentd is an open source data collector designed for processing data streams. 150+ plugins instantly enable you to store the data for Log Management, Big Data Analytics, etc. <a href="http://docs.fluentd.org/articles/architecture">Read More!</a>
     </div>
     <section class="testimonials-holder">
-      <h3 class="heading">
-        Fluentd in Production
-      </h3>
       <div class="column-holder">
-        <div class="column-left">
-          <img style="margin-top:60px" id="featured-logo" src="images/user_logo/nintendo.png"/>
-        </div>
-        <div class="column-right">
-          <p id="featured-testimonial" class="testimonial-text">
-            &quot;We use Fluentd to collect massive data logs for our platforms. Having developed a system based on Fluentd, we are now effectively monitoring and analyzing our services in real-time. We are very much satisfied with its flexibility, especially how easy it is to use in tandem with other systems.&quot;
-          </p>
-        </div>
-      </div>
-      <div class="logo-container">
-          <img alt="nintendo" class="logo-image" src="images/user_logo/nintendo.png"/>
-          <img alt="slideshare" class="logo-image" src="images/user_logo/Slideshare.png"/>
-          <img alt="gree" class="logo-image" src="images/user_logo/GREE.png"/>
-          <img alt="aws" class="logo-image" src="images/user_logo/AWS.png"/>
-          <img alt="line" class="logo-image" src="images/user_logo/LINE.png"/>
-          <a style="float:right" href="http://docs.fluentd.org/articles/users">...and more!</a>
-        </div>
-        <section class="hacker-blurbs-holder">
-          <h3 class="heading">
-            By Hackers, For Hackers
-          </h3>
-          <div class="blurb description">
-              <p>&quot;Fluentd proves you can achieve programmer happiness and performance at the same time. A great example of Ruby beyond the Web.&quot; <br/><span style="font-size: 0.7em; font-style:italic">Yukihiro Matsumoto (Matz), creator of Ruby</span></p>
-              <img src="/images/matz.jpg"/>
-          </div>
-          <div class="blurb description">
-              <p>&quot;Logs are streams, not files. I love that Fluentd puts this concept front-and-center, with a developer-friendly approach for distributed systems logging.&quot; <br/><span style="font-size:0.7em; font-style:italic">Adam Wiggins, Heroku co-founder</span></p>
-              <img src="/images/adam-wiggins.jpg"/>          
-          </div>      
-        </section>
-
-      </div>
-      <div style="display:none">
-        <span id="testimonial-nintendo">
-          &quot;We use Fluentd to collect massive data logs for our platforms. Having developed a system based on Fluentd, we are now effectively monitoring and analyzing our services in real-time. We are very much satisfied with its flexibility, especially how easy it is to use in tandem with other systems.&quot;
-        </span>
-        <span id="testimonial-slideshare">
-          &quot;Slideshare uses Fluentd to stream logs and events in the cloud. We were looking for a versatile yet lightweight logger in Ruby, and Fluentd fit the bill perfectly.&quot;
-          <br/>
-          <span class="testimonial-author">Sylvain Kalache, Operations Engineer</span>
-        </span>
-        <span id="testimonial-gree">
-          &quot;Data Science is at the core of GREE (TYO:3632)’s business, and it starts with logging user events and Advertisement related data. We currently deploy Fluentd for a number of our games and ad services to federate user event data, and use that data to inform our product decisions.&quot;
-          <br/>
-          <span class="testimonial-author">Masaki Fujimoto, CTO</span>
-        </span>
-        <span id="testimonial-aws">
-          &quot;The architecture of Fluentd (Sponsored by Treasure Data) is very similar to Apache Flume or Facebook’s Scribe. Fluentd is easier to install and maintain and has better documentation and support than Flume and Scribe&quot;
-          <br/>
-          <span class="testimonial-author"><a href="http://media.amazonwebservices.com/AWS_Amazon_EMR_Best_Practices.pdf">Best Practices for Amazon EMR</a></span>
-        </span>
-        <span id="testimonial-line">
-          &quot;We utilize Fluentd to collect a very large amount of logs. The logs are written into Hadoop HDFS clusters, and are also used to analyze various service statuses in realtime. We also use many plugins from rubygems.org to further enhance this mechanism.&quot;
-          <br/>
-          <span class="testimonial-author">Satoshi Tagomori, Software Engineer</span>
-        </span>
+        <table>
+          <tr>
+            <td class="testimonials-logo"><img alt="Nintendo" class="logo-image" src="images/user_logo/nintendo.png"/></td>
+            <td class="testimonials-logo"><img alt="AWS"      class="logo-image" src="images/user_logo/AWS.png"/></td>
+            <td class="testimonials-logo"><img alt="GREE"     class="logo-image" src="images/user_logo/GREE.png"/></td>
+            <td class="testimonials-logo"><img alt="LINE"     class="logo-image" src="images/user_logo/LINE.png"/></td>
+          </tr>
+          <tr>
+            <td class="testimonials-text">We use Fluentd to collect massive data logs for our platforms. Having developed a system based on Fluentd, we are now effectively monitoring and analyzing our services in real-time. We are very much satisfied with its flexibility, especially how easy it is to use in tandem with other systems.</td>
+            <td class="testimonials-text">The architecture of Fluentd (Sponsored by Treasure Data) is very similar to Apache Flume or Facebook’s Scribe. Fluentd is easier to install and maintain and has better documentation and support than Flume and Scribe</td>
+            <td class="testimonials-text">Data Science is at the core of GREE’s business, and it starts with logging user events and Advertisement related data. We currently deploy Fluentd for a number of our games and ad services to federate user event data, and use that data to inform our product decisions. - Masaki Fujimoto, CTO</td>
+            <td class="testimonials-text">We utilize Fluentd to collect a very large amount of logs. The logs are written into Hadoop HDFS clusters, and are also used to analyze various service statuses in realtime. We also use many plugins from rubygems.org to further enhance this mechanism. - Satoshi Tagomori</td>
+          </tr>
+        </table>
       </div>
     </section>
+    <table width="100%">
+      <tr>
+        <td>
+    <section class="hacker-blurbs-holder">
+      <h3 class="heading">
+        By Hackers, For Hackers
+      </h3>
+      <div class="blurb description">
+        <img height="95px" src="/images/matz.jpg"/>
+        <p>&quot;Fluentd proves you can achieve programmer happiness and performance at the same time. A great example of Ruby beyond the Web.&quot; <br/><span style="font-size: 0.7em; font-style:italic">Yukihiro Matsumoto (Matz), creator of Ruby</span></p>
+      </div>
+      <div class="blurb description">
+        <img height="95px" src="/images/adam-wiggins.jpg"/>          
+        <p>&quot;Logs are streams, not files. I love that Fluentd puts this concept front-and-center, with a developer-friendly approach for distributed systems logging.&quot; <br/><span style="font-size:0.7em; font-style:italic">Adam Wiggins, Heroku co-founder</span></p>
+      </div>      
+    </section>
+        </td>
+        <td width="350px">
+          <h3 class="heading">Featured Video</h3>
+          <center>
+<iframe src="//player.vimeo.com/video/87210603?title=0&amp;byline=0&amp;portrait=0" width="350" height="197" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe> <p><a href="http://vimeo.com/87210603">Sadayuki Furuhashi talks about<br/> Fluentd: Open Source Log Management</a><br/>at SF Metrics Meetup</p>
+          </center>
+        </td>
+      </tr>
+    </table>
+    <center>
+      <a href="http://docs.fluentd.org/articles/architecture" class="btn-look">Learn More</a><br /><br />
+    </center>
   </div>
-
+  
   <footer id="footer">
     <center>
     <span>

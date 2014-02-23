@@ -111,7 +111,7 @@ select{
 
 .logo-image {
   margin: 15px;
-  height: 55px;
+  height: 50px;
 }
 #featured-logo {
   margin: auto;
@@ -275,23 +275,21 @@ select{
 }
 
 .heading {
-	font-size:2.143em;
 	line-height:1.066em;
 	text-shadow: 1px 1px 1px #fff;
-	margin: 50px 0 20px 0;
-	font: 3em Georgia, Times, serif;
+	margin: 3px 0 10px 0;
+	font: 2em Georgia, Times, serif;
 	font-color: #da4808;
 }
 
 .column-holder{
-	padding:0 0 22px;
+	padding:0 0 0px;
 	overflow:hidden;
 	background:url(/images/bg-testimonials-holder.png) 0 100% repeat-x;
 }
 .testimonials-holder, .hacker-blurbs-holder {
-	/*background: url(/images/sep01.png) 0 100% repeat-x;*/
 	padding:0 0 6px;
-	margin:0 0 23px;
+	margin:0 0 0px;
 }
 
 .testimonials-holder .column-left {
@@ -307,21 +305,31 @@ select{
 	padding:0 0 0 50px;
 	background:url(/images/sep02.png) 2px 0 no-repeat;
 }
+.testimonials-logo {
+	background:url(/images/bg-testimonials-holder.png) 0 100% repeat-x;
+  text-align:center;
+}
+.testimonials-text {
+  width: 25%;
+  font-size: 12px;
+  padding: 15px;
+}
 
 .hacker-blurbs-holder .description {
-	padding:27px 35px 15px;
+	padding: 10px 15px 0px 0px;
 	color:#4f5355;
 	text-shadow: 1px 1px 1px #fff;
-	font-size:2em;
+	font-size:1.4em;
 	line-height:1.286em;
 }
-.hacker-blurbs-holder .blurb { height: 200px;}
+.hacker-blurbs-holder .blurb { height: 110px;}
 .hacker-blurbs-holder .blurb p {
-	width: 600px;
+	width: 480px;
 	float: left;
-
+  padding-left: 10px;
+  padding-right: 0px;
 }
-.hacker-blurbs-holder .blurb img { float: right;}
+.hacker-blurbs-holder .blurb img { float: left; }
 
 
 .testimonials-holder .column-right p.testimonial-text {
